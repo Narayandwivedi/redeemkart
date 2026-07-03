@@ -27,6 +27,10 @@ const cartReducer = (state, action) => {
       )
       
       if (existingItem) {
+        const maxLimit = action.payload.maxAddCartItem ?? 4;
+        if (maxLimit !== null && existingItem.quantity + 1 > maxLimit) {
+          return state; // Prevent adding beyond limit
+        }
         return {
           ...state,
           items: state.items.map(item => {

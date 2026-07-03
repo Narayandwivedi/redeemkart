@@ -19,7 +19,7 @@ const calculateDiscount = (original, current) => {
 }
 
 const GiftCardGooglePlay = () => {
-  const { addToCart } = useCart()
+  const { addToCart, items } = useCart()
   const { isAuthenticated, BACKEND_URL } = useContext(AppContext)
   const navigate = useNavigate()
   
@@ -77,12 +77,30 @@ const GiftCardGooglePlay = () => {
       toast.error('Out of stock')
       return
     }
+    const maxLimit = voucher.maxAddCartItem ?? 4;
+    if (maxLimit !== null) {
+      const cartItem = items.find(i => (i._id || i.id) === (voucher._id || voucher.id));
+      if (cartItem && cartItem.quantity >= maxLimit) {
+        toast.warn(`You can only add ${maxLimit} of this item.`);
+        return;
+      }
+    }
     addToCart(voucher)
     toast.success('Added to cart!')
   }
 
   const handleBuyNow = (voucher) => {
     if (voucher.stockQuantity <= 0) return
+    const maxLimit = voucher.maxAddCartItem ?? 4;
+    if (maxLimit !== null) {
+      const cartItem = items.find(i => (i._id || i.id) === (voucher._id || voucher.id));
+      if (cartItem && cartItem.quantity >= maxLimit) {
+        toast.warn(`You can only add ${maxLimit} of this item.`);
+        if (!isAuthenticated) navigate('/login')
+        else navigate('/checkout')
+        return;
+      }
+    }
     if (!isAuthenticated) {
       navigate('/login')
       return

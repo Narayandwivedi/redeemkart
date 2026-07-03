@@ -77,6 +77,13 @@ const productSchema = new mongoose.Schema({
     default: 0
   },
   
+  // Cart Quantity Limit
+  maxAddCartItem: {
+    type: Number,
+    min: 1,
+    default: 4
+  },
+  
   // Media
   images: [{
     type: String // Image URLs

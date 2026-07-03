@@ -26,7 +26,7 @@ const GiftCards = () => {
 
   // Add new variant form
   const [showAddVariant, setShowAddVariant] = useState(false)
-  const [newVariantForm, setNewVariantForm] = useState({ originalPrice: '', price: '', stockQuantity: '' })
+  const [newVariantForm, setNewVariantForm] = useState({ originalPrice: '', price: '', stockQuantity: '', maxAddCartItem: '' })
 
   const [showInactive, setShowInactive] = useState(true) // show inactive variants by default in admin
   const [addCodeForm, setAddCodeForm] = useState({})
@@ -143,7 +143,7 @@ const GiftCards = () => {
   // ---- Variant management ----
   const handleEditClick = (p) => {
     setEditingVariant(p._id)
-    setEditForm({ originalPrice: p.originalPrice || '', price: p.price, stockQuantity: p.stockQuantity, isActive: p.isActive })
+    setEditForm({ originalPrice: p.originalPrice || '', price: p.price, stockQuantity: p.stockQuantity, maxAddCartItem: p.maxAddCartItem ?? '', isActive: p.isActive })
   }
 
   const handleSaveVariant = async (id) => {
@@ -180,6 +180,7 @@ const GiftCards = () => {
       originalPrice: Number(newVariantForm.originalPrice),
       price: Number(newVariantForm.price),
       stockQuantity: Number(newVariantForm.stockQuantity || 0),
+      maxAddCartItem: newVariantForm.maxAddCartItem ? Number(newVariantForm.maxAddCartItem) : 4,
       isActive: true,
       images: [`/products/${selectedBrand.toLowerCase().replace(' ', '%20')}.avif`]
     }
@@ -289,7 +290,7 @@ const GiftCards = () => {
 
         {/* Add variant panel */}
         {showAddVariant && (
-          <div className="p-4 bg-indigo-50/50 border-b grid grid-cols-4 gap-4 items-end">
+          <div className="p-4 bg-indigo-50/50 border-b grid grid-cols-2 md:grid-cols-5 gap-4 items-end">
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1">Original Price (₹) *</label>
               <input type="number" value={newVariantForm.originalPrice} onChange={e => setNewVariantForm({...newVariantForm, originalPrice: e.target.value})} className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500" placeholder="e.g. 100" />
@@ -301,6 +302,10 @@ const GiftCards = () => {
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1">Initial Stock Qty</label>
               <input type="number" value={newVariantForm.stockQuantity} onChange={e => setNewVariantForm({...newVariantForm, stockQuantity: e.target.value})} className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500" placeholder="e.g. 100" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-1">Max Cart Qty</label>
+              <input type="number" value={newVariantForm.maxAddCartItem} onChange={e => setNewVariantForm({...newVariantForm, maxAddCartItem: e.target.value})} className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500" placeholder="e.g. 4" />
             </div>
             <button onClick={handleAddVariant} className="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-700">Create Variant</button>
           </div>
@@ -365,6 +370,10 @@ const GiftCards = () => {
                           <div>
                             <label className="block text-[10px] text-gray-500 mb-0.5">Stock</label>
                             <input type="number" value={editForm.stockQuantity} onChange={e => setEditForm({...editForm, stockQuantity: e.target.value})} className="w-16 md:w-20 px-2 py-1 text-sm border border-gray-300 rounded" />
+                          </div>
+                          <div>
+                            <label className="block text-[10px] text-gray-500 mb-0.5">Max Qty</label>
+                            <input type="number" value={editForm.maxAddCartItem} onChange={e => setEditForm({...editForm, maxAddCartItem: e.target.value})} className="w-16 md:w-20 px-2 py-1 text-sm border border-gray-300 rounded" />
                           </div>
                         </div>
                       ) : (
