@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { AppContext } from '../context/AppContext'
@@ -93,12 +93,39 @@ const calculateDiscount = (original, current) => {
 const GiftCardDetail = () => {
   const { brand } = useParams()
   const navigate = useNavigate()
-  const { addToCart } = useCart()
-  const { isAuthenticated } = useContext(AppContext)
+  const { addToCart, items } = useCart()
+  const { isAuthenticated, BACKEND_URL } = useContext(AppContext)
+  
   const [selectedDenom, setSelectedDenom] = useState(null)
+  const [fetchedVouchers, setFetchedVouchers] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const brandInfo = brandData[brand]
-  const vouchers = brandInfo?.vouchers || []
+
+  useEffect(() => {
+    const fetchVouchers = async () => {
+      if (!brandInfo) return
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/products/category/gift-cards?brand=${brandInfo.name}&limit=50`)
+        const data = await response.json()
+        if (data.success && data.data.length > 0) {
+          const mappedVouchers = data.data.map(v => ({
+            ...v,
+            denom: v.originalPrice || v.price
+          }))
+          const sorted = mappedVouchers.sort((a, b) => a.price - b.price)
+          setFetchedVouchers(sorted)
+        }
+      } catch (error) {
+        console.error('Error fetching vouchers:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchVouchers()
+  }, [brandInfo, BACKEND_URL])
+
+  const vouchers = fetchedVouchers.length > 0 ? fetchedVouchers : (brandInfo?.vouchers || [])
   const selected = vouchers.find(v => v.denom === selectedDenom) || vouchers[0]
   const discountPercent = calculateDiscount(selected?.originalPrice, selected?.price)
   const savings = selected ? selected.originalPrice - selected.price : 0
@@ -116,29 +143,52 @@ const GiftCardDetail = () => {
       toast.error('Out of stock')
       return
     }
-    addToCart({
-      _id: selected._id,
+    
+    // Use the backend product structure if available, otherwise fallback
+    const cartItemData = fetchedVouchers.length > 0 ? selected : {
+      ...selected,
       name: `${brandInfo?.name} Gift Card - \u20B9${selected.denom}`,
-      price: selected.price,
-      originalPrice: selected.originalPrice,
       images: [brandInfo?.img],
-    })
+    }
+
+    const maxLimit = cartItemData.maxAddCartItem ?? 4;
+    if (maxLimit !== null) {
+      const existingItem = items.find(i => (i._id || i.id) === (cartItemData._id || cartItemData.id));
+      if (existingItem && existingItem.quantity >= maxLimit) {
+        toast.warn(`You can only add ${maxLimit} of this item.`);
+        return;
+      }
+    }
+
+    addToCart(cartItemData)
     toast.success('Added to cart!')
   }
 
   const handleBuyNow = () => {
     if (!selected || selected.stockQuantity === 0) return
+    
+    const cartItemData = fetchedVouchers.length > 0 ? selected : {
+      ...selected,
+      name: `${brandInfo?.name} Gift Card - \u20B9${selected.denom}`,
+      images: [brandInfo?.img],
+    }
+
+    const maxLimit = cartItemData.maxAddCartItem ?? 4;
+    if (maxLimit !== null) {
+      const existingItem = items.find(i => (i._id || i.id) === (cartItemData._id || cartItemData.id));
+      if (existingItem && existingItem.quantity >= maxLimit) {
+        toast.warn(`You can only add ${maxLimit} of this item.`);
+        if (!isAuthenticated) navigate('/login')
+        else navigate('/checkout')
+        return;
+      }
+    }
+
     if (!isAuthenticated) {
       navigate('/login')
       return
     }
-    addToCart({
-      _id: selected._id,
-      name: `${brandInfo?.name} Gift Card - \u20B9${selected.denom}`,
-      price: selected.price,
-      originalPrice: selected.originalPrice,
-      images: [brandInfo?.img],
-    })
+    addToCart(cartItemData)
     navigate('/checkout')
   }
 
