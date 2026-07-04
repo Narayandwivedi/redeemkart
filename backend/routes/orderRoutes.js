@@ -7,7 +7,8 @@ const {
   getOrdersByEmail,
   updateOrderStatus,
   getAllOrders,
-  verifyPayment
+  verifyPayment,
+  assignCodeToOrder
 } = require('../controllers/orderController');
 
 // Public routes
@@ -20,5 +21,6 @@ router.get('/:identifier', getOrder);             // GET /api/orders/:id - Get o
 // Admin routes
 router.get('/', protect, authorize('admin'), getAllOrders);
 router.patch('/:orderId/status', protect, authorize('admin'), updateOrderStatus);
+router.post('/:orderId/assign-code', protect, authorize('admin'), assignCodeToOrder);
 
 module.exports = router;

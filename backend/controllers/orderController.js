@@ -659,11 +659,127 @@ const verifyPayment = async (req, res) => {
   }
 };
 
+// Assign code manually (Admin)
+const assignCodeToOrder = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { brand, balance, code, pin, listingId } = req.body;
+
+    if (!brand || !balance || !code) {
+      return res.status(400).json({ success: false, message: 'Brand, balance, and code are required' });
+    }
+
+    const order = await Order.findById(orderId);
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+
+    // If a listingId is provided, mark that GiftCardListing as sold
+    if (listingId) {
+      const listing = await GiftCardListing.findById(listingId);
+      if (listing) {
+        listing.status = 'sold';
+        if (order.userId) {
+          listing.soldTo = order.userId;
+        } else if (order.customerInfo && order.customerInfo.email) {
+          const user = await User.findOne({ email: order.customerInfo.email });
+          if (user) {
+            listing.soldTo = user._id;
+          }
+        }
+        await listing.save();
+      }
+    }
+
+    // Add the new code to order.giftCodes
+    order.giftCodes.push({
+      brand,
+      balance: parseFloat(balance),
+      code,
+      pin: pin || null,
+      ...(listingId && { listingId })
+    });
+
+    // Update order status to delivered
+    order.status = 'delivered';
+    order.deliveryDate = new Date();
+    await order.save();
+
+    // Send email to customer
+    try {
+      const transporter = nodemailer.createTransport({
+        host: process.env.EMAIL_HOST,
+        port: process.env.EMAIL_PORT,
+        secure: false,
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+        }
+      });
+
+      const recipientEmail = (order.recipientInfo && order.recipientInfo.email) ? order.recipientInfo.email : order.customerInfo.email;
+      const recipientName = (order.recipientInfo && order.recipientInfo.name) ? order.recipientInfo.name : order.customerInfo.name;
+      const logoUrl = process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/favicon.png` : 'https://gchub.in/favicon.png';
+
+      const emailHtml = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #334155;">
+          <div style="max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+            <div style="background: linear-gradient(to right, #fbbf24, #f59e0b); padding: 30px 20px; text-align: center;">
+              <img src="${logoUrl}" alt="GCHub Logo" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #ffffff;" />
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">Your Digital Voucher</h1>
+            </div>
+            
+            <div style="padding: 32px 24px;">
+              <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.5;">Hello <strong>${recipientName}</strong>,</p>
+              <p style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.5;">Thank you for your purchase from GCHub! Here is your digital redeem code. You can easily copy the code below.</p>
+              
+              <div style="margin-bottom: 24px; padding: 20px; border-radius: 12px; background: #fffbeb; border: 1px solid #fde68a;">
+                <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: 600; color: #92400e;">${brand} - Balance: ₹${balance}</p>
+                <div style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px dashed #d97706; text-align: center; margin-bottom: 12px;">
+                  <p style="margin: 0; font-size: 24px; font-family: monospace; font-weight: bold; color: #000000; letter-spacing: 2px; user-select: all;">${code}</p>
+                </div>
+                ${pin ? `<p style="margin: 0; font-size: 14px; color: #b45309; text-align: center;">PIN: <strong>${pin}</strong></p>` : ''}
+              </div>
+              
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center;">
+                <p style="margin: 0 0 10px 0; font-size: 14px; color: #64748b;">Need help redeeming your code?</p>
+                <a href="${process.env.FRONTEND_URL}/customer-support" style="display: inline-block; background: #f1f5f9; color: #475569; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 14px;">Contact Support</a>
+              </div>
+            </div>
+          </div>
+        </body>
+        </html>
+      `;
+
+      await transporter.sendMail({
+        from: `"GCHub" <${process.env.EMAIL_USER}>`,
+        to: recipientEmail,
+        subject: '🎉 Your Digital Voucher Code from GCHub',
+        html: emailHtml
+      });
+    } catch (emailErr) {
+      console.error('Error sending manual voucher email:', emailErr);
+    }
+
+    res.json({ success: true, message: 'Code assigned successfully', data: order });
+  } catch (error) {
+    console.error('Error assigning code:', error);
+    res.status(500).json({ success: false, message: 'Failed to assign code', error: error.message });
+  }
+};
+
 module.exports = {
   createOrder,
   getOrder,
   getOrdersByEmail,
   updateOrderStatus,
   getAllOrders,
-  verifyPayment
+  verifyPayment,
+  assignCodeToOrder
 };

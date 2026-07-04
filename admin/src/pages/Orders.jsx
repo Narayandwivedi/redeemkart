@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Package, Search, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Package, Search, ChevronLeft, ChevronRight, X } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -43,6 +43,14 @@ const Orders = () => {
   const [page, setPage] = useState(1)
   const [pagination, setPagination] = useState(null)
 
+  // Assign Code Modal State
+  const [assignModalOpen, setAssignModalOpen] = useState(false)
+  const [selectedOrder, setSelectedOrder] = useState(null)
+  const [assignData, setAssignData] = useState({ brand: '', balance: '', code: '', pin: '', listingId: '' })
+  const [assigning, setAssigning] = useState(false)
+  const [activeListings, setActiveListings] = useState([])
+  const [fetchingListings, setFetchingListings] = useState(false)
+
   const fetchOrders = async () => {
     setLoading(true)
     try {
@@ -61,6 +69,29 @@ const Orders = () => {
   }
 
   useEffect(() => { fetchOrders() }, [activeTab, page])
+
+  const handleAssignSubmit = async () => {
+    if (!assignData.brand || !assignData.balance || !assignData.code) {
+      return toast.error('Brand, Balance, and Code are required')
+    }
+    setAssigning(true)
+    try {
+      const res = await axios.post(
+        `${BACKEND_URL}/api/orders/${selectedOrder._id}/assign-code`,
+        assignData,
+        { withCredentials: true }
+      )
+      if (res.data.success) {
+        toast.success('Code assigned and email sent!')
+        setAssignModalOpen(false)
+        fetchOrders()
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to assign code')
+    } finally {
+      setAssigning(false)
+    }
+  }
 
   const filtered = search.trim()
     ? orders.filter((o) =>
@@ -123,16 +154,17 @@ const Orders = () => {
                 <th className="px-4 py-3 font-semibold text-gray-600">Payment</th>
                 <th className="px-4 py-3 font-semibold text-gray-600">Status</th>
                 <th className="px-4 py-3 font-semibold text-gray-600">Date</th>
+                <th className="px-4 py-3 font-semibold text-gray-600">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-12 text-center text-gray-400">Loading...</td>
+                  <td colSpan={8} className="px-4 py-12 text-center text-gray-400">Loading...</td>
                 </tr>
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-12 text-center text-gray-400">
+                  <td colSpan={8} className="px-4 py-12 text-center text-gray-400">
                     <Package className="h-8 w-8 mx-auto mb-2 text-gray-300" />
                     <p>No orders found</p>
                   </td>
@@ -164,6 +196,43 @@ const Orders = () => {
                       </span>
                     </td>
                     <td className="px-4 py-3 text-gray-500 text-xs">{new Date(order.orderDate || order.createdAt).toLocaleDateString('en-IN')}</td>
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={async () => {
+                          setSelectedOrder(order)
+                          setAssignData({
+                            brand: order.items?.[0]?.productBrand || '',
+                            balance: order.items?.[0]?.productPrice || '',
+                            code: '',
+                            pin: '',
+                            listingId: ''
+                          })
+                          setAssignModalOpen(true)
+                          
+                          // Fetch active listings for this product
+                          const productId = order.items?.[0]?.productId
+                          if (productId) {
+                            setFetchingListings(true)
+                            try {
+                              const res = await axios.get(`${BACKEND_URL}/api/admin/gift-cards/product/${productId}`, { withCredentials: true })
+                              if (res.data.success) {
+                                setActiveListings(res.data.data.filter(l => l.status === 'active'))
+                              }
+                            } catch (err) {
+                              console.error('Failed to fetch listings', err)
+                              setActiveListings([])
+                            } finally {
+                              setFetchingListings(false)
+                            }
+                          } else {
+                            setActiveListings([])
+                          }
+                        }}
+                        className="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 font-medium rounded-lg text-xs whitespace-nowrap"
+                      >
+                        Assign Code
+                      </button>
+                    </td>
                   </tr>
                 ))
               )}
@@ -195,6 +264,121 @@ const Orders = () => {
           </div>
         )}
       </div>
+
+      {/* Assign Code Modal */}
+      {assignModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-bold text-gray-900">
+                Assign Code to {selectedOrder?.customerInfo?.name || 'Customer'}
+              </h2>
+              <button onClick={() => setAssignModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              {fetchingListings ? (
+                <div className="text-sm text-gray-500 mb-2">Loading available codes...</div>
+              ) : activeListings.length > 0 ? (
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Select Existing Code (Optional)</label>
+                  <select
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onChange={(e) => {
+                      if (!e.target.value) {
+                        setAssignData(prev => ({ ...prev, code: '', pin: '', listingId: '' }))
+                        return
+                      }
+                      const selected = activeListings.find(l => l._id === e.target.value)
+                      if (selected) {
+                        setAssignData(prev => ({
+                          ...prev,
+                          code: selected.code,
+                          pin: selected.pin || '',
+                          brand: selected.brand,
+                          balance: selected.balance,
+                          listingId: selected._id
+                        }))
+                      }
+                    }}
+                    value={assignData.listingId || ""}
+                  >
+                    <option value="">-- Type manual code below --</option>
+                    {activeListings.map(l => (
+                      <option key={l._id} value={l._id}>
+                        Code: {l.code} (Bal: ₹{l.balance})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <div className="text-sm text-amber-600 mb-4 bg-amber-50 p-2 rounded border border-amber-200">
+                  No active existing codes found for this variant. Please enter manually.
+                </div>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+                <input
+                  type="text"
+                  value={assignData.brand}
+                  onChange={(e) => setAssignData({ ...assignData, brand: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="e.g. Google Play"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Balance (Value)</label>
+                <input
+                  type="number"
+                  value={assignData.balance}
+                  onChange={(e) => setAssignData({ ...assignData, balance: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="e.g. 500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Redeem Code</label>
+                <input
+                  type="text"
+                  value={assignData.code}
+                  onChange={(e) => setAssignData({ ...assignData, code: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+                  placeholder="XXXX-XXXX-XXXX"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">PIN (Optional)</label>
+                <input
+                  type="text"
+                  value={assignData.pin}
+                  onChange={(e) => setAssignData({ ...assignData, pin: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+                  placeholder="Leave empty if none"
+                />
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                onClick={() => setAssignModalOpen(false)}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAssignSubmit}
+                disabled={assigning}
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+              >
+                {assigning ? 'Assigning...' : 'Assign & Send'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
