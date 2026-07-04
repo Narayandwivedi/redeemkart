@@ -91,7 +91,7 @@ const updateListingStatus = async (req, res) => {
 
     const updateData = { status };
     if (status === 'active') {
-      updateData.$unset = { soldTo: 1 };
+      updateData.soldTo = null;
     }
 
     const listing = await GiftCardListing.findByIdAndUpdate(

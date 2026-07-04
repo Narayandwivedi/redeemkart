@@ -140,6 +140,19 @@ const GiftCards = () => {
     }
   }
 
+  const handleToggleCodeStatus = async (codeId, currentStatus, productId) => {
+    const newStatus = currentStatus === 'active' ? 'sold' : 'active'
+    if (!window.confirm(`Change status to ${newStatus}?`)) return
+    try {
+      await axios.patch(`${BACKEND_URL}/api/admin/gift-cards/${codeId}/status`, { status: newStatus }, { withCredentials: true })
+      toast.success(`Status changed to ${newStatus}`)
+      fetchCodesForVariant(productId)
+      fetchData()
+    } catch (err) {
+      toast.error('Failed to update status')
+    }
+  }
+
   // ---- Variant management ----
   const handleEditClick = (p) => {
     setEditingVariant(p._id)
@@ -462,10 +475,12 @@ const GiftCards = () => {
                                       <td className="py-2 pr-4 font-mono text-xs text-gray-500">{c.pin || '—'}</td>
                                       <td className="py-2 pr-4 text-xs text-gray-500">{new Date(c.expiry).toLocaleDateString('en-IN')}</td>
                                       <td className="py-2 pr-4">
-                                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold uppercase ${
+                                        <button 
+                                          onClick={() => handleToggleCodeStatus(c._id, c.status, p._id)}
+                                          className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold uppercase transition-colors hover:opacity-80 ${
                                           c.status === 'active' ? 'bg-emerald-100 text-emerald-700' :
                                           c.status === 'sold' ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'
-                                        }`}>{c.status}</span>
+                                        }`}>{c.status}</button>
                                       </td>
                                       <td className="py-2 pr-4 text-xs text-gray-500">
                                         {c.soldTo ? <span>{c.soldTo.email}</span> : '—'}
