@@ -515,10 +515,14 @@ const verifyPayment = async (req, res) => {
             if (availableListing) {
               // Mark as sold
               availableListing.status = 'sold';
-              if (order.user) {
-                availableListing.soldTo = order.user;
+              if (order.userId) {
+                availableListing.soldTo = order.userId;
               } else if (order.customerInfo && order.customerInfo.email) {
-                // If guest checkout, try to find user by email or leave empty
+                // If guest checkout, try to find user by email
+                const userByEmail = await User.findOne({ email: order.customerInfo.email });
+                if (userByEmail) {
+                  availableListing.soldTo = userByEmail._id;
+                }
               }
               await availableListing.save();
 
