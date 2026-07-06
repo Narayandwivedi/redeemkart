@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink } from 'lucide-react'
+import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2 } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -68,6 +68,19 @@ const Users = () => {
       }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to access account')
+    }
+  }
+
+  const handleDeleteUser = async (user) => {
+    if (!window.confirm(`Are you sure you want to delete ${user.fullName || user.email}? This will deactivate their account.`)) return
+    try {
+      const res = await axios.delete(`${BACKEND_URL}/api/admin/users/${user._id}`, { withCredentials: true })
+      if (res.data.success) {
+        setUsers((prev) => prev.filter((u) => u._id !== user._id))
+        toast.success(res.data.message)
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to delete user')
     }
   }
 
@@ -168,6 +181,13 @@ const Users = () => {
                           title={user.isActive ? 'Deactivate user' : 'Activate user'}
                         >
                           {user.isActive ? <ToggleRight className="h-4 w-4" /> : <ToggleLeft className="h-4 w-4" />}
+                        </button>
+                        <button
+                          onClick={() => handleDeleteUser(user)}
+                          className="p-1.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors"
+                          title="Delete user"
+                        >
+                          <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
                     </td>
