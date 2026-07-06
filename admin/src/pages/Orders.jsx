@@ -54,7 +54,7 @@ const Orders = () => {
   const fetchOrders = async () => {
     setLoading(true)
     try {
-      const params = { page, limit: 15 }
+      const params = { page, limit: 40 }
       if (activeTab) params.status = activeTab
       const res = await axios.get(`${BACKEND_URL}/api/orders`, { params, withCredentials: true })
       if (res.data.success) {
@@ -242,21 +242,40 @@ const Orders = () => {
 
         {pagination && pagination.pages > 1 && (
           <div className="flex items-center justify-between px-4 py-3 border-t border-gray-100">
-            <span className="text-xs text-gray-500">
+            <p className="text-sm text-gray-500">
               Page {pagination.current} of {pagination.pages}
-            </span>
-            <div className="flex items-center gap-2">
+            </p>
+            <div className="flex items-center gap-1">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page <= 1}
-                className="p-1.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                title="Previous page"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
+              {Array.from({ length: pagination.pages }, (_, i) => i + 1)
+                .filter((p) => p === 1 || p === pagination.pages || Math.abs(p - page) <= 1)
+                .map((p, i, arr) => (
+                  <span key={p} className="flex items-center">
+                    {i > 0 && arr[i - 1] !== p - 1 && <span className="px-1 text-gray-400">...</span>}
+                    <button
+                      onClick={() => setPage(p)}
+                      className={`min-w-[32px] h-8 rounded-lg text-sm font-medium transition-colors ${
+                        p === page
+                          ? 'bg-blue-500 text-white'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  </span>
+                ))}
               <button
                 onClick={() => setPage((p) => Math.min(pagination.pages, p + 1))}
                 disabled={page >= pagination.pages}
-                className="p-1.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                title="Next page"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>

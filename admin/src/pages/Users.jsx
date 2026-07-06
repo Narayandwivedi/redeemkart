@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2 } from 'lucide-react'
+import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -26,13 +26,22 @@ const Users = () => {
   const [users, setUsers] = useState([])
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [totalUsers, setTotalUsers] = useState(0)
+  const limit = 40
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (pageNum = page) => {
     try {
-      const params = {}
+      const params = { page: pageNum, limit }
       if (search.trim()) params.search = search.trim()
       const res = await axios.get(`${BACKEND_URL}/api/admin/users`, { params, withCredentials: true })
-      if (res.data.success) setUsers(res.data.data.users)
+      if (res.data.success) {
+        setUsers(res.data.data.users)
+        setPage(res.data.data.pagination.currentPage)
+        setTotalPages(res.data.data.pagination.totalPages)
+        setTotalUsers(res.data.data.pagination.totalUsers)
+      }
     } catch {
       toast.error('Failed to fetch users')
     } finally {
@@ -40,12 +49,19 @@ const Users = () => {
     }
   }
 
-  useEffect(() => { fetchUsers() }, [])
+  useEffect(() => { fetchUsers(1) }, [])
 
   useEffect(() => {
-    const timer = setTimeout(fetchUsers, 400)
+    const timer = setTimeout(() => { setPage(1); fetchUsers(1) }, 400)
     return () => clearTimeout(timer)
   }, [search])
+
+  const goToPage = (p) => {
+    if (p < 1 || p > totalPages) return
+    setPage(p)
+    setLoading(true)
+    fetchUsers(p)
+  }
 
   const handleToggleStatus = async (user) => {
     try {
@@ -88,7 +104,7 @@ const Users = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900">Users</h1>
-        <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border">{users.length} users</span>
+        <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border">{totalUsers} user{totalUsers !== 1 ? 's' : ''}</span>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -137,7 +153,7 @@ const Users = () => {
               ) : (
                 users.map((user, idx) => (
                   <tr key={user._id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-4 py-3 text-gray-500">{idx + 1}</td>
+                    <td className="px-4 py-3 text-gray-500">{(page - 1) * limit + idx + 1}</td>
                     <td className="px-4 py-3 font-medium text-gray-900">{user.fullName || user.firstName + ' ' + (user.lastName || '')}</td>
                     <td className="px-4 py-3 text-gray-700">{user.phone || '-'}</td>
                     <td className="px-4 py-3 text-gray-700">{user.email || '-'}</td>
@@ -197,6 +213,49 @@ const Users = () => {
             </tbody>
           </table>
         </div>
+
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-100">
+            <p className="text-sm text-gray-500">
+              Page {page} of {totalPages}
+            </p>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => goToPage(page - 1)}
+                disabled={page <= 1}
+                className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                title="Previous page"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter((p) => p === 1 || p === totalPages || Math.abs(p - page) <= 1)
+                .map((p, i, arr) => (
+                  <span key={p} className="flex items-center">
+                    {i > 0 && arr[i - 1] !== p - 1 && <span className="px-1 text-gray-400">...</span>}
+                    <button
+                      onClick={() => goToPage(p)}
+                      className={`min-w-[32px] h-8 rounded-lg text-sm font-medium transition-colors ${
+                        p === page
+                          ? 'bg-blue-500 text-white'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  </span>
+                ))}
+              <button
+                onClick={() => goToPage(page + 1)}
+                disabled={page >= totalPages}
+                className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                title="Next page"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
