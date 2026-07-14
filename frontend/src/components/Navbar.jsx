@@ -55,12 +55,15 @@ const Navbar = () => {
           )}
 
           {/* Logo Section - left on home, centered on other pages (mobile) */}
-          <Link to="/" className={`${location.pathname === '/' ? 'left-0' : 'left-1/2 -translate-x-1/2'} absolute md:static md:translate-x-0 flex items-center flex-shrink-0`}>
-            <img
-              src="/gchublogo.png"
-              alt="GCHUB Logo"
-              className="h-[150px] w-[150px] md:h-[210px] md:w-[210px] object-contain drop-shadow-lg transition-transform duration-200"
-            />
+          <Link to="/" className={`${location.pathname === '/' ? 'left-0' : 'left-1/2 -translate-x-1/2'} absolute md:static md:translate-x-0 flex items-center flex-shrink-0 -ml-2 md:-ml-4`}>
+            <span
+              className="text-xl md:text-3xl font-bold tracking-tight"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              <span className="text-gray-900">Redeem</span>
+              <span className="text-blue-600">Bazaar</span>
+              <span className="text-gray-500 font-semibold text-sm md:text-lg align-baseline">.com</span>
+            </span>
           </Link>
 
           {/* Desktop Search - centered */}
