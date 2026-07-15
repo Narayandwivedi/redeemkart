@@ -271,14 +271,14 @@ const ChatBot = () => {
       {/* Floating button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-[60] w-14 h-14 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-full shadow-xl hover:shadow-amber-300/50 hover:scale-110 transition-all duration-200 flex items-center justify-center cursor-pointer"
+        className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-[60] w-14 h-14 bg-emerald-500 rounded-full shadow-xl hover:shadow-emerald-300/50 hover:scale-110 transition-all duration-200 flex items-center justify-center cursor-pointer"
         aria-label="Open support chat"
       >
         {isOpen ? (
-          <X className="w-6 h-6 text-black" />
+          <X className="w-6 h-6 text-white" />
         ) : (
           <>
-            <MessageCircle className="w-[22px] h-[22px] md:w-6 md:h-6 text-black" />
+            <MessageCircle className="w-[22px] h-[22px] md:w-6 md:h-6 text-white" />
             {hasNewMessage && (
               <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white" />
             )}
@@ -297,7 +297,7 @@ const ChatBot = () => {
           {/* Header */}
           <div className="bg-gradient-to-r from-slate-900 to-slate-800 px-4 py-3 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-amber-400 rounded-full flex items-center justify-center shadow-md">
+              <div className="w-9 h-9 bg-emerald-500 rounded-full flex items-center justify-center shadow-md">
                 <Bot className="w-5 h-5 text-black" />
               </div>
               <div>
@@ -502,12 +502,12 @@ const ChatBot = () => {
               onKeyDown={handleKeyDown}
               placeholder={refundStep === 'select_item' ? 'Choose an item above...' : refundStep === 'ask_reason' ? 'Type reason...' : 'Type your message...'}
               disabled={loading || refundStep === 'select_item'}
-              className="flex-1 text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400 transition-all placeholder:text-slate-400 disabled:opacity-60"
+              className="flex-1 text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400 transition-all placeholder:text-slate-400 disabled:opacity-60"
             />
             <button
               onClick={() => sendMessage()}
               disabled={loading || !input.trim() || refundStep === 'select_item'}
-              className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center hover:shadow-md hover:shadow-amber-300/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0 active:scale-95"
+              className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center hover:shadow-md hover:shadow-emerald-300/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0 active:scale-95"
             >
               <Send className="w-4 h-4 text-black" />
             </button>
