@@ -21,7 +21,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} ðŸ‘‹ I'm the GC Hub support bot! How can I help you today?`,
+      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ I'm the GC Hub support bot! How can I help you today?`,
       id: 'welcome'
     }
   ])
@@ -112,7 +112,7 @@ const ChatBot = () => {
       setTimeout(() => {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: 'ðŸŽ® GC Hub offers discounted game keys and downloads! Here are the games available on our platform. Select one to buy or view details:',
+          content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â® GC Hub offers discounted game keys and downloads! Here are the games available on our platform. Select one to buy or view details:',
           id: Date.now() + 1
         }, {
           role: 'assistant',
@@ -135,16 +135,16 @@ const ChatBot = () => {
         
         if (isGameItem) {
           if (textLower.includes('receive') || textLower.includes('get') || textLower.includes('not deliver') || textLower.includes('technical') || textLower.includes('error') || textLower.includes('download') || textLower.includes('install')) {
-            policyResponse = `ðŸŽ® **Refund Policy for Games**:\n\nGames are generally **non-refundable**. However, since you did not receive the game or got a technical error while downloading, our support team will verify this and **provide a new download link** to resolve any problem. Our team will contact you at your email address to assist with this!`
+            policyResponse = `ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â® **Refund Policy for Games**:\n\nGames are generally **non-refundable**. However, since you did not receive the game or got a technical error while downloading, our support team will verify this and **provide a new download link** to resolve any problem. Our team will contact you at your email address to assist with this!`
           } else {
-            policyResponse = `ðŸŽ® **Refund Policy for Games**:\n\nPlease note that games are **non-refundable**. They are only refundable/replaceable if you **did not receive the game** or encountered a **technical error while downloading**, in which case our team will provide a new download link. For any other issues, please contact support@gchub.in.`
+            policyResponse = `ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â® **Refund Policy for Games**:\n\nPlease note that games are **non-refundable**. They are only refundable/replaceable if you **did not receive the game** or encountered a **technical error while downloading**, in which case our team will provide a new download link. For any other issues, please contact support@gchub.in.`
           }
         } else {
           // It's a voucher or gift card
           if (textLower.includes('invalid') || textLower.includes('not work') || textLower.includes('work') || textLower.includes('fail') || textLower.includes('expired')) {
-            policyResponse = `ðŸŽŸï¸ **Refund Policy for Vouchers/Gift Cards**:\n\nWe are sorry to hear that the code is invalid or not working. Since the code is invalid, we will process your refund back to your original payment method. The refund will be completed in **3-5 days**.`
+            policyResponse = `ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â **Refund Policy for Vouchers/Gift Cards**:\n\nWe are sorry to hear that the code is invalid or not working. Since the code is invalid, we will process your refund back to your original payment method. The refund will be completed in **3-5 days**.`
           } else {
-            policyResponse = `ðŸŽŸï¸ **Refund Policy for Vouchers/Gift Cards**:\n\nOur policy only permits refunds if the voucher code is **invalid or not working** (refund processed in **3-5 days**). For other issues, please contact support@gchub.in.`
+            policyResponse = `ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â **Refund Policy for Vouchers/Gift Cards**:\n\nOur policy only permits refunds if the voucher code is **invalid or not working** (refund processed in **3-5 days**). For other issues, please contact support@gchub.in.`
           }
         }
 
@@ -166,7 +166,7 @@ const ChatBot = () => {
       if (!user) {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: 'ðŸ”’ Please log in to your account first so I can look up your orders and help you request a refund.',
+          content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ Please log in to your account first so I can look up your orders and help you request a refund.',
           id: Date.now() + 1
         }])
         setLoading(false)
@@ -184,7 +184,7 @@ const ChatBot = () => {
           setRefundStep('select_item')
           setMessages(prev => [...prev, {
             role: 'assistant',
-            content: 'ðŸ“‹ Here are your recent ordered items. Please click on the item you want to request a refund for:',
+            content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ Here are your recent ordered items. Please click on the item you want to request a refund for:',
             id: 'select_item_instruction'
           }, {
             role: 'assistant',
@@ -195,14 +195,14 @@ const ChatBot = () => {
         } else {
           setMessages(prev => [...prev, {
             role: 'assistant',
-            content: 'ðŸ” I couldn\'t find any orders placed under your email address. If you made a purchase, please make sure you are logged into the correct account.',
+            content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â I couldn\'t find any orders placed under your email address. If you made a purchase, please make sure you are logged into the correct account.',
             id: Date.now() + 1
           }])
         }
       } catch (err) {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: 'âš ï¸ I encountered an error checking your order history. Please try again or email us at support@gchub.in.',
+          content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â I encountered an error checking your order history. Please try again or email us at support@gchub.in.',
           id: Date.now() + 1
         }])
       } finally {
@@ -239,7 +239,7 @@ const ChatBot = () => {
     } catch (err) {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'âš ï¸ Something went wrong. Please try again or email us at support@gchub.in',
+        content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â Something went wrong. Please try again or email us at support@gchub.in',
         id: Date.now() + 1
       }])
     } finally {
@@ -257,7 +257,7 @@ const ChatBot = () => {
   const resetChat = () => {
     setMessages([{
       role: 'assistant',
-      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} ðŸ‘‹ I'm the GC Hub support bot! How can I help you today?`,
+      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ I'm the GC Hub support bot! How can I help you today?`,
       id: 'welcome'
     }])
     setRefundStep(null)
@@ -304,7 +304,7 @@ const ChatBot = () => {
                 <p className="text-white font-semibold text-sm leading-none">GC Hub Support</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-green-400 text-[10px] font-medium">AI Assistant Â· Online</span>
+                  <span className="text-green-400 text-[10px] font-medium">AI Assistant ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Online</span>
                 </div>
               </div>
             </div>
@@ -339,13 +339,13 @@ const ChatBot = () => {
                             key={`${order._id}-${idx}`}
                             onClick={() => handleSelectOrderItem(item, order._id)}
                             disabled={refundStep !== 'select_item'}
-                            className="w-full text-left text-xs p-2.5 bg-slate-50 hover:bg-amber-50 hover:border-amber-300 border border-slate-200 rounded-xl transition-all cursor-pointer flex justify-between items-center group font-medium"
+                            className="w-full text-left text-xs p-2.5 bg-slate-50 hover:bg-violet-50 hover:border-violet-300 border border-slate-200 rounded-xl transition-all cursor-pointer flex justify-between items-center group font-medium"
                           >
                             <div className="truncate pr-2">
-                              <p className="font-semibold text-slate-800 truncate group-hover:text-amber-800">{item.productName}</p>
-                              <p className="text-[10px] text-slate-500">Order #{order._id.slice(-6).toUpperCase()} Â· â‚¹{item.productPrice}</p>
+                              <p className="font-semibold text-slate-800 truncate group-hover:text-violet-900">{item.productName}</p>
+                              <p className="text-[10px] text-slate-500">Order #{order._id.slice(-6).toUpperCase()} ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹{item.productPrice}</p>
                             </div>
-                            <span className="text-[10px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded group-hover:bg-amber-200 group-hover:text-amber-800 shrink-0">Select</span>
+                            <span className="text-[10px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded group-hover:bg-violet-200 group-hover:text-violet-900 shrink-0">Select</span>
                           </button>
                         ))
                       )}
@@ -372,7 +372,7 @@ const ChatBot = () => {
                           key={reason}
                           onClick={() => handleSelectReason(reason)}
                           disabled={refundStep !== 'ask_reason'}
-                          className="w-full text-left text-xs px-3 py-2 bg-slate-50 hover:bg-amber-50 hover:border-amber-300 border border-slate-200 rounded-xl transition-all cursor-pointer font-medium text-slate-700 hover:text-amber-800"
+                          className="w-full text-left text-xs px-3 py-2 bg-slate-50 hover:bg-violet-50 hover:border-violet-300 border border-slate-200 rounded-xl transition-all cursor-pointer font-medium text-slate-700 hover:text-violet-900"
                         >
                           {reason}
                         </button>
@@ -411,12 +411,12 @@ const ChatBot = () => {
                           <div className="p-2 flex flex-col flex-1 justify-between">
                             <div>
                               <h4 className="font-semibold text-slate-800 text-[11px] leading-tight line-clamp-2">{game.fullName || game.name}</h4>
-                              <p className="text-xs font-black text-slate-950 mt-1">â‚¹{game.price}</p>
+                              <p className="text-xs font-black text-slate-950 mt-1">ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹{game.price}</p>
                             </div>
                             <div className="flex flex-col gap-1 mt-2">
                               <button
                                 onClick={() => handleBuyGameDirectly(game)}
-                                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black text-[10px] font-semibold py-1 rounded cursor-pointer transition-colors text-center"
+                                className="w-full bg-violet-500 hover:bg-violet-600 text-white text-[10px] font-semibold py-1 rounded cursor-pointer transition-colors text-center"
                               >
                                 Buy Now
                               </button>
@@ -442,7 +442,7 @@ const ChatBot = () => {
                 <div key={msg.id} className={`flex gap-2.5 ${msg.role === 'user' ? 'flex-row-reverse self-end' : 'flex-row self-start'}`}>
                   {/* Avatar */}
                   {msg.role !== 'user' && (
-                    <div className="w-7 h-7 rounded-full shrink-0 flex items-center justify-center text-xs font-semibold bg-amber-400 text-black">
+                    <div className="w-7 h-7 rounded-full shrink-0 flex items-center justify-center text-xs font-semibold bg-violet-500 text-white">
                       <Sparkles className="w-3.5 h-3.5" />
                     </div>
                   )}
@@ -451,7 +451,7 @@ const ChatBot = () => {
                   <div className={`max-w-[78%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-sm whitespace-pre-line ${
                     msg.role === 'assistant'
                       ? 'bg-white text-slate-800 rounded-tl-sm border border-slate-100'
-                      : 'bg-gradient-to-br from-amber-400 to-yellow-500 text-black rounded-tr-sm font-medium'
+                      : 'bg-gradient-to-br from-violet-500 to-violet-600 text-white rounded-tr-sm font-medium'
                   }`}>
                     {msg.content}
                   </div>
@@ -462,7 +462,7 @@ const ChatBot = () => {
             {/* Typing indicator */}
             {loading && (
               <div className="flex gap-2.5 self-start">
-                <div className="w-7 h-7 rounded-full bg-amber-400 flex items-center justify-center shrink-0">
+                <div className="w-7 h-7 rounded-full bg-violet-500 flex items-center justify-center shrink-0">
                   <Sparkles className="w-3.5 h-3.5 text-black" />
                 </div>
                 <div className="bg-white border border-slate-100 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
@@ -477,14 +477,14 @@ const ChatBot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick replies â€” only show when messages are few and not in refund flow */}
+          {/* Quick replies ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â only show when messages are few and not in refund flow */}
           {messages.length <= 2 && !loading && !refundStep && (
             <div className="bg-slate-50 px-3 pb-1 flex flex-wrap gap-1.5">
               {QUICK_REPLIES.map((q) => (
                 <button
                   key={q}
                   onClick={() => sendMessage(q)}
-                  className="text-[11px] font-medium px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-600 hover:border-amber-400 hover:text-amber-700 hover:bg-amber-50 transition-all cursor-pointer whitespace-nowrap"
+                  className="text-[11px] font-medium px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-600 hover:border-violet-500 hover:text-violet-800 hover:bg-violet-50 transition-all cursor-pointer whitespace-nowrap"
                 >
                   {q}
                 </button>

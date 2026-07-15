@@ -15,13 +15,13 @@ const RefundPolicy = () => {
         <div className="text-center mb-10 sm:mb-14">
           <div className="flex items-center justify-center gap-4 mb-6">
             <span className="h-px w-12 sm:w-20 bg-gray-300"></span>
-            <div className="bg-yellow-400 p-3 rounded-xl">
+            <div className="bg-violet-500 p-3 rounded-xl">
               <RotateCcw className="w-6 h-6 text-black" />
             </div>
             <span className="h-px w-12 sm:w-20 bg-gray-300"></span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-3">
-            Refund <span className="text-yellow-500">Policy</span>
+            Refund <span className="text-violet-500">Policy</span>
           </h1>
           <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Last updated: June 2026
@@ -38,15 +38,15 @@ const RefundPolicy = () => {
               <h2 className="text-lg font-semibold text-gray-900 mb-2">No Refund Policy</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 At Voucher Cash, all sales are <strong className="text-gray-900">final and non-refundable</strong>. 
-                Once a digital product — including game keys, gift cards, vouchers, and codes — is purchased and 
+                Once a digital product Ã¢â‚¬â€ including game keys, gift cards, vouchers, and codes Ã¢â‚¬â€ is purchased and 
                 delivered, it cannot be returned, exchanged, or refunded for any reason.
               </p>
             </div>
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="bg-amber-50 p-2.5 rounded-lg shrink-0">
-              <AlertTriangle className="w-5 h-5 text-amber-500" />
+            <div className="bg-violet-50 p-2.5 rounded-lg shrink-0">
+              <AlertTriangle className="w-5 h-5 text-violet-600" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-gray-900 mb-2">Why No Refunds?</h2>
@@ -71,19 +71,19 @@ const RefundPolicy = () => {
               </p>
               <ul className="mt-3 space-y-2 text-sm sm:text-base text-gray-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>The code/voucher was already used before delivery</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>The code does not match the product description</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>The product was not delivered due to a technical error</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>Wrong product was delivered to your account</span>
                 </li>
               </ul>
@@ -98,7 +98,7 @@ const RefundPolicy = () => {
               <h2 className="text-lg font-semibold text-gray-900 mb-2">Refund Processing Time</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 If your refund request is approved, the refund will be processed within 
-                <strong className="text-gray-900"> 3–5 business days</strong>. The amount will be credited 
+                <strong className="text-gray-900"> 3Ã¢â‚¬â€œ5 business days</strong>. The amount will be credited 
                 back to your original payment method. Please note that it may take additional time for 
                 the refund to reflect in your account depending on your bank or payment provider.
               </p>
@@ -124,10 +124,10 @@ const RefundPolicy = () => {
             </div>
           </div>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 sm:p-5">
+          <div className="bg-violet-50 border border-violet-200 rounded-xl p-4 sm:p-5">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
-              <p className="text-sm sm:text-base text-yellow-800 leading-relaxed">
+              <AlertTriangle className="w-5 h-5 text-violet-500 shrink-0 mt-0.5" />
+              <p className="text-sm sm:text-base text-violet-900 leading-relaxed">
                 <strong className="font-semibold">Important:</strong> By making a purchase on Voucher Cash, 
                 you acknowledge that you have read and agreed to this Refund Policy. We strongly 
                 recommend verifying your order details before completing any transaction.

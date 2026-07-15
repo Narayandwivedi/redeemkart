@@ -6,9 +6,9 @@ import { toast } from 'react-toastify'
 import { useSEO } from '../hooks/useSEO'
 
 const vouchers = [
-  { _id: 'myntra-500', name: 'Myntra Gift Card - ₹500', price: 440, originalPrice: 500, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: '₹500 Myntra Gift Card at just ₹440', stockQuantity: 0 },
-  { _id: 'myntra-1000', name: 'Myntra Gift Card - ₹1000', price: 875, originalPrice: 1000, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: '₹1000 Myntra Gift Card at just ₹875', stockQuantity: 0 },
-  { _id: 'myntra-2000', name: 'Myntra Gift Card - ₹2000', price: 1750, originalPrice: 2000, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: '₹2000 Myntra Gift Card at just ₹1750', stockQuantity: 0 },
+  { _id: 'myntra-500', name: 'Myntra Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500', price: 440, originalPrice: 500, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500 Myntra Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹440', stockQuantity: 0 },
+  { _id: 'myntra-1000', name: 'Myntra Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000', price: 875, originalPrice: 1000, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000 Myntra Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹875', stockQuantity: 0 },
+  { _id: 'myntra-2000', name: 'Myntra Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000', price: 1750, originalPrice: 2000, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000 Myntra Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1750', stockQuantity: 0 },
 ]
 
 const formatPrice = (price) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)
@@ -92,7 +92,7 @@ const GiftCardMyntra = () => {
                       </div>
                     ) : (
                       <div className="flex flex-col gap-2">
-                        <button onClick={(e) => { e.stopPropagation(); handleBuyNow(voucher) }} className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm">Buy Now</button>
+                        <button onClick={(e) => { e.stopPropagation(); handleBuyNow(voucher) }} className="w-full bg-violet-500 hover:bg-violet-600 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm">Buy Now</button>
                         <button onClick={(e) => { e.stopPropagation(); handleAddToCart(voucher) }} className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm">Add to Cart</button>
                       </div>
                     )}

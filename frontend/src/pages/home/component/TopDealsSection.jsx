@@ -14,7 +14,7 @@ const fallbackVouchers = [
   },
   {
     _id: 'googleplay-deal',
-    seoTitle: "Google Play Gift Card - ₹500 digital code",
+    seoTitle: "Google Play Gift Card - â‚¹500 digital code",
     price: 475,
     originalPrice: 500,
     brand: "Google Play",
@@ -23,7 +23,7 @@ const fallbackVouchers = [
   },
   {
     _id: 'steam-deal',
-    seoTitle: "Steam Wallet Code - ₹1000 Digital Code",
+    seoTitle: "Steam Wallet Code - â‚¹1000 Digital Code",
     price: 960,
     originalPrice: 1000,
     brand: "Steam",

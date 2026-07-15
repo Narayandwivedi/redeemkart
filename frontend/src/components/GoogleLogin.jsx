@@ -157,8 +157,8 @@ const GoogleLogin = () => {
             </button>
 
             <div className="text-center mb-5">
-              <div className="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Phone className="w-6 h-6 text-amber-600" />
+              <div className="bg-violet-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Phone className="w-6 h-6 text-violet-700" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900">Mobile Number Required</h3>
               <p className="text-sm text-gray-500 mt-1">Please enter your mobile number to complete signup</p>
@@ -170,14 +170,14 @@ const GoogleLogin = () => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))}
               placeholder="Enter 10-digit mobile number"
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm font-medium text-center tracking-widest"
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm font-medium text-center tracking-widest"
               autoFocus
             />
 
             <button
               onClick={handlePhoneSubmit}
               disabled={submitting || phoneNumber.length < 10}
-              className="w-full mt-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 rounded-xl hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full mt-4 bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {submitting ? 'Verifying...' : 'Continue'}
             </button>

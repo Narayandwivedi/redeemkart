@@ -191,7 +191,7 @@ const BlogDetailPage = () => {
       <div className="min-h-screen bg-gray-50">
         <LandingNavbar />
         <div className="container mx-auto px-4 py-20 text-center">
-          <div className="text-gray-400 text-6xl mb-4">😞</div>
+          <div className="text-gray-400 text-6xl mb-4">ðŸ˜ž</div>
           <h1 className="text-3xl font-semibold text-gray-900 mb-4">
             {error || 'Blog not found'}
           </h1>

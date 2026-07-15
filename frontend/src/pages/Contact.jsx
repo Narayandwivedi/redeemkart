@@ -44,7 +44,7 @@ const Contact = () => {
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">
-            Get In <span className="text-yellow-500">Touch</span>
+            Get In <span className="text-violet-500">Touch</span>
           </h1>
           <p className="text-sm text-gray-600 mt-1">We'd love to hear from you</p>
         </div>
@@ -53,7 +53,7 @@ const Contact = () => {
           <div className="mb-6 text-center">
             <Link
               to="/chat"
-              className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-lg shadow-md hover:shadow-yellow-400/40 transition-all duration-200 text-sm"
+              className="inline-flex items-center gap-1.5 bg-violet-500 hover:bg-violet-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:shadow-violet-500/40 transition-all duration-200 text-sm"
             >
               <MessageCircle className="w-4 h-4" />
               <span>Live Chat</span>
@@ -63,34 +63,34 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          {/* Left — Contact Info */}
+          {/* Left ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Contact Info */}
           <div className="space-y-4">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="bg-yellow-400 p-2 rounded-lg shrink-0">
+                  <div className="bg-violet-500 p-2 rounded-lg shrink-0">
                     <Mail className="w-4 h-4 text-black" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-[10px] font-medium text-gray-500 uppercase tracking-wider">Email</p>
-                    <a href="mailto:support@gchub.in" className="text-sm font-medium text-gray-900 hover:text-yellow-600 transition-colors truncate block">
+                    <a href="mailto:support@gchub.in" className="text-sm font-medium text-gray-900 hover:text-violet-700 transition-colors truncate block">
                       support@gchub.in
                     </a>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="bg-yellow-400 p-2 rounded-lg shrink-0">
+                  <div className="bg-violet-500 p-2 rounded-lg shrink-0">
                     <Phone className="w-4 h-4 text-black" />
                   </div>
                   <div>
                     <p className="text-[10px] font-medium text-gray-500 uppercase tracking-wider">Phone</p>
-                    <a href="tel:+919876543210" className="text-sm font-medium text-gray-900 hover:text-yellow-600 transition-colors">
+                    <a href="tel:+919876543210" className="text-sm font-medium text-gray-900 hover:text-violet-700 transition-colors">
                       +91 98765 43210
                     </a>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="bg-yellow-400 p-2 rounded-lg shrink-0">
+                  <div className="bg-violet-500 p-2 rounded-lg shrink-0">
                     <MapPin className="w-4 h-4 text-black" />
                   </div>
                   <div>
@@ -99,7 +99,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="bg-yellow-400 p-2 rounded-lg shrink-0">
+                  <div className="bg-violet-500 p-2 rounded-lg shrink-0">
                     <Clock className="w-4 h-4 text-black" />
                   </div>
                   <div>
@@ -129,7 +129,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right — Form */}
+          {/* Right ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Form */}
           <div>
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
               <h2 className="text-base font-semibold text-gray-900">Send us a Message</h2>
@@ -140,13 +140,13 @@ const Contact = () => {
                   <div>
                     <label htmlFor="name" className="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Name *</label>
                     <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 bg-gray-50 focus:bg-white text-sm"
+                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-50 focus:bg-white text-sm"
                       placeholder="Your name" />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Email *</label>
                     <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required
-                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 bg-gray-50 focus:bg-white text-sm"
+                      className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-50 focus:bg-white text-sm"
                       placeholder="your@email.com" />
                   </div>
                 </div>
@@ -154,7 +154,7 @@ const Contact = () => {
                 <div>
                   <label htmlFor="subject" className="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Subject *</label>
                   <select id="subject" name="subject" value={formData.subject} onChange={handleInputChange} required
-                    className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 bg-gray-50 focus:bg-white text-sm cursor-pointer">
+                    className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-50 focus:bg-white text-sm cursor-pointer">
                     <option value="">Choose a topic</option>
                     <option value="gift-cards">Gift Cards / Vouchers</option>
                     <option value="game-keys">Game Keys</option>
@@ -167,12 +167,12 @@ const Contact = () => {
                 <div>
                   <label htmlFor="message" className="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Message *</label>
                   <textarea id="message" name="message" rows={4} value={formData.message} onChange={handleInputChange} required
-                    className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 resize-none bg-gray-50 focus:bg-white text-sm"
+                    className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 resize-none bg-gray-50 focus:bg-white text-sm"
                     placeholder="How can we help?"></textarea>
                 </div>
 
                 <button type="submit"
-                  className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2.5 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm cursor-pointer">
+                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-semibold py-2.5 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-violet-500/40 text-sm cursor-pointer">
                   <div className="flex items-center justify-center gap-1.5">
                     <Send className="w-4 h-4" />
                     <span>Send Message</span>
@@ -180,16 +180,16 @@ const Contact = () => {
                 </button>
               </form>
 
-              <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <div className="mt-4 p-3 bg-violet-50 border border-violet-200 rounded-lg">
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-900 mb-2">
-                  <Zap className="w-3.5 h-3.5 text-yellow-500" />
+                  <Zap className="w-3.5 h-3.5 text-violet-500" />
                   Quick Response
                 </div>
                 <div className="grid grid-cols-2 gap-1 text-[11px] text-gray-600">
-                  <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-yellow-400"></span>Email: 2-4 hrs</span>
-                  <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-yellow-400"></span>Phone: Immediate</span>
-                  <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-yellow-400"></span>Support: Same day</span>
-                  <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-yellow-400"></span>Orders: Real-time</span>
+                  <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-violet-500"></span>Email: 2-4 hrs</span>
+                  <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-violet-500"></span>Phone: Immediate</span>
+                  <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-violet-500"></span>Support: Same day</span>
+                  <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-violet-500"></span>Orders: Real-time</span>
                 </div>
               </div>
             </div>

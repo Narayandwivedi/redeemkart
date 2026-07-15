@@ -5,9 +5,9 @@ const Profile = () => {
   const [activeTab, setActiveTab] = useState('profile')
 
   const tabs = [
-    { id: 'profile', name: 'Profile Info', icon: '👤' },
-    { id: 'addresses', name: 'My Addresses', icon: '📍' },
-    { id: 'orders', name: 'Order History', icon: '📦' }
+    { id: 'profile', name: 'Profile Info', icon: 'ðŸ‘¤' },
+    { id: 'addresses', name: 'My Addresses', icon: 'ðŸ“' },
+    { id: 'orders', name: 'Order History', icon: 'ðŸ“¦' }
   ]
 
   return (

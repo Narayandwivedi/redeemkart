@@ -368,9 +368,9 @@ const ProductDetail = () => {
                     )}
                     {product.dimensions && (product.dimensions.length || product.dimensions.width || product.dimensions.height) && (
                       <div className="flex justify-between">
-                        <dt className="text-sm font-medium text-gray-600">Dimensions (L × W × H)</dt>
+                        <dt className="text-sm font-medium text-gray-600">Dimensions (L Ã— W Ã— H)</dt>
                         <dd className="text-sm text-gray-900">
-                          {product.dimensions.length || '–'} × {product.dimensions.width || '–'} × {product.dimensions.height || '–'} cm
+                          {product.dimensions.length || 'â€“'} Ã— {product.dimensions.width || 'â€“'} Ã— {product.dimensions.height || 'â€“'} cm
                         </dd>
                       </div>
                     )}

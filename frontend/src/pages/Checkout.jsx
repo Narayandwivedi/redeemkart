@@ -34,7 +34,7 @@ const Checkout = () => {
         customerNotes,
         paymentMethod,
         userId: user._id,
-        // Digital product — no shipping address needed
+        // Digital product ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â no shipping address needed
         shippingAddress: {
           fullAddress: 'Digital Delivery',
           city: 'Digital',
@@ -81,7 +81,7 @@ const Checkout = () => {
               })
               const verifyResult = await verifyResponse.json()
               if (verifyResult.success) {
-                toast.success('🎉 Payment successful! Order placed.')
+                toast.success('ÃƒÂ°Ã…Â¸Ã…Â½Ã¢â‚¬Â° Payment successful! Order placed.')
                 clearCart()
                 navigate('/my-orders')
               } else {
@@ -101,7 +101,7 @@ const Checkout = () => {
             method: 'upi'
           },
           theme: {
-            color: '#f59e0b'
+            color: '#7c3aed'
           },
           modal: {
             ondismiss: function () {
@@ -118,7 +118,7 @@ const Checkout = () => {
         rzp.open()
       } else {
         // Cash on Delivery success path
-        toast.success('🎉 Order placed! Your voucher will be delivered soon.')
+        toast.success('ÃƒÂ°Ã…Â¸Ã…Â½Ã¢â‚¬Â° Order placed! Your voucher will be delivered soon.')
         clearCart()
         navigate('/my-orders')
       }
@@ -140,7 +140,7 @@ const Checkout = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500 mx-auto" />
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600 mx-auto" />
           <p className="mt-4 text-gray-600">Redirecting to cart...</p>
         </div>
       </div>
@@ -150,7 +150,7 @@ const Checkout = () => {
   const subtotal = getTotalPrice()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-yellow-50/20 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50/30 to-violet-50/20 py-8 px-4">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-6">
@@ -159,19 +159,19 @@ const Checkout = () => {
             Back to Cart
           </Link>
           <h1 className="text-2xl font-semibold text-slate-900">Complete Your Order</h1>
-          <p className="text-slate-500 text-sm mt-1">Digital products — instant delivery after payment</p>
+          <p className="text-slate-500 text-sm mt-1">Digital products ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â instant delivery after payment</p>
         </div>
 
         {/* Digital badge */}
-        <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-6">
-          <Zap className="w-4 h-4 text-amber-600 shrink-0" />
-          <p className="text-sm font-medium text-amber-800">
-            These are digital products. No shipping address required — you'll receive your voucher code by email / in your account.
+        <div className="flex items-center gap-2 bg-violet-50 border border-violet-200 rounded-xl px-4 py-3 mb-6">
+          <Zap className="w-4 h-4 text-violet-700 shrink-0" />
+          <p className="text-sm font-medium text-violet-900">
+            These are digital products. No shipping address required ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â you'll receive your voucher code by email / in your account.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          {/* Left — order items + notes */}
+          {/* Left ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â order items + notes */}
           <div className="lg:col-span-3 space-y-4">
             {/* Order items */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
@@ -212,19 +212,19 @@ const Checkout = () => {
                 value={customerNotes}
                 onChange={(e) => setCustomerNotes(e.target.value)}
                 rows={3}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400 text-sm resize-none transition-all outline-none"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-500/30 focus:border-violet-500 text-sm resize-none transition-all outline-none"
                 placeholder="Any special instructions for your order..."
               />
             </div>
           </div>
 
-          {/* Right — order summary + payment */}
+          {/* Right ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â order summary + payment */}
           <div className="lg:col-span-2 space-y-4">
             {/* Account */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
               <h3 className="text-sm font-medium text-slate-700 mb-3">Ordering as</h3>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center font-semibold text-amber-700 text-sm">
+                <div className="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center font-semibold text-violet-800 text-sm">
                   {(user?.fullName || user?.email || 'U').charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0">
@@ -259,7 +259,7 @@ const Checkout = () => {
                 <CreditCard className="w-4 h-4 text-slate-500" />
                 <h3 className="text-sm font-medium text-slate-700">Payment Method</h3>
               </div>
-              <div className="flex items-center gap-3 p-3 border border-amber-300 bg-amber-50/50 rounded-xl">
+              <div className="flex items-center gap-3 p-3 border border-violet-300 bg-violet-50/50 rounded-xl">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
                 <div>
                   <p className="font-medium text-slate-800 text-sm">Pay Online (Razorpay QR & UPI)</p>
@@ -272,7 +272,7 @@ const Checkout = () => {
             <button
               onClick={handlePlaceOrder}
               disabled={isSubmitting}
-              className="w-full py-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold rounded-2xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] text-base"
+              className="w-full py-4 bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold rounded-2xl hover:shadow-lg hover:shadow-violet-300/40 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] text-base"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center gap-2">
@@ -282,7 +282,7 @@ const Checkout = () => {
               ) : (
                 <span className="flex items-center justify-center gap-2">
                   <Lock className="w-4 h-4" />
-                  Place Order · {formatPrice(subtotal)}
+                  Place Order Ãƒâ€šÃ‚Â· {formatPrice(subtotal)}
                 </span>
               )}
             </button>

@@ -140,11 +140,11 @@ const SellVoucher = () => {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-yellow-50 via-white to-orange-50 rounded-xl shadow-md border border-yellow-200 p-5 sm:p-6 mb-6 sm:mb-8 relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+          <div className="bg-gradient-to-br from-violet-50 via-white to-orange-50 rounded-xl shadow-md border border-violet-200 p-5 sm:p-6 mb-6 sm:mb-8 relative overflow-hidden">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-violet-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
 
             <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <Gift className="h-6 w-6 text-yellow-600" />
+              <Gift className="h-6 w-6 text-violet-700" />
               List Your Gift Card
             </h2>
 
@@ -153,13 +153,13 @@ const SellVoucher = () => {
                 <label className="block text-sm font-medium text-gray-800 mb-1.5">Brand</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Gift className="h-4 w-4 text-yellow-600" />
+                    <Gift className="h-4 w-4 text-violet-700" />
                   </div>
                   <select
                     name="brand"
                     value={form.brand}
                     onChange={handleChange}
-                    className="w-full pl-10 border border-yellow-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 shadow-sm transition-shadow appearance-none"
+                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow appearance-none"
                   >
                     <option value="">Select brand</option>
                     {brands.map((b) => (
@@ -170,10 +170,10 @@ const SellVoucher = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">Balance Amount (₹)</label>
+                <label className="block text-sm font-medium text-gray-800 mb-1.5">Balance Amount (Ã¢â€šÂ¹)</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <DollarSign className="h-4 w-4 text-yellow-600" />
+                    <DollarSign className="h-4 w-4 text-violet-700" />
                   </div>
                   <input
                     type="number"
@@ -181,7 +181,7 @@ const SellVoucher = () => {
                     value={form.balance}
                     onChange={handleChange}
                     placeholder="Enter amount"
-                    className="w-full pl-10 border border-yellow-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 shadow-sm transition-shadow"
+                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow"
                   />
                 </div>
               </div>
@@ -190,7 +190,7 @@ const SellVoucher = () => {
                 <label className="block text-sm font-medium text-gray-800 mb-1.5">Gift Card Code</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Hash className="h-4 w-4 text-yellow-600" />
+                    <Hash className="h-4 w-4 text-violet-700" />
                   </div>
                   <input
                     type="text"
@@ -198,7 +198,7 @@ const SellVoucher = () => {
                     value={form.code}
                     onChange={handleChange}
                     placeholder="Enter gift card code"
-                    className="w-full pl-10 border border-yellow-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 shadow-sm transition-shadow"
+                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow"
                   />
                 </div>
               </div>
@@ -209,7 +209,7 @@ const SellVoucher = () => {
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-4 w-4 text-yellow-600" />
+                    <Lock className="h-4 w-4 text-violet-700" />
                   </div>
                   <input
                     type="text"
@@ -217,7 +217,7 @@ const SellVoucher = () => {
                     value={form.pin}
                     onChange={handleChange}
                     placeholder="Enter PIN if required"
-                    className="w-full pl-10 border border-yellow-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 shadow-sm transition-shadow"
+                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow"
                   />
                 </div>
               </div>
@@ -226,14 +226,14 @@ const SellVoucher = () => {
                 <label className="block text-sm font-medium text-gray-800 mb-1.5">Expiry Date</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Calendar className="h-4 w-4 text-yellow-600" />
+                    <Calendar className="h-4 w-4 text-violet-700" />
                   </div>
                   <input
                     type="date"
                     name="expiry"
                     value={form.expiry}
                     onChange={handleChange}
-                    className="w-full pl-10 border border-yellow-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 shadow-sm transition-shadow"
+                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow"
                   />
                 </div>
               </div>
@@ -244,8 +244,8 @@ const SellVoucher = () => {
                   disabled={loading}
                   className="w-full py-3 text-white font-semibold text-base rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{
-                    background: 'linear-gradient(135deg, #eab308 0%, #f59e0b 55%, #d97706 100%)',
-                    boxShadow: '0 4px 14px rgba(234,179,8,0.4)',
+                    background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 55%, #6d28d9 100%)',
+                    boxShadow: '0 4px 14px rgba(139,92,246,0.4)',
                   }}
                 >
                   {loading ? (
@@ -263,7 +263,7 @@ const SellVoucher = () => {
               {form.balance > 0 && (
                 <div className="text-center -mt-2">
                   <p className="text-sm font-medium text-gray-700">
-                    You'll receive: <span className="text-emerald-600">₹{Math.round(form.balance * 0.9)}</span>
+                    You'll receive: <span className="text-emerald-600">Ã¢â€šÂ¹{Math.round(form.balance * 0.9)}</span>
                     <span className="text-gray-400 font-normal"> (after 10% commission)</span>
                   </p>
                 </div>
@@ -292,7 +292,7 @@ const SellVoucher = () => {
                   <div>
                     <p className="font-medium text-gray-900">{card.brand}</p>
                     <p className="text-sm text-gray-500">
-                      Code: {card.code.replace(/.(?=.{4})/g, '*')} | {card.pin ? `PIN: ${card.pin.replace(/.(?=.{4})/g, '*')} |` : ''} ₹{card.balance} | Exp: {new Date(card.expiry).toLocaleDateString('en-IN')}
+                      Code: {card.code.replace(/.(?=.{4})/g, '*')} | {card.pin ? `PIN: ${card.pin.replace(/.(?=.{4})/g, '*')} |` : ''} Ã¢â€šÂ¹{card.balance} | Exp: {new Date(card.expiry).toLocaleDateString('en-IN')}
                     </p>
                   </div>
                 </div>
@@ -312,7 +312,7 @@ const SellVoucher = () => {
           <div className="lg:col-span-1 space-y-6">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-6 sticky top-24">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="w-1 h-5 rounded-full bg-yellow-500 block"></span>
+                <span className="w-1 h-5 rounded-full bg-violet-500 block"></span>
                 Frequently Asked Questions
               </h3>
 
@@ -339,10 +339,10 @@ const SellVoucher = () => {
                 </div>
               </div>
 
-              <div className="mt-6 bg-yellow-50 rounded-lg p-4 border border-yellow-200">
-                <h4 className="font-medium text-yellow-800 text-sm mb-1">Need help?</h4>
-                <p className="text-yellow-700 text-xs mb-3">Our support team is available 24/7 to assist you.</p>
-                <Link to="/contact" className="inline-block text-xs font-semibold text-yellow-900 hover:text-yellow-700">Contact Support &rarr;</Link>
+              <div className="mt-6 bg-violet-50 rounded-lg p-4 border border-violet-200">
+                <h4 className="font-medium text-violet-900 text-sm mb-1">Need help?</h4>
+                <p className="text-violet-800 text-xs mb-3">Our support team is available 24/7 to assist you.</p>
+                <Link to="/contact" className="inline-block text-xs font-semibold text-violet-950 hover:text-violet-800">Contact Support &rarr;</Link>
               </div>
             </div>
           </div>

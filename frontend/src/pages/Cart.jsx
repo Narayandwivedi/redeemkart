@@ -42,7 +42,7 @@ const Cart = () => {
         customerNotes: '',
         paymentMethod: 'online',
         userId: user._id,
-        // Digital product — no shipping address needed
+        // Digital product ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â no shipping address needed
         shippingAddress: {
           fullAddress: 'Digital Delivery',
           city: 'Digital',
@@ -92,7 +92,7 @@ const Cart = () => {
             })
             const verifyResult = await verifyResponse.json()
             if (verifyResult.success) {
-              toast.success('🎉 Payment successful! Order placed.')
+              toast.success('ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â° Payment successful! Order placed.')
               clearCart()
               navigate('/my-orders')
             } else {
@@ -112,7 +112,7 @@ const Cart = () => {
           method: 'upi'
         },
         theme: {
-          color: '#f59e0b'
+          color: '#7c3aed'
         },
         modal: {
           ondismiss: function () {
@@ -137,19 +137,19 @@ const Cart = () => {
   const formatPrice = (price) =>
     new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)
 
-  /* ── Empty State ── */
+  /* ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Empty State ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ */
   if (!loading && items.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-yellow-50/20 flex items-center justify-center px-4 py-20">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50/30 to-violet-50/20 flex items-center justify-center px-4 py-20">
         <div className="text-center max-w-sm">
-          <div className="w-24 h-24 mx-auto mb-6 bg-amber-100 rounded-full flex items-center justify-center">
-            <ShoppingBag className="w-12 h-12 text-amber-400" />
+          <div className="w-24 h-24 mx-auto mb-6 bg-violet-100 rounded-full flex items-center justify-center">
+            <ShoppingBag className="w-12 h-12 text-violet-500" />
           </div>
           <h2 className="text-2xl font-semibold text-slate-900 mb-2">Your cart is empty</h2>
           <p className="text-slate-500 mb-8 text-sm">Browse our vouchers and digital products to get started!</p>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 px-8 rounded-xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold py-3 px-8 rounded-xl hover:shadow-lg hover:shadow-violet-300/40 transition-all duration-200 active:scale-[0.98]"
           >
             <ShoppingBag className="w-4 h-4" />
             Start Shopping
@@ -163,7 +163,7 @@ const Cart = () => {
   const totalItems = getTotalItems()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-yellow-50/20 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50/30 to-violet-50/20 py-8 px-4">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
@@ -184,14 +184,14 @@ const Cart = () => {
         </div>
 
         {/* Digital delivery notice */}
-        <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-2.5 mb-6">
-          <Zap className="w-4 h-4 text-amber-500 shrink-0" />
-          <span className="text-xs font-medium text-amber-700">Digital products — instant delivery to your account after order confirmation</span>
+        <div className="flex items-center gap-2 bg-violet-50 border border-violet-200 rounded-xl px-4 py-2.5 mb-6">
+          <Zap className="w-4 h-4 text-violet-600 shrink-0" />
+          <span className="text-xs font-medium text-violet-800">Digital products ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â instant delivery to your account after order confirmation</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-          {/* ── Cart Items ── */}
+          {/* ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Cart Items ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ */}
           <div className="lg:col-span-8 space-y-3">
             {items.map((item) => {
               const itemId = item._id || item.id
@@ -221,7 +221,7 @@ const Cart = () => {
                         />
                       )}
                       {hasDiscount && (
-                        <div className="absolute top-1 left-1 bg-amber-400 text-black text-[10px] font-semibold px-1.5 py-0.5 rounded-md">
+                        <div className="absolute top-1 left-1 bg-violet-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-md">
                           -{discountPct}%
                         </div>
                       )}
@@ -249,14 +249,14 @@ const Cart = () => {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => updateQuantity(itemId, item.quantity - 1)}
-                            className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-amber-100 hover:text-amber-700 flex items-center justify-center transition-colors cursor-pointer"
+                            className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-violet-100 hover:text-violet-800 flex items-center justify-center transition-colors cursor-pointer"
                           >
                             <Minus className="w-3.5 h-3.5" />
                           </button>
                           <span className="w-7 text-center text-sm font-medium text-slate-800">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(itemId, item.quantity + 1)}
-                            className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-amber-100 hover:text-amber-700 flex items-center justify-center transition-colors cursor-pointer"
+                            className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-violet-100 hover:text-violet-800 flex items-center justify-center transition-colors cursor-pointer"
                           >
                             <Plus className="w-3.5 h-3.5" />
                           </button>
@@ -279,14 +279,14 @@ const Cart = () => {
                       <div className="flex items-center gap-2 bg-slate-50 rounded-xl p-1 border border-slate-100">
                         <button
                           onClick={() => updateQuantity(itemId, item.quantity - 1)}
-                          className="w-8 h-8 rounded-lg hover:bg-amber-100 hover:text-amber-700 flex items-center justify-center transition-colors cursor-pointer"
+                          className="w-8 h-8 rounded-lg hover:bg-violet-100 hover:text-violet-800 flex items-center justify-center transition-colors cursor-pointer"
                         >
                           <Minus className="w-3.5 h-3.5" />
                         </button>
                         <span className="w-8 text-center text-sm font-semibold text-slate-800">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(itemId, item.quantity + 1)}
-                          className="w-8 h-8 rounded-lg hover:bg-amber-100 hover:text-amber-700 flex items-center justify-center transition-colors cursor-pointer"
+                          className="w-8 h-8 rounded-lg hover:bg-violet-100 hover:text-violet-800 flex items-center justify-center transition-colors cursor-pointer"
                         >
                           <Plus className="w-3.5 h-3.5" />
                         </button>
@@ -316,17 +316,17 @@ const Cart = () => {
             {/* Continue shopping */}
             <Link
               to="/"
-              className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-amber-600 font-medium transition-colors mt-2"
+              className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-violet-700 font-medium transition-colors mt-2"
             >
-              ← Continue Shopping
+              ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Ãƒâ€šÃ‚Â Continue Shopping
             </Link>
           </div>
 
-          {/* ── Order Summary ── */}
+          {/* ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Order Summary ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ */}
           <div className="lg:col-span-4">
             <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sticky top-20">
               <h2 className="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                <Tag className="w-4 h-4 text-amber-500" />
+                <Tag className="w-4 h-4 text-violet-600" />
                 Order Summary
               </h2>
 
@@ -351,16 +351,16 @@ const Cart = () => {
               </div>
 
               {/* Delivery Info */}
-              <div className="mt-5 p-4 bg-amber-50/50 border border-amber-200 rounded-xl">
+              <div className="mt-5 p-4 bg-violet-50/50 border border-violet-200 rounded-xl">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-sm font-semibold text-slate-800 flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-amber-500" />
+                    <Mail className="w-4 h-4 text-violet-600" />
                     Delivery Details
                   </h3>
                   {!isEditingRecipient ? (
                     <button 
                       onClick={() => setIsEditingRecipient(true)}
-                      className="text-xs text-amber-600 font-medium hover:text-amber-700 flex items-center gap-1 cursor-pointer"
+                      className="text-xs text-violet-700 font-medium hover:text-violet-800 flex items-center gap-1 cursor-pointer"
                     >
                       <Edit2 className="w-3 h-3" /> Edit
                     </button>
@@ -396,7 +396,7 @@ const Cart = () => {
                           type="text" 
                           value={recipientName}
                           onChange={(e) => setRecipientName(e.target.value)}
-                          className="w-full text-sm pl-8 pr-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                          className="w-full text-sm pl-8 pr-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-violet-500"
                           placeholder="Name"
                         />
                       </div>
@@ -411,7 +411,7 @@ const Cart = () => {
                           type="email" 
                           value={recipientEmail}
                           onChange={(e) => setRecipientEmail(e.target.value)}
-                          className="w-full text-sm pl-8 pr-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                          className="w-full text-sm pl-8 pr-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-violet-500"
                           placeholder="Email address"
                         />
                       </div>
@@ -423,7 +423,7 @@ const Cart = () => {
               <button
                 onClick={handleCheckout}
                 disabled={isSubmitting}
-                className="w-full mt-5 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3.5 px-4 rounded-xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer text-sm disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full mt-5 bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold py-3.5 px-4 rounded-xl hover:shadow-lg hover:shadow-violet-300/40 transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer text-sm disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

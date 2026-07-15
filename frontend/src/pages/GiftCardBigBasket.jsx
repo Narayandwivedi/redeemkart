@@ -6,9 +6,9 @@ import { toast } from 'react-toastify'
 import { useSEO } from '../hooks/useSEO'
 
 const vouchers = [
-  { _id: 'bigbasket-100', name: 'BigBasket Gift Card - ₹100', price: 88, originalPrice: 100, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: '₹100 BigBasket Gift Card at just ₹88', stockQuantity: 0 },
-  { _id: 'bigbasket-500', name: 'BigBasket Gift Card - ₹500', price: 435, originalPrice: 500, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: '₹500 BigBasket Gift Card at just ₹435', stockQuantity: 0 },
-  { _id: 'bigbasket-1000', name: 'BigBasket Gift Card - ₹1000', price: 870, originalPrice: 1000, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: '₹1000 BigBasket Gift Card at just ₹870', stockQuantity: 0 },
+  { _id: 'bigbasket-100', name: 'BigBasket Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100', price: 88, originalPrice: 100, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100 BigBasket Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹88', stockQuantity: 0 },
+  { _id: 'bigbasket-500', name: 'BigBasket Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500', price: 435, originalPrice: 500, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500 BigBasket Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹435', stockQuantity: 0 },
+  { _id: 'bigbasket-1000', name: 'BigBasket Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000', price: 870, originalPrice: 1000, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000 BigBasket Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹870', stockQuantity: 0 },
 ]
 
 const formatPrice = (price) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)
@@ -92,7 +92,7 @@ const GiftCardBigBasket = () => {
                       </div>
                     ) : (
                       <div className="flex flex-col gap-2">
-                        <button onClick={(e) => { e.stopPropagation(); handleBuyNow(voucher) }} className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm">Buy Now</button>
+                        <button onClick={(e) => { e.stopPropagation(); handleBuyNow(voucher) }} className="w-full bg-violet-500 hover:bg-violet-600 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm">Buy Now</button>
                         <button onClick={(e) => { e.stopPropagation(); handleAddToCart(voucher) }} className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm">Add to Cart</button>
                       </div>
                     )}

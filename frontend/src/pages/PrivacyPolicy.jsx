@@ -8,13 +8,13 @@ const PrivacyPolicy = () => {
         <div className="text-center mb-10 sm:mb-14">
           <div className="flex items-center justify-center gap-4 mb-6">
             <span className="h-px w-12 sm:w-20 bg-gray-300"></span>
-            <div className="bg-yellow-400 p-3 rounded-xl">
+            <div className="bg-violet-500 p-3 rounded-xl">
               <Shield className="w-6 h-6 text-black" />
             </div>
             <span className="h-px w-12 sm:w-20 bg-gray-300"></span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-3">
-            Privacy <span className="text-yellow-500">Policy</span>
+            Privacy <span className="text-violet-500">Policy</span>
           </h1>
           <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Last updated: June 2026
@@ -48,19 +48,19 @@ const PrivacyPolicy = () => {
               </p>
               <ul className="space-y-2 text-sm sm:text-base text-gray-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span><strong className="text-gray-900">Personal Information:</strong> Name, email address, phone number, and billing details when you create an account or make a transaction.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span><strong className="text-gray-900">Payment Information:</strong> Bank account details and UPI IDs for processing payouts. All payment data is handled securely through our payment partners.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span><strong className="text-gray-900">Usage Data:</strong> Information about how you interact with our platform, including pages visited, products viewed, and transaction history.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span><strong className="text-gray-900">Device Information:</strong> IP address, browser type, operating system, and device identifiers for analytics and security purposes.</span>
                 </li>
               </ul>
@@ -78,27 +78,27 @@ const PrivacyPolicy = () => {
               </p>
               <ul className="space-y-2 text-sm sm:text-base text-gray-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>To process and fulfill your orders and sell listing requests</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>To process payouts and transfer funds to your bank account</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>To communicate with you about orders, promotions, and support requests</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>To detect and prevent fraudulent activity and ensure platform security</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>To improve our platform, user experience, and customer support</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-500 mt-0.5">•</span>
+                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
                   <span>To comply with legal obligations and enforce our terms of service</span>
                 </li>
               </ul>
@@ -106,8 +106,8 @@ const PrivacyPolicy = () => {
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="bg-amber-50 p-2.5 rounded-lg shrink-0">
-              <UserCheck className="w-5 h-5 text-amber-500" />
+            <div className="bg-violet-50 p-2.5 rounded-lg shrink-0">
+              <UserCheck className="w-5 h-5 text-violet-600" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-gray-900 mb-2">Data Sharing & Disclosure</h2>
@@ -167,10 +167,10 @@ const PrivacyPolicy = () => {
             </div>
           </div>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 sm:p-5">
+          <div className="bg-violet-50 border border-violet-200 rounded-xl p-4 sm:p-5">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
-              <p className="text-sm sm:text-base text-yellow-800 leading-relaxed">
+              <AlertTriangle className="w-5 h-5 text-violet-500 shrink-0 mt-0.5" />
+              <p className="text-sm sm:text-base text-violet-900 leading-relaxed">
                 <strong className="font-semibold">Policy Updates:</strong> We may update this Privacy Policy 
                 from time to time. Changes will be posted on this page with an updated revision date. 
                 Continued use of GCHub after changes constitutes acceptance of the updated policy.

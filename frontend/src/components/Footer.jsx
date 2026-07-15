@@ -9,7 +9,7 @@ const Footer = () => {
     <footer style={{ background: 'linear-gradient(160deg, #111 0%, #1a1200 60%, #0f0f0f 100%)' }} className="text-white">
       
       {/* Top accent bar */}
-      <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, #eab308, #f59e0b, #d97706, #eab308)', backgroundSize: '200% 100%' }} />
+      <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, #8b5cf6, #7c3aed, #6d28d9, #8b5cf6)', backgroundSize: '200% 100%' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
 
@@ -38,9 +38,9 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   aria-label={label}
                   className="flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200"
-                  style={{ background: 'rgba(234,179,8,0.12)', border: '1px solid rgba(234,179,8,0.2)', color: '#eab308' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(234,179,8,0.3)'; e.currentTarget.style.borderColor = '#eab308' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(234,179,8,0.12)'; e.currentTarget.style.borderColor = 'rgba(234,179,8,0.2)' }}
+                  style={{ background: 'rgba(139,92,246,0.12)', border: '1px solid rgba(139,92,246,0.2)', color: '#8b5cf6' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(139,92,246,0.3)'; e.currentTarget.style.borderColor = '#8b5cf6' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(139,92,246,0.12)'; e.currentTarget.style.borderColor = 'rgba(139,92,246,0.2)' }}
                 >
                   {icon}
                 </a>
@@ -53,23 +53,23 @@ const Footer = () => {
             {/* Shop by Category */}
             <div>
               <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#eab308' }} />
+                <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#8b5cf6' }} />
                 Categories
               </h3>
               <ul className="space-y-2.5">
                 {[
-                  { to: '/search?category=e-commerce', label: 'ðŸ›’ E-Commerce' },
-                  { to: '/search?category=gaming', label: 'ðŸŽ® Gaming' },
-                  { to: '/search?category=food-dining', label: 'ðŸ” Food & Dining' },
-                  { to: '/search?category=fashion-lifestyle', label: 'ðŸ‘— Fashion & Lifestyle' },
-                  { to: '/search?category=travel-entertainment', label: 'âœˆï¸ Travel & Entertainment' },
+                  { to: '/search?category=e-commerce', label: 'ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂºÃ¢â‚¬â„¢ E-Commerce' },
+                  { to: '/search?category=gaming', label: 'ÃƒÂ°Ã…Â¸Ã…Â½Ã‚Â® Gaming' },
+                  { to: '/search?category=food-dining', label: 'ÃƒÂ°Ã…Â¸Ã‚ÂÃ¢â‚¬Â Food & Dining' },
+                  { to: '/search?category=fashion-lifestyle', label: 'ÃƒÂ°Ã…Â¸Ã¢â‚¬ËœÃ¢â‚¬â€ Fashion & Lifestyle' },
+                  { to: '/search?category=travel-entertainment', label: 'ÃƒÂ¢Ã…â€œÃ‹â€ ÃƒÂ¯Ã‚Â¸Ã‚Â Travel & Entertainment' },
                 ].map(({ to, label }) => (
                   <li key={to}>
                     <Link
                       to={to}
-                      className="text-gray-400 text-sm hover:text-yellow-400 transition-colors duration-200 flex items-center gap-1.5 group"
+                      className="text-gray-400 text-sm hover:text-violet-500 transition-colors duration-200 flex items-center gap-1.5 group"
                     >
-                      <span className="w-0 group-hover:w-2 h-px rounded transition-all duration-200 inline-block" style={{ background: '#eab308' }} />
+                      <span className="w-0 group-hover:w-2 h-px rounded transition-all duration-200 inline-block" style={{ background: '#8b5cf6' }} />
                       {label}
                     </Link>
                   </li>
@@ -80,7 +80,7 @@ const Footer = () => {
             {/* Quick Links */}
             <div>
               <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#eab308' }} />
+                <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#8b5cf6' }} />
                 Quick Links
               </h3>
               <ul className="space-y-2.5">
@@ -95,9 +95,9 @@ const Footer = () => {
                   <li key={to}>
                     <Link
                       to={to}
-                      className="text-gray-400 text-sm hover:text-yellow-400 transition-colors duration-200 flex items-center gap-1.5 group"
+                      className="text-gray-400 text-sm hover:text-violet-500 transition-colors duration-200 flex items-center gap-1.5 group"
                     >
-                      <span className="w-0 group-hover:w-2 h-px rounded transition-all duration-200 inline-block" style={{ background: '#eab308' }} />
+                      <span className="w-0 group-hover:w-2 h-px rounded transition-all duration-200 inline-block" style={{ background: '#8b5cf6' }} />
                       {label}
                     </Link>
                   </li>
@@ -109,38 +109,38 @@ const Footer = () => {
           {/* Contact & Trust */}
           <div>
             <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-              <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#eab308' }} />
+              <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#8b5cf6' }} />
               Contact Us
             </h3>
             <ul className="space-y-3 mb-5">
               <li className="flex items-start gap-3">
-                <span className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(234,179,8,0.12)' }}>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" style={{ color: '#eab308' }}>
+                <span className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(139,92,246,0.12)' }}>
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" style={{ color: '#8b5cf6' }}>
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
                 </span>
                 <div>
                   <p className="text-gray-500 text-xs mb-0.5">Phone</p>
-                  <a href="tel:+917000121212" className="text-gray-300 text-sm hover:text-yellow-400 transition-colors">+91 70001 21212</a>
+                  <a href="tel:+917000121212" className="text-gray-300 text-sm hover:text-violet-500 transition-colors">+91 70001 21212</a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(234,179,8,0.12)' }}>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" style={{ color: '#eab308' }}>
+                <span className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(139,92,246,0.12)' }}>
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" style={{ color: '#8b5cf6' }}>
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                   </svg>
                 </span>
                 <div>
                   <p className="text-gray-500 text-xs mb-0.5">Email</p>
-                  <a href="mailto:support@gchub.in" className="text-gray-300 text-sm hover:text-yellow-400 transition-colors">support@gchub.in</a>
+                  <a href="mailto:support@gchub.in" className="text-gray-300 text-sm hover:text-violet-500 transition-colors">support@gchub.in</a>
                 </div>
               </li>
             </ul>
 
             {/* Trust badges */}
-            <div className="rounded-xl p-3 space-y-2" style={{ background: 'rgba(234,179,8,0.07)', border: '1px solid rgba(234,179,8,0.15)' }}>
-              {['ðŸ”’ 100% Secure Payments', 'âš¡ Instant Delivery', 'âœ… Verified Vouchers'].map(badge => (
+            <div className="rounded-xl p-3 space-y-2" style={{ background: 'rgba(139,92,246,0.07)', border: '1px solid rgba(139,92,246,0.15)' }}>
+              {['ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂÃ¢â‚¬â„¢ 100% Secure Payments', 'ÃƒÂ¢Ã…Â¡Ã‚Â¡ Instant Delivery', 'ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Verified Vouchers'].map(badge => (
                 <p key={badge} className="text-xs text-gray-400">{badge}</p>
               ))}
             </div>
@@ -150,21 +150,21 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div
           className="mt-8 pt-5 flex flex-col sm:flex-row justify-between items-center gap-3"
-          style={{ borderTop: '1px solid rgba(234,179,8,0.15)' }}
+          style={{ borderTop: '1px solid rgba(139,92,246,0.15)' }}
         >
           <p className="text-gray-500 text-xs text-center sm:text-left">
-            Â© {currentYear} <span style={{ color: '#eab308' }}>GCHub</span>. All rights reserved. Made in ðŸ‡®ðŸ‡³ India.
+            Ãƒâ€šÃ‚Â© {currentYear} <span style={{ color: '#8b5cf6' }}>GCHub</span>. All rights reserved. Made in ÃƒÂ°Ã…Â¸Ã¢â‚¬Â¡Ã‚Â®ÃƒÂ°Ã…Â¸Ã¢â‚¬Â¡Ã‚Â³ India.
           </p>
           <div className="flex items-center gap-4">
             <Link
               to="/refund-policy"
-              className="text-gray-500 hover:text-yellow-400 text-xs transition-colors duration-200"
+              className="text-gray-500 hover:text-violet-500 text-xs transition-colors duration-200"
             >
               Refund Policy
             </Link>
             <Link
               to="/privacy-policy"
-              className="text-gray-500 hover:text-yellow-400 text-xs transition-colors duration-200"
+              className="text-gray-500 hover:text-violet-500 text-xs transition-colors duration-200"
             >
               Privacy Policy
             </Link>

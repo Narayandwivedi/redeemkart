@@ -5,7 +5,7 @@ import axios from 'axios'
 import { AppContext } from '../context/AppContext'
 
 const statusConfig = {
-  active: { icon: Clock, bg: 'bg-amber-50 text-amber-700 border-amber-200', label: 'Active' },
+  active: { icon: Clock, bg: 'bg-violet-50 text-violet-800 border-violet-200', label: 'Active' },
   sold: { icon: CheckCircle, bg: 'bg-emerald-50 text-emerald-700 border-emerald-200', label: 'Sold' },
   expired: { icon: TrendingUp, bg: 'bg-red-50 text-red-700 border-red-200', label: 'Expired' },
 }
@@ -50,18 +50,18 @@ const MySales = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500">Total Earnings</p>
-                <p className="text-xl font-semibold text-gray-900">₹{totalEarnings.toLocaleString('en-IN')}</p>
+                <p className="text-xl font-semibold text-gray-900">Ã¢â€šÂ¹{totalEarnings.toLocaleString('en-IN')}</p>
               </div>
             </div>
           </div>
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
             <div className="flex items-center gap-3">
-              <div className="bg-amber-100 rounded-lg p-3">
-                <Clock className="h-6 w-6 text-amber-600" />
+              <div className="bg-violet-100 rounded-lg p-3">
+                <Clock className="h-6 w-6 text-violet-700" />
               </div>
               <div>
                 <p className="text-sm text-gray-500">Pending Payout</p>
-                <p className="text-xl font-semibold text-gray-900">₹{pendingPayout.toLocaleString('en-IN')}</p>
+                <p className="text-xl font-semibold text-gray-900">Ã¢â€šÂ¹{pendingPayout.toLocaleString('en-IN')}</p>
               </div>
             </div>
           </div>
@@ -119,9 +119,9 @@ const MySales = () => {
                             <span className="font-medium text-gray-900">{card.brand}</span>
                           </div>
                         </td>
-                        <td className="px-5 py-4 text-gray-700">₹{card.balance}</td>
-                        <td className="px-5 py-4 text-gray-500">-₹{commission}</td>
-                        <td className="px-5 py-4 font-medium text-emerald-600">₹{payout}</td>
+                        <td className="px-5 py-4 text-gray-700">Ã¢â€šÂ¹{card.balance}</td>
+                        <td className="px-5 py-4 text-gray-500">-Ã¢â€šÂ¹{commission}</td>
+                        <td className="px-5 py-4 font-medium text-emerald-600">Ã¢â€šÂ¹{payout}</td>
                         <td className="px-5 py-4 text-gray-600">{new Date(card.createdAt).toLocaleDateString('en-IN')}</td>
                         <td className="px-5 py-4 text-gray-600">{card.status === 'sold' ? new Date(card.updatedAt).toLocaleDateString('en-IN') : '-'}</td>
                         <td className="px-5 py-4">

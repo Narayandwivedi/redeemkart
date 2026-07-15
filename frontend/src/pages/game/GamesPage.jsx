@@ -73,7 +73,7 @@ const GamesPage = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
             <h1 className="text-2xl sm:text-3xl font-black text-gray-900 mb-1 flex items-center gap-2">
-              <Gamepad2 className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500" />
+              <Gamepad2 className="w-6 h-6 sm:w-8 sm:h-8 text-violet-500" />
               All Games
             </h1>
             <p className="text-sm text-gray-500">
@@ -81,15 +81,15 @@ const GamesPage = () => {
             </p>
           </div>
           <div className="relative w-full md:max-w-md group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-yellow-500 transition-colors" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-violet-500 transition-colors" />
             <input
               type="text"
               placeholder="Search by name, genre..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-24 py-3 rounded-xl border border-gray-200 shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 text-sm outline-none transition-all bg-white"
+              className="w-full pl-10 pr-24 py-3 rounded-xl border border-gray-200 shadow-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500 text-sm outline-none transition-all bg-white"
             />
-            <button className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-4 py-1.5 rounded-lg transition-colors text-sm shadow-sm flex items-center gap-1">
+            <button className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-violet-500 hover:bg-violet-600 text-white font-semibold px-4 py-1.5 rounded-lg transition-colors text-sm shadow-sm flex items-center gap-1">
               Search
             </button>
           </div>
@@ -123,7 +123,7 @@ const GamesPage = () => {
                         ))}
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-transparent to-transparent flex items-end pb-2 pl-2">
-                        <Sparkles className="w-4 h-4 text-yellow-400 mr-1" />
+                        <Sparkles className="w-4 h-4 text-violet-500 mr-1" />
                         <span className="text-white text-[10px] font-bold uppercase tracking-wider">Bundle</span>
                       </div>
                     </div>
@@ -143,7 +143,7 @@ const GamesPage = () => {
                   </div>
                   {!game.isBundle && (
                     <div className="absolute bottom-2 right-2 bg-white/95 backdrop-blur-sm px-1.5 py-0.5 rounded-md flex items-center gap-1 shadow">
-                      <Star className="w-3 h-3 text-yellow-500" fill="currentColor" />
+                      <Star className="w-3 h-3 text-violet-500" fill="currentColor" />
                       <span className="text-[10px] font-semibold text-gray-900">{game.rating}</span>
                     </div>
                   )}
@@ -158,13 +158,13 @@ const GamesPage = () => {
                     <h3 className="font-semibold text-gray-900 text-sm leading-tight">{game.fullName || game.name}</h3>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-lg font-bold text-gray-900">₹{game.price}</span>
-                    <span className="text-xs text-gray-400 line-through">₹{game.originalPrice}</span>
+                    <span className="text-lg font-bold text-gray-900">ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹{game.price}</span>
+                    <span className="text-xs text-gray-400 line-through">ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹{game.originalPrice}</span>
                   </div>
                   <div className="flex gap-2 mt-auto">
                     <button
                       onClick={(e) => handleBuyNow(e, game)}
-                      className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer"
+                      className="flex-1 bg-violet-500 hover:bg-violet-600 text-white font-semibold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer"
                     >
                       Buy Now
                     </button>

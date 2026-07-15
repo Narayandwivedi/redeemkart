@@ -6,10 +6,10 @@ import { toast } from 'react-toastify'
 import { useSEO } from '../hooks/useSEO'
 
 const vouchers = [
-  { _id: 'amazon-100', name: 'Amazon Gift Card - ₹100', price: 88, originalPrice: 100, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: '₹100 Amazon Gift Card at just ₹88', stockQuantity: 0 },
-  { _id: 'amazon-500', name: 'Amazon Gift Card - ₹500', price: 435, originalPrice: 500, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: '₹500 Amazon Gift Card at just ₹435', stockQuantity: 0 },
-  { _id: 'amazon-1000', name: 'Amazon Gift Card - ₹1000', price: 870, originalPrice: 1000, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: '₹1000 Amazon Gift Card at just ₹870', stockQuantity: 0 },
-  { _id: 'amazon-2000', name: 'Amazon Gift Card - ₹2000', price: 1740, originalPrice: 2000, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: '₹2000 Amazon Gift Card at just ₹1740', stockQuantity: 0 },
+  { _id: 'amazon-100', name: 'Amazon Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100', price: 88, originalPrice: 100, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100 Amazon Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹88', stockQuantity: 0 },
+  { _id: 'amazon-500', name: 'Amazon Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500', price: 435, originalPrice: 500, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500 Amazon Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹435', stockQuantity: 0 },
+  { _id: 'amazon-1000', name: 'Amazon Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000', price: 870, originalPrice: 1000, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000 Amazon Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹870', stockQuantity: 0 },
+  { _id: 'amazon-2000', name: 'Amazon Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000', price: 1740, originalPrice: 2000, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000 Amazon Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1740', stockQuantity: 0 },
 ]
 
 const formatPrice = (price) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)
@@ -93,7 +93,7 @@ const GiftCardAmazon = () => {
                       </div>
                     ) : (
                       <div className="flex flex-col gap-2">
-                        <button onClick={(e) => { e.stopPropagation(); handleBuyNow(voucher) }} className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm">Buy Now</button>
+                        <button onClick={(e) => { e.stopPropagation(); handleBuyNow(voucher) }} className="w-full bg-violet-500 hover:bg-violet-600 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm">Buy Now</button>
                         <button onClick={(e) => { e.stopPropagation(); handleAddToCart(voucher) }} className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm">Add to Cart</button>
                       </div>
                     )}

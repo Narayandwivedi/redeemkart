@@ -164,10 +164,10 @@ const Login = () => {
   }
 
   return (
-    <div className='min-h-[100dvh] bg-gradient-to-br from-slate-50 via-amber-50 to-yellow-100 flex flex-col items-center justify-center p-4 relative overflow-hidden'>
+    <div className='min-h-[100dvh] bg-gradient-to-br from-slate-50 via-violet-50 to-violet-100 flex flex-col items-center justify-center p-4 relative overflow-hidden'>
       <div className='absolute top-0 left-0 w-full h-full overflow-hidden z-0'>
-        <div className='absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-yellow-300/20 rounded-full blur-3xl'></div>
-        <div className='absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-amber-300/20 rounded-full blur-3xl'></div>
+        <div className='absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-violet-300/20 rounded-full blur-3xl'></div>
+        <div className='absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-violet-300/20 rounded-full blur-3xl'></div>
       </div>
 
       <div className='w-full max-w-md z-10'>
@@ -223,7 +223,7 @@ const Login = () => {
             </div>
           )}
 
-          {/* forgotStep 0 — Login / Signup */}
+          {/* forgotStep 0 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Login / Signup */}
           {forgotStep === 0 && (
             <form onSubmit={isLogin ? handleLogin : handleSignup} className='space-y-3.5'>
               {/* Login fields */}
@@ -232,23 +232,23 @@ const Login = () => {
                   <div>
                     <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Email or Mobile</label>
                     <div className='relative group'>
-                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                           <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' />
                         </svg>
                       </div>
-                      <input type='text' value={loginData.emailOrMobile} onChange={(e) => setLoginData({...loginData, emailOrMobile: e.target.value})} placeholder='Email or Mobile' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                      <input type='text' value={loginData.emailOrMobile} onChange={(e) => setLoginData({...loginData, emailOrMobile: e.target.value})} placeholder='Email or Mobile' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                     </div>
                   </div>
                   <div>
                     <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Password</label>
                     <div className='relative group'>
-                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                           <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' />
                         </svg>
                       </div>
-                      <input type={showPassword ? 'text' : 'password'} value={loginData.password} onChange={(e) => setLoginData({...loginData, password: e.target.value})} placeholder='••••••••' className='w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                      <input type={showPassword ? 'text' : 'password'} value={loginData.password} onChange={(e) => setLoginData({...loginData, password: e.target.value})} placeholder='ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢' className='w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                       <button type='button' onClick={() => setShowPassword(!showPassword)} className='absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400 hover:text-slate-600 transition-colors'>
                         {showPassword ? (
                           <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -274,7 +274,7 @@ const Login = () => {
                     </div>
                   )}
                   <div className='text-right -mt-1'>
-                    <button type='button' onClick={() => setForgotStep(1)} className='text-xs font-medium text-amber-600 hover:text-amber-700 hover:underline transition-colors cursor-pointer'>
+                    <button type='button' onClick={() => setForgotStep(1)} className='text-xs font-medium text-violet-700 hover:text-violet-800 hover:underline transition-colors cursor-pointer'>
                       Forgot Password?
                     </button>
                   </div>
@@ -287,45 +287,45 @@ const Login = () => {
                   <div>
                     <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Full Name</label>
                     <div className='relative group'>
-                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                           <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
                         </svg>
                       </div>
-                      <input type='text' value={signupData.fullName} onChange={(e) => setSignupData({...signupData, fullName: e.target.value})} placeholder='John Doe' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                      <input type='text' value={signupData.fullName} onChange={(e) => setSignupData({...signupData, fullName: e.target.value})} placeholder='John Doe' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                     </div>
                   </div>
                   <div>
                     <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Email</label>
                     <div className='relative group'>
-                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                           <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' />
                         </svg>
                       </div>
-                      <input type='email' value={signupData.email} onChange={(e) => setSignupData({...signupData, email: e.target.value})} placeholder='john@example.com' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                      <input type='email' value={signupData.email} onChange={(e) => setSignupData({...signupData, email: e.target.value})} placeholder='john@example.com' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                     </div>
                   </div>
                   <div>
                     <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Mobile</label>
                     <div className='relative group'>
-                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                           <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' />
                         </svg>
                       </div>
-                      <input type='tel' value={signupData.mobile} onChange={(e) => setSignupData({...signupData, mobile: e.target.value})} placeholder='+91 9876543210' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                      <input type='tel' value={signupData.mobile} onChange={(e) => setSignupData({...signupData, mobile: e.target.value})} placeholder='+91 9876543210' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                     </div>
                   </div>
                   <div>
                     <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Password</label>
                     <div className='relative group'>
-                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                           <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' />
                         </svg>
                       </div>
-                      <input type={showPassword ? 'text' : 'password'} value={signupData.password} onChange={(e) => setSignupData({...signupData, password: e.target.value})} placeholder='Create a password' className='w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                      <input type={showPassword ? 'text' : 'password'} value={signupData.password} onChange={(e) => setSignupData({...signupData, password: e.target.value})} placeholder='Create a password' className='w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                       <button type='button' onClick={() => setShowPassword(!showPassword)} className='absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400 hover:text-slate-600 transition-colors'>
                         {showPassword ? (
                           <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -343,12 +343,12 @@ const Login = () => {
                   <div>
                     <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Confirm Password</label>
                     <div className='relative group'>
-                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                           <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' />
                         </svg>
                       </div>
-                      <input type={showPassword ? 'text' : 'password'} value={signupData.confirmPassword} onChange={(e) => setSignupData({...signupData, confirmPassword: e.target.value})} placeholder='Re-enter password' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                      <input type={showPassword ? 'text' : 'password'} value={signupData.confirmPassword} onChange={(e) => setSignupData({...signupData, confirmPassword: e.target.value})} placeholder='Re-enter password' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                     </div>
                   </div>
                   {error && (
@@ -364,7 +364,7 @@ const Login = () => {
                 </>
               )}
 
-              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
+              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-violet-600/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
                 {loading ? (
                   <>
                     <svg className='animate-spin h-5 w-5 text-black' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
@@ -393,18 +393,18 @@ const Login = () => {
             </form>
           )}
 
-          {/* forgotStep 1 — Send OTP */}
+          {/* forgotStep 1 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Send OTP */}
           {forgotStep === 1 && (
             <form onSubmit={handleSendOTP} className='space-y-3.5'>
               <div>
                 <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Email Address</label>
                 <div className='relative group'>
-                  <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                  <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                     <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                       <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' />
                     </svg>
                   </div>
-                  <input type='email' value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)} placeholder='john@example.com' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                  <input type='email' value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)} placeholder='john@example.com' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                 </div>
               </div>
 
@@ -419,7 +419,7 @@ const Login = () => {
                 </div>
               )}
 
-              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
+              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-violet-600/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
                 {loading ? (
                   <>
                     <svg className='animate-spin h-5 w-5 text-black' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
@@ -441,13 +441,13 @@ const Login = () => {
             </form>
           )}
 
-          {/* forgotStep 2 — Verify OTP */}
+          {/* forgotStep 2 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Verify OTP */}
           {forgotStep === 2 && (
             <form onSubmit={handleResetPassword} className='space-y-3.5'>
               <div>
                 <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-3 ml-1'>Enter OTP</label>
                 <div className='flex items-center justify-center gap-2'>
-                  <input type='text' inputMode='numeric' maxLength={6} value={forgotOtp} onChange={(e) => setForgotOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder='000000' className='w-full text-center text-xl font-semibold bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all py-2.5 tracking-[0.5em]' disabled={loading} />
+                  <input type='text' inputMode='numeric' maxLength={6} value={forgotOtp} onChange={(e) => setForgotOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder='000000' className='w-full text-center text-xl font-semibold bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all py-2.5 tracking-[0.5em]' disabled={loading} />
                 </div>
               </div>
 
@@ -462,7 +462,7 @@ const Login = () => {
                 </div>
               )}
 
-              <button type='submit' disabled={loading || forgotOtp.length !== 6} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
+              <button type='submit' disabled={loading || forgotOtp.length !== 6} className='w-full bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-violet-600/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
                 {loading ? (
                   <>
                     <svg className='animate-spin h-5 w-5 text-black' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
@@ -484,18 +484,18 @@ const Login = () => {
             </form>
           )}
 
-          {/* forgotStep 3 — Reset Password */}
+          {/* forgotStep 3 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Reset Password */}
           {forgotStep === 3 && (
             <form onSubmit={handleResetPassword} className='space-y-3.5'>
               <div>
                 <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>New Password</label>
                 <div className='relative group'>
-                  <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                  <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                     <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                       <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' />
                     </svg>
                   </div>
-                  <input type={showNewPassword ? 'text' : 'password'} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='Min. 6 characters' className='w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                  <input type={showNewPassword ? 'text' : 'password'} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder='Min. 6 characters' className='w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                   <button type='button' onClick={() => setShowNewPassword(!showNewPassword)} className='absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400 hover:text-slate-600 transition-colors'>
                     {showNewPassword ? (
                       <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -514,12 +514,12 @@ const Login = () => {
               <div>
                 <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Confirm Password</label>
                 <div className='relative group'>
-                  <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
+                  <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-violet-600'>
                     <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                       <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' />
                     </svg>
                   </div>
-                  <input type={showConfirmPassword ? 'text' : 'password'} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder='Re-enter new password' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
+                  <input type={showConfirmPassword ? 'text' : 'password'} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder='Re-enter new password' className='w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all text-sm placeholder:text-slate-400 font-medium' disabled={loading} />
                 </div>
               </div>
 
@@ -534,7 +534,7 @@ const Login = () => {
                 </div>
               )}
 
-              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
+              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-violet-600/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
                 {loading ? (
                   <>
                     <svg className='animate-spin h-5 w-5 text-black' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>

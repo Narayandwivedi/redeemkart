@@ -203,7 +203,7 @@ const GiftCardDetail = () => {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-violet-50/40 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-semibold text-slate-800 mb-2">Brand not found</h2>
-          <Link to="/gift-cards" className="text-amber-600 hover:underline font-medium">Browse all gift cards</Link>
+          <Link to="/gift-cards" className="text-violet-700 hover:underline font-medium">Browse all gift cards</Link>
         </div>
       </div>
     )
@@ -281,7 +281,7 @@ const GiftCardDetail = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <button onClick={handleBuyNow} className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-sm">
+                    <button onClick={handleBuyNow} className="flex-1 bg-violet-500 hover:bg-violet-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-sm">
                       Buy Now
                     </button>
                     <button onClick={handleAddToCart} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-sm">

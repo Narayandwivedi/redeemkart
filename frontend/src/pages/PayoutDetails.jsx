@@ -70,12 +70,12 @@ const PayoutDetails = () => {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black px-5 sm:px-6 py-6">
             <div className="flex items-center gap-4">
-              <div className="bg-yellow-400 p-3 rounded-full shrink-0">
+              <div className="bg-violet-500 p-3 rounded-full shrink-0">
                 <Banknote className="w-8 h-8 sm:w-10 sm:h-10 text-black" />
               </div>
               <div>
                 <h2 className="text-lg sm:text-xl font-semibold text-white">Payout Settings</h2>
-                <p className="text-yellow-200 text-sm mt-0.5">Add your bank account or UPI ID</p>
+                <p className="text-violet-200 text-sm mt-0.5">Add your bank account or UPI ID</p>
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@ const PayoutDetails = () => {
                 {/* Bank Account */}
                 <div>
                   <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
-                    <Building2 className="w-4 h-4 text-yellow-500" />
+                    <Building2 className="w-4 h-4 text-violet-500" />
                     Bank Account
                   </div>
 
@@ -102,28 +102,28 @@ const PayoutDetails = () => {
                     <div className="sm:col-span-2">
                       <label className="block text-[11px] font-medium text-gray-500 mb-1">Account Holder Name</label>
                       <input type="text" name="bankAccountHolder" value={formData.bankAccountHolder} onChange={handleChange} disabled={!isEditing} placeholder="Name on bank account"
-                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 ${
+                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
                           !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
                         }`} />
                     </div>
                     <div className="sm:col-span-2">
                       <label className="block text-[11px] font-medium text-gray-500 mb-1">Account Number</label>
                       <input type="text" name="bankAccountNumber" value={formData.bankAccountNumber} onChange={handleChange} disabled={!isEditing} placeholder="Enter account number"
-                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 ${
+                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
                           !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
                         }`} />
                     </div>
                     <div>
                       <label className="block text-[11px] font-medium text-gray-500 mb-1">Bank Name</label>
                       <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} disabled={!isEditing} placeholder="e.g. SBI, HDFC"
-                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 ${
+                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
                           !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
                         }`} />
                     </div>
                     <div>
                       <label className="block text-[11px] font-medium text-gray-500 mb-1">IFSC Code</label>
                       <input type="text" name="ifscCode" value={formData.ifscCode} onChange={handleChange} disabled={!isEditing} placeholder="e.g. SBIN0001234"
-                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 ${
+                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
                           !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
                         }`} />
                     </div>
@@ -140,7 +140,7 @@ const PayoutDetails = () => {
                 {/* UPI */}
                 <div>
                   <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
-                    <Smartphone className="w-4 h-4 text-yellow-500" />
+                    <Smartphone className="w-4 h-4 text-violet-500" />
                     UPI
                   </div>
 
@@ -154,7 +154,7 @@ const PayoutDetails = () => {
                   <div>
                     <label className="block text-[11px] font-medium text-gray-500 mb-1">UPI ID</label>
                     <input type="text" name="upiId" value={formData.upiId} onChange={handleChange} disabled={!isEditing} placeholder="e.g. name@upi"
-                      className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 ${
+                      className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
                         !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
                       }`} />
                   </div>
@@ -162,7 +162,7 @@ const PayoutDetails = () => {
 
                 {/* Status info */}
                 {!isEditing && !hasBank && !hasUpi && (
-                  <div className="flex items-center gap-2 text-xs text-amber-600 bg-amber-50 px-3 py-2.5 rounded-lg">
+                  <div className="flex items-center gap-2 text-xs text-violet-700 bg-violet-50 px-3 py-2.5 rounded-lg">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     No payout details added yet. Click Edit to add your bank account or UPI ID.
                   </div>
@@ -172,7 +172,7 @@ const PayoutDetails = () => {
                 <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
                   {!isEditing ? (
                     <button type="button" onClick={() => setIsEditing(true)}
-                      className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm cursor-pointer">
+                      className="inline-flex items-center gap-1.5 bg-violet-500 hover:bg-violet-600 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-violet-500/40 text-sm cursor-pointer">
                       <Edit2 className="w-4 h-4" />
                       Edit Payout Info
                     </button>
@@ -184,7 +184,7 @@ const PayoutDetails = () => {
                         Cancel
                       </button>
                       <button type="submit" disabled={loading}
-                        className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm disabled:opacity-50 cursor-pointer">
+                        className="inline-flex items-center gap-1.5 bg-violet-500 hover:bg-violet-600 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-violet-500/40 text-sm disabled:opacity-50 cursor-pointer">
                         {loading ? (
                           <Loader className="w-4 h-4 animate-spin" />
                         ) : (

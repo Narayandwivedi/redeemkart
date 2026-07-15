@@ -178,7 +178,7 @@ const CheckoutFlow = ({ onClose, onSuccess }) => {
                     {items.map((item) => (
                       <div key={item._id || item.id} className="flex justify-between items-center">
                         <span className="text-gray-700">
-                          {item.name || item.seoTitle} × {item.quantity}
+                          {item.name || item.seoTitle} Ã— {item.quantity}
                         </span>
                         <span className="font-medium">{formatPrice(item.price * item.quantity)}</span>
                       </div>

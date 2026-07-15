@@ -46,7 +46,7 @@ const CustomerSupport = () => {
             </Link>
             <div>
               <h1 className="text-xl font-semibold text-white">Customer Support</h1>
-              <p className="text-gray-300 text-sm">Hi {user?.fullName?.split(' ')[0]} 👋</p>
+              <p className="text-gray-300 text-sm">Hi {user?.fullName?.split(' ')[0]} ðŸ‘‹</p>
             </div>
           </div>
           <div className="bg-gradient-to-br from-blue-400 to-blue-500 p-3 rounded-xl shadow-lg">

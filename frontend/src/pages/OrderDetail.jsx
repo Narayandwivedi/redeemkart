@@ -40,7 +40,7 @@ const OrderDetail = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return 'bg-yellow-100 text-yellow-800 border-yellow-200'
+      case 'pending': return 'bg-violet-100 text-violet-900 border-violet-200'
       case 'confirmed': return 'bg-blue-100 text-blue-800 border-blue-200'
       case 'processing': return 'bg-purple-100 text-purple-800 border-purple-200'
       case 'shipped': return 'bg-indigo-100 text-indigo-800 border-indigo-200'
@@ -74,7 +74,7 @@ const OrderDetail = () => {
 
   const getPaymentStatusColor = (status) => {
     switch (status) {
-      case 'pending': return 'bg-yellow-100 text-yellow-800'
+      case 'pending': return 'bg-violet-100 text-violet-900'
       case 'paid': return 'bg-green-100 text-green-800'
       case 'failed': return 'bg-red-100 text-red-800'
       case 'refunded': return 'bg-gray-100 text-gray-800'
@@ -164,7 +164,7 @@ const OrderDetail = () => {
             <ArrowLeft className="w-4 h-4 mr-1.5" />
             Back to Orders
           </button>
-          {/* Order title — mobile friendly, no overflow */}
+          {/* Order title Ã¢â‚¬â€ mobile friendly, no overflow */}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
@@ -187,7 +187,7 @@ const OrderDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-5">
-            {/* Gift Card Redeem Codes — shown FIRST on mobile for quick access */}
+            {/* Gift Card Redeem Codes Ã¢â‚¬â€ shown FIRST on mobile for quick access */}
             {order.giftCodes && order.giftCodes.length > 0 && (
               <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl shadow-sm border-2 border-emerald-300 overflow-hidden">
                 <div className="px-4 py-4 sm:px-6 border-b border-emerald-200">
@@ -203,7 +203,7 @@ const OrderDetail = () => {
                       {/* Card header */}
                       <div className="flex items-start justify-between gap-2 mb-4">
                         <span className="font-medium text-gray-800 text-sm leading-tight">
-                          {gc.brand} — ₹{gc.balance} Gift Card
+                          {gc.brand} Ã¢â‚¬â€ Ã¢â€šÂ¹{gc.balance} Gift Card
                         </span>
                         <span className="flex-shrink-0 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
                           Ready to Use
@@ -216,7 +216,7 @@ const OrderDetail = () => {
                           Redeem Code
                         </label>
                         <div className="flex gap-2">
-                          {/* Scrollable code box — never overflows on any screen */}
+                          {/* Scrollable code box Ã¢â‚¬â€ never overflows on any screen */}
                           <div className="flex-1 min-w-0 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 overflow-x-auto">
                             <p className="font-mono text-sm font-semibold text-gray-900 tracking-widest whitespace-nowrap select-all">
                               {gc.code}
@@ -267,7 +267,7 @@ const OrderDetail = () => {
                     </div>
                   ))}
                   <div className="text-xs text-emerald-700 bg-emerald-100 rounded-lg p-3 leading-relaxed">
-                    💡 <strong>How to redeem:</strong> Go to your Google Play / respective store, tap &quot;Redeem code&quot; and enter the code above.
+                    Ã°Å¸â€™Â¡ <strong>How to redeem:</strong> Go to your Google Play / respective store, tap &quot;Redeem code&quot; and enter the code above.
                   </div>
                   <p className="text-xs font-medium text-emerald-800 text-center pt-2 border-t border-emerald-200/50">
                     Your code has been sent to your email. You can also find it here anytime.

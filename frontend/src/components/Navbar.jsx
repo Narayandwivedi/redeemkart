@@ -73,11 +73,11 @@ const Navbar = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="w-full pl-5 pr-12 py-2.5 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 bg-gray-50 hover:bg-white transition-colors shadow-sm"
+                className="w-full pl-5 pr-12 py-2.5 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-50 hover:bg-white transition-colors shadow-sm"
               />
               <button
                 type="submit"
-                className="absolute right-1.5 top-1/2 -translate-y-1/2 p-2 bg-yellow-500 text-gray-900 rounded-full hover:bg-yellow-400 transition-colors cursor-pointer"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 p-2 bg-violet-500 text-white rounded-full hover:bg-violet-500 transition-colors cursor-pointer"
               >
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -114,7 +114,7 @@ const Navbar = () => {
               {!isAuthenticated && (
                 <Link 
                   to="/login" 
-                  className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-4 py-2 rounded-lg text-sm transition-all duration-200 shadow-lg hover:shadow-yellow-400/50 transform hover:scale-105 cursor-pointer"
+                  className="bg-violet-500 hover:bg-violet-300 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-all duration-200 shadow-lg hover:shadow-violet-500/50 transform hover:scale-105 cursor-pointer"
                 >
                   <span>Login</span>
                 </Link>
@@ -230,11 +230,11 @@ const Navbar = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
                 autoFocus
-                className="w-full pl-5 pr-12 py-2 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 bg-white transition-colors shadow-sm"
+                className="w-full pl-5 pr-12 py-2 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-white transition-colors shadow-sm"
               />
               <button
                 type="submit"
-                className="absolute right-1.5 top-1/2 -translate-y-1/2 p-2 bg-yellow-500 text-gray-900 rounded-full hover:bg-yellow-400 transition-colors cursor-pointer"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 p-2 bg-violet-500 text-white rounded-full hover:bg-violet-500 transition-colors cursor-pointer"
               >
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

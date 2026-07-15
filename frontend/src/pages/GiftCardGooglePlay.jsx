@@ -223,7 +223,7 @@ const GiftCardGooglePlay = () => {
                       <div className="flex flex-col gap-2">
                         <button
                           onClick={(e) => { e.stopPropagation(); handleBuyNow(voucher) }}
-                          className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm"
+                          className="w-full bg-violet-500 hover:bg-violet-600 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm"
                         >
                           Buy Now
                         </button>

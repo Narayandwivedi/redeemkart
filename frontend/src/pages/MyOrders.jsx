@@ -39,8 +39,8 @@ const MyOrders = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return 'bg-amber-50 text-amber-700 border-amber-200'
-      case 'confirmed': return 'bg-yellow-50 text-yellow-700 border-yellow-200'
+      case 'pending': return 'bg-violet-50 text-violet-800 border-violet-200'
+      case 'confirmed': return 'bg-violet-50 text-violet-800 border-violet-200'
       case 'processing': return 'bg-blue-50 text-blue-700 border-blue-200'
       case 'shipped': return 'bg-indigo-50 text-indigo-700 border-indigo-200'
       case 'delivered': return 'bg-green-50 text-green-700 border-green-200'
@@ -51,8 +51,8 @@ const MyOrders = () => {
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case 'pending': return <Clock className="w-4 h-4 text-amber-500" />
-      case 'confirmed': return <CheckCircle2 className="w-4 h-4 text-yellow-500" />
+      case 'pending': return <Clock className="w-4 h-4 text-violet-600" />
+      case 'confirmed': return <CheckCircle2 className="w-4 h-4 text-violet-500" />
       case 'processing': return <Loader2 className="w-4 h-4 text-blue-500 animate-spin" />
       case 'shipped': return <Package className="w-4 h-4 text-indigo-500" />
       case 'delivered': return <CheckCircle2 className="w-4 h-4 text-green-500" />
@@ -97,15 +97,15 @@ const MyOrders = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-yellow-50/20 py-16 flex flex-col items-center justify-center">
-        <Loader2 className="w-10 h-10 text-amber-500 animate-spin mb-4" />
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50/30 to-violet-50/20 py-16 flex flex-col items-center justify-center">
+        <Loader2 className="w-10 h-10 text-violet-600 animate-spin mb-4" />
         <p className="text-slate-600 font-medium animate-pulse">Loading your order history...</p>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-yellow-50/20 py-10 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50/30 to-violet-50/20 py-10 px-4">
       <div className="max-w-4xl mx-auto">
         
         {/* Header */}
@@ -116,8 +116,8 @@ const MyOrders = () => {
 
         {orders.length === 0 ? (
           <div className="text-center py-20 bg-white border border-slate-100 rounded-3xl shadow-sm px-6 max-w-lg mx-auto">
-            <div className="w-20 h-20 mx-auto mb-6 bg-amber-50 rounded-2xl flex items-center justify-center">
-              <ShoppingBag className="w-10 h-10 text-amber-500" />
+            <div className="w-20 h-20 mx-auto mb-6 bg-violet-50 rounded-2xl flex items-center justify-center">
+              <ShoppingBag className="w-10 h-10 text-violet-600" />
             </div>
             <h2 className="text-xl font-semibold text-slate-950 mb-2">No orders placed yet</h2>
             <p className="text-slate-500 mb-8 text-sm max-w-xs mx-auto">
@@ -125,7 +125,7 @@ const MyOrders = () => {
             </p>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 px-8 rounded-xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 active:scale-[0.98]"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold py-3 px-8 rounded-xl hover:shadow-lg hover:shadow-violet-300/40 transition-all duration-200 active:scale-[0.98]"
             >
               Start Shopping
             </Link>
@@ -213,7 +213,7 @@ const MyOrders = () => {
                           <span className="font-medium text-purple-600 uppercase tracking-wider text-[10px]">
                             {item.productBrand}
                           </span>
-                          <span>·</span>
+                          <span>Ãƒâ€šÃ‚Â·</span>
                           <span>Qty: {item.quantity}</span>
                         </div>
                       </div>

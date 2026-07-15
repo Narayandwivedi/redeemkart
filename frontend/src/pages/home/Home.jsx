@@ -76,7 +76,7 @@ const Home = () => {
                         ))}
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-transparent to-transparent flex items-end pb-2 pl-2">
-                        <Sparkles className="w-4 h-4 text-yellow-400 mr-1" />
+                        <Sparkles className="w-4 h-4 text-violet-500 mr-1" />
                         <span className="text-white text-[10px] font-bold uppercase tracking-wider">Bundle</span>
                       </div>
                     </div>
@@ -98,11 +98,11 @@ const Home = () => {
                 <div className="p-3 flex flex-col gap-2">
                   <h3 className={`font-semibold text-gray-900 leading-tight ${isBundle ? 'text-[11px]' : 'text-sm'}`}>{isBundle ? game.fullName : game.name}</h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-lg font-bold text-gray-900">₹{game.price}</span>
-                    <span className="text-xs text-gray-400 line-through">₹{game.originalPrice}</span>
+                    <span className="text-lg font-bold text-gray-900">ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹{game.price}</span>
+                    <span className="text-xs text-gray-400 line-through">ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹{game.originalPrice}</span>
                   </div>
                   <div className="flex gap-2">
-                    <button onClick={(e) => { e.stopPropagation(); const item = isBundle ? { _id: game._id, name: game.fullName, price: game.price, originalPrice: game.originalPrice, images: bundleGameImages } : game; addToCart(item); if (isBundle) { toast.success('Game bundle added to cart!') } else { navigate('/cart') } }} className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer">
+                    <button onClick={(e) => { e.stopPropagation(); const item = isBundle ? { _id: game._id, name: game.fullName, price: game.price, originalPrice: game.originalPrice, images: bundleGameImages } : game; addToCart(item); if (isBundle) { toast.success('Game bundle added to cart!') } else { navigate('/cart') } }} className="flex-1 bg-violet-500 hover:bg-violet-600 text-white font-semibold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer">
                       Buy Now
                     </button>
                     <button onClick={(e) => { e.stopPropagation(); const item = isBundle ? { _id: game._id, name: game.fullName, price: game.price, originalPrice: game.originalPrice, images: bundleGameImages } : game; addToCart(item); toast.success(isBundle ? 'Game bundle added to cart!' : `${game.name} added to cart!`) }} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-medium py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer">
@@ -173,7 +173,7 @@ const Home = () => {
                     <p className="font-medium text-gray-800 text-[11px] sm:text-sm truncate">{review.name}</p>
                     <div className="flex gap-px sm:gap-0.5">
                       {[...Array(5)].map((_, j) => (
-                        <Star key={j} className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${j < review.rating ? 'text-yellow-400' : 'text-gray-200'}`} fill={j < review.rating ? 'currentColor' : 'none'} />
+                        <Star key={j} className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${j < review.rating ? 'text-violet-500' : 'text-gray-200'}`} fill={j < review.rating ? 'currentColor' : 'none'} />
                       ))}
                     </div>
                   </div>

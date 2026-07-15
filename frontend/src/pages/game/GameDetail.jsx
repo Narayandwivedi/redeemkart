@@ -62,7 +62,7 @@ const GameDetail = () => {
           <p className="text-gray-500 mb-4">The game you're looking for doesn't exist.</p>
           <button
             onClick={() => navigate('/')}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-lg transition-all duration-200 cursor-pointer"
+            className="bg-violet-500 hover:bg-violet-600 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200 cursor-pointer"
           >
             Go Home
           </button>
@@ -141,14 +141,14 @@ const GameDetail = () => {
                 </div>
               )}
               <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-lg shadow-md flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-yellow-500" />
+                <Sparkles className="w-4 h-4 text-violet-500" />
                 <span className="text-sm font-semibold text-gray-900">Bundle</span>
               </div>
             </div>
 
             <div className="flex flex-col gap-6">
               <div>
-                <p className="text-xs font-medium text-yellow-500 uppercase tracking-wider mb-1">Bundle Offer</p>
+                <p className="text-xs font-medium text-violet-500 uppercase tracking-wider mb-1">Bundle Offer</p>
                 <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-2">{game.fullName}</h1>
                 <p className="text-sm text-gray-500">Get {bundleGames.length} premium AAA titles at one unbeatable price</p>
               </div>
@@ -165,7 +165,7 @@ const GameDetail = () => {
                 <div className="flex flex-row gap-3">
                   <button
                     onClick={handleBuyNow}
-                    className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3.5 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 transform hover:scale-[1.02] cursor-pointer"
+                    className="flex-1 bg-violet-500 hover:bg-violet-600 text-white font-semibold py-3.5 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-violet-500/40 transform hover:scale-[1.02] cursor-pointer"
                   >
                     Buy Bundle
                   </button>
@@ -202,7 +202,7 @@ const GameDetail = () => {
                 </div>
                 <div className="p-1.5">
                   <p className="text-[10px] font-medium text-gray-800 leading-tight truncate">{g.fullName || g.name}</p>
-                  <p className="text-[10px] font-semibold text-gray-900">₹{g.price}</p>
+                  <p className="text-[10px] font-semibold text-gray-900">ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹{g.price}</p>
                 </div>
               </div>
             ))}
@@ -228,7 +228,7 @@ const GameDetail = () => {
               </div>
             )}
             <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-lg shadow-md flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-violet-500" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
               <span className="text-sm font-semibold text-gray-900">{game.rating}</span>
@@ -237,7 +237,7 @@ const GameDetail = () => {
 
           <div className="flex flex-col gap-6">
             <div>
-              <p className="text-xs font-medium text-yellow-500 uppercase tracking-wider mb-1">{game.genre}</p>
+              <p className="text-xs font-medium text-violet-500 uppercase tracking-wider mb-1">{game.genre}</p>
               <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-2">{game.fullName}</h1>
               <p className="text-sm text-gray-500">{game.name}</p>
             </div>
@@ -254,7 +254,7 @@ const GameDetail = () => {
               <div className="flex flex-row gap-3">
                 <button
                   onClick={handleBuyNow}
-                  className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3.5 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 transform hover:scale-[1.02] cursor-pointer"
+                  className="flex-1 bg-violet-500 hover:bg-violet-600 text-white font-semibold py-3.5 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-violet-500/40 transform hover:scale-[1.02] cursor-pointer"
                 >
                   Buy Now
                 </button>
