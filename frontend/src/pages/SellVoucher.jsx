@@ -170,7 +170,7 @@ const SellVoucher = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">Balance Amount (Ã¢â€šÂ¹)</label>
+                <label className="block text-sm font-medium text-gray-800 mb-1.5">Balance Amount (₹)</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <DollarSign className="h-4 w-4 text-violet-700" />
@@ -263,7 +263,7 @@ const SellVoucher = () => {
               {form.balance > 0 && (
                 <div className="text-center -mt-2">
                   <p className="text-sm font-medium text-gray-700">
-                    You'll receive: <span className="text-emerald-600">Ã¢â€šÂ¹{Math.round(form.balance * 0.9)}</span>
+                    You'll receive: <span className="text-emerald-600">₹{Math.round(form.balance * 0.9)}</span>
                     <span className="text-gray-400 font-normal"> (after 10% commission)</span>
                   </p>
                 </div>
@@ -292,7 +292,7 @@ const SellVoucher = () => {
                   <div>
                     <p className="font-medium text-gray-900">{card.brand}</p>
                     <p className="text-sm text-gray-500">
-                      Code: {card.code.replace(/.(?=.{4})/g, '*')} | {card.pin ? `PIN: ${card.pin.replace(/.(?=.{4})/g, '*')} |` : ''} Ã¢â€šÂ¹{card.balance} | Exp: {new Date(card.expiry).toLocaleDateString('en-IN')}
+                      Code: {card.code.replace(/.(?=.{4})/g, '*')} | {card.pin ? `PIN: ${card.pin.replace(/.(?=.{4})/g, '*')} |` : ''} ₹{card.balance} | Exp: {new Date(card.expiry).toLocaleDateString('en-IN')}
                     </p>
                   </div>
                 </div>
