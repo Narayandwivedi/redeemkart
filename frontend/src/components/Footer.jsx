@@ -19,7 +19,13 @@ const Footer = () => {
           {/* Brand Column */}
           <div>
             <Link to="/" className="flex items-center mb-2 group">
-              <img src="/redeemkart-logo.png" alt="RedeemKart" className="h-[70px] w-[140px] md:h-[90px] md:w-[180px] object-contain drop-shadow-lg group-hover:scale-102 transition-transform duration-200" />
+              <span
+                className="text-2xl md:text-3xl font-semibold tracking-tight"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                <span className="text-white">Redeem</span><span className="text-emerald-500 ml-0.5">Kart</span>
+                <span className="text-white font-light text-sm md:text-lg align-baseline">.in</span>
+              </span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-5">
               India's trusted gift card trading platform. Buy, sell and trade gift cards & digital vouchers from 100+ top brands at the best prices.
