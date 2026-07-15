@@ -32,9 +32,9 @@ const GameDetail = () => {
   const game = games[slug]
 
   useSEO({
-    title: game ? `${game.fullName} | Buy AAA Games | GCHub` : 'Loading Game... | GCHub',
-    description: game ? game.description?.substring(0, 160) : 'Buy popular AAA games at cheap prices on GCHub.',
-    keywords: game ? `${game.name}, buy ${game.name}, cheap ${game.name}, pc games, gchub` : 'pc games, buy games, gchub',
+    title: game ? `${game.fullName} | Buy AAA Games | RedeemKart` : 'Loading Game... | RedeemKart',
+    description: game ? game.description?.substring(0, 160) : 'Buy popular AAA games at cheap prices on RedeemKart.',
+    keywords: game ? `${game.name}, buy ${game.name}, cheap ${game.name}, pc games, RedeemKart` : 'pc games, buy games, RedeemKart',
     ogImage: game ? game.img : null,
     structuredData: game ? {
       "@context": "https://schema.org",

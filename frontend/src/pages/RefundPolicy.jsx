@@ -4,9 +4,9 @@ import { useSEO } from '../hooks/useSEO'
 
 const RefundPolicy = () => {
   useSEO({
-    title: 'Refund Policy | GCHub Gift Cards & Game Vouchers',
-    description: 'Read the GCHub Refund Policy. Learn about conditions under which refunds, exchanges, or returns for digital gift cards and game keys may be processed.',
-    keywords: 'GCHub refund policy, digital voucher returns, game key refunds, gift card returns policy'
+    title: 'Refund Policy | RedeemKart Gift Cards & Game Vouchers',
+    description: 'Read the RedeemKart Refund Policy. Learn about conditions under which refunds, exchanges, or returns for digital gift cards and game keys may be processed.',
+    keywords: 'RedeemKart refund policy, digital voucher returns, game key refunds, gift card returns policy'
   })
 
   return (

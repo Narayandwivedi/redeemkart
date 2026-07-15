@@ -11,9 +11,9 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState(0)
 
   useSEO({
-    title: product ? `${product.seoTitle || product.name} | GCHub` : 'Loading Product... | GCHub',
-    description: product ? product.description?.substring(0, 160) : 'Buy gift cards and vouchers online at GCHub.',
-    keywords: product ? `${product.brand}, ${product.name}, buy ${product.name}, gift card, GCHub` : 'gift card, GCHub',
+    title: product ? `${product.seoTitle || product.name} | RedeemKart` : 'Loading Product... | RedeemKart',
+    description: product ? product.description?.substring(0, 160) : 'Buy gift cards and vouchers online at RedeemKart.',
+    keywords: product ? `${product.brand}, ${product.name}, buy ${product.name}, gift card, RedeemKart` : 'gift card, RedeemKart',
     ogImage: product && product.images && product.images[0] ? product.images[0] : null,
     structuredData: product ? {
       "@context": "https://schema.org",

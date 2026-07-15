@@ -34,11 +34,11 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:5174',
-    'https://gchub.in',
-    'https://www.gchub.in',
-    'https://api.gchub.in',
-    'https://www.api.gchub.in',
-    'https://adm.gchub.in'
+    'https://redeemkart.in',
+    'https://www.redeemkart.in',
+    'https://api.redeemkart.in',
+    'https://www.api.redeemkart.in',
+    'https://adm.redeemkart.in'
   ],
   credentials: true,
 }))
@@ -51,7 +51,7 @@ app.use('/uploads', express.static('uploads'));
 
 // Root route
 app.get('/', (req, res) => {
-  res.json({ message: 'GCHub API is working fine' });
+  res.json({ message: 'RedeemKart API is working fine' });
 });
 
 // Routes

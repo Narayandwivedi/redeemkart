@@ -31,7 +31,7 @@ const AdminLayout = () => {
     <div className="flex h-screen bg-gray-100">
       <aside className={`fixed inset-y-0 left-0 z-30 w-64 bg-gray-900 text-white transform transition-transform duration-200 ease-in-out lg:relative lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-700">
-          <h1 className="text-lg font-bold">GCHub Admin</h1>
+          <h1 className="text-lg font-bold">RedeemKart Admin</h1>
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-gray-400 hover:text-white">
             <X className="h-5 w-5" />
           </button>

@@ -61,7 +61,7 @@ const Checkout = () => {
           key: result.data.razorpayKeyId || import.meta.env.VITE_RAZORPAY_KEY_ID,
           amount: Math.round(result.data.totalAmount * 100),
           currency: 'INR',
-          name: 'GCHub',
+          name: 'RedeemKart',
           description: 'Purchase of Digital Vouchers',
           image: '/favicon.png',
           order_id: result.data.razorpayOrderId,

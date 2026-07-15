@@ -193,7 +193,7 @@ const GiftCardDetail = () => {
   }
 
   useSEO({
-    title: `${brandInfo?.name} Gift Cards | Buy Online & Save | GCHub`,
+    title: `${brandInfo?.name} Gift Cards | Buy Online & Save | RedeemKart`,
     description: brandInfo?.description || 'Gift cards at best prices',
     keywords: `buy ${brandInfo?.name} gift card, ${brandInfo?.name} voucher`,
   })

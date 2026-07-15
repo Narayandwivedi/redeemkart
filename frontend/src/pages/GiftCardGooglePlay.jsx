@@ -46,13 +46,13 @@ const GiftCardGooglePlay = () => {
   }, [BACKEND_URL])
 
   useSEO({
-    title: 'Google Play Gift Cards | Buy Online & Save | GCHub',
-    description: 'Get Google Play gift card codes instantly. Save up to 20% on Google Play vouchers with instant digital delivery via email on GCHub.',
-    keywords: 'buy google play gift card, google play voucher, cheap google play codes, google play redeem codes, GCHub',
+    title: 'Google Play Gift Cards | Buy Online & Save | RedeemKart',
+    description: 'Get Google Play gift card codes instantly on RedeemKart. Save up to 20% on Google Play vouchers with instant digital delivery via email.',
+    keywords: 'buy google play gift card, google play voucher, cheap google play codes, google play redeem codes, RedeemKart',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "name": "Google Play Gift Cards on GCHub",
+      "name": "Google Play Gift Cards on RedeemKart",
       "numberOfItems": vouchers.length,
       "itemListElement": vouchers.map((v, index) => ({
         "@type": "ListItem",

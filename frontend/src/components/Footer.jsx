@@ -19,15 +19,15 @@ const Footer = () => {
           {/* Brand Column */}
           <div>
             <Link to="/" className="flex items-center mb-2 group">
-              <img src="/gchublogo.png" alt="GCHUB" className="h-[70px] w-[140px] md:h-[90px] md:w-[180px] object-contain drop-shadow-lg group-hover:scale-102 transition-transform duration-200" />
+              <img src="/redeemkart-logo.png" alt="RedeemKart" className="h-[70px] w-[140px] md:h-[90px] md:w-[180px] object-contain drop-shadow-lg group-hover:scale-102 transition-transform duration-200" />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-5">
-              India's trusted marketplace for gift cards & vouchers. Buy, sell and redeem digital vouchers from top brands at the best prices.
+              India's trusted gift card trading platform. Buy, sell and trade gift cards & digital vouchers from 100+ top brands at the best prices.
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-3">
               {[
-                { label: 'Instagram', href: 'https://www.instagram.com/gchub.in', icon: <Instagram className="w-4 h-4" /> },
+                { label: 'Instagram', href: 'https://www.instagram.com/redeemkart.in', icon: <Instagram className="w-4 h-4" /> },
                 { label: 'Facebook', href: '#', icon: <Facebook className="w-4 h-4" /> },
                 { label: 'X (Twitter)', href: '#', icon: <Twitter className="w-4 h-4" /> },
               ].map(({ label, href, icon }) => (
@@ -133,7 +133,7 @@ const Footer = () => {
                 </span>
                 <div>
                   <p className="text-gray-500 text-xs mb-0.5">Email</p>
-                  <a href="mailto:support@gchub.in" className="text-gray-300 text-sm hover:text-violet-500 transition-colors">support@gchub.in</a>
+                  <a href="mailto:support@redeemkart.in" className="text-gray-300 text-sm hover:text-violet-500 transition-colors">support@redeemkart.in</a>
                 </div>
               </li>
             </ul>
@@ -153,7 +153,7 @@ const Footer = () => {
           style={{ borderTop: '1px solid rgba(139,92,246,0.15)' }}
         >
           <p className="text-gray-500 text-xs text-center sm:text-left">
-            Ãƒâ€šÃ‚Â© {currentYear} <span style={{ color: '#8b5cf6' }}>GCHub</span>. All rights reserved. Made in ÃƒÂ°Ã…Â¸Ã¢â‚¬Â¡Ã‚Â®ÃƒÂ°Ã…Â¸Ã¢â‚¬Â¡Ã‚Â³ India.
+            &copy; {currentYear} <span style={{ color: '#8b5cf6' }}>RedeemKart</span>. All rights reserved. Made in 🇮🇳 India.
           </p>
           <div className="flex items-center gap-4">
             <Link

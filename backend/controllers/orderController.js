@@ -573,7 +573,7 @@ const verifyPayment = async (req, res) => {
 
           const recipientEmail = (order.recipientInfo && order.recipientInfo.email) ? order.recipientInfo.email : order.customerInfo.email;
           const recipientName = (order.recipientInfo && order.recipientInfo.name) ? order.recipientInfo.name : order.customerInfo.name;
-          const logoUrl = process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/favicon.png` : 'https://gchub.in/favicon.png';
+          const logoUrl = process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/favicon.png` : 'https://redeemkart.in/favicon.png';
 
           let codesHtml = '';
           for (const code of giftCodes) {
@@ -598,13 +598,13 @@ const verifyPayment = async (req, res) => {
             <body style="margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #334155;">
               <div style="max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
                 <div style="background: linear-gradient(to right, #fbbf24, #f59e0b); padding: 30px 20px; text-align: center;">
-                  <img src="${logoUrl}" alt="GCHub Logo" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #ffffff;" />
+                  <img src="${logoUrl}" alt="RedeemKart Logo" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #ffffff;" />
                   <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">Your Digital Vouchers</h1>
                 </div>
                 
                 <div style="padding: 32px 24px;">
                   <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.5;">Hello <strong>${recipientName}</strong>,</p>
-                  <p style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.5;">Thank you for your purchase from GCHub! Here are your digital redeem codes. You can easily copy the code below.</p>
+                  <p style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.5;">Thank you for your purchase from RedeemKart! Here are your digital redeem codes. You can easily copy the code below.</p>
                   
                   ${codesHtml}
                   
@@ -615,7 +615,7 @@ const verifyPayment = async (req, res) => {
                 </div>
                 
                 <div style="background: #f8fafc; padding: 20px; text-align: center; border-top: 1px solid #f1f5f9;">
-                  <p style="margin: 0; font-size: 12px; color: #94a3b8;">&copy; ${new Date().getFullYear()} GCHub. All rights reserved.</p>
+                  <p style="margin: 0; font-size: 12px; color: #94a3b8;">&copy; ${new Date().getFullYear()} RedeemKart. All rights reserved.</p>
                 </div>
               </div>
             </body>
@@ -623,9 +623,9 @@ const verifyPayment = async (req, res) => {
           `;
 
           await transporter.sendMail({
-            from: `"GCHub" <${process.env.EMAIL_USER}>`,
+            from: `"RedeemKart" <${process.env.EMAIL_USER}>`,
             to: recipientEmail,
-            subject: '🎉 Your Digital Voucher Codes from GCHub',
+            subject: '🎉 Your Digital Voucher Codes from RedeemKart',
             html: emailHtml
           });
           console.log('Voucher email sent to:', recipientEmail);
@@ -719,7 +719,7 @@ const assignCodeToOrder = async (req, res) => {
 
       const recipientEmail = (order.recipientInfo && order.recipientInfo.email) ? order.recipientInfo.email : order.customerInfo.email;
       const recipientName = (order.recipientInfo && order.recipientInfo.name) ? order.recipientInfo.name : order.customerInfo.name;
-      const logoUrl = process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/favicon.png` : 'https://gchub.in/favicon.png';
+      const logoUrl = process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/favicon.png` : 'https://redeemkart.in/favicon.png';
 
       const emailHtml = `
         <!DOCTYPE html>
@@ -731,13 +731,13 @@ const assignCodeToOrder = async (req, res) => {
         <body style="margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #334155;">
           <div style="max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
             <div style="background: linear-gradient(to right, #fbbf24, #f59e0b); padding: 30px 20px; text-align: center;">
-              <img src="${logoUrl}" alt="GCHub Logo" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #ffffff;" />
+              <img src="${logoUrl}" alt="RedeemKart Logo" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #ffffff;" />
               <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">Your Digital Voucher</h1>
             </div>
             
             <div style="padding: 32px 24px;">
               <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.5;">Hello <strong>${recipientName}</strong>,</p>
-              <p style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.5;">Thank you for your purchase from GCHub! Here is your digital redeem code. You can easily copy the code below.</p>
+              <p style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.5;">Thank you for your purchase from RedeemKart! Here is your digital redeem code. You can easily copy the code below.</p>
               
               <div style="margin-bottom: 24px; padding: 20px; border-radius: 12px; background: #fffbeb; border: 1px solid #fde68a;">
                 <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: 600; color: #92400e;">${brand} - Balance: ₹${balance}</p>
@@ -758,9 +758,9 @@ const assignCodeToOrder = async (req, res) => {
       `;
 
       await transporter.sendMail({
-        from: `"GCHub" <${process.env.EMAIL_USER}>`,
+        from: `"RedeemKart" <${process.env.EMAIL_USER}>`,
         to: recipientEmail,
-        subject: '🎉 Your Digital Voucher Code from GCHub',
+        subject: '🎉 Your Digital Voucher Code from RedeemKart',
         html: emailHtml
       });
     } catch (emailErr) {

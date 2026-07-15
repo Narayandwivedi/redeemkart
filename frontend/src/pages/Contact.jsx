@@ -6,9 +6,9 @@ import { useSEO } from '../hooks/useSEO'
 
 const Contact = () => {
   useSEO({
-    title: 'Contact GCHub Support | Get Assistance Instantly',
-    description: 'Contact GCHub support team for assistance with gift card sales, voucher payouts, game key purchases, or other inquiries.',
-    keywords: 'contact GCHub, gift card support, GCHub customer care, support email, vouchercash support'
+    title: 'Contact RedeemKart Support | Get Assistance Instantly',
+    description: 'Contact RedeemKart support team for assistance with gift card trading, voucher payouts, game key purchases, or other inquiries.',
+    keywords: 'contact RedeemKart, gift card support, RedeemKart customer care, support email'
   })
 
   const { isAuthenticated } = useContext(AppContext) || {}
@@ -73,8 +73,8 @@ const Contact = () => {
                   </div>
                   <div className="min-w-0">
                     <p className="text-[10px] font-medium text-gray-500 uppercase tracking-wider">Email</p>
-                    <a href="mailto:support@gchub.in" className="text-sm font-medium text-gray-900 hover:text-violet-700 transition-colors truncate block">
-                      support@gchub.in
+                    <a href="mailto:support@redeemkart.in" className="text-sm font-medium text-gray-900 hover:text-violet-700 transition-colors truncate block">
+                      support@redeemkart.in
                     </a>
                   </div>
                 </div>

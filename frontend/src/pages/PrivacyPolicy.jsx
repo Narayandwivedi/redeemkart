@@ -30,9 +30,9 @@ const PrivacyPolicy = () => {
             <div>
               <h2 className="text-lg font-semibold text-gray-900 mb-2">Introduction</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                At GCHub, we take your privacy seriously. This Privacy Policy explains how we collect, 
+                At RedeemKart, we take your privacy seriously. This Privacy Policy explains how we collect, 
                 use, disclose, and safeguard your information when you visit our platform and use our 
-                services. By using GCHub, you consent to the practices described in this policy.
+                services. By using RedeemKart, you consent to the practices described in this policy.
               </p>
             </div>
           </div>
@@ -127,7 +127,7 @@ const PrivacyPolicy = () => {
             <div>
               <h2 className="text-lg font-semibold text-gray-900 mb-2">Cookies & Tracking</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                GCHub uses cookies and similar tracking technologies to enhance your browsing experience, 
+                RedeemKart uses cookies and similar tracking technologies to enhance your browsing experience, 
                 analyze site traffic, and understand where our visitors come from. You can control cookie 
                 preferences through your browser settings. Disabling cookies may affect certain 
                 functionality of the platform.
@@ -161,7 +161,7 @@ const PrivacyPolicy = () => {
                 reach out to us:
               </p>
               <div className="mt-4 bg-gray-50 rounded-xl p-4 sm:p-5">
-                <p className="text-gray-600 text-sm">Email: support@gchub.com</p>
+                <p className="text-gray-600 text-sm">Email: support@redeemkart.in</p>
                 <p className="text-gray-600 text-sm mt-1">Chat: Available 24/7 on our website</p>
               </div>
             </div>
@@ -173,7 +173,7 @@ const PrivacyPolicy = () => {
               <p className="text-sm sm:text-base text-violet-900 leading-relaxed">
                 <strong className="font-semibold">Policy Updates:</strong> We may update this Privacy Policy 
                 from time to time. Changes will be posted on this page with an updated revision date. 
-                Continued use of GCHub after changes constitutes acceptance of the updated policy.
+                Continued use of RedeemKart after changes constitutes acceptance of the updated policy.
               </p>
             </div>
           </div>

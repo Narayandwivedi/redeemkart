@@ -22,10 +22,10 @@ const GiftCardFlipkart = () => {
   const navigate = useNavigate()
 
   useSEO({
-    title: 'Flipkart Gift Cards | Buy Online & Save | GCHub',
-    description: 'Get Flipkart gift card codes instantly. Save up to 15% on Flipkart vouchers with instant digital delivery via email on GCHub.',
-    keywords: 'buy flipkart gift card, flipkart voucher, cheap flipkart codes, flipkart redeem codes, GCHub',
-    structuredData: { "@context": "https://schema.org", "@type": "ItemList", "name": "Flipkart Gift Cards on GCHub", "numberOfItems": vouchers.length, "itemListElement": vouchers.map((v, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@type": "Product", "name": v.name, "description": v.description, "offers": { "@type": "Offer", "priceCurrency": "INR", "price": v.price, "availability": v.stockQuantity === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock" } } })) }
+    title: 'Flipkart Gift Cards | Buy Online & Save | RedeemKart',
+    description: 'Get Flipkart gift card codes instantly on RedeemKart. Save up to 15% on Flipkart vouchers with instant digital delivery via email.',
+    keywords: 'buy flipkart gift card, flipkart voucher, cheap flipkart codes, flipkart redeem codes, RedeemKart',
+    structuredData: { "@context": "https://schema.org", "@type": "ItemList", "name": "Flipkart Gift Cards on RedeemKart", "numberOfItems": vouchers.length, "itemListElement": vouchers.map((v, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@type": "Product", "name": v.name, "description": v.description, "offers": { "@type": "Offer", "priceCurrency": "INR", "price": v.price, "availability": v.stockQuantity === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock" } } })) }
   })
 
   const handleAddToCart = (voucher) => { if (voucher.stockQuantity <= 0) { toast.error('Out of stock'); return }; addToCart(voucher); toast.success('Added to cart!') }

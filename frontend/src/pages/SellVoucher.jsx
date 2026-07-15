@@ -22,14 +22,14 @@ const SellVoucher = () => {
   const [loading, setLoading] = useState(false)
 
   useSEO({
-    title: 'Sell Gift Cards Online | Instant Cash Out | GCHub',
-    description: 'Sell your unused gift cards and digital vouchers instantly. List cards from Google Play, Amazon, Steam, and more to receive fast payouts directly to your bank account.',
-    keywords: 'sell gift cards, sell vouchers online, gift card cash out, instant cash for gift cards, flipkart voucher cashout, GCHub',
+    title: 'Sell Gift Cards Online | Instant Cash Out | RedeemKart',
+    description: 'Sell your unused gift cards and digital vouchers instantly on RedeemKart. List cards from Google Play, Amazon, Steam, and more to receive fast payouts directly to your bank account.',
+    keywords: 'sell gift cards, sell vouchers online, gift card cash out, instant cash for gift cards, flipkart voucher cashout, RedeemKart',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Sell Gift Cards | GCHub",
-      "description": "Sell your unused gift cards and digital vouchers instantly on GCHub. Get paid directly to your bank account."
+      "name": "Sell Gift Cards | RedeemKart",
+      "description": "Sell your unused gift cards and digital vouchers instantly on RedeemKart. Get paid directly to your bank account."
     }
   })
   const [form, setForm] = useState({

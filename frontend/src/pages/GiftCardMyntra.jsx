@@ -20,10 +20,10 @@ const GiftCardMyntra = () => {
   const navigate = useNavigate()
 
   useSEO({
-    title: 'Myntra Gift Cards | Buy Online & Save | GCHub',
-    description: 'Get Myntra gift card codes instantly. Save up to 15% on Myntra vouchers with instant digital delivery via email on GCHub.',
-    keywords: 'buy myntra gift card, myntra voucher, cheap myntra codes, myntra redeem codes, GCHub',
-    structuredData: { "@context": "https://schema.org", "@type": "ItemList", "name": "Myntra Gift Cards on GCHub", "numberOfItems": vouchers.length, "itemListElement": vouchers.map((v, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@type": "Product", "name": v.name, "description": v.description, "offers": { "@type": "Offer", "priceCurrency": "INR", "price": v.price, "availability": v.stockQuantity === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock" } } })) }
+    title: 'Myntra Gift Cards | Buy Online & Save | RedeemKart',
+    description: 'Get Myntra gift card codes instantly on RedeemKart. Save up to 15% on Myntra vouchers with instant digital delivery via email.',
+    keywords: 'buy myntra gift card, myntra voucher, cheap myntra codes, myntra redeem codes, RedeemKart',
+    structuredData: { "@context": "https://schema.org", "@type": "ItemList", "name": "Myntra Gift Cards on RedeemKart", "numberOfItems": vouchers.length, "itemListElement": vouchers.map((v, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@type": "Product", "name": v.name, "description": v.description, "offers": { "@type": "Offer", "priceCurrency": "INR", "price": v.price, "availability": v.stockQuantity === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock" } } })) }
   })
 
   const handleAddToCart = (voucher) => { if (voucher.stockQuantity <= 0) { toast.error('Out of stock'); return }; addToCart(voucher); toast.success('Added to cart!') }

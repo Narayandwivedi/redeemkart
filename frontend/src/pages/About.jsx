@@ -1,64 +1,64 @@
 import React from 'react'
-import { Gift, Gamepad2, Banknote, ShieldCheck, Zap, Users, ArrowRightLeft, BadgePercent } from 'lucide-react'
+import { Gift, Gamepad2, Banknote, ShieldCheck, Zap, Users, ArrowRightLeft, BadgePercent, CreditCard, Repeat, Wallet } from 'lucide-react'
 import { useSEO } from '../hooks/useSEO'
 
 const About = () => {
   useSEO({
-    title: 'About GCHub | India\'s Trusted Gift Card & Voucher Marketplace',
-    description: 'Learn about GCHub, India\'s premier peer-to-peer gift card marketplace. Sell unused vouchers for cash and buy gift cards & games at discounts.',
-    keywords: 'about GCHub, how to sell gift cards, buy cheap games, gift card marketplace india'
+    title: 'About RedeemKart | India\'s Trusted Gift Card Trading Platform',
+    description: 'Learn about RedeemKart, India\'s premier gift card trading platform. Sell unused gift cards for cash and buy discounted vouchers from top brands.',
+    keywords: 'about RedeemKart, gift card trading, sell gift cards online, buy discounted gift cards, voucher marketplace india'
   })
 
   const stats = [
-    { label: 'Active Users', value: '10K+' },
-    { label: 'Vouchers Sold', value: '50K+' },
-    { label: 'Games Listed', value: '5K+' },
-    { label: 'Cash Payouts', value: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2Cr+' },
+    { label: 'Active Traders', value: '10K+' },
+    { label: 'Gift Cards Sold', value: '50K+' },
+    { label: 'Brands Listed', value: '100+' },
+    { label: 'Cash Payouts', value: '₹2Cr+' },
   ]
 
   const features = [
     {
       icon: Gift,
-      title: 'Sell Unused Vouchers',
-      desc: 'Got a gift card or voucher you will never use? List it on GCHub and turn it into real cash instantly.',
+      title: 'Sell Unused Gift Cards',
+      desc: 'Got a gift card you will never use? List it on RedeemKart and turn it into real cash instantly. We support all major brands.',
       color: 'bg-blue-50 text-blue-500',
     },
     {
-      icon: Gamepad2,
-      title: 'Buy Games at Discount',
-      desc: 'Get your favorite games and gift cards at prices lower than retail. Every deal is a steal on GCHub.',
+      icon: CreditCard,
+      title: 'Buy Gift Cards at Discount',
+      desc: 'Purchase gift cards from top brands like Amazon, Flipkart, Google Play, and more at prices below face value. Every deal saves you money.',
       color: 'bg-green-50 text-green-500',
     },
     {
-      icon: Banknote,
-      title: 'Cash in Your Bank',
-      desc: 'Once your voucher sells, the money is transferred directly to your bank account ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â no hidden fees, no delays.',
+      icon: Wallet,
+      title: 'Instant Cash Payouts',
+      desc: 'Once your gift card sells, the money is transferred directly to your bank account — no hidden fees, no delays, no hassle.',
       color: 'bg-violet-50 text-violet-600',
     },
     {
       icon: ShieldCheck,
-      title: 'Secure Transactions',
-      desc: 'Every transaction is protected. We verify all vouchers and codes so buyers and sellers trade with confidence.',
+      title: '100% Secure Trading',
+      desc: 'Every transaction is verified and protected. We validate all gift card codes so both buyers and sellers trade with complete confidence.',
       color: 'bg-purple-50 text-purple-500',
     },
     {
-      icon: Zap,
-      title: 'Instant Delivery',
-      desc: 'Buy a game or voucher? Get the code delivered to your account in seconds. No waiting, no hassle.',
-      color: 'bg-violet-50 text-violet-500',
+      icon: Repeat,
+      title: 'Peer-to-Peer Marketplace',
+      desc: 'RedeemKart connects people with unused gift cards to buyers looking for discounts. A win-win marketplace for everyone.',
+      color: 'bg-red-50 text-red-500',
     },
     {
-      icon: ArrowRightLeft,
-      title: 'Peer-to-Peer Marketplace',
-      desc: 'GCHub connects people who have unused vouchers with people who want them ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â a win-win for everyone.',
-      color: 'bg-red-50 text-red-500',
+      icon: Zap,
+      title: 'Instant Digital Delivery',
+      desc: 'Buy a gift card or voucher? Get the code delivered to your account in seconds. No waiting, no shipping, no hassle.',
+      color: 'bg-violet-50 text-violet-500',
     },
   ]
 
   const steps = [
-    { num: '01', title: 'List Your Voucher', desc: 'Enter the voucher code, its value, and your selling price. We will verify and list it on the marketplace.' },
-    { num: '02', title: 'Get Matched with a Buyer', desc: 'Thousands of buyers browse GCHub daily. Once someone purchases your voucher, you get notified instantly.' },
-    { num: '03', title: 'Receive Cash in Your Bank', desc: 'The amount is credited to your GCHub wallet. Withdraw it to your bank account with just a few clicks.' },
+    { num: '01', title: 'List Your Gift Card', desc: 'Enter the gift card code, its value, and your selling price. We verify and publish it on the marketplace within minutes.' },
+    { num: '02', title: 'Get Matched with a Buyer', desc: 'Thousands of buyers browse RedeemKart daily. Once a buyer purchases your gift card, you get notified instantly.' },
+    { num: '03', title: 'Withdraw Cash to Your Bank', desc: 'The amount is credited to your RedeemKart wallet. Withdraw it to your bank account with just a few clicks — no minimum balance required.' },
   ]
 
   return (
@@ -75,27 +75,23 @@ const About = () => {
             <span className="h-px w-12 sm:w-20 bg-gray-300"></span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-semibold text-gray-900 mb-4">
-            About <span className="text-violet-500">GCHub</span>
+            About <span className="text-violet-500">RedeemKart</span>
           </h1>
           <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            India's trusted marketplace to <strong>sell unused vouchers for cash</strong> and{' '}
-            <strong>buy games & gift cards at discounted prices</strong>.
+            India's trusted <strong>gift card trading platform</strong> — sell your unwanted gift cards for instant cash, or buy discounted vouchers from 100+ top brands.
           </p>
         </div>
 
-        {/* What is GCHub */}
+        {/* What is RedeemKart */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 mb-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            What is <span className="text-violet-500">GCHub</span>?
+            What is <span className="text-violet-500">RedeemKart</span>?
           </h2>
           <p className="text-gray-600 leading-relaxed mb-4">
-            GCHub is a peer-to-peer platform where you can sell your unused gift cards, vouchers, and game codes 
-            for real cash ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â directly deposited into your bank account. At the same time, it is a marketplace for 
-            gamers and shoppers to buy games, gift cards, and vouchers at prices below market rate.
+            RedeemKart is India's premier <strong>gift card trading platform</strong> where you can sell your unused gift cards, vouchers, and digital codes for real cash — directly deposited into your bank account. At the same time, it is a marketplace for smart shoppers to buy gift cards and vouchers from top brands at prices below face value.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            Whether you received a gift card you do not need or want to grab the latest game without burning 
-            a hole in your pocket, GCHub makes it fast, safe, and simple.
+            Whether you received an Amazon gift card you do not need, want to grab a discounted Flipkart voucher, or are looking for the best deal on Google Play codes — RedeemKart makes gift card trading fast, safe, and rewarding.
           </p>
         </div>
 
@@ -109,7 +105,7 @@ const About = () => {
           ))}
         </div>
 
-        {/* How It Works ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â For Sellers */}
+        {/* How It Works — For Sellers */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 mb-8">
           <div className="flex items-center gap-3 mb-6">
             <div className="bg-green-50 p-2.5 rounded-lg">
@@ -132,14 +128,14 @@ const About = () => {
           </div>
         </div>
 
-        {/* Why Choose GCHub */}
+        {/* Why Choose RedeemKart */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 mb-8">
           <div className="flex items-center gap-3 mb-6">
             <div className="bg-violet-50 p-2.5 rounded-lg">
               <BadgePercent className="w-6 h-6 text-violet-500" />
             </div>
             <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              Why Choose <span className="text-violet-500">GCHub</span>?
+              Why Choose <span className="text-violet-500">RedeemKart</span>?
             </h2>
           </div>
           <div className="grid sm:grid-cols-2 gap-6">
@@ -162,9 +158,9 @@ const About = () => {
           <Users className="w-10 h-10 text-black mx-auto mb-4" />
           <h2 className="text-xl sm:text-2xl font-semibold text-black mb-3">Our Mission</h2>
           <p className="text-sm sm:text-base text-black/80 max-w-2xl mx-auto leading-relaxed">
-            We believe no gift card should go unused and no gamer should pay full price. 
-            GCHub bridges the gap between unused value and smart savings ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â creating a 
-            community where everyone wins.
+            We believe no gift card should go to waste and no smart shopper should pay full price. 
+            RedeemKart makes gift card trading simple, secure, and accessible — turning unused 
+            gift cards into real value for everyone.
           </p>
         </div>
 
