@@ -21,7 +21,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ I'm the RedeemKart support bot! How can I help you today?`,
+      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} 👋 I'm the RedeemKart support bot! How can I help you today?`,
       id: 'welcome'
     }
   ])
@@ -112,7 +112,7 @@ const ChatBot = () => {
       setTimeout(() => {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â® RedeemKart offers discounted game keys and downloads! Here are the games available on our platform. Select one to buy or view details:',
+          content: 'RedeemKart offers discounted game keys and downloads! Here are the games available on our platform. Select one to buy or view details:',
           id: Date.now() + 1
         }, {
           role: 'assistant',
@@ -135,16 +135,16 @@ const ChatBot = () => {
         
         if (isGameItem) {
           if (textLower.includes('receive') || textLower.includes('get') || textLower.includes('not deliver') || textLower.includes('technical') || textLower.includes('error') || textLower.includes('download') || textLower.includes('install')) {
-            policyResponse = `ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â® **Refund Policy for Games**:\n\nGames are generally **non-refundable**. However, since you did not receive the game or got a technical error while downloading, our support team will verify this and **provide a new download link** to resolve any problem. Our team will contact you at your email address to assist with this!`
+            policyResponse = `**Refund Policy for Games**:\n\nGames are generally **non-refundable**. However, since you did not receive the game or got a technical error while downloading, our support team will verify this and **provide a new download link** to resolve any problem. Our team will contact you at your email address to assist with this!`
           } else {
-            policyResponse = `ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â® **Refund Policy for Games**:\n\nPlease note that games are **non-refundable**. They are only refundable/replaceable if you **did not receive the game** or encountered a **technical error while downloading**, in which case our team will provide a new download link. For any other issues, please contact support@redeemkart.in.`
+            policyResponse = `**Refund Policy for Games**:\n\nPlease note that games are **non-refundable**. They are only refundable/replaceable if you **did not receive the game** or encountered a **technical error while downloading**, in which case our team will provide a new download link. For any other issues, please contact support@redeemkart.in.`
           }
         } else {
           // It's a voucher or gift card
           if (textLower.includes('invalid') || textLower.includes('not work') || textLower.includes('work') || textLower.includes('fail') || textLower.includes('expired')) {
-            policyResponse = `ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â **Refund Policy for Vouchers/Gift Cards**:\n\nWe are sorry to hear that the code is invalid or not working. Since the code is invalid, we will process your refund back to your original payment method. The refund will be completed in **3-5 days**.`
+            policyResponse = `**Refund Policy for Vouchers/Gift Cards**:\n\nWe are sorry to hear that the code is invalid or not working. Since the code is invalid, we will process your refund back to your original payment method. The refund will be completed in **3-5 days**.`
           } else {
-            policyResponse = `ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â **Refund Policy for Vouchers/Gift Cards**:\n\nOur policy only permits refunds if the voucher code is **invalid or not working** (refund processed in **3-5 days**). For other issues, please contact support@redeemkart.in.`
+            policyResponse = `**Refund Policy for Vouchers/Gift Cards**:\n\nOur policy only permits refunds if the voucher code is **invalid or not working** (refund processed in **3-5 days**). For other issues, please contact support@redeemkart.in.`
           }
         }
 
@@ -166,7 +166,7 @@ const ChatBot = () => {
       if (!user) {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ Please log in to your account first so I can look up your orders and help you request a refund.',
+          content: 'Please log in to your account first so I can look up your orders and help you request a refund.',
           id: Date.now() + 1
         }])
         setLoading(false)
@@ -184,7 +184,7 @@ const ChatBot = () => {
           setRefundStep('select_item')
           setMessages(prev => [...prev, {
             role: 'assistant',
-            content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ Here are your recent ordered items. Please click on the item you want to request a refund for:',
+            content: 'Here are your recent ordered items. Please click on the item you want to request a refund for:',
             id: 'select_item_instruction'
           }, {
             role: 'assistant',
@@ -195,14 +195,14 @@ const ChatBot = () => {
         } else {
           setMessages(prev => [...prev, {
             role: 'assistant',
-            content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚ÂÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â I couldn\'t find any orders placed under your email address. If you made a purchase, please make sure you are logged into the correct account.',
+            content: 'I couldn\'t find any orders placed under your email address. If you made a purchase, please make sure you are logged into the correct account.',
             id: Date.now() + 1
           }])
         }
       } catch (err) {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â I encountered an error checking your order history. Please try again or email us at support@redeemkart.in.',
+          content: 'I encountered an error checking your order history. Please try again or email us at support@redeemkart.in.',
           id: Date.now() + 1
         }])
       } finally {
@@ -239,7 +239,7 @@ const ChatBot = () => {
     } catch (err) {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â Something went wrong. Please try again or email us at support@redeemkart.in',
+        content: 'Something went wrong. Please try again or email us at support@redeemkart.in',
         id: Date.now() + 1
       }])
     } finally {
@@ -257,7 +257,7 @@ const ChatBot = () => {
   const resetChat = () => {
     setMessages([{
       role: 'assistant',
-      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹ I'm the RedeemKart support bot! How can I help you today?`,
+      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} 👋 I'm the RedeemKart support bot! How can I help you today?`,
       id: 'welcome'
     }])
     setRefundStep(null)
@@ -304,7 +304,7 @@ const ChatBot = () => {
                 <p className="text-white font-semibold text-sm leading-none">RedeemKart Support</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-green-400 text-[10px] font-medium">AI Assistant ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Online</span>
+                  <span className="text-green-400 text-[10px] font-medium">AI Assistant ● Online</span>
                 </div>
               </div>
             </div>
@@ -343,7 +343,7 @@ const ChatBot = () => {
                           >
                             <div className="truncate pr-2">
                               <p className="font-semibold text-slate-800 truncate group-hover:text-violet-900">{item.productName}</p>
-                              <p className="text-[10px] text-slate-500">Order #{order._id.slice(-6).toUpperCase()} ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹{item.productPrice}</p>
+                              <p className="text-[10px] text-slate-500">Order #{order._id.slice(-6).toUpperCase()} • ₹{item.productPrice}</p>
                             </div>
                             <span className="text-[10px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded group-hover:bg-violet-200 group-hover:text-violet-900 shrink-0">Select</span>
                           </button>
@@ -411,7 +411,7 @@ const ChatBot = () => {
                           <div className="p-2 flex flex-col flex-1 justify-between">
                             <div>
                               <h4 className="font-semibold text-slate-800 text-[11px] leading-tight line-clamp-2">{game.fullName || game.name}</h4>
-                              <p className="text-xs font-black text-slate-950 mt-1">ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¹{game.price}</p>
+                              <p className="text-xs font-black text-slate-950 mt-1">₹{game.price}</p>
                             </div>
                             <div className="flex flex-col gap-1 mt-2">
                               <button
@@ -477,7 +477,7 @@ const ChatBot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick replies ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â only show when messages are few and not in refund flow */}
+          {/* Quick replies only show when messages are few and not in refund flow */}
           {messages.length <= 2 && !loading && !refundStep && (
             <div className="bg-slate-50 px-3 pb-1 flex flex-wrap gap-1.5">
               {QUICK_REPLIES.map((q) => (
