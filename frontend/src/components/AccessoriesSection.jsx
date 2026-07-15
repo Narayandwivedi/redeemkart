@@ -137,7 +137,7 @@ const AccessoriesSection = () => {
             to="/computer-accessories"
             className="group inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-4 px-8 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
           >
-            <span className="mr-2">ÃƒÂ°Ã…Â¸Ã…Â½Ã‚Â®</span>
+            <span className="mr-2">🎮</span>
             View All Accessories
             <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />

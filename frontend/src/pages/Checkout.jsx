@@ -81,7 +81,7 @@ const Checkout = () => {
               })
               const verifyResult = await verifyResponse.json()
               if (verifyResult.success) {
-                toast.success('ÃƒÂ°Ã…Â¸Ã…Â½Ã¢â‚¬Â° Payment successful! Order placed.')
+                toast.success('✅ Payment successful! Order placed.')
                 clearCart()
                 navigate('/my-orders')
               } else {
@@ -118,7 +118,7 @@ const Checkout = () => {
         rzp.open()
       } else {
         // Cash on Delivery success path
-        toast.success('ÃƒÂ°Ã…Â¸Ã…Â½Ã¢â‚¬Â° Order placed! Your voucher will be delivered soon.')
+        toast.success('✅ Order placed! Your voucher will be delivered soon.')
         clearCart()
         navigate('/my-orders')
       }

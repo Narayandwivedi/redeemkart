@@ -64,11 +64,11 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2.5">
                 {[
-                  { to: '/search?category=e-commerce', label: 'ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂºÃ¢â‚¬â„¢ E-Commerce' },
-                  { to: '/search?category=gaming', label: 'ÃƒÂ°Ã…Â¸Ã…Â½Ã‚Â® Gaming' },
-                  { to: '/search?category=food-dining', label: 'ÃƒÂ°Ã…Â¸Ã‚ÂÃ¢â‚¬Â Food & Dining' },
-                  { to: '/search?category=fashion-lifestyle', label: 'ÃƒÂ°Ã…Â¸Ã¢â‚¬ËœÃ¢â‚¬â€ Fashion & Lifestyle' },
-                  { to: '/search?category=travel-entertainment', label: 'ÃƒÂ¢Ã…â€œÃ‹â€ ÃƒÂ¯Ã‚Â¸Ã‚Â Travel & Entertainment' },
+                  { to: '/search?category=e-commerce', label: '🛒 E-Commerce' },
+                  { to: '/search?category=gaming', label: '🎮 Gaming' },
+                  { to: '/search?category=food-dining', label: '🍔 Food & Dining' },
+                  { to: '/search?category=fashion-lifestyle', label: '👔 Fashion & Lifestyle' },
+                  { to: '/search?category=travel-entertainment', label: '✈️ Travel & Entertainment' },
                 ].map(({ to, label }) => (
                   <li key={to}>
                     <Link
@@ -146,7 +146,7 @@ const Footer = () => {
 
             {/* Trust badges */}
             <div className="rounded-xl p-3 space-y-2" style={{ background: 'rgba(139,92,246,0.07)', border: '1px solid rgba(139,92,246,0.15)' }}>
-              {['ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂÃ¢â‚¬â„¢ 100% Secure Payments', 'ÃƒÂ¢Ã…Â¡Ã‚Â¡ Instant Delivery', 'ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Verified Vouchers'].map(badge => (
+              {['🔒 100% Secure Payments', '⚡ Instant Delivery', '✅ Verified Vouchers'].map(badge => (
                 <p key={badge} className="text-xs text-gray-400">{badge}</p>
               ))}
             </div>
