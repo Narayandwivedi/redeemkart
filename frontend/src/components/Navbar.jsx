@@ -38,7 +38,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-100 shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-[70px] md:h-[90px] relative">
+        <div className="flex items-center h-[55px] md:h-[90px] relative">
           {/* Mobile Back Button */}
           {location.pathname !== '/' && (
             <div className="md:hidden flex items-center w-10">
@@ -57,7 +57,7 @@ const Navbar = () => {
           {/* Logo Section - left on home, centered on other pages (mobile) */}
           <Link to="/" className={`${location.pathname === '/' ? 'left-0' : 'left-1/2 -translate-x-1/2'} absolute md:static md:translate-x-0 flex items-center flex-shrink-0 -ml-2 md:-ml-4`}>
             <span
-              className="text-xl md:text-3xl font-semibold tracking-tight"
+              className="text-2xl md:text-3xl font-semibold tracking-tight"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               <span className="text-gray-900">Redeem</span><span className="text-emerald-500 ml-0.5">Kart</span>
