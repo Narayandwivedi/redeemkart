@@ -46,7 +46,7 @@ const Account = () => {
         <div className="text-center md:text-left mb-8">
           {/* Mobile Header */}
           <div className="md:hidden">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">My Account</h1>
+            <h1 className="text-2xl font-semibold text-gray-900 mb-2">My Account</h1>
             <p className="text-gray-600">Hello, {user?.fullName || 'User'}!</p>
           </div>
           
@@ -59,7 +59,7 @@ const Account = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                <h1 className="text-3xl font-semibold text-gray-900 mb-2">
                   Welcome back, {user?.fullName || 'User'}!
                 </h1>
                 <p className="text-lg text-gray-600">{user?.email}</p>
@@ -95,7 +95,7 @@ const Account = () => {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-xl font-medium text-gray-900 mb-2">
                     {option.title}
                   </h3>
                   <p className="text-gray-600">
@@ -114,18 +114,18 @@ const Account = () => {
 
         {/* Desktop Stats Section */}
         <div className="hidden md:block mt-12 bg-white rounded-lg shadow-sm p-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Account Overview</h2>
+          <h2 className="text-2xl font-medium text-gray-900 mb-6">Account Overview</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div className="text-center p-6 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg">
-              <div className="text-3xl font-bold text-emerald-600 mb-2">0</div>
+              <div className="text-3xl font-semibold text-emerald-600 mb-2">0</div>
               <div className="text-gray-700 font-medium">Active Orders</div>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
-              <div className="text-3xl font-bold text-blue-600 mb-2">0</div>
+              <div className="text-3xl font-semibold text-blue-600 mb-2">0</div>
               <div className="text-gray-700 font-medium">Total Orders</div>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
-              <div className="text-3xl font-bold text-purple-600 mb-2">1</div>
+              <div className="text-3xl font-semibold text-purple-600 mb-2">1</div>
               <div className="text-gray-700 font-medium">Saved Addresses</div>
             </div>
           </div>

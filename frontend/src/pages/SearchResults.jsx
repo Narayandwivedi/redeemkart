@@ -575,7 +575,7 @@ const SearchResults = () => {
                 <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">No Search Query</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-2">No Search Query</h2>
             <p className="text-gray-600 mb-6">
               Please enter a search term to find products
             </p>
@@ -660,7 +660,7 @@ const SearchResults = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="text-2xl font-semibold text-gray-900">
                 Search Results for: <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">"{query}"</span>
               </h1>
               {!loading && (
@@ -761,7 +761,7 @@ const SearchResults = () => {
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Search Error</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Search Error</h3>
             <p className="text-gray-600 mb-4">{error}</p>
             <button 
               onClick={performSearch}
@@ -780,7 +780,7 @@ const SearchResults = () => {
                 <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">No Products Found</h3>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-2">No Products Found</h3>
             <p className="text-gray-600 mb-6">
               We couldn't find any products matching "{query}"
             </p>
@@ -844,7 +844,7 @@ const SearchResults = () => {
                       </span>
                     </div>
                     
-                    <h3 className="font-bold text-gray-900 mb-3 group-hover:text-cyan-700 transition-colors text-sm sm:text-lg line-clamp-2 leading-tight">
+                    <h3 className="font-semibold text-gray-900 mb-3 group-hover:text-cyan-700 transition-colors text-sm sm:text-lg line-clamp-2 leading-tight">
                       {product.seoTitle || product.name}
                     </h3>
 
@@ -887,7 +887,7 @@ const SearchResults = () => {
                       
                       {/* Savings Amount */}
                       {product.originalPrice && product.originalPrice > product.price && (
-                        <span className="text-green-600 font-bold text-xs sm:text-sm">
+                        <span className="text-green-600 font-semibold text-xs sm:text-sm">
                           <span className="hidden sm:inline">Save </span>
                           {formatPrice(product.originalPrice - product.price)}
                         </span>

@@ -202,8 +202,8 @@ const GiftCardDetail = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-violet-50/40 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">Brand not found</h2>
-          <Link to="/gift-cards" className="text-amber-600 hover:underline font-semibold">Browse all gift cards</Link>
+          <h2 className="text-2xl font-semibold text-slate-800 mb-2">Brand not found</h2>
+          <Link to="/gift-cards" className="text-amber-600 hover:underline font-medium">Browse all gift cards</Link>
         </div>
       </div>
     )
@@ -225,7 +225,7 @@ const GiftCardDetail = () => {
 
             <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
               <div className="mb-6">
-                <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Gift Card</p>
+                <p className="text-xs font-semibold text-emerald-600 uppercase tracking-widest mb-2">Gift Card</p>
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-800 mb-3">
                   {brandInfo.name}
                 </h1>
@@ -233,7 +233,7 @@ const GiftCardDetail = () => {
               </div>
 
               <div className="mb-6">
-                <p className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Select Denomination</p>
+                <p className="text-xs font-semibold text-slate-700 uppercase tracking-wider mb-3">Select Denomination</p>
                 <div className="relative">
                   <div className="flex flex-nowrap gap-2.5 overflow-x-auto pb-2 scrollbar-thin pe-6">
                     {vouchers.map((v) => {
@@ -244,7 +244,7 @@ const GiftCardDetail = () => {
                           key={v._id}
                           onClick={() => handleVariantClick(v)}
                           disabled={isOos}
-                          className={`flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-bold border-2 transition-all duration-200 cursor-pointer ${
+                          className={`flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all duration-200 cursor-pointer ${
                             isOos
                               ? 'border-slate-200 bg-slate-100 text-slate-400 cursor-not-allowed line-through'
                               : isSelected
@@ -266,7 +266,7 @@ const GiftCardDetail = () => {
                 <>
                   <div className="bg-slate-50 rounded-2xl p-4 sm:p-5 mb-6 border border-slate-100">
                     <div className="flex items-baseline gap-3 mb-1">
-                      <span className="text-3xl sm:text-4xl font-extrabold text-slate-900">
+                      <span className="text-3xl sm:text-4xl font-bold text-slate-900">
                         {formatPrice(selected.price)}
                       </span>
                       {selected.originalPrice > selected.price && (
@@ -275,16 +275,16 @@ const GiftCardDetail = () => {
                         </span>
                       )}
                     </div>
-                    <div className="flex items-center gap-2 text-emerald-600 font-bold text-sm">
+                    <div className="flex items-center gap-2 text-emerald-600 font-semibold text-sm">
                       <span>You save {formatPrice(savings)} ({discountPercent}% OFF)</span>
                     </div>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <button onClick={handleBuyNow} className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-sm">
+                    <button onClick={handleBuyNow} className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-sm">
                       Buy Now
                     </button>
-                    <button onClick={handleAddToCart} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-sm">
+                    <button onClick={handleAddToCart} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-sm">
                       Add to Cart
                     </button>
                   </div>
@@ -293,7 +293,7 @@ const GiftCardDetail = () => {
 
               {selected?.stockQuantity === 0 && (
                 <div className="bg-red-50 border border-red-200 rounded-2xl p-4 text-center">
-                  <p className="text-red-700 font-bold">This denomination is currently out of stock</p>
+                  <p className="text-red-700 font-semibold">This denomination is currently out of stock</p>
                   <p className="text-red-500 text-sm mt-1">Please select another option</p>
                 </div>
               )}

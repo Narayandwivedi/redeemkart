@@ -22,7 +22,7 @@ const Profile = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white">User Profile</h1>
+                <h1 className="text-3xl font-semibold text-white">User Profile</h1>
                 <p className="text-cyan-300 mt-2">Manage your account settings and preferences</p>
               </div>
             </div>
@@ -53,7 +53,7 @@ const Profile = () => {
             {activeTab === 'profile' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-4">Account Information</h2>
+                  <h2 className="text-xl font-medium text-gray-800 mb-4">Account Information</h2>
                 
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
@@ -84,7 +84,7 @@ const Profile = () => {
                 </div>
                 
                 <div className="space-y-4">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-4">Quick Actions</h2>
+                  <h2 className="text-xl font-medium text-gray-800 mb-4">Quick Actions</h2>
                 
                 <div className="space-y-3">
                   <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 px-4 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all duration-200 flex items-center justify-center space-x-2">

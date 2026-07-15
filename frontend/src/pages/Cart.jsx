@@ -145,11 +145,11 @@ const Cart = () => {
           <div className="w-24 h-24 mx-auto mb-6 bg-amber-100 rounded-full flex items-center justify-center">
             <ShoppingBag className="w-12 h-12 text-amber-400" />
           </div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Your cart is empty</h2>
+          <h2 className="text-2xl font-semibold text-slate-900 mb-2">Your cart is empty</h2>
           <p className="text-slate-500 mb-8 text-sm">Browse our vouchers and digital products to get started!</p>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold py-3 px-8 rounded-xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 px-8 rounded-xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 active:scale-[0.98]"
           >
             <ShoppingBag className="w-4 h-4" />
             Start Shopping
@@ -169,7 +169,7 @@ const Cart = () => {
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">Shopping Cart</h1>
+            <h1 className="text-2xl font-semibold text-slate-900">Shopping Cart</h1>
             <p className="text-slate-400 text-sm mt-0.5">{totalItems} {totalItems === 1 ? 'item' : 'items'} in your cart</p>
           </div>
           {items.length > 0 && (
@@ -221,7 +221,7 @@ const Cart = () => {
                         />
                       )}
                       {hasDiscount && (
-                        <div className="absolute top-1 left-1 bg-amber-400 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-md">
+                        <div className="absolute top-1 left-1 bg-amber-400 text-black text-[10px] font-semibold px-1.5 py-0.5 rounded-md">
                           -{discountPct}%
                         </div>
                       )}
@@ -229,7 +229,7 @@ const Cart = () => {
 
                     {/* Info */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-slate-800 text-sm sm:text-base leading-snug truncate">
+                      <h3 className="font-medium text-slate-800 text-sm sm:text-base leading-snug truncate">
                         {item.name || item.seoTitle || 'Product'}
                       </h3>
                       {item.category && (
@@ -238,7 +238,7 @@ const Cart = () => {
 
                       {/* Price */}
                       <div className="flex items-baseline gap-2 mt-1.5">
-                        <span className="text-base font-bold text-slate-900">{formatPrice(item.price)}</span>
+                        <span className="text-base font-semibold text-slate-900">{formatPrice(item.price)}</span>
                         {hasDiscount && (
                           <span className="text-xs text-slate-400 line-through">{formatPrice(item.originalPrice)}</span>
                         )}
@@ -253,7 +253,7 @@ const Cart = () => {
                           >
                             <Minus className="w-3.5 h-3.5" />
                           </button>
-                          <span className="w-7 text-center text-sm font-semibold text-slate-800">{item.quantity}</span>
+                          <span className="w-7 text-center text-sm font-medium text-slate-800">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(itemId, item.quantity + 1)}
                             className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-amber-100 hover:text-amber-700 flex items-center justify-center transition-colors cursor-pointer"
@@ -262,7 +262,7 @@ const Cart = () => {
                           </button>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="font-bold text-slate-900 text-sm">{formatPrice(item.price * item.quantity)}</span>
+                          <span className="font-semibold text-slate-900 text-sm">{formatPrice(item.price * item.quantity)}</span>
                           <button
                             onClick={() => removeFromCart(itemId)}
                             className="text-slate-300 hover:text-red-500 transition-colors cursor-pointer"
@@ -283,7 +283,7 @@ const Cart = () => {
                         >
                           <Minus className="w-3.5 h-3.5" />
                         </button>
-                        <span className="w-8 text-center text-sm font-bold text-slate-800">{item.quantity}</span>
+                        <span className="w-8 text-center text-sm font-semibold text-slate-800">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(itemId, item.quantity + 1)}
                           className="w-8 h-8 rounded-lg hover:bg-amber-100 hover:text-amber-700 flex items-center justify-center transition-colors cursor-pointer"
@@ -294,7 +294,7 @@ const Cart = () => {
 
                       {/* Line total */}
                       <div className="text-right w-20">
-                        <p className="font-bold text-slate-900 text-base">{formatPrice(item.price * item.quantity)}</p>
+                        <p className="font-semibold text-slate-900 text-base">{formatPrice(item.price * item.quantity)}</p>
                         {item.quantity > 1 && (
                           <p className="text-xs text-slate-400">{formatPrice(item.price)} each</p>
                         )}
@@ -325,7 +325,7 @@ const Cart = () => {
           {/* ── Order Summary ── */}
           <div className="lg:col-span-4">
             <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sticky top-20">
-              <h2 className="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <h2 className="text-base font-semibold text-slate-800 mb-4 flex items-center gap-2">
                 <Tag className="w-4 h-4 text-amber-500" />
                 Order Summary
               </h2>
@@ -346,28 +346,28 @@ const Cart = () => {
               </div>
 
               <div className="border-t border-slate-100 mt-4 pt-4 flex justify-between items-baseline">
-                <span className="font-bold text-slate-900 text-base">Total</span>
-                <span className="font-bold text-slate-900 text-xl">{formatPrice(subtotal)}</span>
+                <span className="font-semibold text-slate-900 text-base">Total</span>
+                <span className="font-semibold text-slate-900 text-xl">{formatPrice(subtotal)}</span>
               </div>
 
               {/* Delivery Info */}
               <div className="mt-5 p-4 bg-amber-50/50 border border-amber-200 rounded-xl">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-sm font-bold text-slate-800 flex items-center gap-2">
+                  <h3 className="text-sm font-semibold text-slate-800 flex items-center gap-2">
                     <Mail className="w-4 h-4 text-amber-500" />
                     Delivery Details
                   </h3>
                   {!isEditingRecipient ? (
                     <button 
                       onClick={() => setIsEditingRecipient(true)}
-                      className="text-xs text-amber-600 font-semibold hover:text-amber-700 flex items-center gap-1 cursor-pointer"
+                      className="text-xs text-amber-600 font-medium hover:text-amber-700 flex items-center gap-1 cursor-pointer"
                     >
                       <Edit2 className="w-3 h-3" /> Edit
                     </button>
                   ) : (
                     <button 
                       onClick={() => setIsEditingRecipient(false)}
-                      className="text-xs text-green-600 font-semibold hover:text-green-700 flex items-center gap-1 cursor-pointer"
+                      className="text-xs text-green-600 font-medium hover:text-green-700 flex items-center gap-1 cursor-pointer"
                     >
                       <Check className="w-3 h-3" /> Save
                     </button>
@@ -379,7 +379,7 @@ const Cart = () => {
                     <p className="text-xs text-slate-600 mb-1">
                       The redeem code will be sent to:
                     </p>
-                    <p className="text-sm font-semibold text-slate-900 truncate">{recipientEmail || user?.email}</p>
+                    <p className="text-sm font-medium text-slate-900 truncate">{recipientEmail || user?.email}</p>
                     {recipientName && (
                       <p className="text-xs text-slate-500 truncate mt-0.5">{recipientName}</p>
                     )}
@@ -387,7 +387,7 @@ const Cart = () => {
                 ) : (
                   <div className="space-y-3 mt-3">
                     <div>
-                      <label className="text-xs font-semibold text-slate-700 mb-1 block">Recipient Name</label>
+                      <label className="text-xs font-medium text-slate-700 mb-1 block">Recipient Name</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
                           <User className="h-3 w-3 text-slate-400" />
@@ -402,7 +402,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <div>
-                      <label className="text-xs font-semibold text-slate-700 mb-1 block">Delivery Email</label>
+                      <label className="text-xs font-medium text-slate-700 mb-1 block">Delivery Email</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
                           <Mail className="h-3 w-3 text-slate-400" />
@@ -423,7 +423,7 @@ const Cart = () => {
               <button
                 onClick={handleCheckout}
                 disabled={isSubmitting}
-                className="w-full mt-5 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold py-3.5 px-4 rounded-xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer text-sm disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full mt-5 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3.5 px-4 rounded-xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer text-sm disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

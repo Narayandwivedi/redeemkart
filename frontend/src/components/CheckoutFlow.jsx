@@ -101,7 +101,7 @@ const CheckoutFlow = ({ onClose, onSuccess }) => {
       <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-900">Checkout</h2>
+          <h2 className="text-2xl font-semibold text-gray-900">Checkout</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -118,7 +118,7 @@ const CheckoutFlow = ({ onClose, onSuccess }) => {
             {steps.map((step, index) => (
               <React.Fragment key={step.number}>
                 <div className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold ${
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-medium ${
                     currentStep === step.number 
                       ? 'bg-cyan-600' 
                       : step.completed 
@@ -169,7 +169,7 @@ const CheckoutFlow = ({ onClose, onSuccess }) => {
             {/* Step 2: Review & Payment */}
             {currentStep === 2 && (
               <div className="space-y-6">
-                <h3 className="text-lg font-semibold text-gray-900">Review Your Order</h3>
+                <h3 className="text-lg font-medium text-gray-900">Review Your Order</h3>
                 
                 {/* Order Items */}
                 <div className="bg-gray-50 rounded-lg p-4">
@@ -198,7 +198,7 @@ const CheckoutFlow = ({ onClose, onSuccess }) => {
                       <span>Tax (18%):</span>
                       <span>{formatPrice(getTotalPrice() * 0.18)}</span>
                     </div>
-                    <div className="flex justify-between text-lg font-bold border-t border-gray-200 pt-2">
+                    <div className="flex justify-between text-lg font-semibold border-t border-gray-200 pt-2">
                       <span>Total:</span>
                       <span>{formatPrice(getTotalPrice() * 1.18)}</span>
                     </div>

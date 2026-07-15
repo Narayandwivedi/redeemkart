@@ -74,7 +74,7 @@ const About = () => {
             </div>
             <span className="h-px w-12 sm:w-20 bg-gray-300"></span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl sm:text-5xl font-semibold text-gray-900 mb-4">
             About <span className="text-yellow-500">GCHub</span>
           </h1>
           <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -85,7 +85,7 @@ const About = () => {
 
         {/* What is GCHub */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
             What is <span className="text-yellow-500">GCHub</span>?
           </h2>
           <p className="text-gray-600 leading-relaxed mb-4">
@@ -103,7 +103,7 @@ const About = () => {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           {stats.map((s) => (
             <div key={s.label} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6 text-center">
-              <p className="text-2xl sm:text-3xl font-bold text-yellow-500">{s.value}</p>
+              <p className="text-2xl sm:text-3xl font-semibold text-yellow-500">{s.value}</p>
               <p className="text-xs sm:text-sm text-gray-500 mt-1">{s.label}</p>
             </div>
           ))}
@@ -115,17 +115,17 @@ const About = () => {
             <div className="bg-green-50 p-2.5 rounded-lg">
               <Banknote className="w-6 h-6 text-green-500" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">
               How Selling <span className="text-yellow-500">Works</span>
             </h2>
           </div>
           <div className="grid sm:grid-cols-3 gap-6">
             {steps.map((s) => (
               <div key={s.num} className="text-center">
-                <div className="w-12 h-12 bg-yellow-400 text-black font-bold rounded-xl flex items-center justify-center mx-auto mb-3 text-sm">
+                <div className="w-12 h-12 bg-yellow-400 text-black font-semibold rounded-xl flex items-center justify-center mx-auto mb-3 text-sm">
                   {s.num}
                 </div>
-                <h3 className="font-bold text-gray-900 mb-1">{s.title}</h3>
+                <h3 className="font-semibold text-gray-900 mb-1">{s.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
               </div>
             ))}
@@ -138,7 +138,7 @@ const About = () => {
             <div className="bg-yellow-50 p-2.5 rounded-lg">
               <BadgePercent className="w-6 h-6 text-yellow-500" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">
               Why Choose <span className="text-yellow-500">GCHub</span>?
             </h2>
           </div>
@@ -149,7 +149,7 @@ const About = () => {
                   <f.icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1">{f.title}</h3>
+                  <h3 className="font-semibold text-gray-900 mb-1">{f.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">{f.desc}</p>
                 </div>
               </div>
@@ -160,7 +160,7 @@ const About = () => {
         {/* Mission */}
         <div className="bg-gradient-to-r from-amber-400 to-yellow-500 rounded-2xl p-6 sm:p-10 text-center">
           <Users className="w-10 h-10 text-black mx-auto mb-4" />
-          <h2 className="text-xl sm:text-2xl font-bold text-black mb-3">Our Mission</h2>
+          <h2 className="text-xl sm:text-2xl font-semibold text-black mb-3">Our Mission</h2>
           <p className="text-sm sm:text-base text-black/80 max-w-2xl mx-auto leading-relaxed">
             We believe no gift card should go unused and no gamer should pay full price. 
             GCHub bridges the gap between unused value and smart savings — creating a 

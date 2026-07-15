@@ -44,10 +44,10 @@ const Home = () => {
       <div className="py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 text-center flex-1">Buy Popular AAA Games</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 text-center flex-1">Buy Popular AAA Games</h2>
             <button
               onClick={() => navigate('/games')}
-              className="hidden sm:flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer"
             >
               View All
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,7 +77,7 @@ const Home = () => {
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-transparent to-transparent flex items-end pb-2 pl-2">
                         <Sparkles className="w-4 h-4 text-yellow-400 mr-1" />
-                        <span className="text-white text-[10px] font-extrabold uppercase tracking-wider">Bundle</span>
+                        <span className="text-white text-[10px] font-bold uppercase tracking-wider">Bundle</span>
                       </div>
                     </div>
                   ) : game.img ? (
@@ -91,21 +91,21 @@ const Home = () => {
                       {game.name}
                     </div>
                   )}
-                  <div className="absolute top-2 left-2 bg-red-500 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md">
+                  <div className="absolute top-2 left-2 bg-red-500 text-white text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md">
                     -{Math.round(((game.originalPrice - game.price) / game.originalPrice) * 100)}% OFF
                   </div>
                 </div>
                 <div className="p-3 flex flex-col gap-2">
-                  <h3 className={`font-bold text-gray-900 leading-tight ${isBundle ? 'text-[11px]' : 'text-sm'}`}>{isBundle ? game.fullName : game.name}</h3>
+                  <h3 className={`font-semibold text-gray-900 leading-tight ${isBundle ? 'text-[11px]' : 'text-sm'}`}>{isBundle ? game.fullName : game.name}</h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-lg font-extrabold text-gray-900">₹{game.price}</span>
+                    <span className="text-lg font-bold text-gray-900">₹{game.price}</span>
                     <span className="text-xs text-gray-400 line-through">₹{game.originalPrice}</span>
                   </div>
                   <div className="flex gap-2">
-                    <button onClick={(e) => { e.stopPropagation(); const item = isBundle ? { _id: game._id, name: game.fullName, price: game.price, originalPrice: game.originalPrice, images: bundleGameImages } : game; addToCart(item); if (isBundle) { toast.success('Game bundle added to cart!') } else { navigate('/cart') } }} className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer">
+                    <button onClick={(e) => { e.stopPropagation(); const item = isBundle ? { _id: game._id, name: game.fullName, price: game.price, originalPrice: game.originalPrice, images: bundleGameImages } : game; addToCart(item); if (isBundle) { toast.success('Game bundle added to cart!') } else { navigate('/cart') } }} className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer">
                       Buy Now
                     </button>
-                    <button onClick={(e) => { e.stopPropagation(); const item = isBundle ? { _id: game._id, name: game.fullName, price: game.price, originalPrice: game.originalPrice, images: bundleGameImages } : game; addToCart(item); toast.success(isBundle ? 'Game bundle added to cart!' : `${game.name} added to cart!`) }} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer">
+                    <button onClick={(e) => { e.stopPropagation(); const item = isBundle ? { _id: game._id, name: game.fullName, price: game.price, originalPrice: game.originalPrice, images: bundleGameImages } : game; addToCart(item); toast.success(isBundle ? 'Game bundle added to cart!' : `${game.name} added to cart!`) }} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-medium py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer">
                       <><span className="sm:hidden">Add Cart</span><span className="hidden sm:inline">Add to Cart</span></>
                     </button>
                   </div>
@@ -116,7 +116,7 @@ const Home = () => {
           <div className="mt-6 text-center sm:hidden">
             <button
               onClick={() => navigate('/games')}
-              className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 cursor-pointer"
+              className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-all duration-200 cursor-pointer"
             >
               View All Games
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,19 +129,19 @@ const Home = () => {
 
       {/* Quick Links */}
       <div className="py-6 bg-white border-b border-slate-100">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Quick Links</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Quick Links</h2>
         <div className="flex flex-row justify-center gap-2 sm:gap-4 px-3 sm:px-0 max-w-full">
-        <button onClick={() => navigate('/search?q=vouchers')} className="group relative inline-flex items-center justify-center gap-0.5 sm:gap-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-bold py-1.5 sm:py-4 px-1 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 overflow-hidden text-[10px] sm:text-base flex-1 sm:flex-none">
+        <button onClick={() => navigate('/search?q=vouchers')} className="group relative inline-flex items-center justify-center gap-0.5 sm:gap-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold py-1.5 sm:py-4 px-1 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 overflow-hidden text-[10px] sm:text-base flex-1 sm:flex-none">
           <Gift className="w-3 h-3 sm:w-5 sm:h-5" />
           <span>Buy Voucher</span>
           <ArrowRight className="w-2 h-2 sm:w-4 sm:h-4 opacity-0 -ml-1 sm:-ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 hidden sm:inline" />
         </button>
-        <button onClick={() => navigate('/search?q=games')} className="group relative inline-flex items-center justify-center gap-0.5 sm:gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-1.5 sm:py-4 px-1 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 overflow-hidden text-[10px] sm:text-base flex-1 sm:flex-none">
+        <button onClick={() => navigate('/search?q=games')} className="group relative inline-flex items-center justify-center gap-0.5 sm:gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-1.5 sm:py-4 px-1 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 overflow-hidden text-[10px] sm:text-base flex-1 sm:flex-none">
           <Gamepad2 className="w-3 h-3 sm:w-5 sm:h-5" />
           <span>Buy Games</span>
           <ArrowRight className="w-2 h-2 sm:w-4 sm:h-4 opacity-0 -ml-1 sm:-ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 hidden sm:inline" />
         </button>
-        <button onClick={() => navigate('/sell-voucher')} className="group relative inline-flex items-center justify-center gap-0.5 sm:gap-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-1.5 sm:py-4 px-1 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 overflow-hidden text-[10px] sm:text-base flex-1 sm:flex-none">
+        <button onClick={() => navigate('/sell-voucher')} className="group relative inline-flex items-center justify-center gap-0.5 sm:gap-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold py-1.5 sm:py-4 px-1 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 overflow-hidden text-[10px] sm:text-base flex-1 sm:flex-none">
           <DollarSign className="w-3 h-3 sm:w-5 sm:h-5" />
           <span>Sell Voucher</span>
           <ArrowRight className="w-2 h-2 sm:w-4 sm:h-4 opacity-0 -ml-1 sm:-ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 hidden sm:inline" />
@@ -152,7 +152,7 @@ const Home = () => {
       {/* User Reviews */}
       <div className="py-8 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">What Our Customers Say</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">What Our Customers Say</h2>
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { name: 'Rahul Sharma', rating: 5, text: 'bc GTA 5 ka code mil gaya 2 minute mein, best website hai yeh!', initials: 'RS' },
@@ -166,11 +166,11 @@ const Home = () => {
             ].map((review, i) => (
               <div key={i} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
                 <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                  <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-[10px] sm:text-sm">
+                  <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold text-[10px] sm:text-sm">
                     {review.initials}
                   </div>
                   <div className="min-w-0">
-                    <p className="font-semibold text-gray-800 text-[11px] sm:text-sm truncate">{review.name}</p>
+                    <p className="font-medium text-gray-800 text-[11px] sm:text-sm truncate">{review.name}</p>
                     <div className="flex gap-px sm:gap-0.5">
                       {[...Array(5)].map((_, j) => (
                         <Star key={j} className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${j < review.rating ? 'text-yellow-400' : 'text-gray-200'}`} fill={j < review.rating ? 'currentColor' : 'none'} />

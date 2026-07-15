@@ -182,14 +182,14 @@ const Login = () => {
                   <button
                     type='button'
                     onClick={() => { setIsLogin(true); setError('') }}
-                    className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all cursor-pointer ${isLogin ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                    className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all cursor-pointer ${isLogin ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                   >
                     Sign In
                   </button>
                   <button
                     type='button'
                     onClick={() => { setIsLogin(false); setError('') }}
-                    className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all cursor-pointer ${!isLogin ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                    className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all cursor-pointer ${!isLogin ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                   >
                     Sign Up
                   </button>
@@ -198,7 +198,7 @@ const Login = () => {
               </>
             ) : (
               <div className='mb-2'>
-                <p className='text-slate-700 font-bold text-sm'>
+                <p className='text-slate-700 font-semibold text-sm'>
                   {forgotStep === 1 && 'Forgot Password'}
                   {forgotStep === 2 && 'Enter OTP'}
                   {forgotStep === 3 && 'Reset Password'}
@@ -230,7 +230,7 @@ const Login = () => {
               {isLogin && (
                 <>
                   <div>
-                    <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Email or Mobile</label>
+                    <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Email or Mobile</label>
                     <div className='relative group'>
                       <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -241,7 +241,7 @@ const Login = () => {
                     </div>
                   </div>
                   <div>
-                    <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Password</label>
+                    <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Password</label>
                     <div className='relative group'>
                       <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -274,7 +274,7 @@ const Login = () => {
                     </div>
                   )}
                   <div className='text-right -mt-1'>
-                    <button type='button' onClick={() => setForgotStep(1)} className='text-xs font-semibold text-amber-600 hover:text-amber-700 hover:underline transition-colors cursor-pointer'>
+                    <button type='button' onClick={() => setForgotStep(1)} className='text-xs font-medium text-amber-600 hover:text-amber-700 hover:underline transition-colors cursor-pointer'>
                       Forgot Password?
                     </button>
                   </div>
@@ -285,7 +285,7 @@ const Login = () => {
               {!isLogin && (
                 <>
                   <div>
-                    <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Full Name</label>
+                    <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Full Name</label>
                     <div className='relative group'>
                       <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -296,7 +296,7 @@ const Login = () => {
                     </div>
                   </div>
                   <div>
-                    <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Email</label>
+                    <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Email</label>
                     <div className='relative group'>
                       <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -307,7 +307,7 @@ const Login = () => {
                     </div>
                   </div>
                   <div>
-                    <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Mobile</label>
+                    <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Mobile</label>
                     <div className='relative group'>
                       <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -318,7 +318,7 @@ const Login = () => {
                     </div>
                   </div>
                   <div>
-                    <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Password</label>
+                    <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Password</label>
                     <div className='relative group'>
                       <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -341,7 +341,7 @@ const Login = () => {
                     </div>
                   </div>
                   <div>
-                    <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Confirm Password</label>
+                    <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Confirm Password</label>
                     <div className='relative group'>
                       <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                         <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -364,7 +364,7 @@ const Login = () => {
                 </>
               )}
 
-              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
+              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
                 {loading ? (
                   <>
                     <svg className='animate-spin h-5 w-5 text-black' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
@@ -383,7 +383,7 @@ const Login = () => {
                   <div className='w-full border-t border-slate-200'></div>
                 </div>
                 <div className='relative flex justify-center text-xs uppercase'>
-                  <span className='bg-white px-2 text-slate-400 font-bold tracking-widest'>Or continue with</span>
+                  <span className='bg-white px-2 text-slate-400 font-semibold tracking-widest'>Or continue with</span>
                 </div>
               </div>
 
@@ -397,7 +397,7 @@ const Login = () => {
           {forgotStep === 1 && (
             <form onSubmit={handleSendOTP} className='space-y-3.5'>
               <div>
-                <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Email Address</label>
+                <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Email Address</label>
                 <div className='relative group'>
                   <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                     <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -419,7 +419,7 @@ const Login = () => {
                 </div>
               )}
 
-              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
+              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
                 {loading ? (
                   <>
                     <svg className='animate-spin h-5 w-5 text-black' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
@@ -434,7 +434,7 @@ const Login = () => {
               </button>
 
               <div className='text-center'>
-                <button type='button' onClick={() => setForgotStep(0)} className='text-xs font-semibold text-slate-500 hover:text-slate-700 transition-colors cursor-pointer'>
+                <button type='button' onClick={() => setForgotStep(0)} className='text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer'>
                   &larr; Back to Sign In
                 </button>
               </div>
@@ -445,9 +445,9 @@ const Login = () => {
           {forgotStep === 2 && (
             <form onSubmit={handleResetPassword} className='space-y-3.5'>
               <div>
-                <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 ml-1'>Enter OTP</label>
+                <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-3 ml-1'>Enter OTP</label>
                 <div className='flex items-center justify-center gap-2'>
-                  <input type='text' inputMode='numeric' maxLength={6} value={forgotOtp} onChange={(e) => setForgotOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder='000000' className='w-full text-center text-xl font-bold bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all py-2.5 tracking-[0.5em]' disabled={loading} />
+                  <input type='text' inputMode='numeric' maxLength={6} value={forgotOtp} onChange={(e) => setForgotOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder='000000' className='w-full text-center text-xl font-semibold bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all py-2.5 tracking-[0.5em]' disabled={loading} />
                 </div>
               </div>
 
@@ -462,7 +462,7 @@ const Login = () => {
                 </div>
               )}
 
-              <button type='submit' disabled={loading || forgotOtp.length !== 6} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
+              <button type='submit' disabled={loading || forgotOtp.length !== 6} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
                 {loading ? (
                   <>
                     <svg className='animate-spin h-5 w-5 text-black' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
@@ -477,7 +477,7 @@ const Login = () => {
               </button>
 
               <div className='text-center'>
-                <button type='button' onClick={() => setForgotStep(1)} className='text-xs font-semibold text-slate-500 hover:text-slate-700 transition-colors cursor-pointer'>
+                <button type='button' onClick={() => setForgotStep(1)} className='text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer'>
                   &larr; Change Email
                 </button>
               </div>
@@ -488,7 +488,7 @@ const Login = () => {
           {forgotStep === 3 && (
             <form onSubmit={handleResetPassword} className='space-y-3.5'>
               <div>
-                <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>New Password</label>
+                <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>New Password</label>
                 <div className='relative group'>
                   <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                     <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -512,7 +512,7 @@ const Login = () => {
               </div>
 
               <div>
-                <label className='block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Confirm Password</label>
+                <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1 ml-1'>Confirm Password</label>
                 <div className='relative group'>
                   <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-colors group-focus-within:text-amber-500'>
                     <svg className='w-5 h-5 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -534,7 +534,7 @@ const Login = () => {
                 </div>
               )}
 
-              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
+              <button type='submit' disabled={loading} className='w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
                 {loading ? (
                   <>
                     <svg className='animate-spin h-5 w-5 text-black' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
@@ -549,7 +549,7 @@ const Login = () => {
               </button>
 
               <div className='text-center'>
-                <button type='button' onClick={() => setForgotStep(0)} className='text-xs font-semibold text-slate-500 hover:text-slate-700 transition-colors cursor-pointer'>
+                <button type='button' onClick={() => setForgotStep(0)} className='text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer'>
                   &larr; Back to Sign In
                 </button>
               </div>
@@ -557,13 +557,13 @@ const Login = () => {
           )}
 
           <div className='mt-4 text-center space-y-1'>
-            <p className='text-[10px] text-slate-400 font-semibold flex items-center justify-center gap-1'>
+            <p className='text-[10px] text-slate-400 font-medium flex items-center justify-center gap-1'>
               <svg className='w-3 h-3 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' />
               </svg>
               Your transactions are encrypted and secure.
             </p>
-            <p className='text-[10px] text-slate-400 font-semibold flex items-center justify-center gap-1'>
+            <p className='text-[10px] text-slate-400 font-medium flex items-center justify-center gap-1'>
               <svg className='w-3 h-3 text-slate-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z' />
               </svg>

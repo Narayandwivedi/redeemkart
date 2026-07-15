@@ -39,7 +39,7 @@ const MobileBottomNav = () => {
                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
           </span>
-          <span className="text-[12px] font-semibold leading-none" style={{ color: isActive('/') ? '#b45309' : '#9ca3af' }}>
+          <span className="text-[12px] font-medium leading-none" style={{ color: isActive('/') ? '#b45309' : '#9ca3af' }}>
             Home
           </span>
         </Link>
@@ -58,7 +58,7 @@ const MobileBottomNav = () => {
                 d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z" />
             </svg>
           </span>
-          <span className="text-[12px] font-semibold leading-none" style={{ color: isActive('/sell-voucher') ? '#b45309' : '#9ca3af' }}>
+          <span className="text-[12px] font-medium leading-none" style={{ color: isActive('/sell-voucher') ? '#b45309' : '#9ca3af' }}>
             Sell Card
           </span>
         </Link>
@@ -74,11 +74,11 @@ const MobileBottomNav = () => {
           >
             <img src="/cart.avif" alt="Cart" className="w-[22px] h-[22px] object-contain" />
           </span>
-          <span className="text-[12px] font-semibold leading-none" style={{ color: isActive('/cart') ? '#b45309' : '#9ca3af' }}>
+          <span className="text-[12px] font-medium leading-none" style={{ color: isActive('/cart') ? '#b45309' : '#9ca3af' }}>
             Cart
           </span>
           {getTotalItems() > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[10px] font-bold rounded-full h-[18px] w-[18px] flex items-center justify-center shadow">
+            <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[10px] font-semibold rounded-full h-[18px] w-[18px] flex items-center justify-center shadow">
               {getTotalItems()}
             </span>
           )}
@@ -98,7 +98,7 @@ const MobileBottomNav = () => {
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </span>
-          <span className="text-[12px] font-semibold leading-none" style={{ color: isActive('/account') || isActive('/login') ? '#b45309' : '#9ca3af' }}>
+          <span className="text-[12px] font-medium leading-none" style={{ color: isActive('/account') || isActive('/login') ? '#b45309' : '#9ca3af' }}>
             {isAuthenticated ? 'Account' : 'Login'}
           </span>
         </Link>

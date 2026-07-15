@@ -119,13 +119,13 @@ const MyOrders = () => {
             <div className="w-20 h-20 mx-auto mb-6 bg-amber-50 rounded-2xl flex items-center justify-center">
               <ShoppingBag className="w-10 h-10 text-amber-500" />
             </div>
-            <h2 className="text-xl font-bold text-slate-950 mb-2">No orders placed yet</h2>
+            <h2 className="text-xl font-semibold text-slate-950 mb-2">No orders placed yet</h2>
             <p className="text-slate-500 mb-8 text-sm max-w-xs mx-auto">
               When you purchase vouchers, game topups, or gift cards, they will appear here.
             </p>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold py-3 px-8 rounded-xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 active:scale-[0.98]"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold py-3 px-8 rounded-xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 active:scale-[0.98]"
             >
               Start Shopping
             </Link>
@@ -141,12 +141,12 @@ const MyOrders = () => {
                 <div className="px-6 py-4 bg-slate-50/50 border-b border-slate-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                     <div>
-                      <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Order ID</p>
-                      <p className="text-sm font-bold text-slate-800 font-mono">#{order._id.toUpperCase()}</p>
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Order ID</p>
+                      <p className="text-sm font-semibold text-slate-800 font-mono">#{order._id.toUpperCase()}</p>
                     </div>
                     <span className="hidden md:inline h-6 w-px bg-slate-200" />
                     <div>
-                      <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Date Placed</p>
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Date Placed</p>
                       <div className="flex items-center gap-1.5 text-sm font-medium text-slate-600">
                         <Calendar className="w-3.5 h-3.5 text-slate-400" />
                         <span>{formatDate(order.orderDate)}</span>
@@ -156,10 +156,10 @@ const MyOrders = () => {
                   
                   <div className="flex items-center justify-between md:justify-end gap-6 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
                     <div className="text-left md:text-right">
-                      <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Total amount</p>
-                      <p className="text-base font-extrabold text-slate-900">{formatPrice(order.totalAmount)}</p>
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total amount</p>
+                      <p className="text-base font-bold text-slate-900">{formatPrice(order.totalAmount)}</p>
                     </div>
-                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 border rounded-full text-xs font-bold capitalize ${getStatusColor(order.status)}`}>
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 border rounded-full text-xs font-semibold capitalize ${getStatusColor(order.status)}`}>
                       {getStatusIcon(order.status)}
                       <span>{order.status}</span>
                     </span>
@@ -208,9 +208,9 @@ const MyOrders = () => {
 
                       {/* Product Name & Brand */}
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-bold text-slate-900 text-sm truncate">{item.productName}</h4>
+                        <h4 className="font-semibold text-slate-900 text-sm truncate">{item.productName}</h4>
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5 text-xs text-slate-500">
-                          <span className="font-semibold text-purple-600 uppercase tracking-wider text-[10px]">
+                          <span className="font-medium text-purple-600 uppercase tracking-wider text-[10px]">
                             {item.productBrand}
                           </span>
                           <span>·</span>
@@ -220,7 +220,7 @@ const MyOrders = () => {
 
                       {/* Prices */}
                       <div className="text-right shrink-0">
-                        <p className="font-extrabold text-slate-900 text-sm">{formatPrice(item.subtotal)}</p>
+                        <p className="font-bold text-slate-900 text-sm">{formatPrice(item.subtotal)}</p>
                         <div className="flex items-baseline justify-end gap-1.5">
                           <p className="text-[10px] text-slate-500 font-medium">{formatPrice(item.productPrice)} each</p>
                           {item.originalPrice && item.originalPrice > item.productPrice && (
@@ -236,7 +236,7 @@ const MyOrders = () => {
                 <div className="px-6 py-4 bg-slate-50/30 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
                     {order.estimatedDelivery && (
-                      <div className="flex items-center text-xs font-semibold text-slate-500 gap-1.5">
+                      <div className="flex items-center text-xs font-medium text-slate-500 gap-1.5">
                         <Clock className="w-3.5 h-3.5 text-slate-400" />
                         <span>
                           {order.status === 'delivered'
@@ -250,7 +250,7 @@ const MyOrders = () => {
 
                   <button
                     onClick={() => handleOrderClick(order._id)}
-                    className="w-full sm:w-auto bg-slate-950 hover:bg-slate-800 text-white font-bold py-2.5 px-5 rounded-xl transition-all duration-200 text-xs flex items-center justify-center gap-2 cursor-pointer border border-transparent shadow hover:shadow-md active:scale-95 shrink-0"
+                    className="w-full sm:w-auto bg-slate-950 hover:bg-slate-800 text-white font-semibold py-2.5 px-5 rounded-xl transition-all duration-200 text-xs flex items-center justify-center gap-2 cursor-pointer border border-transparent shadow hover:shadow-md active:scale-95 shrink-0"
                   >
                     <span>View Order Details</span>
                     <ExternalLink className="w-3.5 h-3.5" />

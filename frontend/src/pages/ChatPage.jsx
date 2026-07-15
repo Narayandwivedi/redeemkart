@@ -201,7 +201,7 @@ const ChatPage = () => {
                 <MessageCircle className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Support Chat</h1>
+                <h1 className="text-xl font-semibold text-gray-900">Support Chat</h1>
                 <p className="text-sm text-gray-600">We're here to help you</p>
               </div>
             </div>

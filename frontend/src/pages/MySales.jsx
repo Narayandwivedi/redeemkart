@@ -38,7 +38,7 @@ const MySales = () => {
           <Link to="/" className="text-gray-600 hover:text-gray-900">
             <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
           </Link>
-          <h1 className="text-lg sm:text-2xl font-bold text-gray-900">My Sales</h1>
+          <h1 className="text-lg sm:text-2xl font-semibold text-gray-900">My Sales</h1>
         </div>
 
         {/* Stats Cards */}
@@ -50,7 +50,7 @@ const MySales = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500">Total Earnings</p>
-                <p className="text-xl font-bold text-gray-900">₹{totalEarnings.toLocaleString('en-IN')}</p>
+                <p className="text-xl font-semibold text-gray-900">₹{totalEarnings.toLocaleString('en-IN')}</p>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ const MySales = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500">Pending Payout</p>
-                <p className="text-xl font-bold text-gray-900">₹{pendingPayout.toLocaleString('en-IN')}</p>
+                <p className="text-xl font-semibold text-gray-900">₹{pendingPayout.toLocaleString('en-IN')}</p>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@ const MySales = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500">Total Sales</p>
-                <p className="text-xl font-bold text-gray-900">{listings.length}</p>
+                <p className="text-xl font-semibold text-gray-900">{listings.length}</p>
               </div>
             </div>
           </div>
@@ -81,19 +81,19 @@ const MySales = () => {
         {/* Sales Table */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <div className="px-5 py-4 border-b border-gray-100">
-            <h2 className="text-lg font-bold text-gray-900">Sales History</h2>
+            <h2 className="text-lg font-semibold text-gray-900">Sales History</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50 text-left">
-                  <th className="px-5 py-3 font-semibold text-gray-600">Brand</th>
-                  <th className="px-5 py-3 font-semibold text-gray-600">Card Value</th>
-                  <th className="px-5 py-3 font-semibold text-gray-600">Commission</th>
-                  <th className="px-5 py-3 font-semibold text-gray-600">You Received</th>
-                  <th className="px-5 py-3 font-semibold text-gray-600">Listed On</th>
-                  <th className="px-5 py-3 font-semibold text-gray-600">Paid On</th>
-                  <th className="px-5 py-3 font-semibold text-gray-600">Status</th>
+                  <th className="px-5 py-3 font-medium text-gray-600">Brand</th>
+                  <th className="px-5 py-3 font-medium text-gray-600">Card Value</th>
+                  <th className="px-5 py-3 font-medium text-gray-600">Commission</th>
+                  <th className="px-5 py-3 font-medium text-gray-600">You Received</th>
+                  <th className="px-5 py-3 font-medium text-gray-600">Listed On</th>
+                  <th className="px-5 py-3 font-medium text-gray-600">Paid On</th>
+                  <th className="px-5 py-3 font-medium text-gray-600">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -121,11 +121,11 @@ const MySales = () => {
                         </td>
                         <td className="px-5 py-4 text-gray-700">₹{card.balance}</td>
                         <td className="px-5 py-4 text-gray-500">-₹{commission}</td>
-                        <td className="px-5 py-4 font-semibold text-emerald-600">₹{payout}</td>
+                        <td className="px-5 py-4 font-medium text-emerald-600">₹{payout}</td>
                         <td className="px-5 py-4 text-gray-600">{new Date(card.createdAt).toLocaleDateString('en-IN')}</td>
                         <td className="px-5 py-4 text-gray-600">{card.status === 'sold' ? new Date(card.updatedAt).toLocaleDateString('en-IN') : '-'}</td>
                         <td className="px-5 py-4">
-                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${statusStyle}`}>
+                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${statusStyle}`}>
                             <StatusIcon className="h-3.5 w-3.5" />
                             {statusLabel}
                           </span>

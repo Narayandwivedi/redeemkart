@@ -230,17 +230,17 @@ const ProductDetail = () => {
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-2xl lg:text-3xl font-semibold text-gray-900 mb-4">
+              <h1 className="text-2xl lg:text-3xl font-medium text-gray-900 mb-4">
                 {product.seoTitle || product.name}
               </h1>
               
               <div className="flex items-center space-x-4 mb-6">
                 <span className="text-sm text-gray-600">Brand:</span>
-                <span className="font-semibold text-gray-900">{product.brand}</span>
+                <span className="font-medium text-gray-900">{product.brand}</span>
                 {product.model && (
                   <>
                     <span className="text-sm text-gray-600">Model:</span>
-                    <span className="font-semibold text-gray-900">{product.model}</span>
+                    <span className="font-medium text-gray-900">{product.model}</span>
                   </>
                 )}
               </div>
@@ -255,7 +255,7 @@ const ProductDetail = () => {
             {/* Price */}
             <div className="border-t border-gray-200 pt-6">
               <div className="flex items-center space-x-4">
-                <span className="text-4xl font-bold text-cyan-600">
+                <span className="text-4xl font-semibold text-cyan-600">
                   {formatPrice(product.price)}
                 </span>
                 {product.originalPrice && product.originalPrice > product.price && (
@@ -298,7 +298,7 @@ const ProductDetail = () => {
               <button
                 onClick={handleBuyNow}
                 disabled={product.stockQuantity <= 0}
-                className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold py-4 px-8 rounded-xl hover:from-orange-600 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-orange-600 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Buy Now
               </button>
@@ -306,7 +306,7 @@ const ProductDetail = () => {
               <button
                 onClick={handleAddToCart}
                 disabled={product.stockQuantity <= 0}
-                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium py-4 px-8 rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Add to Cart
               </button>
@@ -315,7 +315,7 @@ const ProductDetail = () => {
             {/* Product Description */}
             {product.description && (
               <div className="border-t border-gray-200 pt-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Description</h3>
+                <h3 className="text-xl font-medium text-gray-900 mb-4">Description</h3>
                 <p className="text-gray-700 leading-relaxed">{product.description}</p>
               </div>
             )}
@@ -323,7 +323,7 @@ const ProductDetail = () => {
             {/* Key Features */}
             {product.features && product.features.length > 0 && (
               <div className="border-t border-gray-200 pt-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Key Features</h3>
+                <h3 className="text-xl font-medium text-gray-900 mb-4">Key Features</h3>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {product.features.map((feature, index) => (
                     <li key={index} className="flex items-center text-gray-700">
@@ -340,7 +340,7 @@ const ProductDetail = () => {
             {/* Specifications */}
             {product.specifications && Object.keys(product.specifications).length > 0 && (
               <div className="border-t border-gray-200 pt-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Specifications</h3>
+                <h3 className="text-xl font-medium text-gray-900 mb-4">Specifications</h3>
                 <div className="bg-gray-50 rounded-xl p-6">
                   <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {Object.entries(product.specifications).map(([key, value]) => (
@@ -357,7 +357,7 @@ const ProductDetail = () => {
             {/* Physical Specifications */}
             {(product.weight || (product.dimensions && (product.dimensions.length || product.dimensions.width || product.dimensions.height))) && (
               <div className="border-t border-gray-200 pt-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Physical Specifications</h3>
+                <h3 className="text-xl font-medium text-gray-900 mb-4">Physical Specifications</h3>
                 <div className="bg-gray-50 rounded-xl p-6">
                   <dl className="space-y-2">
                     {product.weight && (

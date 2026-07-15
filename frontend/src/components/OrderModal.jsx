@@ -105,7 +105,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
       <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-900">Place Order</h2>
+          <h2 className="text-2xl font-semibold text-gray-900">Place Order</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -135,9 +135,9 @@ const OrderModal = ({ isOpen, onClose, product }) => {
               )}
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-gray-900">{product.name}</h3>
+              <h3 className="font-medium text-gray-900">{product.name}</h3>
               <p className="text-gray-600 text-sm">{product.brand}</p>
-              <p className="text-2xl font-bold text-cyan-600">{formatPrice(product.price)}</p>
+              <p className="text-2xl font-semibold text-cyan-600">{formatPrice(product.price)}</p>
             </div>
           </div>
         </div>
@@ -159,7 +159,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
                 >
                   -
                 </button>
-                <span className="font-semibold text-lg px-4">{formData.quantity}</span>
+                <span className="font-medium text-lg px-4">{formData.quantity}</span>
                 <button
                   type="button"
                   onClick={() => handleQuantityChange(1)}
@@ -242,8 +242,8 @@ const OrderModal = ({ isOpen, onClose, product }) => {
           {/* Order Summary */}
           <div className="mt-6 p-4 bg-gray-50 rounded-lg">
             <div className="flex justify-between items-center">
-              <span className="text-lg font-semibold text-gray-900">Total Amount:</span>
-              <span className="text-2xl font-bold text-cyan-600">{formatPrice(totalPrice)}</span>
+              <span className="text-lg font-medium text-gray-900">Total Amount:</span>
+              <span className="text-2xl font-semibold text-cyan-600">{formatPrice(totalPrice)}</span>
             </div>
           </div>
 

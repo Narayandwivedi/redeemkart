@@ -158,7 +158,7 @@ const BlogsPage = () => {
         ) : blogs.length === 0 ? (
           <div className="text-center py-20">
             <div className="text-gray-400 text-6xl mb-4">📝</div>
-            <h3 className="text-2xl font-semibold text-gray-700 mb-2">No blogs found</h3>
+            <h3 className="text-2xl font-medium text-gray-700 mb-2">No blogs found</h3>
             <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
           </div>
         ) : (
@@ -201,7 +201,7 @@ const BlogsPage = () => {
                   {/* Blog Content */}
                   <div className="p-3 sm:p-6">
                     {/* Blog Title */}
-                    <h2 className="text-sm sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
+                    <h2 className="text-sm sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
                       {blog.title}
                     </h2>
 

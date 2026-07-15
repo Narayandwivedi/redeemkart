@@ -199,7 +199,7 @@ const AddressManager = ({ onAddressSelect, selectedAddressId, showSelection = tr
       {/* Address List */}
       {addresses.length > 0 && (
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-lg font-medium text-gray-900">
             {showSelection ? 'Select Delivery Address' : 'Your Addresses'}
           </h3>
           
@@ -301,7 +301,7 @@ const AddressManager = ({ onAddressSelect, selectedAddressId, showSelection = tr
       {/* Add/Edit Address Form */}
       {showAddForm && (
         <div className="bg-white border border-gray-200 rounded-lg p-6">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">
+          <h4 className="text-lg font-medium text-gray-900 mb-4">
             {editingAddress ? 'Edit Address' : 'Add New Address'}
           </h4>
           

@@ -63,7 +63,7 @@ const PayoutDetails = () => {
     <div className="min-h-screen bg-gray-50 py-6 sm:py-10">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Payout Details</h1>
+          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">Payout Details</h1>
           <p className="text-sm text-gray-500 mt-1">Manage how you receive payments from us</p>
         </div>
 
@@ -74,7 +74,7 @@ const PayoutDetails = () => {
                 <Banknote className="w-8 h-8 sm:w-10 sm:h-10 text-black" />
               </div>
               <div>
-                <h2 className="text-lg sm:text-xl font-bold text-white">Payout Settings</h2>
+                <h2 className="text-lg sm:text-xl font-semibold text-white">Payout Settings</h2>
                 <p className="text-yellow-200 text-sm mt-0.5">Add your bank account or UPI ID</p>
               </div>
             </div>
@@ -86,7 +86,7 @@ const PayoutDetails = () => {
 
                 {/* Bank Account */}
                 <div>
-                  <div className="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                  <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
                     <Building2 className="w-4 h-4 text-yellow-500" />
                     Bank Account
                   </div>
@@ -133,13 +133,13 @@ const PayoutDetails = () => {
                 {/* Divider */}
                 <div className="flex items-center gap-3">
                   <span className="flex-1 h-px bg-gray-200"></span>
-                  <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">OR</span>
+                  <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">OR</span>
                   <span className="flex-1 h-px bg-gray-200"></span>
                 </div>
 
                 {/* UPI */}
                 <div>
-                  <div className="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                  <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
                     <Smartphone className="w-4 h-4 text-yellow-500" />
                     UPI
                   </div>
@@ -172,7 +172,7 @@ const PayoutDetails = () => {
                 <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
                   {!isEditing ? (
                     <button type="button" onClick={() => setIsEditing(true)}
-                      className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm cursor-pointer">
+                      className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm cursor-pointer">
                       <Edit2 className="w-4 h-4" />
                       Edit Payout Info
                     </button>
@@ -184,7 +184,7 @@ const PayoutDetails = () => {
                         Cancel
                       </button>
                       <button type="submit" disabled={loading}
-                        className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm disabled:opacity-50 cursor-pointer">
+                        className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm disabled:opacity-50 cursor-pointer">
                         {loading ? (
                           <Loader className="w-4 h-4 animate-spin" />
                         ) : (

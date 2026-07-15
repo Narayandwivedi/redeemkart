@@ -192,7 +192,7 @@ const BlogDetailPage = () => {
         <LandingNavbar />
         <div className="container mx-auto px-4 py-20 text-center">
           <div className="text-gray-400 text-6xl mb-4">😞</div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl font-semibold text-gray-900 mb-4">
             {error || 'Blog not found'}
           </h1>
           <p className="text-gray-600 mb-8">
@@ -225,7 +225,7 @@ const BlogDetailPage = () => {
 
             <div className="text-center lg:text-left">
               <div className="mb-6">
-                <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold capitalize shadow-sm ${
+                <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium capitalize shadow-sm ${
                   blog.category === 'cricket' ? 'bg-blue-100 text-blue-800 border border-blue-200' :
                   blog.category === 'fantasy' ? 'bg-purple-100 text-purple-800 border border-purple-200' :
                   blog.category === 'tips' ? 'bg-orange-100 text-orange-800 border border-orange-200' :
@@ -236,7 +236,7 @@ const BlogDetailPage = () => {
                 </span>
               </div>
               
-              <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight lg:leading-[1.1] tracking-tight">
+              <h1 className="text-3xl md:text-4xl lg:text-6xl font-semibold text-gray-900 mb-6 leading-tight lg:leading-[1.1] tracking-tight">
                 {blog.title}
               </h1>
               
@@ -246,11 +246,11 @@ const BlogDetailPage = () => {
               
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 p-6 bg-white rounded-xl shadow-sm border border-gray-100">
                 <div className="flex items-center justify-center lg:justify-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
                     {blog.author.charAt(0)}
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold text-gray-900">By {blog.author}</div>
+                    <div className="font-medium text-gray-900">By {blog.author}</div>
                     <div className="text-sm text-gray-500">Cricket Expert</div>
                   </div>
                 </div>
@@ -307,7 +307,7 @@ const BlogDetailPage = () => {
             <div className="flex flex-col xl:flex-row gap-12 lg:gap-16">
               <article className="xl:w-2/3">
                 <div className="hidden lg:block mb-12 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">In This Article</h3>
+                  <h3 className="text-lg font-medium text-gray-900 mb-4">In This Article</h3>
                   <div className="text-sm text-gray-600">
                     <p>This comprehensive guide covers fantasy cricket strategies, tips, and best practices to help you dominate your leagues.</p>
                   </div>
@@ -321,7 +321,7 @@ const BlogDetailPage = () => {
 
                 {blog.tags && blog.tags.length > 0 && (
                   <div className="mt-16 p-6 bg-gray-50 rounded-xl border border-gray-100">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Topics Covered</h3>
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Topics Covered</h3>
                     <div className="flex flex-wrap gap-3">
                       {blog.tags.map((tag, index) => (
                         <span key={index} className="px-4 py-2 bg-white text-gray-700 text-sm rounded-full border border-gray-200">
@@ -336,19 +336,19 @@ const BlogDetailPage = () => {
               <aside className="xl:w-1/3">
                 <div className="sticky top-8 space-y-8">
                   <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Author</h3>
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Author</h3>
                     <div className="text-center">
-                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xl mx-auto mb-4">
                         {blog.author.charAt(0)}
                       </div>
-                      <h4 className="font-semibold text-gray-900">{blog.author}</h4>
+                      <h4 className="font-medium text-gray-900">{blog.author}</h4>
                       <p className="text-sm text-gray-500">Cricket Expert</p>
                     </div>
                   </div>
 
                   {relatedBlogs.length > 0 && (
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-6">Related Articles</h3>
+                      <h3 className="text-lg font-medium text-gray-900 mb-6">Related Articles</h3>
                       <div className="space-y-4">
                         {relatedBlogs.map((relatedBlog) => (
                           <div key={relatedBlog._id}>

@@ -92,7 +92,7 @@ const AccessoriesSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 
-                <h3 className="text-base md:text-xl font-bold text-gray-900 text-center mb-1 md:mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                <h3 className="text-base md:text-xl font-semibold text-gray-900 text-center mb-1 md:mb-2 group-hover:text-purple-600 transition-colors duration-300">
                   {accessory.name}
                 </h3>
                 
@@ -111,7 +111,7 @@ const AccessoriesSection = () => {
 
                 {/* Price Range */}
                 <div className="text-center mb-3 md:mb-4">
-                  <span className="text-xs md:text-sm font-semibold text-gray-900 bg-gray-100 px-2 md:px-3 py-1 rounded-full">
+                  <span className="text-xs md:text-sm font-medium text-gray-900 bg-gray-100 px-2 md:px-3 py-1 rounded-full">
                     {accessory.priceRange}
                   </span>
                 </div>
@@ -119,7 +119,7 @@ const AccessoriesSection = () => {
 
               {/* CTA Button */}
               <div 
-                className={`w-full bg-gradient-to-r ${accessory.gradient} text-white font-semibold py-2 md:py-3 px-3 md:px-6 rounded-xl group-hover:opacity-90 transition-all duration-300 text-center shadow-md group-hover:shadow-lg transform group-hover:scale-[1.02] text-xs md:text-base`}
+                className={`w-full bg-gradient-to-r ${accessory.gradient} text-white font-medium py-2 md:py-3 px-3 md:px-6 rounded-xl group-hover:opacity-90 transition-all duration-300 text-center shadow-md group-hover:shadow-lg transform group-hover:scale-[1.02] text-xs md:text-base`}
               >
                 <span className="hidden sm:inline">Shop {accessory.name}</span>
                 <span className="sm:hidden">Shop</span>
@@ -135,7 +135,7 @@ const AccessoriesSection = () => {
         <div className="text-center mt-12">
           <Link 
             to="/computer-accessories"
-            className="group inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 px-8 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+            className="group inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-4 px-8 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
           >
             <span className="mr-2">🎮</span>
             View All Accessories
@@ -148,7 +148,7 @@ const AccessoriesSection = () => {
         {/* Features Section */}
         <div className="mt-16 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg border border-purple-100">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Why Choose Our Accessories?</h3>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-2">Why Choose Our Accessories?</h3>
             <p className="text-gray-600">Premium quality accessories to enhance your gaming and productivity</p>
           </div>
           
@@ -159,7 +159,7 @@ const AccessoriesSection = () => {
                   <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">Gaming Grade</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">Gaming Grade</h4>
               <p className="text-gray-600 text-sm">Professional gaming peripherals for competitive play</p>
             </div>
             
@@ -169,7 +169,7 @@ const AccessoriesSection = () => {
                   <path fillRule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">RGB Lighting</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">RGB Lighting</h4>
               <p className="text-gray-600 text-sm">Customizable RGB lighting for perfect ambiance</p>
             </div>
             
@@ -179,7 +179,7 @@ const AccessoriesSection = () => {
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">Warranty</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">Warranty</h4>
               <p className="text-gray-600 text-sm">Comprehensive warranty coverage on all accessories</p>
             </div>
             
@@ -189,7 +189,7 @@ const AccessoriesSection = () => {
                   <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">Ergonomic</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">Ergonomic</h4>
               <p className="text-gray-600 text-sm">Designed for comfort during long gaming sessions</p>
             </div>
           </div>

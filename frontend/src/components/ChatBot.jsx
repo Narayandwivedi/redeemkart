@@ -21,7 +21,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} 👋 I'm the GC Hub support bot! How can I help you today?`,
+      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} ðŸ‘‹ I'm the GC Hub support bot! How can I help you today?`,
       id: 'welcome'
     }
   ])
@@ -112,7 +112,7 @@ const ChatBot = () => {
       setTimeout(() => {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: '🎮 GC Hub offers discounted game keys and downloads! Here are the games available on our platform. Select one to buy or view details:',
+          content: 'ðŸŽ® GC Hub offers discounted game keys and downloads! Here are the games available on our platform. Select one to buy or view details:',
           id: Date.now() + 1
         }, {
           role: 'assistant',
@@ -135,16 +135,16 @@ const ChatBot = () => {
         
         if (isGameItem) {
           if (textLower.includes('receive') || textLower.includes('get') || textLower.includes('not deliver') || textLower.includes('technical') || textLower.includes('error') || textLower.includes('download') || textLower.includes('install')) {
-            policyResponse = `🎮 **Refund Policy for Games**:\n\nGames are generally **non-refundable**. However, since you did not receive the game or got a technical error while downloading, our support team will verify this and **provide a new download link** to resolve any problem. Our team will contact you at your email address to assist with this!`
+            policyResponse = `ðŸŽ® **Refund Policy for Games**:\n\nGames are generally **non-refundable**. However, since you did not receive the game or got a technical error while downloading, our support team will verify this and **provide a new download link** to resolve any problem. Our team will contact you at your email address to assist with this!`
           } else {
-            policyResponse = `🎮 **Refund Policy for Games**:\n\nPlease note that games are **non-refundable**. They are only refundable/replaceable if you **did not receive the game** or encountered a **technical error while downloading**, in which case our team will provide a new download link. For any other issues, please contact support@gchub.in.`
+            policyResponse = `ðŸŽ® **Refund Policy for Games**:\n\nPlease note that games are **non-refundable**. They are only refundable/replaceable if you **did not receive the game** or encountered a **technical error while downloading**, in which case our team will provide a new download link. For any other issues, please contact support@gchub.in.`
           }
         } else {
           // It's a voucher or gift card
           if (textLower.includes('invalid') || textLower.includes('not work') || textLower.includes('work') || textLower.includes('fail') || textLower.includes('expired')) {
-            policyResponse = `🎟️ **Refund Policy for Vouchers/Gift Cards**:\n\nWe are sorry to hear that the code is invalid or not working. Since the code is invalid, we will process your refund back to your original payment method. The refund will be completed in **3-5 days**.`
+            policyResponse = `ðŸŽŸï¸ **Refund Policy for Vouchers/Gift Cards**:\n\nWe are sorry to hear that the code is invalid or not working. Since the code is invalid, we will process your refund back to your original payment method. The refund will be completed in **3-5 days**.`
           } else {
-            policyResponse = `🎟️ **Refund Policy for Vouchers/Gift Cards**:\n\nOur policy only permits refunds if the voucher code is **invalid or not working** (refund processed in **3-5 days**). For other issues, please contact support@gchub.in.`
+            policyResponse = `ðŸŽŸï¸ **Refund Policy for Vouchers/Gift Cards**:\n\nOur policy only permits refunds if the voucher code is **invalid or not working** (refund processed in **3-5 days**). For other issues, please contact support@gchub.in.`
           }
         }
 
@@ -166,7 +166,7 @@ const ChatBot = () => {
       if (!user) {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: '🔒 Please log in to your account first so I can look up your orders and help you request a refund.',
+          content: 'ðŸ”’ Please log in to your account first so I can look up your orders and help you request a refund.',
           id: Date.now() + 1
         }])
         setLoading(false)
@@ -184,7 +184,7 @@ const ChatBot = () => {
           setRefundStep('select_item')
           setMessages(prev => [...prev, {
             role: 'assistant',
-            content: '📋 Here are your recent ordered items. Please click on the item you want to request a refund for:',
+            content: 'ðŸ“‹ Here are your recent ordered items. Please click on the item you want to request a refund for:',
             id: 'select_item_instruction'
           }, {
             role: 'assistant',
@@ -195,14 +195,14 @@ const ChatBot = () => {
         } else {
           setMessages(prev => [...prev, {
             role: 'assistant',
-            content: '🔍 I couldn\'t find any orders placed under your email address. If you made a purchase, please make sure you are logged into the correct account.',
+            content: 'ðŸ” I couldn\'t find any orders placed under your email address. If you made a purchase, please make sure you are logged into the correct account.',
             id: Date.now() + 1
           }])
         }
       } catch (err) {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: '⚠️ I encountered an error checking your order history. Please try again or email us at support@gchub.in.',
+          content: 'âš ï¸ I encountered an error checking your order history. Please try again or email us at support@gchub.in.',
           id: Date.now() + 1
         }])
       } finally {
@@ -239,7 +239,7 @@ const ChatBot = () => {
     } catch (err) {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: '⚠️ Something went wrong. Please try again or email us at support@gchub.in',
+        content: 'âš ï¸ Something went wrong. Please try again or email us at support@gchub.in',
         id: Date.now() + 1
       }])
     } finally {
@@ -257,7 +257,7 @@ const ChatBot = () => {
   const resetChat = () => {
     setMessages([{
       role: 'assistant',
-      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} 👋 I'm the GC Hub support bot! How can I help you today?`,
+      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} ðŸ‘‹ I'm the GC Hub support bot! How can I help you today?`,
       id: 'welcome'
     }])
     setRefundStep(null)
@@ -301,10 +301,10 @@ const ChatBot = () => {
                 <Bot className="w-5 h-5 text-black" />
               </div>
               <div>
-                <p className="text-white font-bold text-sm leading-none">GC Hub Support</p>
+                <p className="text-white font-semibold text-sm leading-none">GC Hub Support</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-green-400 text-[10px] font-medium">AI Assistant · Online</span>
+                  <span className="text-green-400 text-[10px] font-medium">AI Assistant Â· Online</span>
                 </div>
               </div>
             </div>
@@ -331,7 +331,7 @@ const ChatBot = () => {
               if (msg.type === 'order_selector') {
                 return (
                   <div key={msg.id} className="bg-white border border-slate-100 rounded-2xl p-3 space-y-2 shadow-sm max-w-[90%] self-start">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Your Recent Items</p>
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Your Recent Items</p>
                     <div className="max-h-40 overflow-y-auto space-y-1.5 pr-1">
                       {msg.orders.map(order => 
                         order.items.map((item, idx) => (
@@ -342,8 +342,8 @@ const ChatBot = () => {
                             className="w-full text-left text-xs p-2.5 bg-slate-50 hover:bg-amber-50 hover:border-amber-300 border border-slate-200 rounded-xl transition-all cursor-pointer flex justify-between items-center group font-medium"
                           >
                             <div className="truncate pr-2">
-                              <p className="font-bold text-slate-800 truncate group-hover:text-amber-800">{item.productName}</p>
-                              <p className="text-[10px] text-slate-500">Order #{order._id.slice(-6).toUpperCase()} · ₹{item.productPrice}</p>
+                              <p className="font-semibold text-slate-800 truncate group-hover:text-amber-800">{item.productName}</p>
+                              <p className="text-[10px] text-slate-500">Order #{order._id.slice(-6).toUpperCase()} Â· â‚¹{item.productPrice}</p>
                             </div>
                             <span className="text-[10px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded group-hover:bg-amber-200 group-hover:text-amber-800 shrink-0">Select</span>
                           </button>
@@ -365,7 +365,7 @@ const ChatBot = () => {
 
                 return (
                   <div key={msg.id} className="bg-white border border-slate-100 rounded-2xl p-3 space-y-2 shadow-sm max-w-[90%] self-start">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Select a Reason</p>
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Select a Reason</p>
                     <div className="flex flex-col gap-1.5">
                       {reasons.map((reason) => (
                         <button
@@ -385,7 +385,7 @@ const ChatBot = () => {
               if (msg.type === 'game_selector') {
                 return (
                   <div key={msg.id} className="w-[calc(100vw-4rem)] max-w-sm self-start overflow-hidden pr-2">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Available Games</p>
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Available Games</p>
                     <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin snap-x">
                       {gamesList.map((game) => (
                         <div
@@ -400,23 +400,23 @@ const ChatBot = () => {
                                 className="w-full h-full object-cover"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs font-bold px-1 bg-slate-800">
+                              <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs font-semibold px-1 bg-slate-800">
                                 {game.name}
                               </div>
                             )}
-                            <div className="absolute top-1.5 left-1.5 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow">
+                            <div className="absolute top-1.5 left-1.5 bg-red-500 text-white text-[9px] font-semibold px-1.5 py-0.5 rounded-full shadow">
                               -{Math.round(((game.originalPrice - game.price) / game.originalPrice) * 100)}%
                             </div>
                           </div>
                           <div className="p-2 flex flex-col flex-1 justify-between">
                             <div>
-                              <h4 className="font-bold text-slate-800 text-[11px] leading-tight line-clamp-2">{game.fullName || game.name}</h4>
-                              <p className="text-xs font-black text-slate-950 mt-1">₹{game.price}</p>
+                              <h4 className="font-semibold text-slate-800 text-[11px] leading-tight line-clamp-2">{game.fullName || game.name}</h4>
+                              <p className="text-xs font-black text-slate-950 mt-1">â‚¹{game.price}</p>
                             </div>
                             <div className="flex flex-col gap-1 mt-2">
                               <button
                                 onClick={() => handleBuyGameDirectly(game)}
-                                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black text-[10px] font-bold py-1 rounded cursor-pointer transition-colors text-center"
+                                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black text-[10px] font-semibold py-1 rounded cursor-pointer transition-colors text-center"
                               >
                                 Buy Now
                               </button>
@@ -442,7 +442,7 @@ const ChatBot = () => {
                 <div key={msg.id} className={`flex gap-2.5 ${msg.role === 'user' ? 'flex-row-reverse self-end' : 'flex-row self-start'}`}>
                   {/* Avatar */}
                   {msg.role !== 'user' && (
-                    <div className="w-7 h-7 rounded-full shrink-0 flex items-center justify-center text-xs font-bold bg-amber-400 text-black">
+                    <div className="w-7 h-7 rounded-full shrink-0 flex items-center justify-center text-xs font-semibold bg-amber-400 text-black">
                       <Sparkles className="w-3.5 h-3.5" />
                     </div>
                   )}
@@ -477,14 +477,14 @@ const ChatBot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick replies — only show when messages are few and not in refund flow */}
+          {/* Quick replies â€” only show when messages are few and not in refund flow */}
           {messages.length <= 2 && !loading && !refundStep && (
             <div className="bg-slate-50 px-3 pb-1 flex flex-wrap gap-1.5">
               {QUICK_REPLIES.map((q) => (
                 <button
                   key={q}
                   onClick={() => sendMessage(q)}
-                  className="text-[11px] font-semibold px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-600 hover:border-amber-400 hover:text-amber-700 hover:bg-amber-50 transition-all cursor-pointer whitespace-nowrap"
+                  className="text-[11px] font-medium px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-600 hover:border-amber-400 hover:text-amber-700 hover:bg-amber-50 transition-all cursor-pointer whitespace-nowrap"
                 >
                   {q}
                 </button>

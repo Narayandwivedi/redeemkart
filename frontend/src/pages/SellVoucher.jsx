@@ -107,18 +107,18 @@ const SellVoucher = () => {
               <Link to="/" className="text-gray-600 hover:text-gray-900">
                 <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
               </Link>
-              <h1 className="text-lg sm:text-2xl font-bold text-gray-900">Sell Gift Cards</h1>
+              <h1 className="text-lg sm:text-2xl font-semibold text-gray-900">Sell Gift Cards</h1>
             </div>
           </div>
 
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 mb-6 sm:mb-8">
-            <h2 className="text-center text-[13px] sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">How It Works</h2>
+            <h2 className="text-center text-[13px] sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">How It Works</h2>
             <div className="flex flex-row items-start sm:items-center gap-0">
               <div className="flex-1 flex flex-col items-center text-center relative">
                 <div className="bg-gray-900 text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-1.5 sm:mb-2 shadow-md relative z-10">
                   <Upload className="h-3 w-3 sm:h-5 sm:w-5" />
                 </div>
-                <p className="font-semibold text-gray-900 text-[10px] sm:text-sm leading-tight">Add Your Card</p>
+                <p className="font-medium text-gray-900 text-[10px] sm:text-sm leading-tight">Add Your Card</p>
                 <p className="text-[9px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">List your gift card for sale</p>
                 <div className="absolute top-4 sm:top-5 left-[55%] w-[80%] h-0.5 border-t-[1.5px] sm:border-t-2 border-dashed border-gray-300 z-0" />
               </div>
@@ -126,7 +126,7 @@ const SellVoucher = () => {
                 <div className="bg-gray-900 text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-1.5 sm:mb-2 shadow-md relative z-10">
                   <Clock className="h-3 w-3 sm:h-5 sm:w-5" />
                 </div>
-                <p className="font-semibold text-gray-900 text-[10px] sm:text-sm leading-tight">Sells in 24 Hrs</p>
+                <p className="font-medium text-gray-900 text-[10px] sm:text-sm leading-tight">Sells in 24 Hrs</p>
                 <p className="text-[9px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">Fast & easy selling process</p>
                 <div className="absolute top-4 sm:top-5 left-[55%] w-[80%] h-0.5 border-t-[1.5px] sm:border-t-2 border-dashed border-gray-300 z-0" />
               </div>
@@ -134,7 +134,7 @@ const SellVoucher = () => {
                 <div className="bg-gray-900 text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-1.5 sm:mb-2 shadow-md relative z-10">
                   <Banknote className="h-3 w-3 sm:h-5 sm:w-5" />
                 </div>
-                <p className="font-semibold text-gray-900 text-[10px] sm:text-sm leading-tight">Get Paid</p>
+                <p className="font-medium text-gray-900 text-[10px] sm:text-sm leading-tight">Get Paid</p>
                 <p className="text-[9px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">Money credited to your bank</p>
               </div>
             </div>
@@ -143,14 +143,14 @@ const SellVoucher = () => {
           <div className="bg-gradient-to-br from-yellow-50 via-white to-orange-50 rounded-xl shadow-md border border-yellow-200 p-5 sm:p-6 mb-6 sm:mb-8 relative overflow-hidden">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
 
-            <h2 className="text-xl font-extrabold text-gray-900 mb-6 flex items-center gap-2">
+            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
               <Gift className="h-6 w-6 text-yellow-600" />
               List Your Gift Card
             </h2>
 
             <div className="grid grid-cols-1 gap-5 relative z-10">
               <div>
-                <label className="block text-sm font-semibold text-gray-800 mb-1.5">Brand</label>
+                <label className="block text-sm font-medium text-gray-800 mb-1.5">Brand</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Gift className="h-4 w-4 text-yellow-600" />
@@ -170,7 +170,7 @@ const SellVoucher = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-800 mb-1.5">Balance Amount (₹)</label>
+                <label className="block text-sm font-medium text-gray-800 mb-1.5">Balance Amount (₹)</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <DollarSign className="h-4 w-4 text-yellow-600" />
@@ -187,7 +187,7 @@ const SellVoucher = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-800 mb-1.5">Gift Card Code</label>
+                <label className="block text-sm font-medium text-gray-800 mb-1.5">Gift Card Code</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Hash className="h-4 w-4 text-yellow-600" />
@@ -204,7 +204,7 @@ const SellVoucher = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-800 mb-1.5">
+                <label className="block text-sm font-medium text-gray-800 mb-1.5">
                   PIN <span className="text-gray-400 font-normal">(optional)</span>
                 </label>
                 <div className="relative">
@@ -223,7 +223,7 @@ const SellVoucher = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-800 mb-1.5">Expiry Date</label>
+                <label className="block text-sm font-medium text-gray-800 mb-1.5">Expiry Date</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Calendar className="h-4 w-4 text-yellow-600" />
@@ -242,7 +242,7 @@ const SellVoucher = () => {
                 <button
                   onClick={handleAdd}
                   disabled={loading}
-                  className="w-full py-3 text-white font-bold text-base rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full py-3 text-white font-semibold text-base rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{
                     background: 'linear-gradient(135deg, #eab308 0%, #f59e0b 55%, #d97706 100%)',
                     boxShadow: '0 4px 14px rgba(234,179,8,0.4)',
@@ -262,7 +262,7 @@ const SellVoucher = () => {
 
               {form.balance > 0 && (
                 <div className="text-center -mt-2">
-                  <p className="text-sm font-semibold text-gray-700">
+                  <p className="text-sm font-medium text-gray-700">
                     You'll receive: <span className="text-emerald-600">₹{Math.round(form.balance * 0.9)}</span>
                     <span className="text-gray-400 font-normal"> (after 10% commission)</span>
                   </p>
@@ -271,7 +271,7 @@ const SellVoucher = () => {
             </div>
           </div>
 
-          <h2 className="text-lg font-bold text-gray-900 mb-4">Your Active Listings</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Your Active Listings</h2>
         {cards.length === 0 ? (
           <div className="text-center py-20">
             <Gift className="h-16 w-16 text-gray-300 mx-auto mb-4" />
@@ -290,7 +290,7 @@ const SellVoucher = () => {
                     <Gift className="h-6 w-6 text-gray-700" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">{card.brand}</p>
+                    <p className="font-medium text-gray-900">{card.brand}</p>
                     <p className="text-sm text-gray-500">
                       Code: {card.code.replace(/.(?=.{4})/g, '*')} | {card.pin ? `PIN: ${card.pin.replace(/.(?=.{4})/g, '*')} |` : ''} ₹{card.balance} | Exp: {new Date(card.expiry).toLocaleDateString('en-IN')}
                     </p>
@@ -311,38 +311,38 @@ const SellVoucher = () => {
           {/* Sidebar Section - FAQs */}
           <div className="lg:col-span-1 space-y-6">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-6 sticky top-24">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="w-1 h-5 rounded-full bg-yellow-500 block"></span>
                 Frequently Asked Questions
               </h3>
 
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold text-gray-800 text-sm mb-1">How fast will my card sell?</h4>
+                  <h4 className="font-medium text-gray-800 text-sm mb-1">How fast will my card sell?</h4>
                   <p className="text-gray-500 text-xs leading-relaxed">Most popular brand gift cards sell within 24 hours. Less common brands may take 2-3 days.</p>
                 </div>
                 <div className="border-t border-gray-100 pt-4">
-                  <h4 className="font-semibold text-gray-800 text-sm mb-1">When do I get paid?</h4>
+                  <h4 className="font-medium text-gray-800 text-sm mb-1">When do I get paid?</h4>
                   <p className="text-gray-500 text-xs leading-relaxed">Money is automatically transferred to your linked bank account or wallet within 48 hours after the buyer verifies the card.</p>
                 </div>
                 <div className="border-t border-gray-100 pt-4">
-                  <h4 className="font-semibold text-gray-800 text-sm mb-1">Are there any selling fees?</h4>
+                  <h4 className="font-medium text-gray-800 text-sm mb-1">Are there any selling fees?</h4>
                   <p className="text-gray-500 text-xs leading-relaxed">We charge a flat 5% commission on successful sales. There are no listing fees.</p>
                 </div>
                 <div className="border-t border-gray-100 pt-4">
-                  <h4 className="font-semibold text-gray-800 text-sm mb-1">What if my code doesn't work?</h4>
+                  <h4 className="font-medium text-gray-800 text-sm mb-1">What if my code doesn't work?</h4>
                   <p className="text-gray-500 text-xs leading-relaxed">Ensure the code and PIN are correct before listing. If a buyer reports an invalid code, we will investigate and may suspend your account if found fraudulent.</p>
                 </div>
                 <div className="border-t border-gray-100 pt-4">
-                  <h4 className="font-semibold text-gray-800 text-sm mb-1">How do I add my bank account to get paid?</h4>
+                  <h4 className="font-medium text-gray-800 text-sm mb-1">How do I add my bank account to get paid?</h4>
                   <p className="text-gray-500 text-xs leading-relaxed">Go to your Account settings and select "Payment Methods". There, you can securely add and verify your bank account or wallet details.</p>
                 </div>
               </div>
 
               <div className="mt-6 bg-yellow-50 rounded-lg p-4 border border-yellow-200">
-                <h4 className="font-semibold text-yellow-800 text-sm mb-1">Need help?</h4>
+                <h4 className="font-medium text-yellow-800 text-sm mb-1">Need help?</h4>
                 <p className="text-yellow-700 text-xs mb-3">Our support team is available 24/7 to assist you.</p>
-                <Link to="/contact" className="inline-block text-xs font-bold text-yellow-900 hover:text-yellow-700">Contact Support &rarr;</Link>
+                <Link to="/contact" className="inline-block text-xs font-semibold text-yellow-900 hover:text-yellow-700">Contact Support &rarr;</Link>
               </div>
             </div>
           </div>

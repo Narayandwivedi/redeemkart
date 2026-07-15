@@ -20,7 +20,7 @@ const RefundPolicy = () => {
             </div>
             <span className="h-px w-12 sm:w-20 bg-gray-300"></span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-3">
             Refund <span className="text-yellow-500">Policy</span>
           </h1>
           <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -35,7 +35,7 @@ const RefundPolicy = () => {
               <ShieldAlert className="w-5 h-5 text-red-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">No Refund Policy</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">No Refund Policy</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 At Voucher Cash, all sales are <strong className="text-gray-900">final and non-refundable</strong>. 
                 Once a digital product — including game keys, gift cards, vouchers, and codes — is purchased and 
@@ -49,7 +49,7 @@ const RefundPolicy = () => {
               <AlertTriangle className="w-5 h-5 text-amber-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Why No Refunds?</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Why No Refunds?</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 Digital products are delivered instantly and cannot be "returned" once the code or key 
                 has been revealed. Due to the nature of digital goods, we cannot verify whether a product 
@@ -63,7 +63,7 @@ const RefundPolicy = () => {
               <FileText className="w-5 h-5 text-blue-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">When a Refund May Be Issued</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">When a Refund May Be Issued</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 In the rare event that a purchased voucher or game key is found to be invalid, 
                 defective, or does not work as described, you may be eligible for a refund. 
@@ -95,7 +95,7 @@ const RefundPolicy = () => {
               <Clock className="w-5 h-5 text-green-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Refund Processing Time</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Refund Processing Time</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 If your refund request is approved, the refund will be processed within 
                 <strong className="text-gray-900"> 3–5 business days</strong>. The amount will be credited 
@@ -110,14 +110,14 @@ const RefundPolicy = () => {
               <Mail className="w-5 h-5 text-purple-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">How to Request a Refund</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">How to Request a Refund</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 If you believe your issue qualifies for a refund, please contact our support team 
                 within <strong className="text-gray-900">7 days</strong> of purchase with your order 
                 ID and a detailed description of the problem.
               </p>
               <div className="mt-4 bg-gray-50 rounded-xl p-4 sm:p-5">
-                <p className="font-semibold text-gray-800 text-sm sm:text-base mb-1">Contact Us:</p>
+                <p className="font-medium text-gray-800 text-sm sm:text-base mb-1">Contact Us:</p>
                 <p className="text-gray-600 text-sm">Email: support@vouchercash.online</p>
                 <p className="text-gray-600 text-sm mt-1">Chat: Available 24/7 on our website</p>
               </div>
@@ -128,7 +128,7 @@ const RefundPolicy = () => {
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
               <p className="text-sm sm:text-base text-yellow-800 leading-relaxed">
-                <strong className="font-bold">Important:</strong> By making a purchase on Voucher Cash, 
+                <strong className="font-semibold">Important:</strong> By making a purchase on Voucher Cash, 
                 you acknowledge that you have read and agreed to this Refund Policy. We strongly 
                 recommend verifying your order details before completing any transaction.
               </p>

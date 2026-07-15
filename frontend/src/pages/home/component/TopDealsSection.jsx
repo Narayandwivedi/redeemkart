@@ -94,7 +94,7 @@ const TopDealsSection = () => {
       <div className="max-w-[86rem] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full mb-4">
-            <span className="text-white text-sm font-semibold">Today's Hot Offers</span>
+            <span className="text-white text-sm font-medium">Today's Hot Offers</span>
           </div>
 
           <h2 className="text-3xl lg:text-4xl font-black text-slate-800 mb-3">
@@ -119,7 +119,7 @@ const TopDealsSection = () => {
               >
                 {discountPercent > 0 && (
                   <div className="absolute top-3 left-3 z-10">
-                    <div className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-2.5 py-1 rounded-full text-xs font-bold shadow-md">
+                    <div className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-2.5 py-1 rounded-full text-xs font-semibold shadow-md">
                       -{discountPercent}% OFF
                     </div>
                   </div>
@@ -132,17 +132,17 @@ const TopDealsSection = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80"></div>
-                  <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg text-xs font-bold text-slate-700 shadow-sm">
+                  <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 shadow-sm">
                     {product.brand}
                   </div>
                 </div>
 
                 <div className="p-5 flex-1 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] tracking-wider font-extrabold text-indigo-600 uppercase mb-1 block">
+                    <span className="text-[10px] tracking-wider font-bold text-indigo-600 uppercase mb-1 block">
                       {product.category?.replace('-', ' & ')}
                     </span>
-                    <h3 className="font-bold text-slate-800 mb-3 text-base leading-tight group-hover:text-indigo-600 transition-colors line-clamp-2">
+                    <h3 className="font-semibold text-slate-800 mb-3 text-base leading-tight group-hover:text-indigo-600 transition-colors line-clamp-2">
                       {product.seoTitle}
                     </h3>
                   </div>
@@ -150,7 +150,7 @@ const TopDealsSection = () => {
                   <div>
                     <div className="flex items-end justify-between border-t border-slate-100 pt-3">
                       <div className="flex flex-col">
-                        <span className="text-xl font-extrabold text-slate-900">
+                        <span className="text-xl font-bold text-slate-900">
                           {formatPrice(product.price)}
                         </span>
                         {product.originalPrice > product.price && (
@@ -161,7 +161,7 @@ const TopDealsSection = () => {
                       </div>
 
                       {product.originalPrice > product.price && (
-                        <span className="text-emerald-600 font-bold text-xs bg-emerald-50 px-2 py-1 rounded-md">
+                        <span className="text-emerald-600 font-semibold text-xs bg-emerald-50 px-2 py-1 rounded-md">
                           Save {formatPrice(product.originalPrice - product.price)}
                         </span>
                       )}

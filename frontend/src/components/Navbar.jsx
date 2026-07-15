@@ -57,12 +57,11 @@ const Navbar = () => {
           {/* Logo Section - left on home, centered on other pages (mobile) */}
           <Link to="/" className={`${location.pathname === '/' ? 'left-0' : 'left-1/2 -translate-x-1/2'} absolute md:static md:translate-x-0 flex items-center flex-shrink-0 -ml-2 md:-ml-4`}>
             <span
-              className="text-xl md:text-3xl font-bold tracking-tight"
+              className="text-xl md:text-3xl font-semibold tracking-tight"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
-              <span className="text-gray-900">Redeem</span>
-              <span className="text-blue-600">Bazaar</span>
-              <span className="text-gray-500 font-semibold text-sm md:text-lg align-baseline">.com</span>
+              <span className="text-gray-900">Redeem</span><span className="text-emerald-500 ml-0.5">Kart</span>
+              <span className="text-gray-900 font-light text-sm md:text-lg align-baseline">.in</span>
             </span>
           </Link>
 
@@ -93,7 +92,7 @@ const Navbar = () => {
             {location.pathname === '/' && (
               <Link
                 to="/sell-voucher"
-                className="md:hidden animate-pulse bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold px-3.5 py-2 rounded-lg text-xs transition-all duration-200 shadow-md hover:shadow-green-500/50 transform hover:scale-105 cursor-pointer"
+                className="md:hidden animate-pulse bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold px-3.5 py-2 rounded-lg text-xs transition-all duration-200 shadow-md hover:shadow-green-500/50 transform hover:scale-105 cursor-pointer"
               >
                 Sell Gift Card +
               </Link>
@@ -103,7 +102,7 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-2">
               <Link
                 to="/sell-voucher"
-                className="animate-pulse bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold px-4 py-2 rounded-lg text-sm transition-all duration-200 shadow-lg hover:shadow-green-500/50 transform hover:scale-105 cursor-pointer"
+                className="animate-pulse bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-all duration-200 shadow-lg hover:shadow-green-500/50 transform hover:scale-105 cursor-pointer"
               >
                 Sell Your Gift Card +
               </Link>
@@ -125,7 +124,7 @@ const Navbar = () => {
               {!isAuthenticated && (
                 <Link 
                   to="/login" 
-                  className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold px-4 py-2 rounded-lg text-sm transition-all duration-200 shadow-lg hover:shadow-yellow-400/50 transform hover:scale-105 cursor-pointer"
+                  className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-4 py-2 rounded-lg text-sm transition-all duration-200 shadow-lg hover:shadow-yellow-400/50 transform hover:scale-105 cursor-pointer"
                 >
                   <span>Login</span>
                 </Link>

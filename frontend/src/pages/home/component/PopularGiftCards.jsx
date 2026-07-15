@@ -16,10 +16,10 @@ const PopularGiftCards = () => {
     <div className="py-4 md:py-8 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl md:text-[28px] font-bold text-gray-800 text-center flex-1">Popular Gift Cards</h2>
+          <h2 className="text-2xl md:text-[28px] font-semibold text-gray-800 text-center flex-1">Popular Gift Cards</h2>
           <button
             onClick={() => navigate('/gift-cards')}
-            className="hidden sm:flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer"
+            className="hidden sm:flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer"
           >
             View All
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@ const PopularGiftCards = () => {
         <div className="mt-6 text-center sm:hidden">
           <button
             onClick={() => navigate('/gift-cards')}
-            className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 cursor-pointer"
+            className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-all duration-200 cursor-pointer"
           >
             View All Gift Cards
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -81,7 +81,7 @@ const GiftCardsPage = () => {
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-10 pr-24 py-3 rounded-xl border border-gray-200 shadow-sm focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 text-sm outline-none transition-all bg-white"
             />
-            <button className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold px-4 py-1.5 rounded-lg transition-colors text-sm shadow-sm flex items-center gap-1 cursor-pointer">
+            <button className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-4 py-1.5 rounded-lg transition-colors text-sm shadow-sm flex items-center gap-1 cursor-pointer">
               Search
             </button>
           </div>
@@ -91,7 +91,7 @@ const GiftCardsPage = () => {
         <div className="flex flex-wrap gap-2 mb-8">
           <button
             onClick={() => setSelectedBrand('')}
-            className={`px-4 py-1.5 rounded-full text-xs font-bold border transition-all duration-150 cursor-pointer ${
+            className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-all duration-150 cursor-pointer ${
               selectedBrand === ''
                 ? 'bg-yellow-400 border-yellow-400 text-black shadow-sm'
                 : 'bg-white border-gray-200 text-gray-600 hover:border-yellow-400 hover:text-yellow-600'
@@ -103,7 +103,7 @@ const GiftCardsPage = () => {
             <button
               key={b}
               onClick={() => setSelectedBrand(selectedBrand === b ? '' : b)}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold border transition-all duration-150 cursor-pointer ${
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-all duration-150 cursor-pointer ${
                 selectedBrand === b
                   ? 'bg-yellow-400 border-yellow-400 text-black shadow-sm'
                   : 'bg-white border-gray-200 text-gray-600 hover:border-yellow-400 hover:text-yellow-600'
@@ -118,7 +118,7 @@ const GiftCardsPage = () => {
         {filtered.length === 0 ? (
           <div className="text-center py-20">
             <Gift className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-600 mb-1">No gift cards found</h3>
+            <h3 className="text-xl font-semibold text-gray-600 mb-1">No gift cards found</h3>
             <p className="text-gray-400 text-sm">Try a different search or brand filter</p>
           </div>
         ) : (
@@ -141,7 +141,7 @@ const GiftCardsPage = () => {
                       />
                     </div>
                     {discount > 0 && (
-                      <div className="absolute top-2 left-2 bg-red-500 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md">
+                      <div className="absolute top-2 left-2 bg-red-500 text-white text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md">
                         -{discount}% OFF
                       </div>
                     )}
@@ -150,14 +150,14 @@ const GiftCardsPage = () => {
                   {/* Info */}
                   <div className="p-3 flex flex-col gap-2 flex-1">
                     <div>
-                      <p className="text-[10px] font-semibold text-yellow-600 uppercase tracking-wider">
+                      <p className="text-[10px] font-medium text-yellow-600 uppercase tracking-wider">
                         {card.brand}
                       </p>
-                      <h3 className="font-bold text-gray-900 text-sm leading-tight">{card.name}</h3>
+                      <h3 className="font-semibold text-gray-900 text-sm leading-tight">{card.name}</h3>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="text-lg font-extrabold text-gray-900">₹{card.price}</span>
+                      <span className="text-lg font-bold text-gray-900">₹{card.price}</span>
                       {card.originalPrice > card.price && (
                         <span className="text-xs text-gray-400 line-through">₹{card.originalPrice}</span>
                       )}
@@ -166,13 +166,13 @@ const GiftCardsPage = () => {
                     <div className="flex gap-2 mt-auto">
                       <button
                         onClick={(e) => handleBuyNow(e, card)}
-                        className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer"
+                        className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer"
                       >
                         Buy Now
                       </button>
                       <button
                         onClick={(e) => handleAddToCart(e, card)}
-                        className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer"
+                        className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-medium py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-200 cursor-pointer"
                       >
                         <span className="sm:hidden">Add</span>
                         <span className="hidden sm:inline">Add to Cart</span>

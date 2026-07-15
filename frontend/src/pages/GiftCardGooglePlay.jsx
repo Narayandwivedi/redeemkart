@@ -147,7 +147,7 @@ const GiftCardGooglePlay = () => {
               >
                 {discountPercent > 0 && (
                   <div className="absolute top-3 left-3 z-10">
-                    <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-2 py-0.5 rounded-full text-[10px] font-bold shadow-sm">
+                    <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-2 py-0.5 rounded-full text-[10px] font-semibold shadow-sm">
                       -{discountPercent}% OFF
                     </div>
                   </div>
@@ -163,12 +163,12 @@ const GiftCardGooglePlay = () => {
                   
                   {voucher.stockQuantity === 0 ? (
                     <div className="absolute inset-0 flex items-center justify-center backdrop-blur-[2px]">
-                      <div className="bg-slate-900/80 text-white px-4 py-2 rounded-lg font-bold tracking-wider uppercase shadow-xl transform border border-slate-700">
+                      <div className="bg-slate-900/80 text-white px-4 py-2 rounded-lg font-semibold tracking-wider uppercase shadow-xl transform border border-slate-700">
                         Out of Stock
                       </div>
                     </div>
                   ) : (
-                    <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 shadow-sm hidden sm:flex items-center gap-1.5">
+                    <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-700 shadow-sm hidden sm:flex items-center gap-1.5">
                       <svg className="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                       </svg>
@@ -179,11 +179,11 @@ const GiftCardGooglePlay = () => {
 
                 <div className="p-4 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-bold text-slate-800 mb-1 text-sm sm:text-base leading-tight group-hover:text-emerald-600 transition-colors">
+                    <h3 className="font-semibold text-slate-800 mb-1 text-sm sm:text-base leading-tight group-hover:text-emerald-600 transition-colors">
                       {voucher.seoTitle || voucher.name}
                     </h3>
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="text-[10px] sm:text-xs tracking-wider font-extrabold text-emerald-600 uppercase">
+                      <span className="text-[10px] sm:text-xs tracking-wider font-bold text-emerald-600 uppercase">
                         Google Play Code
                       </span>
                     </div>
@@ -192,7 +192,7 @@ const GiftCardGooglePlay = () => {
                   <div>
                     <div className="flex flex-col gap-1 border-t border-slate-100 pt-3 mb-3">
                       <div className="flex items-baseline gap-2">
-                        <span className="text-lg sm:text-xl font-extrabold text-slate-900">
+                        <span className="text-lg sm:text-xl font-bold text-slate-900">
                           {formatPrice(voucher.price)}
                         </span>
                         {voucher.originalPrice > voucher.price && (
@@ -202,7 +202,7 @@ const GiftCardGooglePlay = () => {
                         )}
                       </div>
 
-                      <div className="flex items-center gap-1.5 text-emerald-600 font-bold text-[10px] sm:text-xs">
+                      <div className="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px] sm:text-xs">
                         <span>Save {formatPrice(savings)} ({discountPercent}%)</span>
                       </div>
                     </div>
@@ -211,7 +211,7 @@ const GiftCardGooglePlay = () => {
                       <div className="flex flex-col gap-2">
                         <button
                           disabled
-                          className="w-full bg-slate-200 text-slate-500 font-bold py-2.5 px-4 rounded-lg cursor-not-allowed text-xs sm:text-sm flex items-center justify-center gap-2"
+                          className="w-full bg-slate-200 text-slate-500 font-semibold py-2.5 px-4 rounded-lg cursor-not-allowed text-xs sm:text-sm flex items-center justify-center gap-2"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -223,13 +223,13 @@ const GiftCardGooglePlay = () => {
                       <div className="flex flex-col gap-2">
                         <button
                           onClick={(e) => { e.stopPropagation(); handleBuyNow(voucher) }}
-                          className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm"
+                          className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm"
                         >
                           Buy Now
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); handleAddToCart(voucher) }}
-                          className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm"
+                          className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer text-xs sm:text-sm"
                         >
                           Add to Cart
                         </button>

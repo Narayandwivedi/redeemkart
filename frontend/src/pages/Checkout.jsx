@@ -158,7 +158,7 @@ const Checkout = () => {
             <ChevronLeft className="w-4 h-4" />
             Back to Cart
           </Link>
-          <h1 className="text-2xl font-bold text-slate-900">Complete Your Order</h1>
+          <h1 className="text-2xl font-semibold text-slate-900">Complete Your Order</h1>
           <p className="text-slate-500 text-sm mt-1">Digital products — instant delivery after payment</p>
         </div>
 
@@ -177,7 +177,7 @@ const Checkout = () => {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
               <div className="px-5 py-4 border-b border-slate-100 flex items-center gap-2">
                 <ShoppingBag className="w-5 h-5 text-slate-500" />
-                <h2 className="font-semibold text-slate-800">Order Items ({getTotalItems()})</h2>
+                <h2 className="font-medium text-slate-800">Order Items ({getTotalItems()})</h2>
               </div>
               <div className="divide-y divide-slate-50">
                 {items.map((item) => (
@@ -191,11 +191,11 @@ const Checkout = () => {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-slate-800 text-sm truncate">{item.name || item.seoTitle}</h4>
+                      <h4 className="font-medium text-slate-800 text-sm truncate">{item.name || item.seoTitle}</h4>
                       <p className="text-xs text-slate-400 mt-0.5">Qty: {item.quantity}</p>
                     </div>
                     <div className="text-right shrink-0">
-                      <p className="font-bold text-slate-900 text-sm">{formatPrice(item.price * item.quantity)}</p>
+                      <p className="font-semibold text-slate-900 text-sm">{formatPrice(item.price * item.quantity)}</p>
                       {item.quantity > 1 && <p className="text-xs text-slate-400">{formatPrice(item.price)} each</p>}
                     </div>
                   </div>
@@ -205,7 +205,7 @@ const Checkout = () => {
 
             {/* Customer Notes */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
                 Order Notes <span className="text-slate-400 font-normal">(optional)</span>
               </label>
               <textarea
@@ -222,13 +222,13 @@ const Checkout = () => {
           <div className="lg:col-span-2 space-y-4">
             {/* Account */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-              <h3 className="text-sm font-semibold text-slate-700 mb-3">Ordering as</h3>
+              <h3 className="text-sm font-medium text-slate-700 mb-3">Ordering as</h3>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center font-bold text-amber-700 text-sm">
+                <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center font-semibold text-amber-700 text-sm">
                   {(user?.fullName || user?.email || 'U').charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0">
-                  <p className="font-semibold text-slate-800 text-sm truncate">{user?.fullName || 'User'}</p>
+                  <p className="font-medium text-slate-800 text-sm truncate">{user?.fullName || 'User'}</p>
                   <p className="text-xs text-slate-400 truncate">{user?.email}</p>
                 </div>
               </div>
@@ -236,7 +236,7 @@ const Checkout = () => {
 
             {/* Order Summary */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-              <h3 className="text-sm font-semibold text-slate-700 mb-4">Order Summary</h3>
+              <h3 className="text-sm font-medium text-slate-700 mb-4">Order Summary</h3>
               <div className="space-y-2.5 text-sm">
                 <div className="flex justify-between">
                   <span className="text-slate-500">Subtotal ({getTotalItems()} items)</span>
@@ -246,7 +246,7 @@ const Checkout = () => {
                   <span className="text-slate-500">Delivery</span>
                   <span className="text-green-600 font-medium">FREE</span>
                 </div>
-                <div className="border-t border-slate-100 pt-2.5 flex justify-between text-base font-bold">
+                <div className="border-t border-slate-100 pt-2.5 flex justify-between text-base font-semibold">
                   <span className="text-slate-900">Total</span>
                   <span className="text-slate-900">{formatPrice(subtotal)}</span>
                 </div>
@@ -257,12 +257,12 @@ const Checkout = () => {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 space-y-3">
               <div className="flex items-center gap-2 mb-2">
                 <CreditCard className="w-4 h-4 text-slate-500" />
-                <h3 className="text-sm font-semibold text-slate-700">Payment Method</h3>
+                <h3 className="text-sm font-medium text-slate-700">Payment Method</h3>
               </div>
               <div className="flex items-center gap-3 p-3 border border-amber-300 bg-amber-50/50 rounded-xl">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
                 <div>
-                  <p className="font-semibold text-slate-800 text-sm">Pay Online (Razorpay QR & UPI)</p>
+                  <p className="font-medium text-slate-800 text-sm">Pay Online (Razorpay QR & UPI)</p>
                   <p className="text-xs text-slate-500">Fast & secure digital delivery via UPI, QR code, or Cards</p>
                 </div>
               </div>
@@ -272,7 +272,7 @@ const Checkout = () => {
             <button
               onClick={handlePlaceOrder}
               disabled={isSubmitting}
-              className="w-full py-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold rounded-2xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] text-base"
+              className="w-full py-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold rounded-2xl hover:shadow-lg hover:shadow-amber-300/40 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] text-base"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center gap-2">

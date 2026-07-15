@@ -33,7 +33,7 @@ const Hero = () => {
                   </svg>
                 </div>
                 <div className="text-center">
-                  <h3 className="font-bold text-gray-900 text-xs">Quality Assured</h3>
+                  <h3 className="font-semibold text-gray-900 text-xs">Quality Assured</h3>
                   <p className="text-gray-600 text-xs">Premium components</p>
                 </div>
               </div>
@@ -45,7 +45,7 @@ const Hero = () => {
                   </svg>
                 </div>
                 <div className="text-center">
-                  <h3 className="font-bold text-gray-900 text-xs">24/7 Support</h3>
+                  <h3 className="font-semibold text-gray-900 text-xs">24/7 Support</h3>
                   <p className="text-gray-600 text-xs">Always here</p>
                 </div>
               </div>
@@ -78,7 +78,7 @@ const Hero = () => {
             <div className="flex flex-col gap-2.5 justify-center pb-3 px-3">
               <Link 
                 to="/pc-build" 
-                className="group bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold text-sm py-2.5 px-6 rounded-xl hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-center cursor-pointer flex items-center justify-center"
+                className="group bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-semibold text-sm py-2.5 px-6 rounded-xl hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-center cursor-pointer flex items-center justify-center"
               >
                 <span className="mr-2">🚀</span>
                 Build Your PC Now
@@ -89,7 +89,7 @@ const Hero = () => {
               
               <Link 
                 to="/pc-parts" 
-                className="group bg-white text-gray-700 font-semibold text-sm py-2.5 px-6 rounded-xl border-2 border-gray-200 hover:border-cyan-300 hover:bg-cyan-50 transition-all duration-300 text-center cursor-pointer flex items-center justify-center"
+                className="group bg-white text-gray-700 font-medium text-sm py-2.5 px-6 rounded-xl border-2 border-gray-200 hover:border-cyan-300 hover:bg-cyan-50 transition-all duration-300 text-center cursor-pointer flex items-center justify-center"
               >
                 <span className="mr-2">🛒</span>
                 Browse PC Parts
@@ -124,7 +124,7 @@ const Hero = () => {
                     </svg>
                   </div>
                   <div className="text-center lg:text-left">
-                    <h3 className="font-bold text-gray-900 text-sm">Quality Assured</h3>
+                    <h3 className="font-semibold text-gray-900 text-sm">Quality Assured</h3>
                     <p className="text-gray-600 text-xs">Premium components only</p>
                   </div>
                 </div>
@@ -136,7 +136,7 @@ const Hero = () => {
                     </svg>
                   </div>
                   <div className="text-center lg:text-left">
-                    <h3 className="font-bold text-gray-900 text-sm">24/7 Support</h3>
+                    <h3 className="font-semibold text-gray-900 text-sm">24/7 Support</h3>
                     <p className="text-gray-600 text-xs">Always here to help</p>
                   </div>
                 </div>
@@ -148,7 +148,7 @@ const Hero = () => {
                     </svg>
                   </div>
                   <div className="text-center lg:text-left">
-                    <h3 className="font-bold text-gray-900 text-sm">Expert Team</h3>
+                    <h3 className="font-semibold text-gray-900 text-sm">Expert Team</h3>
                     <p className="text-gray-600 text-xs">Professional guidance</p>
                   </div>
                 </div>
@@ -158,7 +158,7 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <Link 
                   to="/pc-build" 
-                  className="group bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold py-3 px-6 rounded-xl hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-center cursor-pointer flex items-center justify-center"
+                  className="group bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-center cursor-pointer flex items-center justify-center"
                 >
                   <span className="mr-2">🚀</span>
                   Build Your PC Now
@@ -169,7 +169,7 @@ const Hero = () => {
                 
                 <Link 
                   to="/pc-parts" 
-                  className="group bg-white text-gray-700 font-semibold py-3 px-6 rounded-xl border-2 border-gray-200 hover:border-cyan-300 hover:bg-cyan-50 transition-all duration-300 text-center cursor-pointer flex items-center justify-center"
+                  className="group bg-white text-gray-700 font-medium py-3 px-6 rounded-xl border-2 border-gray-200 hover:border-cyan-300 hover:bg-cyan-50 transition-all duration-300 text-center cursor-pointer flex items-center justify-center"
                 >
                   <span className="mr-2">🛒</span>
                   Browse PC Parts

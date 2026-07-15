@@ -57,7 +57,7 @@ const ProfileInfo = () => {
     <div className="min-h-screen bg-gray-50 py-6 sm:py-10">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Profile</h1>
+          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">Profile</h1>
           <p className="text-sm text-gray-500 mt-1">Manage your personal information</p>
         </div>
 
@@ -70,7 +70,7 @@ const ProfileInfo = () => {
                 <User className="w-8 h-8 sm:w-10 sm:h-10 text-black" />
               </div>
               <div className="min-w-0">
-                <h2 className="text-lg sm:text-xl font-bold text-white truncate">{user?.fullName}</h2>
+                <h2 className="text-lg sm:text-xl font-semibold text-white truncate">{user?.fullName}</h2>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <Mail className="w-3.5 h-3.5 text-yellow-400 shrink-0" />
                   <p className="text-yellow-200 text-sm truncate">{user?.email}</p>
@@ -84,7 +84,7 @@ const ProfileInfo = () => {
             <form onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div>
-                  <label className="flex items-center gap-1.5 text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                  <label className="flex items-center gap-1.5 text-[11px] font-medium text-gray-500 uppercase tracking-wider mb-1.5">
                     <User className="w-3.5 h-3.5" />
                     Full Name
                   </label>
@@ -95,7 +95,7 @@ const ProfileInfo = () => {
                 </div>
 
                 <div>
-                  <label className="flex items-center gap-1.5 text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                  <label className="flex items-center gap-1.5 text-[11px] font-medium text-gray-500 uppercase tracking-wider mb-1.5">
                     <Mail className="w-3.5 h-3.5" />
                     Email Address
                   </label>
@@ -105,7 +105,7 @@ const ProfileInfo = () => {
                 </div>
 
                 <div>
-                  <label className="flex items-center gap-1.5 text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                  <label className="flex items-center gap-1.5 text-[11px] font-medium text-gray-500 uppercase tracking-wider mb-1.5">
                     <Phone className="w-3.5 h-3.5" />
                     Phone Number
                   </label>
@@ -119,7 +119,7 @@ const ProfileInfo = () => {
                 <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
                   {!isEditing ? (
                     <button type="button" onClick={() => setIsEditing(true)}
-                      className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm cursor-pointer">
+                      className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm cursor-pointer">
                       <Edit2 className="w-4 h-4" />
                       Edit Profile
                     </button>
@@ -131,7 +131,7 @@ const ProfileInfo = () => {
                         Cancel
                       </button>
                       <button type="submit" disabled={loading}
-                        className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm disabled:opacity-50 cursor-pointer">
+                        className="inline-flex items-center gap-1.5 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-lg transition-all duration-200 shadow-md hover:shadow-yellow-400/40 text-sm disabled:opacity-50 cursor-pointer">
                         {loading ? (
                           <Loader className="w-4 h-4 animate-spin" />
                         ) : (
@@ -148,7 +148,7 @@ const ProfileInfo = () => {
 
           {/* Quick Actions */}
           <div className="bg-gray-50 border-t border-gray-100 px-5 sm:px-6 py-4">
-            <h3 className="text-sm font-bold text-gray-800 mb-3">Quick Actions</h3>
+            <h3 className="text-sm font-semibold text-gray-800 mb-3">Quick Actions</h3>
             <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <button onClick={() => navigate('/manage-addresses')}
                 className="flex flex-col items-center justify-center gap-1.5 bg-white border border-gray-200 text-gray-700 hover:border-yellow-400 hover:text-yellow-600 py-3 px-2 rounded-xl transition-all duration-200 text-[11px] font-medium cursor-pointer">

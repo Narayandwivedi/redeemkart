@@ -52,17 +52,17 @@ const Footer = () => {
           <div className="grid grid-cols-2 gap-6">
             {/* Shop by Category */}
             <div>
-              <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+              <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                 <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#eab308' }} />
                 Categories
               </h3>
               <ul className="space-y-2.5">
                 {[
-                  { to: '/search?category=e-commerce', label: '🛒 E-Commerce' },
-                  { to: '/search?category=gaming', label: '🎮 Gaming' },
-                  { to: '/search?category=food-dining', label: '🍔 Food & Dining' },
-                  { to: '/search?category=fashion-lifestyle', label: '👗 Fashion & Lifestyle' },
-                  { to: '/search?category=travel-entertainment', label: '✈️ Travel & Entertainment' },
+                  { to: '/search?category=e-commerce', label: 'ðŸ›’ E-Commerce' },
+                  { to: '/search?category=gaming', label: 'ðŸŽ® Gaming' },
+                  { to: '/search?category=food-dining', label: 'ðŸ” Food & Dining' },
+                  { to: '/search?category=fashion-lifestyle', label: 'ðŸ‘— Fashion & Lifestyle' },
+                  { to: '/search?category=travel-entertainment', label: 'âœˆï¸ Travel & Entertainment' },
                 ].map(({ to, label }) => (
                   <li key={to}>
                     <Link
@@ -79,7 +79,7 @@ const Footer = () => {
 
             {/* Quick Links */}
             <div>
-              <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+              <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
                 <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#eab308' }} />
                 Quick Links
               </h3>
@@ -108,7 +108,7 @@ const Footer = () => {
 
           {/* Contact & Trust */}
           <div>
-            <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+            <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
               <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#eab308' }} />
               Contact Us
             </h3>
@@ -140,7 +140,7 @@ const Footer = () => {
 
             {/* Trust badges */}
             <div className="rounded-xl p-3 space-y-2" style={{ background: 'rgba(234,179,8,0.07)', border: '1px solid rgba(234,179,8,0.15)' }}>
-              {['🔒 100% Secure Payments', '⚡ Instant Delivery', '✅ Verified Vouchers'].map(badge => (
+              {['ðŸ”’ 100% Secure Payments', 'âš¡ Instant Delivery', 'âœ… Verified Vouchers'].map(badge => (
                 <p key={badge} className="text-xs text-gray-400">{badge}</p>
               ))}
             </div>
@@ -153,7 +153,7 @@ const Footer = () => {
           style={{ borderTop: '1px solid rgba(234,179,8,0.15)' }}
         >
           <p className="text-gray-500 text-xs text-center sm:text-left">
-            © {currentYear} <span style={{ color: '#eab308' }}>GCHub</span>. All rights reserved. Made in 🇮🇳 India.
+            Â© {currentYear} <span style={{ color: '#eab308' }}>GCHub</span>. All rights reserved. Made in ðŸ‡®ðŸ‡³ India.
           </p>
           <div className="flex items-center gap-4">
             <Link

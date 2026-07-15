@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
             </div>
             <span className="h-px w-12 sm:w-20 bg-gray-300"></span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-3">
             Privacy <span className="text-yellow-500">Policy</span>
           </h1>
           <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -28,7 +28,7 @@ const PrivacyPolicy = () => {
               <Eye className="w-5 h-5 text-blue-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Introduction</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Introduction</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 At GCHub, we take your privacy seriously. This Privacy Policy explains how we collect, 
                 use, disclose, and safeguard your information when you visit our platform and use our 
@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
               <Database className="w-5 h-5 text-green-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Information We Collect</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Information We Collect</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-3">
                 We may collect the following types of information:
               </p>
@@ -72,7 +72,7 @@ const PrivacyPolicy = () => {
               <Lock className="w-5 h-5 text-purple-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">How We Use Your Information</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">How We Use Your Information</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-3">
                 Your information helps us provide, maintain, and improve our services:
               </p>
@@ -110,7 +110,7 @@ const PrivacyPolicy = () => {
               <UserCheck className="w-5 h-5 text-amber-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Data Sharing & Disclosure</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Data Sharing & Disclosure</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 We do not sell your personal information to third parties. We may share your data only 
                 with trusted service providers who assist in operating our platform (payment processors, 
@@ -125,7 +125,7 @@ const PrivacyPolicy = () => {
               <Cookie className="w-5 h-5 text-red-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Cookies & Tracking</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Cookies & Tracking</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 GCHub uses cookies and similar tracking technologies to enhance your browsing experience, 
                 analyze site traffic, and understand where our visitors come from. You can control cookie 
@@ -140,7 +140,7 @@ const PrivacyPolicy = () => {
               <Shield className="w-5 h-5 text-indigo-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Data Security</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Data Security</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 We implement industry-standard security measures including SSL encryption, secure data 
                 storage, and regular security audits to protect your personal information. However, no 
@@ -155,7 +155,7 @@ const PrivacyPolicy = () => {
               <Mail className="w-5 h-5 text-teal-500" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Contact Us</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Contact Us</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 If you have any questions about this Privacy Policy or how we handle your data, please 
                 reach out to us:
@@ -171,7 +171,7 @@ const PrivacyPolicy = () => {
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
               <p className="text-sm sm:text-base text-yellow-800 leading-relaxed">
-                <strong className="font-bold">Policy Updates:</strong> We may update this Privacy Policy 
+                <strong className="font-semibold">Policy Updates:</strong> We may update this Privacy Policy 
                 from time to time. Changes will be posted on this page with an updated revision date. 
                 Continued use of GCHub after changes constitutes acceptance of the updated policy.
               </p>
