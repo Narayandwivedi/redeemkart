@@ -88,16 +88,6 @@ const Navbar = () => {
 
           {/* Desktop Right Actions + Mobile Toggle */}
           <div className="flex items-center gap-2 flex-shrink-0 ml-auto">
-            {/* Mobile Sell Gift Card Button (Homepage only) */}
-            {location.pathname === '/' && (
-              <Link
-                to="/sell-voucher"
-                className="md:hidden animate-pulse bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold px-3.5 py-2 rounded-lg text-xs transition-all duration-200 shadow-md hover:shadow-green-500/50 transform hover:scale-105 cursor-pointer"
-              >
-                Sell Gift Card +
-              </Link>
-            )}
-
             {/* Desktop Cart + Login/Profile */}
             <div className="hidden md:flex items-center gap-2">
               <Link
