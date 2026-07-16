@@ -56,13 +56,7 @@ const Navbar = () => {
 
           {/* Logo Section - left on home, centered on other pages (mobile) */}
           <Link to="/" className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center flex-shrink-0 -ml-2 md:-ml-4">
-            <span
-              className="text-2xl md:text-3xl font-semibold tracking-tight"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
-            >
-              <span className="text-gray-900">Redeem</span><span className="text-emerald-500 ml-0.5">Kart</span>
-              <span className="text-gray-900 font-light text-sm md:text-lg align-baseline">.in</span>
-            </span>
+            <img src="/redeemkart-logo.png" alt="RedeemKart" className="h-11 md:h-13 w-auto object-contain" />
           </Link>
 
           {/* Desktop Search - centered */}
