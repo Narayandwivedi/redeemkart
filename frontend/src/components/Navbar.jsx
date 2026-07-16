@@ -56,7 +56,8 @@ const Navbar = () => {
 
           {/* Logo Section - left on home, centered on other pages (mobile) */}
           <Link to="/" className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center flex-shrink-0 -ml-2 md:-ml-4">
-            <img src="/redeemkart-logo.png" alt="RedeemKart" className="h-11 md:h-13 w-auto object-contain" />
+            <img src="/favicon.png" alt="" className="h-10 md:h-12 w-auto object-contain mr-2" />
+            <img src="/redeemkart-logo.png" alt="RedeemKart" className="h-9 md:h-11 w-auto object-contain mt-1" />
           </Link>
 
           {/* Desktop Search - centered */}
