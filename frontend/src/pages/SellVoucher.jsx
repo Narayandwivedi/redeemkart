@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { ArrowLeft, Plus, Trash2, Gift, DollarSign, Hash, Calendar, X, Upload, Clock, Banknote, Lock } from 'lucide-react'
+import { ArrowLeft, Plus, Gift, DollarSign, Hash, Calendar, X, Upload, Clock, Banknote, Lock } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
@@ -80,18 +80,6 @@ const SellVoucher = () => {
       toast.error(err.response?.data?.message || 'Failed to list gift card')
     } finally {
       setLoading(false)
-    }
-  }
-
-  const handleDelete = async (id) => {
-    try {
-      const res = await axios.delete(`${BACKEND_URL}/api/gift-cards/${id}`, { withCredentials: true })
-      if (res.data.success) {
-        setCards(cards.filter((c) => c._id !== id))
-        toast.info('Listing removed')
-      }
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to delete listing')
     }
   }
 
@@ -265,8 +253,8 @@ const SellVoucher = () => {
               {form.balance > 0 && (
                 <div className="text-center -mt-2">
                   <p className="text-sm font-medium text-gray-700">
-                    You'll receive: <span className="text-emerald-600">₹{Math.round(form.balance * 0.9)}</span>
-                    <span className="text-gray-400 font-normal"> (after 10% commission)</span>
+                    You'll receive: <span className="text-emerald-600">₹{Math.round(form.balance * (form.brand === 'Google Play' ? 0.7 : 0.9))}</span>
+                    <span className="text-gray-400 font-normal"> (after {form.brand === 'Google Play' ? 30 : 10}% commission)</span>
                   </p>
                 </div>
               )}
@@ -298,12 +286,6 @@ const SellVoucher = () => {
                     </p>
                   </div>
                 </div>
-                <button
-                  onClick={() => handleDelete(card._id)}
-                  className="text-red-500 hover:text-red-700 transition-colors self-end sm:self-auto"
-                >
-                  <Trash2 className="h-5 w-5" />
-                </button>
               </div>
             ))}
           </div>

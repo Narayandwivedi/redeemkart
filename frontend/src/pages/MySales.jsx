@@ -28,8 +28,8 @@ const MySales = () => {
     fetchListings()
   }, [BACKEND_URL])
 
-  const totalEarnings = listings.filter(s => s.status === 'sold').reduce((sum, s) => sum + Math.round(s.balance * 0.95), 0)
-  const pendingPayout = listings.filter(s => s.status === 'active').reduce((sum, s) => sum + Math.round(s.balance * 0.95), 0)
+  const totalEarnings = listings.filter(s => s.status === 'sold').reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
+  const pendingPayout = listings.filter(s => s.status === 'active').reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -106,7 +106,8 @@ const MySales = () => {
                   </tr>
                 ) : (
                   listings.map((card) => {
-                    const commission = Math.round(card.balance * 0.05)
+                    const commissionRate = card.brand === 'Google Play' ? 0.3 : 0.1
+                    const commission = Math.round(card.balance * commissionRate)
                     const payout = card.balance - commission
                     const StatusIcon = statusConfig[card.status]?.icon || Clock
                     const statusStyle = statusConfig[card.status]?.bg || 'bg-gray-50 text-gray-700 border-gray-200'
