@@ -86,7 +86,7 @@ const Home = () => {
                     <p className="font-medium text-gray-800 text-[11px] sm:text-sm truncate">{review.name}</p>
                     <div className="flex gap-px sm:gap-0.5">
                       {[...Array(5)].map((_, j) => (
-                        <Star key={j} className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${j < review.rating ? 'text-violet-500' : 'text-gray-200'}`} fill={j < review.rating ? 'currentColor' : 'none'} />
+                        <Star key={j} className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${j < review.rating ? 'text-yellow-400' : 'text-gray-200'}`} fill={j < review.rating ? 'currentColor' : 'none'} />
                       ))}
                     </div>
                   </div>
