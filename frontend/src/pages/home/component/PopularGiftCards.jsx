@@ -32,7 +32,7 @@ const PopularGiftCards = () => {
             <Link
               key={product.name}
               to={product.link}
-              className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-200 group flex flex-col items-center p-0.5"
+              className="flex flex-col items-center"
             >
               <img
                 src={product.file}
