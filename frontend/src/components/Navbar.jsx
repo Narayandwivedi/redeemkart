@@ -86,7 +86,7 @@ const Navbar = () => {
             {/* Desktop Cart + Login/Profile */}
             <div className="hidden md:flex items-center gap-2">
               <Link
-                to="/sell-voucher"
+                to="/sell-gift-card"
                 className="animate-pulse bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-all duration-200 shadow-lg hover:shadow-green-500/50 transform hover:scale-105 cursor-pointer"
               >
                 Sell Your Gift Card +

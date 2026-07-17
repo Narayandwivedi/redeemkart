@@ -94,7 +94,7 @@ const Home = () => {
           <span>Buy Games</span>
           <ArrowRight className="w-2 h-2 sm:w-4 sm:h-4 opacity-0 -ml-1 sm:-ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 hidden sm:inline" />
         </button>
-        <button onClick={() => navigate('/sell-voucher')} className="group relative inline-flex items-center justify-center gap-0.5 sm:gap-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold py-1.5 sm:py-4 px-1 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 overflow-hidden text-[10px] sm:text-base flex-1 sm:flex-none">
+        <button onClick={() => navigate('/sell-gift-card')} className="group relative inline-flex items-center justify-center gap-0.5 sm:gap-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold py-1.5 sm:py-4 px-1 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 overflow-hidden text-[10px] sm:text-base flex-1 sm:flex-none">
           <DollarSign className="w-3 h-3 sm:w-5 sm:h-5" />
           <span>Sell Voucher</span>
           <ArrowRight className="w-2 h-2 sm:w-4 sm:h-4 opacity-0 -ml-1 sm:-ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 hidden sm:inline" />

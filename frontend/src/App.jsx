@@ -142,7 +142,7 @@ const AppContent = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/sell-voucher" element={<SellVoucher />} />
+        <Route path="/sell-gift-card" element={<SellVoucher />} />
         <Route path="/my-sales" element={<ProtectedRoute><MySales /></ProtectedRoute>} />
         <Route path="/blog" element={<BlogsPage />} />
         <Route path="/blog/:slug" element={<BlogDetailPage />} />

@@ -162,7 +162,7 @@ const Contact = () => {
                     <option value="gift-cards">Gift Cards / Vouchers</option>
                     <option value="game-keys">Game Keys</option>
                     <option value="refund">Refund Issue</option>
-                    <option value="sell-voucher">Sell Voucher</option>
+                    <option value="sell-gift-card">Sell Voucher</option>
                     <option value="other">Other</option>
                   </select>
                 </div>

@@ -94,7 +94,7 @@ const Footer = () => {
                   { to: '/', label: 'Home' },
                   { to: '/about', label: 'About Us' },
                   { to: '/contact', label: 'Contact Us' },
-                  { to: '/sell-voucher', label: 'Sell Gift Card' },
+                  { to: '/sell-gift-card', label: 'Sell Gift Card' },
                   { to: '/my-orders', label: 'My Orders' },
                   { to: '/customer-support', label: 'Support' },
                 ].map(({ to, label }) => (

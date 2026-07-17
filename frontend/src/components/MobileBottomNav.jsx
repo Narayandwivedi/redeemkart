@@ -45,12 +45,12 @@ const MobileBottomNav = () => {
         </Link>
 
         {/* SELL CARD */}
-        <Link to="/sell-voucher" className="flex flex-col items-center gap-0.5 relative" style={{ minWidth: 56 }}>
+        <Link to="/sell-gift-card" className="flex flex-col items-center gap-0.5 relative" style={{ minWidth: 56 }}>
           <span
             className="flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-200"
             style={{
-              background: isActive('/sell-voucher') ? 'rgba(139,92,246,0.15)' : 'transparent',
-              color: isActive('/sell-voucher') ? '#7c3aed' : '#6b7280',
+              background: isActive('/sell-gift-card') ? 'rgba(139,92,246,0.15)' : 'transparent',
+              color: isActive('/sell-gift-card') ? '#7c3aed' : '#6b7280',
             }}
           >
             <svg className="w-[22px] h-[22px]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -58,7 +58,7 @@ const MobileBottomNav = () => {
                 d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z" />
             </svg>
           </span>
-          <span className="text-[12px] font-medium leading-none" style={{ color: isActive('/sell-voucher') ? '#7c3aed' : '#9ca3af' }}>
+          <span className="text-[12px] font-medium leading-none" style={{ color: isActive('/sell-gift-card') ? '#7c3aed' : '#9ca3af' }}>
             Sell Card
           </span>
         </Link>
