@@ -32,14 +32,15 @@ const PopularGiftCards = () => {
             <Link
               key={product.name}
               to={product.link}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center h-full"
             >
               <img
                 src={product.file}
                 alt={product.name}
                 className="h-28 w-28 sm:h-44 sm:w-44 object-contain"
               />
-              <span className="w-full py-0.5 sm:py-1.5 bg-gray-800 text-white text-[9px] sm:text-xs font-medium rounded hover:bg-gray-700 transition-colors duration-200 text-center">
+              <div className="flex-1" />
+              <span className="w-28 sm:w-44 py-2 sm:py-2.5 bg-gradient-to-r from-violet-500 to-violet-600 text-white text-[10px] sm:text-xs font-semibold hover:shadow-md hover:from-violet-400 hover:to-violet-500 transition-all duration-200 text-center cursor-pointer">
                 Shop Now
               </span>
             </Link>
