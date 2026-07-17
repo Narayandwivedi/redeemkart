@@ -203,24 +203,26 @@ const SellVoucher = () => {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">
-                  PIN <span className="text-gray-400 font-normal">(optional)</span>
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-4 w-4 text-violet-700" />
+              {form.brand !== 'Google Play' && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-800 mb-1.5">
+                    PIN <span className="text-gray-400 font-normal">(optional)</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Lock className="h-4 w-4 text-violet-700" />
+                    </div>
+                    <input
+                      type="text"
+                      name="pin"
+                      value={form.pin}
+                      onChange={handleChange}
+                      placeholder="Enter PIN if required"
+                      className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow"
+                    />
                   </div>
-                  <input
-                    type="text"
-                    name="pin"
-                    value={form.pin}
-                    onChange={handleChange}
-                    placeholder="Enter PIN if required"
-                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow"
-                  />
                 </div>
-              </div>
+              )}
 
               <div>
                 <label className="block text-sm font-medium text-gray-800 mb-1.5">Expiry Date</label>
