@@ -6,9 +6,9 @@ import { toast } from 'react-toastify'
 import { useSEO } from '../hooks/useSEO'
 
 const vouchers = [
-  { _id: 'myntra-500', name: 'Myntra Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500', price: 440, originalPrice: 500, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500 Myntra Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹440', stockQuantity: 0 },
-  { _id: 'myntra-1000', name: 'Myntra Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000', price: 875, originalPrice: 1000, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000 Myntra Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹875', stockQuantity: 0 },
-  { _id: 'myntra-2000', name: 'Myntra Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000', price: 1750, originalPrice: 2000, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000 Myntra Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1750', stockQuantity: 0 },
+  { _id: 'myntra-500', name: 'Myntra Gift Card - ₹500', price: 440, originalPrice: 500, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: '₹500 Myntra Gift Card at just ₹440', stockQuantity: 0 },
+  { _id: 'myntra-1000', name: 'Myntra Gift Card - ₹1000', price: 875, originalPrice: 1000, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: '₹1000 Myntra Gift Card at just ₹875', stockQuantity: 0 },
+  { _id: 'myntra-2000', name: 'Myntra Gift Card - ₹2000', price: 1750, originalPrice: 2000, brand: 'Myntra', category: 'gift-cards', images: ['/products/myntra.avif'], description: '₹2000 Myntra Gift Card at just ₹1750', stockQuantity: 0 },
 ]
 
 const formatPrice = (price) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)

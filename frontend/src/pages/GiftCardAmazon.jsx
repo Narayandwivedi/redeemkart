@@ -6,10 +6,10 @@ import { toast } from 'react-toastify'
 import { useSEO } from '../hooks/useSEO'
 
 const vouchers = [
-  { _id: 'amazon-100', name: 'Amazon Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100', price: 88, originalPrice: 100, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100 Amazon Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹88', stockQuantity: 0 },
-  { _id: 'amazon-500', name: 'Amazon Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500', price: 435, originalPrice: 500, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500 Amazon Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹435', stockQuantity: 0 },
-  { _id: 'amazon-1000', name: 'Amazon Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000', price: 870, originalPrice: 1000, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000 Amazon Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹870', stockQuantity: 0 },
-  { _id: 'amazon-2000', name: 'Amazon Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000', price: 1740, originalPrice: 2000, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000 Amazon Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1740', stockQuantity: 0 },
+  { _id: 'amazon-100', name: 'Amazon Gift Card - ₹100', price: 88, originalPrice: 100, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: '₹100 Amazon Gift Card at just ₹88', stockQuantity: 0 },
+  { _id: 'amazon-500', name: 'Amazon Gift Card - ₹500', price: 435, originalPrice: 500, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: '₹500 Amazon Gift Card at just ₹435', stockQuantity: 0 },
+  { _id: 'amazon-1000', name: 'Amazon Gift Card - ₹1000', price: 870, originalPrice: 1000, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: '₹1000 Amazon Gift Card at just ₹870', stockQuantity: 0 },
+  { _id: 'amazon-2000', name: 'Amazon Gift Card - ₹2000', price: 1740, originalPrice: 2000, brand: 'Amazon', category: 'gift-cards', images: ['/products/amazon.avif'], description: '₹2000 Amazon Gift Card at just ₹1740', stockQuantity: 0 },
 ]
 
 const formatPrice = (price) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)

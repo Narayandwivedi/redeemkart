@@ -6,11 +6,11 @@ import { toast } from 'react-toastify'
 import { useSEO } from '../hooks/useSEO'
 
 const vouchers = [
-  { _id: 'flipkart-100', name: 'Flipkart Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100', price: 89, originalPrice: 100, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100 Flipkart Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹89', stockQuantity: 0 },
-  { _id: 'flipkart-500', name: 'Flipkart Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500', price: 440, originalPrice: 500, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500 Flipkart Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹440', stockQuantity: 0 },
-  { _id: 'flipkart-1000', name: 'Flipkart Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000', price: 875, originalPrice: 1000, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000 Flipkart Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹875', stockQuantity: 0 },
-  { _id: 'flipkart-200', name: 'Flipkart Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹200', price: 178, originalPrice: 200, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹200 Flipkart Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹178', stockQuantity: 0 },
-  { _id: 'flipkart-2000', name: 'Flipkart Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000', price: 1750, originalPrice: 2000, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹2000 Flipkart Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1750', stockQuantity: 0 },
+  { _id: 'flipkart-100', name: 'Flipkart Gift Card - ₹100', price: 89, originalPrice: 100, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: '₹100 Flipkart Gift Card at just ₹89', stockQuantity: 0 },
+  { _id: 'flipkart-500', name: 'Flipkart Gift Card - ₹500', price: 440, originalPrice: 500, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: '₹500 Flipkart Gift Card at just ₹440', stockQuantity: 0 },
+  { _id: 'flipkart-1000', name: 'Flipkart Gift Card - ₹1000', price: 875, originalPrice: 1000, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: '₹1000 Flipkart Gift Card at just ₹875', stockQuantity: 0 },
+  { _id: 'flipkart-200', name: 'Flipkart Gift Card - ₹200', price: 178, originalPrice: 200, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: '₹200 Flipkart Gift Card at just ₹178', stockQuantity: 0 },
+  { _id: 'flipkart-2000', name: 'Flipkart Gift Card - ₹2000', price: 1750, originalPrice: 2000, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: '₹2000 Flipkart Gift Card at just ₹1750', stockQuantity: 0 },
 ]
 
 const formatPrice = (price) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)

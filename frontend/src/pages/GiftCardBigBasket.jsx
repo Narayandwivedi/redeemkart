@@ -6,9 +6,9 @@ import { toast } from 'react-toastify'
 import { useSEO } from '../hooks/useSEO'
 
 const vouchers = [
-  { _id: 'bigbasket-100', name: 'BigBasket Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100', price: 88, originalPrice: 100, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100 BigBasket Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹88', stockQuantity: 0 },
-  { _id: 'bigbasket-500', name: 'BigBasket Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500', price: 435, originalPrice: 500, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500 BigBasket Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹435', stockQuantity: 0 },
-  { _id: 'bigbasket-1000', name: 'BigBasket Gift Card - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000', price: 870, originalPrice: 1000, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000 BigBasket Gift Card at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹870', stockQuantity: 0 },
+  { _id: 'bigbasket-100', name: 'BigBasket Gift Card - ₹100', price: 88, originalPrice: 100, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: '₹100 BigBasket Gift Card at just ₹88', stockQuantity: 0 },
+  { _id: 'bigbasket-500', name: 'BigBasket Gift Card - ₹500', price: 435, originalPrice: 500, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: '₹500 BigBasket Gift Card at just ₹435', stockQuantity: 0 },
+  { _id: 'bigbasket-1000', name: 'BigBasket Gift Card - ₹1000', price: 870, originalPrice: 1000, brand: 'BigBasket', category: 'gift-cards', images: ['/products/bigbasket.avif'], description: '₹1000 BigBasket Gift Card at just ₹870', stockQuantity: 0 },
 ]
 
 const formatPrice = (price) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)

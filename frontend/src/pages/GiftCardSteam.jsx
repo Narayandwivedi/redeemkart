@@ -6,10 +6,10 @@ import { toast } from 'react-toastify'
 import { useSEO } from '../hooks/useSEO'
 
 const vouchers = [
-  { _id: 'steam-50', name: 'Steam Wallet Code - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹50', price: 44, originalPrice: 50, brand: 'Steam', category: 'gift-cards', images: ['/products/steam.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹50 Steam Wallet Code at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹44', stockQuantity: 0 },
-  { _id: 'steam-100', name: 'Steam Wallet Code - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100', price: 85, originalPrice: 100, brand: 'Steam', category: 'gift-cards', images: ['/products/steam.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹100 Steam Wallet Code at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹85', stockQuantity: 0 },
-  { _id: 'steam-500', name: 'Steam Wallet Code - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500', price: 430, originalPrice: 500, brand: 'Steam', category: 'gift-cards', images: ['/products/steam.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹500 Steam Wallet Code at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹430', stockQuantity: 0 },
-  { _id: 'steam-1000', name: 'Steam Wallet Code - ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000', price: 860, originalPrice: 1000, brand: 'Steam', category: 'gift-cards', images: ['/products/steam.avif'], description: 'ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹1000 Steam Wallet Code at just ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹860', stockQuantity: 0 },
+  { _id: 'steam-50', name: 'Steam Wallet Code - ₹50', price: 44, originalPrice: 50, brand: 'Steam', category: 'gift-cards', images: ['/products/steam.avif'], description: '₹50 Steam Wallet Code at just ₹44', stockQuantity: 0 },
+  { _id: 'steam-100', name: 'Steam Wallet Code - ₹100', price: 85, originalPrice: 100, brand: 'Steam', category: 'gift-cards', images: ['/products/steam.avif'], description: '₹100 Steam Wallet Code at just ₹85', stockQuantity: 0 },
+  { _id: 'steam-500', name: 'Steam Wallet Code - ₹500', price: 430, originalPrice: 500, brand: 'Steam', category: 'gift-cards', images: ['/products/steam.avif'], description: '₹500 Steam Wallet Code at just ₹430', stockQuantity: 0 },
+  { _id: 'steam-1000', name: 'Steam Wallet Code - ₹1000', price: 860, originalPrice: 1000, brand: 'Steam', category: 'gift-cards', images: ['/products/steam.avif'], description: '₹1000 Steam Wallet Code at just ₹860', stockQuantity: 0 },
 ]
 
 const formatPrice = (price) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price)

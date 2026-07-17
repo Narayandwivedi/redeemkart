@@ -157,9 +157,9 @@ const GiftCardsPage = () => {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="text-lg font-bold text-gray-900">ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹{card.price}</span>
+                      <span className="text-lg font-bold text-gray-900">₹{card.price}</span>
                       {card.originalPrice > card.price && (
-                        <span className="text-xs text-gray-400 line-through">ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹{card.originalPrice}</span>
+                        <span className="text-xs text-gray-400 line-through">₹{card.originalPrice}</span>
                       )}
                     </div>
 

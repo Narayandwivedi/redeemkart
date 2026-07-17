@@ -202,7 +202,7 @@ const GameDetail = () => {
                 </div>
                 <div className="p-1.5">
                   <p className="text-[10px] font-medium text-gray-800 leading-tight truncate">{g.fullName || g.name}</p>
-                  <p className="text-[10px] font-semibold text-gray-900">ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹{g.price}</p>
+                  <p className="text-[10px] font-semibold text-gray-900">₹{g.price}</p>
                 </div>
               </div>
             ))}
