@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Gift, Gamepad2, DollarSign, ArrowRight, Star, Sparkles } from 'lucide-react'
 import HeroSection from './component/HeroSection'
@@ -30,6 +30,46 @@ const Home = () => {
   })
 
   const bundleGameImages = bundleGameSlugs.map((slug) => games[slug]?.img).filter(Boolean)
+
+  const gradients = [
+    'from-cyan-500 to-blue-600',
+    'from-pink-500 to-rose-600',
+    'from-amber-500 to-orange-600',
+    'from-green-500 to-emerald-600',
+    'from-purple-500 to-violet-600',
+    'from-red-500 to-pink-600',
+    'from-indigo-500 to-blue-600',
+    'from-teal-500 to-cyan-600',
+  ]
+
+  const reviews = [
+    { name: 'Rahul Sharma', rating: 5, text: 'bc GTA 5 ka code mil gaya 2 minute mein, best website hai yeh!', initials: 'RS' },
+    { name: 'Priya Patel', rating: 5, text: 'Google Play voucher instantly aagaya, 20% off mil gaya, kamaal kar diya!', initials: 'PP' },
+    { name: 'Amit Verma', rating: 4, text: 'Amazon gift card becha, payment 5 min mein aa gayi. Thoda aur rate hota to maza aata!', initials: 'AV' },
+    { name: 'Manish Reddy', rating: 5, text: 'Got my Steam wallet code in 2 minutes. Game bundle sale mein bohot accha deal mila!', initials: 'MR' },
+    { name: 'Vikram Singh', rating: 5, text: 'Bought an Apple gift card at great price. Code delivered in under a minute. Legit platform bro!', initials: 'VS' },
+    { name: 'Arjun Mehta', rating: 5, text: 'Mere bhai ke liye GTA 5 aur RDR2 ka bundle liya. Itna sasta kahi nahi milega!', initials: 'AM' },
+    { name: 'Rohit Joshi', rating: 5, text: 'Bought a Google Play voucher and got 15% off. Delivery was instant. Highly recommended!', initials: 'RJ' },
+    { name: 'Karan Joshi', rating: 5, text: 'Sold my unused Flipkart voucher. Got better rate than any other platform. Will use again for sure!', initials: 'KJ' },
+  ]
+
+  const [page, setPage] = useState(0)
+  const [itemsPerPage, setItemsPerPage] = useState(4)
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth
+      if (w < 640) setItemsPerPage(2)
+      else if (w < 1024) setItemsPerPage(2)
+      else setItemsPerPage(4)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const totalPages = Math.ceil(reviews.length / itemsPerPage)
+  const currentReviews = reviews.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -66,34 +106,39 @@ const Home = () => {
       <div className="py-8 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">What Our Customers Say</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { name: 'Rahul Sharma', rating: 5, text: 'bc GTA 5 ka code mil gaya 2 minute mein, best website hai yeh!', initials: 'RS' },
-              { name: 'Priya Patel', rating: 5, text: 'Google Play voucher instantly aagaya, 20% off mil gaya, kamaal kar diya!', initials: 'PP' },
-              { name: 'Amit Verma', rating: 4, text: 'Amazon gift card becha, payment 5 min mein aa gayi. Thoda aur rate hota to maza aata!', initials: 'AV' },
-              { name: 'Manish Reddy', rating: 5, text: 'Got my Steam wallet code in 2 minutes. Game bundle sale mein bohot accha deal mila!', initials: 'MR' },
-              { name: 'Vikram Singh', rating: 5, text: 'Bought an Apple gift card at great price. Code delivered in under a minute. Legit platform bro!', initials: 'VS' },
-              { name: 'Arjun Mehta', rating: 5, text: 'Mere bhai ke liye GTA 5 aur RDR2 ka bundle liya. Itna sasta kahi nahi milega!', initials: 'AM' },
-              { name: 'Rohit Joshi', rating: 5, text: 'Bought a Google Play voucher and got 15% off. Delivery was instant. Highly recommended!', initials: 'RJ' },
-              { name: 'Karan Joshi', rating: 5, text: 'Sold my unused Flipkart voucher. Got better rate than any other platform. Will use again for sure!', initials: 'KJ' },
-            ].map((review, i) => (
-              <div key={i} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
-                <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                  <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold text-[10px] sm:text-sm">
-                    {review.initials}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="font-medium text-gray-800 text-[11px] sm:text-sm truncate">{review.name}</p>
-                    <div className="flex gap-px sm:gap-0.5">
-                      {[...Array(5)].map((_, j) => (
-                        <Star key={j} className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${j < review.rating ? 'text-yellow-400' : 'text-gray-200'}`} fill={j < review.rating ? 'currentColor' : 'none'} />
-                      ))}
+          <div className="relative">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {currentReviews.map((review, i) => (
+                <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200 min-h-[160px] flex flex-col">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div className={`w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center text-white font-semibold text-[10px] sm:text-sm`}>
+                      {review.initials}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-medium text-gray-800 text-[11px] sm:text-sm truncate">{review.name}</p>
+                      <div className="flex gap-px sm:gap-0.5">
+                        {[...Array(5)].map((_, j) => (
+                          <Star key={j} className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${j < review.rating ? 'text-yellow-400' : 'text-gray-200'}`} fill={j < review.rating ? 'currentColor' : 'none'} />
+                        ))}
+                      </div>
                     </div>
                   </div>
+                  <p className="text-gray-600 text-[11px] sm:text-sm leading-snug sm:leading-relaxed flex-1">{review.text}</p>
                 </div>
-                <p className="text-gray-600 text-[11px] sm:text-sm leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none">{review.text}</p>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {page > 0 && (
+              <button onClick={() => setPage(page - 1)} className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center text-gray-700 hover:text-violet-600 hover:border-violet-300 transition-all cursor-pointer z-10">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              </button>
+            )}
+
+            {page < totalPages - 1 && (
+              <button onClick={() => setPage(page + 1)} className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white shadow-lg border border-gray-200 flex items-center justify-center text-gray-700 hover:text-violet-600 hover:border-violet-300 transition-all cursor-pointer z-10">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
+            )}
           </div>
         </div>
       </div>
