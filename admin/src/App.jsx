@@ -5,6 +5,7 @@ import AdminLayout from './components/AdminLayout'
 import ProtectedRoute from './components/ProtectedRoute'
 import Dashboard from './pages/Dashboard'
 import GiftCards from './pages/GiftCards'
+import UserSelling from './pages/UserSelling'
 import Users from './pages/Users'
 import Orders from './pages/Orders'
 import Login from './pages/Login'
@@ -22,6 +23,7 @@ function App() {
           <Route element={<AdminLayout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/gift-cards" element={<GiftCards />} />
+            <Route path="/user-selling" element={<UserSelling />} />
             <Route path="/users" element={<Users />} />
             <Route path="/orders" element={<Orders />} />
           </Route>
