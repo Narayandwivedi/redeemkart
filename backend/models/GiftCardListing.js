@@ -36,7 +36,7 @@ const giftCardListingSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['active', 'sold', 'expired'],
+    enum: ['pending', 'active', 'sold', 'expired'],
     default: 'active'
   },
   listedBy: {

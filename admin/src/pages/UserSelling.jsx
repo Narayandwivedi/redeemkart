@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Gift, Trash2, Search, User, Copy, RefreshCcw } from 'lucide-react'
+import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -37,7 +37,18 @@ const UserSelling = () => {
     }
   }
 
-  const handleMakeActive = async (id) => {
+  const handleApprove = async (id) => {
+    if (!window.confirm('Approve this listing?')) return
+    try {
+      await axios.patch(`${BACKEND_URL}/api/admin/gift-cards/${id}/status`, { status: 'active' }, { withCredentials: true })
+      toast.success('Listing approved')
+      fetchData()
+    } catch (err) {
+      toast.error('Failed to approve')
+    }
+  }
+
+  const handleMarkActive = async (id) => {
     if (!window.confirm('Change status to active?')) return
     try {
       await axios.patch(`${BACKEND_URL}/api/admin/gift-cards/${id}/status`, { status: 'active' }, { withCredentials: true })
@@ -112,6 +123,7 @@ const UserSelling = () => {
                     </td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-bold uppercase ${
+                        card.status === 'pending' ? 'bg-amber-100 text-amber-700' :
                         card.status === 'active' ? 'bg-emerald-100 text-emerald-700' :
                         card.status === 'sold' ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'
                       }`}>{card.status}</span>
@@ -122,8 +134,13 @@ const UserSelling = () => {
                     <td className="px-6 py-4 text-xs text-gray-500">{new Date(card.createdAt).toLocaleDateString('en-IN')}</td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex justify-end gap-2">
+                        {card.status === 'pending' && (
+                          <button onClick={() => handleApprove(card._id)} className="text-emerald-500 hover:bg-emerald-50 p-1.5 rounded" title="Approve">
+                            <Check className="w-4 h-4" />
+                          </button>
+                        )}
                         {card.status === 'sold' && (
-                          <button onClick={() => handleMakeActive(card._id)} className="text-blue-500 hover:bg-blue-50 p-1.5 rounded" title="Mark Active">
+                          <button onClick={() => handleMarkActive(card._id)} className="text-blue-500 hover:bg-blue-50 p-1.5 rounded" title="Mark Active">
                             <RefreshCcw className="w-4 h-4" />
                           </button>
                         )}

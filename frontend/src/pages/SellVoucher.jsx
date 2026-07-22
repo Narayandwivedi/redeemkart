@@ -74,7 +74,7 @@ const SellVoucher = () => {
       if (res.data.success) {
         setCards([res.data.data, ...cards])
         setForm({ brand: '', balance: '', code: '', pin: '', expiry: '' })
-        toast.success('Gift card listed successfully')
+        toast.success('Gift card submitted for review')
       }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to list gift card')

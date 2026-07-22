@@ -85,7 +85,7 @@ const updateListingStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    if (!['active', 'sold', 'expired'].includes(status)) {
+    if (!['pending', 'active', 'sold', 'expired'].includes(status)) {
       return res.status(400).json({ success: false, message: 'Invalid status' });
     }
 

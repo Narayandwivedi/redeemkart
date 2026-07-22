@@ -11,7 +11,7 @@ const addListing = async (req, res) => {
       });
     }
 
-    const listing = new GiftCardListing({ user: req.user._id, brand, balance, code, expiry, pin, listedBy: 'user' });
+    const listing = new GiftCardListing({ user: req.user._id, brand, balance, code, expiry, pin, listedBy: 'user', status: 'pending' });
     const saved = await listing.save();
 
     res.status(201).json({

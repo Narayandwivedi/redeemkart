@@ -5,6 +5,7 @@ import axios from 'axios'
 import { AppContext } from '../context/AppContext'
 
 const statusConfig = {
+  pending: { icon: Clock, bg: 'bg-amber-50 text-amber-700 border-amber-200', label: 'Pending' },
   active: { icon: Clock, bg: 'bg-violet-50 text-violet-800 border-violet-200', label: 'Active' },
   sold: { icon: CheckCircle, bg: 'bg-emerald-50 text-emerald-700 border-emerald-200', label: 'Sold' },
   expired: { icon: TrendingUp, bg: 'bg-red-50 text-red-700 border-red-200', label: 'Expired' },
@@ -29,7 +30,7 @@ const MySales = () => {
   }, [BACKEND_URL])
 
   const totalEarnings = listings.filter(s => s.status === 'sold').reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
-  const pendingPayout = listings.filter(s => s.status === 'active').reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
+  const pendingPayout = listings.filter(s => s.status === 'active' || s.status === 'pending').reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
 
   return (
     <div className="min-h-screen bg-gray-50">
