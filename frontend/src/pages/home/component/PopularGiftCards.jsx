@@ -13,7 +13,7 @@ const products = [
 const PopularGiftCards = () => {
   const navigate = useNavigate()
   return (
-    <div className="py-4 md:py-8 bg-gray-50">
+    <div className="py-4 md:py-8 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl md:text-[28px] font-semibold text-gray-800 text-center flex-1">Popular Gift Cards</h2>
