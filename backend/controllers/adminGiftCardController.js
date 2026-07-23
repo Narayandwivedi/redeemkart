@@ -1,4 +1,5 @@
 const GiftCardListing = require('../models/GiftCardListing');
+const Product = require('../models/Product');
 
 const getAllListings = async (req, res) => {
   try {
@@ -80,6 +81,34 @@ const deleteListing = async (req, res) => {
   }
 };
 
+const getOrCreateProductForListing = async (listing) => {
+  let product = await Product.findOne({
+    brand: listing.brand,
+    originalPrice: listing.balance,
+    category: 'gift-cards',
+    isActive: true
+  });
+
+  if (!product) {
+    product = new Product({
+      seoTitle: `${listing.brand} Code - ₹${listing.balance} Voucher`,
+      description: `₹${listing.balance} ${listing.brand} Gift Card.`,
+      category: 'gift-cards',
+      subCategory: 'digital-vouchers',
+      brand: listing.brand,
+      originalPrice: listing.balance,
+      price: listing.balance,
+      stockQuantity: 0,
+      maxAddCartItem: 4,
+      isActive: true,
+      images: [`/products/${listing.brand.toLowerCase().replace(/\s+/g, '%20')}.avif`]
+    });
+    await product.save();
+  }
+
+  return product;
+};
+
 const updateListingStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -89,20 +118,23 @@ const updateListingStatus = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid status' });
     }
 
-    const updateData = { status };
-    if (status === 'active') {
-      updateData.soldTo = null;
-    }
-
-    const listing = await GiftCardListing.findByIdAndUpdate(
-      id,
-      updateData,
-      { new: true, runValidators: true }
-    );
-
+    const listing = await GiftCardListing.findById(id);
     if (!listing) {
       return res.status(404).json({ success: false, message: 'Listing not found' });
     }
+
+    if (status === 'active' && !listing.productId) {
+      const product = await getOrCreateProductForListing(listing);
+      listing.productId = product._id;
+      product.stockQuantity = (product.stockQuantity || 0) + 1;
+      await product.save();
+    }
+
+    listing.status = status;
+    if (status === 'active') {
+      listing.soldTo = null;
+    }
+    await listing.save();
 
     res.status(200).json({
       success: true,

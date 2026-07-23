@@ -492,14 +492,13 @@ const verifyPayment = async (req, res) => {
 
           // Loop for the quantity purchased of this specific item
           for (let q = 0; q < item.quantity; q++) {
-            // Find an available admin-listed gift card - prefer matching by productId for precision
+            // Find an available gift card - prefer matching by productId for precision
             let availableListing = null;
             if (String(item.productId).match(/^[0-9a-fA-F]{24}$/)) {
               // Match by exact product ID first
               availableListing = await GiftCardListing.findOne({
                 productId: item.productId,
-                status: 'active',
-                listedBy: 'admin'
+                status: 'active'
               });
             }
             // Fallback: match by brand + balance (handles old orders & user-listed codes)
@@ -507,8 +506,7 @@ const verifyPayment = async (req, res) => {
               availableListing = await GiftCardListing.findOne({
                 brand: brandName,
                 balance: balance,
-                status: 'active',
-                listedBy: 'admin'
+                status: 'active'
               });
             }
 
