@@ -423,7 +423,7 @@ const GiftCards = () => {
                                         }`}>{c.status}</button>
                                       </td>
                                       <td className="py-2 pr-4 text-xs text-gray-500">
-                                        {c.soldTo ? <span>{c.soldTo.email}</span> : '—'}
+                                        {c.soldTo ? <span>{c.soldTo.fullName}<br/><span className="text-gray-400">{c.soldTo.email}</span></span> : '—'}
                                       </td>
                                       <td className="py-2 text-right">
                                         <button onClick={() => handleDeleteCode(c._id, p._id)} className="text-red-400 hover:text-red-600 hover:bg-red-50 p-1 rounded">

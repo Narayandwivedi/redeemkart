@@ -128,7 +128,7 @@ const UserSelling = () => {
                         card.status === 'sold' ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'
                       }`}>{card.status}</span>
                       {card.status === 'sold' && card.soldTo && (
-                        <span className="block text-[10px] text-gray-500 mt-1">Buyer: {card.soldTo.email}</span>
+                        <span className="block text-[10px] text-gray-500 mt-1">Buyer: {card.soldTo.fullName} ({card.soldTo.email})</span>
                       )}
                     </td>
                     <td className="px-6 py-4 text-xs text-gray-500">{new Date(card.createdAt).toLocaleDateString('en-IN')}</td>
