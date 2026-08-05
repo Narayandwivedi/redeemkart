@@ -13,20 +13,63 @@ const Home = () => {
   const { addToCart } = useCart()
 
   useSEO({
-    title: 'RedeemKart | Buy & Sell Gift Cards, Vouchers & Games',
-    description: 'Welcome to RedeemKart — India\'s trusted gift card trading platform. Buy and sell gift cards, game keys, and digital vouchers instantly at the best rates.',
-    keywords: 'buy gift cards, sell gift cards, gift card trading, voucher exchange, RedeemKart, instant gift card cashout',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "RedeemKart",
-      "url": "https://redeemkart.in",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://redeemkart.in/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+    title: 'RedeemKart | Buy & Sell Gift Cards, Vouchers & Games in India',
+    description: 'RedeemKart — India\'s #1 gift card trading platform. Sell unused gift cards for instant cash or buy discounted Amazon, Flipkart, Google Play, Steam vouchers. Best rates guaranteed.',
+    keywords: 'buy gift cards india, sell gift cards online, gift card marketplace india, discounted gift cards, google play gift card india, amazon gift card sell, flipkart voucher cashout, RedeemKart',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/',
+    structuredDataId: 'home-structured-data',
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "RedeemKart",
+        "url": "https://redeemkart.in",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://redeemkart.in/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I sell a gift card on RedeemKart?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simply visit the Sell Gift Card page, enter your gift card brand, code, and the amount. Once verified and sold, the money is deposited directly into your bank account within 24 hours."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I buy discounted gift cards on RedeemKart?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! RedeemKart offers gift cards from brands like Amazon, Flipkart, Google Play, Steam, Myntra and BigBasket at prices below face value. You get real savings on every purchase."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is RedeemKart safe for gift card trading?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, RedeemKart is 100% safe. Every gift card code is verified before sale, and buyer payments are protected. We use secure payment processing and have served 10,000+ happy traders."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How fast do I receive cash after selling a gift card?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Once your gift card is purchased by a buyer, the amount is credited to your RedeemKart wallet instantly. You can withdraw to your bank account anytime with no minimum balance requirement."
+            }
+          }
+        ]
       }
-    }
+    ]
   })
 
   const bundleGameImages = bundleGameSlugs.map((slug) => games[slug]?.img).filter(Boolean)

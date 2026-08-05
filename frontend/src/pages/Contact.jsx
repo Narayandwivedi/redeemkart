@@ -6,9 +6,45 @@ import { useSEO } from '../hooks/useSEO'
 
 const Contact = () => {
   useSEO({
-    title: 'Contact RedeemKart Support | Get Assistance Instantly',
-    description: 'Contact RedeemKart support team for assistance with gift card trading, voucher payouts, game key purchases, or other inquiries.',
-    keywords: 'contact RedeemKart, gift card support, RedeemKart customer care, support email'
+    title: 'Contact RedeemKart | Customer Support | Gift Card Help',
+    description: 'Contact RedeemKart support team for help with buying or selling gift cards, voucher payouts, order issues, and more. Reach us via email, phone, or live chat — response within 2–4 hours.',
+    keywords: 'contact RedeemKart, RedeemKart customer support, gift card help india, sell gift card support, RedeemKart helpline, voucher support email',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/contact',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact RedeemKart",
+      "url": "https://redeemkart.in/contact",
+      "description": "Get in touch with RedeemKart's customer support for help with gift card trading, payouts, and order issues.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "RedeemKart",
+        "url": "https://redeemkart.in",
+        "logo": "https://redeemkart.in/redeemkart-logo.png",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+91-62646-82508",
+            "contactType": "customer support",
+            "areaServed": "IN",
+            "availableLanguage": ["English", "Hindi"],
+            "hoursAvailable": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "10:00",
+              "closes": "20:00"
+            }
+          },
+          {
+            "@type": "ContactPoint",
+            "email": "support@redeemkart.in",
+            "contactType": "customer support",
+            "areaServed": "IN"
+          }
+        ]
+      }
+    }
   })
 
   const { isAuthenticated } = useContext(AppContext) || {}

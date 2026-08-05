@@ -4,12 +4,36 @@ import { Search, Gift, ShoppingCart } from 'lucide-react'
 import { useCart } from '../../context/CartContext'
 import { toast } from 'react-toastify'
 import { giftCardsList } from '../../data/giftCards'
+import { useSEO } from '../../hooks/useSEO'
 
 const GiftCardsPage = () => {
   const navigate = useNavigate()
   const { addToCart } = useCart()
   const [search, setSearch] = useState('')
   const [selectedBrand, setSelectedBrand] = useState('')
+
+  useSEO({
+    title: 'Buy Gift Cards Online at Best Price | Amazon, Flipkart, Google Play | RedeemKart',
+    description: 'Browse and buy discounted gift cards online in India. Shop Amazon, Flipkart, Google Play, Steam, Myntra & BigBasket gift cards at below face value prices on RedeemKart.',
+    keywords: 'buy gift cards online india, discounted gift cards, amazon gift card, flipkart voucher, google play gift card, steam gift card, myntra voucher, bigbasket gift card',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/gift-cards',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Gift Cards Available on RedeemKart",
+      "description": "Buy discounted gift cards from top Indian and international brands on RedeemKart.",
+      "url": "https://redeemkart.in/gift-cards",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Google Play Gift Card", "url": "https://redeemkart.in/gift-cards/google-play" },
+        { "@type": "ListItem", "position": 2, "name": "Amazon Gift Card", "url": "https://redeemkart.in/gift-cards/amazon" },
+        { "@type": "ListItem", "position": 3, "name": "Flipkart Gift Card", "url": "https://redeemkart.in/gift-cards/flipkart" },
+        { "@type": "ListItem", "position": 4, "name": "Steam Gift Card", "url": "https://redeemkart.in/gift-cards/steam" },
+        { "@type": "ListItem", "position": 5, "name": "Myntra Gift Card", "url": "https://redeemkart.in/gift-cards/myntra" },
+        { "@type": "ListItem", "position": 6, "name": "BigBasket Gift Card", "url": "https://redeemkart.in/gift-cards/bigbasket" }
+      ]
+    }
+  })
 
   const brands = [...new Set(giftCardsList.map((g) => g.brand))]
 

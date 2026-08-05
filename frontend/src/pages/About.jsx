@@ -5,8 +5,37 @@ import { useSEO } from '../hooks/useSEO'
 const About = () => {
   useSEO({
     title: 'About RedeemKart | India\'s Trusted Gift Card Trading Platform',
-    description: 'Learn about RedeemKart, India\'s premier gift card trading platform. Sell unused gift cards for cash and buy discounted vouchers from top brands.',
-    keywords: 'about RedeemKart, gift card trading, sell gift cards online, buy discounted gift cards, voucher marketplace india'
+    description: 'Learn about RedeemKart — India\'s premier gift card trading marketplace. Sell unused gift cards for instant cash and buy discounted vouchers from 100+ top brands like Amazon, Flipkart, Google Play & more.',
+    keywords: 'about RedeemKart, gift card trading platform india, sell gift cards online, buy discounted gift cards, voucher marketplace india, gift card cashout india',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/about',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "RedeemKart",
+      "url": "https://redeemkart.in",
+      "logo": "https://redeemkart.in/redeemkart-logo.png",
+      "description": "RedeemKart is India's premier gift card trading platform where you can sell unused gift cards for instant cash or buy discounted vouchers from 100+ top brands.",
+      "email": "support@redeemkart.in",
+      "telephone": "+916264682508",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "New Delhi",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://redeemkart.in"
+      ],
+      "foundingDate": "2024",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": "10"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      }
+    }
   })
 
   const stats = [

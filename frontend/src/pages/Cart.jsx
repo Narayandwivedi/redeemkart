@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { AppContext } from '../context/AppContext'
-import { Trash2, ShoppingBag, ArrowRight, Plus, Minus, Lock, Tag, Zap, Mail, Edit2, Check, User } from 'lucide-react'
+import { Trash2, ShoppingBag, ArrowRight, Plus, Minus, Lock, Tag, Mail, Edit2, Check, User } from 'lucide-react'
 import { toast } from 'react-toastify'
 
 const Cart = () => {
@@ -92,7 +92,7 @@ const Cart = () => {
             })
             const verifyResult = await verifyResponse.json()
             if (verifyResult.success) {
-              toast.success('ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â° Payment successful! Order placed.')
+              toast.success('Payment successful! Order placed.')
               clearCart()
               navigate('/my-orders')
             } else {
@@ -183,11 +183,7 @@ const Cart = () => {
           )}
         </div>
 
-        {/* Digital delivery notice */}
-        <div className="flex items-center gap-2 bg-violet-50 border border-violet-200 rounded-xl px-4 py-2.5 mb-6">
-          <Zap className="w-4 h-4 text-violet-600 shrink-0" />
-          <span className="text-xs font-medium text-violet-800">Digital products ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â instant delivery to your account after order confirmation</span>
-        </div>
+
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
@@ -318,7 +314,7 @@ const Cart = () => {
               to="/"
               className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-violet-700 font-medium transition-colors mt-2"
             >
-              ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Ãƒâ€šÃ‚Â Continue Shopping
+              ← Continue Shopping
             </Link>
           </div>
 

@@ -1,5 +1,20 @@
 User-agent: *
 Allow: /
 
+# Disallow private/user-specific pages
+Disallow: /cart
+Disallow: /checkout
+Disallow: /profile
+Disallow: /account
+Disallow: /my-orders
+Disallow: /order/
+Disallow: /manage-addresses
+Disallow: /profile-info
+Disallow: /customer-support
+Disallow: /payout-details
+Disallow: /my-sales
+Disallow: /chat
+Disallow: /login
+
 # Sitemaps
-Sitemap: https://gchub.in/sitemap.xml
+Sitemap: https://redeemkart.in/sitemap.xml

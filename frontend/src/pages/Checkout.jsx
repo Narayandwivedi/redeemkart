@@ -159,14 +159,14 @@ const Checkout = () => {
             Back to Cart
           </Link>
           <h1 className="text-2xl font-semibold text-slate-900">Complete Your Order</h1>
-          <p className="text-slate-500 text-sm mt-1">Digital products ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â instant delivery after payment</p>
+
         </div>
 
         {/* Digital badge */}
         <div className="flex items-center gap-2 bg-violet-50 border border-violet-200 rounded-xl px-4 py-3 mb-6">
           <Zap className="w-4 h-4 text-violet-700 shrink-0" />
           <p className="text-sm font-medium text-violet-900">
-            These are digital products. No shipping address required ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â you'll receive your voucher code by email / in your account.
+            These are digital products. No shipping address required — you'll receive your voucher code by email / in your account.
           </p>
         </div>
 
@@ -282,7 +282,7 @@ const Checkout = () => {
               ) : (
                 <span className="flex items-center justify-center gap-2">
                   <Lock className="w-4 h-4" />
-                  Place Order Ãƒâ€šÃ‚Â· {formatPrice(subtotal)}
+                  Place Order · {formatPrice(subtotal)}
                 </span>
               )}
             </button>

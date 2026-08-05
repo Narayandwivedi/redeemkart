@@ -787,9 +787,9 @@ const SearchResults = () => {
             <div className="space-y-3">
               <p className="text-sm text-gray-500">Try:</p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>â€¢ Checking your spelling</li>
-                <li>â€¢ Using more general terms</li>
-                <li>â€¢ Trying different keywords</li>
+                <li>• Checking your spelling</li>
+                <li>• Using more general terms</li>
+                <li>• Trying different keywords</li>
               </ul>
             </div>
             <button

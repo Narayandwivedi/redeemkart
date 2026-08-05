@@ -203,7 +203,7 @@ const OrderDetail = () => {
                       {/* Card header */}
                       <div className="flex items-start justify-between gap-2 mb-4">
                         <span className="font-medium text-gray-800 text-sm leading-tight">
-                          {gc.brand} Ã¢â‚¬â€ Ã¢â€šÂ¹{gc.balance} Gift Card
+                          {gc.brand} — ₹{gc.balance} Gift Card
                         </span>
                         <span className="flex-shrink-0 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
                           Ready to Use
@@ -267,7 +267,7 @@ const OrderDetail = () => {
                     </div>
                   ))}
                   <div className="text-xs text-emerald-700 bg-emerald-100 rounded-lg p-3 leading-relaxed">
-                    Ã°Å¸â€™Â¡ <strong>How to redeem:</strong> Go to your Google Play / respective store, tap &quot;Redeem code&quot; and enter the code above.
+                    💡 <strong>How to redeem:</strong> Go to your Google Play / respective store, tap &quot;Redeem code&quot; and enter the code above.
                   </div>
                   <p className="text-xs font-medium text-emerald-800 text-center pt-2 border-t border-emerald-200/50">
                     Your code has been sent to your email. You can also find it here anytime.

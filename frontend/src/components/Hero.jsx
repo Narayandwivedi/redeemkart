@@ -80,7 +80,7 @@ const Hero = () => {
                 to="/pc-build" 
                 className="group bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-semibold text-sm py-2.5 px-6 rounded-xl hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-center cursor-pointer flex items-center justify-center"
               >
-                <span className="mr-2">ðŸš€</span>
+                <span className="mr-2">🚀</span>
                 Build Your PC Now
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -91,7 +91,7 @@ const Hero = () => {
                 to="/pc-parts" 
                 className="group bg-white text-gray-700 font-medium text-sm py-2.5 px-6 rounded-xl border-2 border-gray-200 hover:border-cyan-300 hover:bg-cyan-50 transition-all duration-300 text-center cursor-pointer flex items-center justify-center"
               >
-                <span className="mr-2">ðŸ›’</span>
+                <span className="mr-2">🛒</span>
                 Browse PC Parts
               </Link>
             </div>
@@ -160,7 +160,7 @@ const Hero = () => {
                   to="/pc-build" 
                   className="group bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-center cursor-pointer flex items-center justify-center"
                 >
-                  <span className="mr-2">ðŸš€</span>
+                  <span className="mr-2">🚀</span>
                   Build Your PC Now
                   <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -171,7 +171,7 @@ const Hero = () => {
                   to="/pc-parts" 
                   className="group bg-white text-gray-700 font-medium py-3 px-6 rounded-xl border-2 border-gray-200 hover:border-cyan-300 hover:bg-cyan-50 transition-all duration-300 text-center cursor-pointer flex items-center justify-center"
                 >
-                  <span className="mr-2">ðŸ›’</span>
+                  <span className="mr-2">🛒</span>
                   Browse PC Parts
                 </Link>
               </div>

@@ -6,7 +6,8 @@ const RefundPolicy = () => {
   useSEO({
     title: 'Refund Policy | RedeemKart Gift Cards & Game Vouchers',
     description: 'Read the RedeemKart Refund Policy. Learn about conditions under which refunds, exchanges, or returns for digital gift cards and game keys may be processed.',
-    keywords: 'RedeemKart refund policy, digital voucher returns, game key refunds, gift card returns policy'
+    keywords: 'RedeemKart refund policy, digital voucher returns, game key refunds, gift card returns policy',
+    canonicalUrl: 'https://redeemkart.in/refund-policy'
   })
 
   return (
@@ -38,7 +39,7 @@ const RefundPolicy = () => {
               <h2 className="text-lg font-semibold text-gray-900 mb-2">No Refund Policy</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 At Voucher Cash, all sales are <strong className="text-gray-900">final and non-refundable</strong>. 
-                Once a digital product Ã¢â‚¬â€ including game keys, gift cards, vouchers, and codes Ã¢â‚¬â€ is purchased and 
+                Once a digital product — including game keys, gift cards, vouchers, and codes — is purchased and 
                 delivered, it cannot be returned, exchanged, or refunded for any reason.
               </p>
             </div>
@@ -71,19 +72,19 @@ const RefundPolicy = () => {
               </p>
               <ul className="mt-3 space-y-2 text-sm sm:text-base text-gray-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>The code/voucher was already used before delivery</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>The code does not match the product description</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>The product was not delivered due to a technical error</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>Wrong product was delivered to your account</span>
                 </li>
               </ul>
@@ -98,7 +99,7 @@ const RefundPolicy = () => {
               <h2 className="text-lg font-semibold text-gray-900 mb-2">Refund Processing Time</h2>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                 If your refund request is approved, the refund will be processed within 
-                <strong className="text-gray-900"> 3Ã¢â‚¬â€œ5 business days</strong>. The amount will be credited 
+                <strong className="text-gray-900"> 3–5 business days</strong>. The amount will be credited 
                 back to your original payment method. Please note that it may take additional time for 
                 the refund to reflect in your account depending on your bank or payment provider.
               </p>

@@ -213,7 +213,7 @@ const MyOrders = () => {
                           <span className="font-medium text-purple-600 uppercase tracking-wider text-[10px]">
                             {item.productBrand}
                           </span>
-                          <span>Ãƒâ€šÃ‚Â·</span>
+                          <span>·</span>
                           <span>Qty: {item.quantity}</span>
                         </div>
                       </div>

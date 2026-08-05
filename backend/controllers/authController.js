@@ -559,7 +559,7 @@ const updateProfile = async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const allowedFields = [
       'fullName', 'phone', 'bankAccountHolder', 'bankAccountNumber',
-      'bankName', 'ifscCode', 'upiId'
+      'bankName', 'ifscCode'
     ];
     const updates = {};
     Object.keys(req.body).forEach((key) => {

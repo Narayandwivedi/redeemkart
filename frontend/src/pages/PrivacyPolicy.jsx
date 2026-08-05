@@ -1,7 +1,14 @@
 import React from 'react'
 import { Shield, Lock, Eye, Database, Mail, Cookie, UserCheck, AlertTriangle } from 'lucide-react'
+import { useSEO } from '../hooks/useSEO'
 
 const PrivacyPolicy = () => {
+  useSEO({
+    title: 'Privacy Policy | RedeemKart — Gift Card Trading Platform',
+    description: 'Read the RedeemKart Privacy Policy to understand how we collect, use, and protect your personal data when you buy or sell gift cards and vouchers on our platform.',
+    keywords: 'RedeemKart privacy policy, gift card platform privacy, data protection, user data policy india',
+    canonicalUrl: 'https://redeemkart.in/privacy-policy'
+  })
   return (
     <div className="min-h-screen bg-gray-50 py-8 sm:py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,19 +55,19 @@ const PrivacyPolicy = () => {
               </p>
               <ul className="space-y-2 text-sm sm:text-base text-gray-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span><strong className="text-gray-900">Personal Information:</strong> Name, email address, phone number, and billing details when you create an account or make a transaction.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span><strong className="text-gray-900">Payment Information:</strong> Bank account details and UPI IDs for processing payouts. All payment data is handled securely through our payment partners.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span><strong className="text-gray-900">Usage Data:</strong> Information about how you interact with our platform, including pages visited, products viewed, and transaction history.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span><strong className="text-gray-900">Device Information:</strong> IP address, browser type, operating system, and device identifiers for analytics and security purposes.</span>
                 </li>
               </ul>
@@ -78,27 +85,27 @@ const PrivacyPolicy = () => {
               </p>
               <ul className="space-y-2 text-sm sm:text-base text-gray-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>To process and fulfill your orders and sell listing requests</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>To process payouts and transfer funds to your bank account</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>To communicate with you about orders, promotions, and support requests</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>To detect and prevent fraudulent activity and ensure platform security</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>To improve our platform, user experience, and customer support</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-violet-500 mt-0.5">Ã¢â‚¬Â¢</span>
+                  <span className="text-violet-500 mt-0.5">•</span>
                   <span>To comply with legal obligations and enforce our terms of service</span>
                 </li>
               </ul>

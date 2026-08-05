@@ -5,11 +5,27 @@ import { useCart } from '../../context/CartContext'
 import { AppContext } from '../../context/AppContext'
 import { toast } from 'react-toastify'
 import { gamesList, games, bundleGameSlugs } from '../../data/games'
+import { useSEO } from '../../hooks/useSEO'
 
 const GamesPage = () => {
   const navigate = useNavigate()
   const { addToCart } = useCart()
   const [search, setSearch] = useState('')
+
+  useSEO({
+    title: 'Buy PC & Console Game Keys Online in India | Best Deals | RedeemKart',
+    description: 'Buy affordable PC and console game keys and codes in India on RedeemKart. Get Steam, PlayStation, Xbox game keys at discounted prices with instant digital delivery.',
+    keywords: 'buy game keys india, pc game keys, steam keys india, cheap game codes, xbox game keys, playstation game codes, buy games online india, RedeemKart games',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/games',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Buy Game Keys Online India | RedeemKart",
+      "url": "https://redeemkart.in/games",
+      "description": "Browse and buy PC and console game keys at discounted prices. Instant digital delivery across India."
+    }
+  })
 
   const filtered = search
     ? gamesList.filter(

@@ -63,24 +63,27 @@ export const useSEO = ({
     }
     canonicalLink.setAttribute('href', finalCanonicalUrl)
 
-    // 6. Structured Data Schema
-    let jsonLdScript = null
+    // 6. Structured Data Schema (supports single object or array)
+    const injectedScripts = []
     if (structuredData) {
-      jsonLdScript = document.querySelector(`#${structuredDataId}`)
-      if (!jsonLdScript) {
-        jsonLdScript = document.createElement('script')
-        jsonLdScript.id = structuredDataId
-        jsonLdScript.type = 'application/ld+json'
-        document.head.appendChild(jsonLdScript)
-      }
-      jsonLdScript.textContent = JSON.stringify(structuredData)
+      const schemas = Array.isArray(structuredData) ? structuredData : [structuredData]
+      schemas.forEach((schema, index) => {
+        const id = index === 0 ? structuredDataId : `${structuredDataId}-${index}`
+        let script = document.querySelector(`#${id}`)
+        if (!script) {
+          script = document.createElement('script')
+          script.id = id
+          script.type = 'application/ld+json'
+          document.head.appendChild(script)
+        }
+        script.textContent = JSON.stringify(schema)
+        injectedScripts.push(script)
+      })
     }
 
     // Cleanup
     return () => {
-      if (jsonLdScript) {
-        jsonLdScript.remove()
-      }
+      injectedScripts.forEach(script => script.remove())
     }
   }, [
     title,

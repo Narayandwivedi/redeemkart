@@ -1,18 +1,17 @@
 import React, { useState, useContext } from 'react'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
-import { Building2, Smartphone, Banknote, Save, X, Loader, Edit2, CheckCircle, AlertCircle } from 'lucide-react'
+import { Building2, Banknote, Save, X, Loader, Edit2, CheckCircle, AlertCircle } from 'lucide-react'
 
 const PayoutDetails = () => {
   const { user, BACKEND_URL, setUser } = useContext(AppContext)
-  const hasExistingPayout = user?.bankAccountHolder || user?.bankAccountNumber || user?.bankName || user?.ifscCode || user?.upiId
+  const hasExistingPayout = user?.bankAccountHolder || user?.bankAccountNumber || user?.bankName || user?.ifscCode
   const [isEditing, setIsEditing] = useState(!hasExistingPayout)
   const [formData, setFormData] = useState({
     bankAccountHolder: user?.bankAccountHolder || '',
     bankAccountNumber: user?.bankAccountNumber || '',
     bankName: user?.bankName || '',
     ifscCode: user?.ifscCode || '',
-    upiId: user?.upiId || '',
   })
   const [loading, setLoading] = useState(false)
 
@@ -47,7 +46,6 @@ const PayoutDetails = () => {
       bankAccountNumber: user?.bankAccountNumber || '',
       bankName: user?.bankName || '',
       ifscCode: user?.ifscCode || '',
-      upiId: user?.upiId || '',
     })
     setIsEditing(false)
   }
@@ -57,7 +55,6 @@ const PayoutDetails = () => {
   }
 
   const hasBank = formData.bankAccountHolder && formData.bankAccountNumber && formData.bankName && formData.ifscCode
-  const hasUpi = formData.upiId
 
   return (
     <div className="min-h-screen bg-gray-50 py-6 sm:py-10">
@@ -75,7 +72,7 @@ const PayoutDetails = () => {
               </div>
               <div>
                 <h2 className="text-lg sm:text-xl font-semibold text-white">Payout Settings</h2>
-                <p className="text-violet-200 text-sm mt-0.5">Add your bank account or UPI ID</p>
+                <p className="text-violet-200 text-sm mt-0.5">Add your bank account for payouts</p>
               </div>
             </div>
           </div>
@@ -130,41 +127,11 @@ const PayoutDetails = () => {
                   </div>
                 </div>
 
-                {/* Divider */}
-                <div className="flex items-center gap-3">
-                  <span className="flex-1 h-px bg-gray-200"></span>
-                  <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">OR</span>
-                  <span className="flex-1 h-px bg-gray-200"></span>
-                </div>
-
-                {/* UPI */}
-                <div>
-                  <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
-                    <Smartphone className="w-4 h-4 text-violet-500" />
-                    UPI
-                  </div>
-
-                  {!isEditing && hasUpi && (
-                    <div className="flex items-center gap-2 text-xs text-green-600 mb-3 bg-green-50 px-3 py-2 rounded-lg">
-                      <CheckCircle className="w-4 h-4 shrink-0" />
-                      UPI ID added
-                    </div>
-                  )}
-
-                  <div>
-                    <label className="block text-[11px] font-medium text-gray-500 mb-1">UPI ID</label>
-                    <input type="text" name="upiId" value={formData.upiId} onChange={handleChange} disabled={!isEditing} placeholder="e.g. name@upi"
-                      className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
-                        !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
-                      }`} />
-                  </div>
-                </div>
-
                 {/* Status info */}
-                {!isEditing && !hasBank && !hasUpi && (
+                {!isEditing && !hasBank && (
                   <div className="flex items-center gap-2 text-xs text-violet-700 bg-violet-50 px-3 py-2.5 rounded-lg">
                     <AlertCircle className="w-4 h-4 shrink-0" />
-                    No payout details added yet. Click Edit to add your bank account or UPI ID.
+                    No payout details added yet. Click Edit to add your bank account.
                   </div>
                 )}
 

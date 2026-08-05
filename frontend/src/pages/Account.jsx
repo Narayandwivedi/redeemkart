@@ -27,7 +27,7 @@ const Account = () => {
     },
     {
       title: 'Payout Details',
-      description: 'Manage your bank account and UPI for payouts',
+      description: 'Manage your bank account for payouts',
       path: '/payout-details',
       icon: <Banknote className="w-6 h-6" />
     },

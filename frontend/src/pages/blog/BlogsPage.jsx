@@ -1,12 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
+import { useSEO } from '../../hooks/useSEO';
 
 const BlogsPage = () => {
   const { BACKEND_URL } = useContext(AppContext);
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+
+  useSEO({
+    title: 'Blog | Gift Card Tips, Voucher Guides & Deals | RedeemKart',
+    description: 'Explore the RedeemKart blog for the latest tips on buying and selling gift cards, how to get maximum value from vouchers, game key guides, and exclusive deals in India.',
+    keywords: 'gift card tips, sell gift card guide, buy discounted vouchers, RedeemKart blog, gift card deals india, google play voucher tips',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/blog'
+  })
 
   useEffect(() => {
     fetchBlogs();
@@ -157,7 +166,7 @@ const BlogsPage = () => {
           </div>
         ) : blogs.length === 0 ? (
           <div className="text-center py-20">
-            <div className="text-gray-400 text-6xl mb-4">ðŸ“</div>
+            <div className="text-gray-400 text-6xl mb-4">📝</div>
             <h3 className="text-2xl font-medium text-gray-700 mb-2">No blogs found</h3>
             <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
           </div>
