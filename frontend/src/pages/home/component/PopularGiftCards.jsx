@@ -15,8 +15,8 @@ const PopularGiftCards = () => {
   return (
     <div className="py-4 md:py-8 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl md:text-[28px] font-semibold text-gray-800 text-center flex-1">Popular Gift Cards</h2>
+        <div className="flex items-center justify-between mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-[28px] font-bold md:font-semibold text-gray-800 text-center flex-1">Popular Gift Cards</h2>
           <button
             onClick={() => navigate('/gift-cards')}
             className="hidden sm:flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 cursor-pointer"
@@ -39,7 +39,6 @@ const PopularGiftCards = () => {
                 alt={product.name}
                 className="h-28 w-28 sm:h-44 sm:w-44 object-contain max-w-full"
               />
-              <div className="flex-1" />
               <span className="w-full sm:w-44 py-2 sm:py-2.5 bg-gradient-to-r from-gray-800 to-gray-900 text-white text-[10px] sm:text-xs font-semibold hover:shadow-md hover:from-gray-700 hover:to-gray-800 transition-all duration-200 text-center cursor-pointer">
                 Shop Now
               </span>
