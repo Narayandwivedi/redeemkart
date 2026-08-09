@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Gift, Gamepad2, DollarSign, ArrowRight, Star, Sparkles } from 'lucide-react'
 import HeroSection from './component/HeroSection'
 import PopularGiftCards from './component/PopularGiftCards'
+import HomeGamesSection from './component/HomeGamesSection'
 import { useCart } from '../../context/CartContext'
 import { toast } from 'react-toastify'
 import { games, bundleGameSlugs } from '../../data/games'
@@ -122,6 +123,8 @@ const Home = () => {
       </div>
 
       <PopularGiftCards />
+
+      <HomeGamesSection />
 
       {/* Quick Links */}
       <div className="py-6 bg-white border-b border-slate-100">

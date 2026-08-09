@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const products = [
-  { name: 'Google Play', file: '/products/google%20play.avif', link: '/gift-cards/google-play' },
+  { name: 'Google Play', file: '/products/google%20play%203.png', link: '/gift-cards/google-play' },
   { name: 'Amazon', file: '/products/amazon.avif', link: '/gift-cards/amazon' },
   { name: 'BigBasket', file: '/products/bigbasket.avif', link: '/gift-cards/bigbasket' },
   { name: 'Flipkart', file: '/products/flipkart.avif', link: '/gift-cards/flipkart' },
@@ -37,10 +37,10 @@ const PopularGiftCards = () => {
               <img
                 src={product.file}
                 alt={product.name}
-                className="h-28 w-28 sm:h-44 sm:w-44 object-contain"
+                className="h-28 w-28 sm:h-44 sm:w-44 object-contain max-w-full"
               />
               <div className="flex-1" />
-              <span className="w-28 sm:w-44 py-2 sm:py-2.5 bg-gradient-to-r from-violet-500 to-violet-600 text-white text-[10px] sm:text-xs font-semibold hover:shadow-md hover:from-violet-400 hover:to-violet-500 transition-all duration-200 text-center cursor-pointer">
+              <span className="w-full sm:w-44 py-2 sm:py-2.5 bg-gradient-to-r from-gray-800 to-gray-900 text-white text-[10px] sm:text-xs font-semibold hover:shadow-md hover:from-gray-700 hover:to-gray-800 transition-all duration-200 text-center cursor-pointer">
                 Shop Now
               </span>
             </Link>
