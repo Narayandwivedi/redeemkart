@@ -19,6 +19,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div>
             <Link to="/" className="flex items-center mb-2 group">
+              <img src="/favicon.png" alt="RedeemKart" className="h-10 md:h-12 w-auto object-contain mr-2" />
               <span
                 className="text-2xl md:text-3xl font-semibold tracking-tight"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
