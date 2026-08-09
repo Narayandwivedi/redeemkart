@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const products = [
-  { name: 'Google Play', file: '/products/google%20play%203.png', link: '/gift-cards/google-play' },
+  { name: 'Google Play', file: '/products/google%20play.avif', link: '/gift-cards/google-play' },
   { name: 'Amazon', file: '/products/amazon.avif', link: '/gift-cards/amazon' },
   { name: 'BigBasket', file: '/products/bigbasket.avif', link: '/gift-cards/bigbasket' },
   { name: 'Flipkart', file: '/products/flipkart.avif', link: '/gift-cards/flipkart' },
