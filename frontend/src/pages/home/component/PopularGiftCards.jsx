@@ -27,19 +27,21 @@ const PopularGiftCards = () => {
             </svg>
           </button>
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 gap-2">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4">
           {products.map((product) => (
             <Link
               key={product.name}
               to={product.link}
-              className="flex flex-col items-center h-full"
+              className="flex flex-col items-center bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-200 overflow-hidden transition-all duration-200 hover:-translate-y-1 group h-full"
             >
-              <img
-                src={product.file}
-                alt={product.name}
-                className="h-28 w-28 sm:h-44 sm:w-44 object-contain max-w-full"
-              />
-              <span className="w-full sm:w-44 py-2 sm:py-2.5 bg-gradient-to-r from-gray-800 to-gray-900 text-white text-[10px] sm:text-xs font-semibold hover:shadow-md hover:from-gray-700 hover:to-gray-800 transition-all duration-200 text-center cursor-pointer">
+              <div className="w-full flex-1 flex items-center justify-center p-1.5 sm:p-3 bg-white">
+                <img
+                  src={product.file}
+                  alt={product.name}
+                  className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-200 block"
+                />
+              </div>
+              <span className="w-full py-1.5 sm:py-2.5 bg-gradient-to-r from-gray-800 to-gray-900 text-white text-[10px] sm:text-xs font-semibold group-hover:from-gray-700 group-hover:to-gray-800 transition-all duration-200 text-center block mt-auto">
                 Shop Now
               </span>
             </Link>
