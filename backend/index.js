@@ -47,6 +47,11 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+console.log(process.env.MONGODB_URI);
+
+
+
 // Static file serving for uploaded images
 app.use('/uploads', express.static('uploads'));
 
