@@ -23,6 +23,8 @@ const GiftCardMyntra = () => {
     title: 'Myntra Gift Cards | Buy Online & Save | RedeemKart',
     description: 'Get Myntra gift card codes instantly on RedeemKart. Save up to 15% on Myntra vouchers with instant digital delivery via email.',
     keywords: 'buy myntra gift card, myntra voucher, cheap myntra codes, myntra redeem codes, RedeemKart',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/gift-cards/myntra',
     structuredData: { "@context": "https://schema.org", "@type": "ItemList", "name": "Myntra Gift Cards on RedeemKart", "numberOfItems": vouchers.length, "itemListElement": vouchers.map((v, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@type": "Product", "name": v.name, "description": v.description, "offers": { "@type": "Offer", "priceCurrency": "INR", "price": v.price, "availability": v.stockQuantity === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock" } } })) }
   })
 

@@ -49,6 +49,8 @@ const GiftCardGooglePlay = () => {
     title: 'Google Play Gift Cards | Buy Online & Save | RedeemKart',
     description: 'Get Google Play gift card codes instantly on RedeemKart. Save up to 20% on Google Play vouchers with instant digital delivery via email.',
     keywords: 'buy google play gift card, google play voucher, cheap google play codes, google play redeem codes, RedeemKart',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/gift-cards/google-play',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "ItemList",

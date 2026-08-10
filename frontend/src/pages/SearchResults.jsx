@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useSEO } from '../hooks/useSEO'
 
 const SearchResults = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -16,6 +17,17 @@ const SearchResults = () => {
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1)
   const [originalSearchInput, setOriginalSearchInput] = useState('')
   const navigate = useNavigate()
+  const query = searchParams.get('q') || ''
+
+  useSEO({
+    title: query
+      ? `"${query}" — Search Results | RedeemKart`
+      : 'Search Gift Cards & Vouchers | RedeemKart',
+    description: query
+      ? `Browse search results for "${query}" on RedeemKart. Find discounted gift cards, vouchers, and game codes.`
+      : 'Search for gift cards, digital vouchers, and game codes on RedeemKart — India\'s trusted gift card marketplace.',
+    noindex: true, // search result pages should not be indexed
+  })
 
   // Comprehensive suggestions based on popular e-commerce search terms
   const sampleSuggestions = [
@@ -156,7 +168,6 @@ const SearchResults = () => {
   ]
 
   // Get search parameters
-  const query = searchParams.get('q') || ''
   const category = searchParams.get('category') || 'all'
   const brand = searchParams.get('brand') || 'all'
   const sort = searchParams.get('sort') || 'relevance'

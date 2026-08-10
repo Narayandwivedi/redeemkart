@@ -89,17 +89,21 @@ const BlogsPage = () => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "Blog - MySeries11",
-            "description": "Latest cricket news and fantasy tips from MySeries11. Stay updated with cricket analysis, fantasy sports strategies, player insights, and expert predictions.",
-            "url": "https://myseries11.com/blog",
+            "name": "Blog - RedeemKart",
+            "description": "Explore the RedeemKart blog for gift card tips, voucher guides, how to sell unused gift cards, and get maximum value from discounted vouchers in India.",
+            "url": "https://redeemkart.in/blog",
             "mainEntity": {
               "@type": "Blog",
-              "name": "MySeries11 Blog",
-              "description": "Cricket news, fantasy tips, and expert analysis",
+              "name": "RedeemKart Blog",
+              "description": "Gift card tips, voucher guides, and deals for Indian shoppers",
               "publisher": {
                 "@type": "Organization",
-                "name": "MySeries11",
-                "url": "https://myseries11.com"
+                "name": "RedeemKart",
+                "url": "https://redeemkart.in",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://redeemkart.in/redeemkart-logo.png"
+                }
               }
             },
             "breadcrumb": {
@@ -109,13 +113,13 @@ const BlogsPage = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Home",
-                  "item": "https://myseries11.com/"
+                  "item": "https://redeemkart.in/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Blog",
-                  "item": "https://myseries11.com/blog"
+                  "item": "https://redeemkart.in/blog"
                 }
               ]
             }

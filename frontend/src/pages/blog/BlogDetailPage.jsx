@@ -45,7 +45,7 @@ const BlogDetailPage = () => {
       const description = blog.metaDescription || blog.excerpt;
       const imageUrl = blog.featuredImage ? getImageUrl(blog.featuredImage) : null;
       
-      document.title = `${title} | MySeries11 Blog`;
+      document.title = `${title} | RedeemKart Blog`;
       
       const setMetaTag = (name, content, property = false) => {
         const attribute = property ? 'property' : 'name';
@@ -59,7 +59,7 @@ const BlogDetailPage = () => {
       };
 
       setMetaTag('description', description);
-      setMetaTag('keywords', blog.tags ? blog.tags.join(', ') : 'cricket, fantasy cricket, MySeries11');
+      setMetaTag('keywords', blog.tags ? blog.tags.join(', ') : 'gift cards, vouchers, RedeemKart');
       
       setMetaTag('og:title', title, true);
       setMetaTag('og:description', description, true);
@@ -108,16 +108,17 @@ const BlogDetailPage = () => {
         },
         "publisher": {
           "@type": "Organization",
-          "name": "MySeries11",
+          "name": "RedeemKart",
+          "url": "https://redeemkart.in",
           "logo": {
             "@type": "ImageObject",
-            "url": `${window.location.origin}/logo.png`
+            "url": "https://redeemkart.in/redeemkart-logo.png"
           }
         },
         "datePublished": blog.publishedAt || blog.createdAt,
         "dateModified": blog.updatedAt || blog.createdAt,
         "articleSection": blog.category,
-        "keywords": blog.tags ? blog.tags.join(', ') : 'cricket, fantasy cricket',
+        "keywords": blog.tags ? blog.tags.join(', ') : 'gift cards, vouchers, RedeemKart',
         "mainEntityOfPage": {
           "@type": "WebPage",
           "@id": window.location.href
@@ -135,7 +136,7 @@ const BlogDetailPage = () => {
     }
 
     return () => {
-      document.title = 'MySeries11 - Skill Based Fantasy Cricket Gaming Platform | Play & Win Cash';
+      document.title = 'RedeemKart | Buy & Sell Gift Cards, Vouchers & Games';
       
       const jsonLd = document.querySelector('#blog-structured-data');
       if (jsonLd) {
@@ -251,7 +252,7 @@ const BlogDetailPage = () => {
                   </div>
                   <div className="text-left">
                     <div className="font-medium text-gray-900">By {blog.author}</div>
-                    <div className="text-sm text-gray-500">Cricket Expert</div>
+                    <div className="text-sm text-gray-500">RedeemKart Team</div>
                   </div>
                 </div>
                 
@@ -342,7 +343,7 @@ const BlogDetailPage = () => {
                         {blog.author.charAt(0)}
                       </div>
                       <h4 className="font-medium text-gray-900">{blog.author}</h4>
-                      <p className="text-sm text-gray-500">Cricket Expert</p>
+                      <p className="text-sm text-gray-500">Gift Card Expert</p>
                     </div>
                   </div>
 

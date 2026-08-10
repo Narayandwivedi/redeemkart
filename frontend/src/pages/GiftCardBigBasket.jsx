@@ -23,6 +23,8 @@ const GiftCardBigBasket = () => {
     title: 'BigBasket Gift Cards | Buy Online & Save | RedeemKart',
     description: 'Get BigBasket gift card codes instantly on RedeemKart. Save up to 15% on BigBasket vouchers with instant digital delivery via email.',
     keywords: 'buy bigbasket gift card, bigbasket voucher, cheap bigbasket codes, bigbasket redeem codes, RedeemKart',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/gift-cards/bigbasket',
     structuredData: { "@context": "https://schema.org", "@type": "ItemList", "name": "BigBasket Gift Cards on RedeemKart", "numberOfItems": vouchers.length, "itemListElement": vouchers.map((v, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@type": "Product", "name": v.name, "description": v.description, "offers": { "@type": "Offer", "priceCurrency": "INR", "price": v.price, "availability": v.stockQuantity === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock" } } })) }
   })
 

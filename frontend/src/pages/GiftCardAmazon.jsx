@@ -24,6 +24,8 @@ const GiftCardAmazon = () => {
     title: 'Amazon Gift Cards | Buy Online & Save | RedeemKart',
     description: 'Get Amazon gift card codes instantly on RedeemKart. Save up to 15% on Amazon vouchers with instant digital delivery via email.',
     keywords: 'buy amazon gift card, amazon voucher, cheap amazon codes, amazon redeem codes, RedeemKart',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/gift-cards/amazon',
     structuredData: { "@context": "https://schema.org", "@type": "ItemList", "name": "Amazon Gift Cards on RedeemKart", "numberOfItems": vouchers.length, "itemListElement": vouchers.map((v, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@type": "Product", "name": v.name, "description": v.description, "offers": { "@type": "Offer", "priceCurrency": "INR", "price": v.price, "availability": v.stockQuantity === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock" } } })) }
   })
 
