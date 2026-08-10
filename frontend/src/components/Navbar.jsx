@@ -45,13 +45,25 @@ const Navbar = () => {
     setMobileMenuOpen(false)
   }, [location.pathname])
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
+
   return (
     <nav className="bg-gray-100 shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-[55px] md:h-[90px] relative">
           {/* Mobile Back Button OR Hamburger Menu */}
           {location.pathname === '/' ? (
-            <div className="md:hidden flex items-center w-10" ref={mobileMenuRef}>
+            <div className="md:hidden flex items-center w-10">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={`p-2 rounded-md transition-colors duration-200 cursor-pointer ${mobileMenuOpen ? 'text-blue-600 bg-gray-200' : 'text-gray-700 hover:text-blue-600'}`}
@@ -268,10 +280,30 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Sidebar Overlay */}
       {mobileMenuOpen && (
-        <div ref={mobileMenuRef} className="md:hidden border-t border-gray-200 bg-gray-100 animate-fadeIn">
-          <nav className="px-4 py-3">
+        <div className="md:hidden fixed inset-0 z-50">
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div ref={mobileMenuRef} className="absolute top-0 left-0 h-full w-[85%] max-w-sm bg-gray-100 shadow-2xl overflow-y-auto animate-slide-in-left">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white sticky top-0 z-10">
+              <Link to="/" className="flex items-center flex-shrink-0">
+                <img src="/favicon.png" alt="" className="h-9 w-auto object-contain mr-2" />
+                <img src="/redeemkart-logo.png" alt="RedeemKart" className="h-8 w-auto object-contain" />
+              </Link>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 text-gray-600 hover:text-gray-900 rounded-md hover:bg-gray-100 transition-colors cursor-pointer"
+                aria-label="Close menu"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <nav className="px-4 py-3">
             <p className="px-3 pb-1.5 pt-1 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
               Quick Actions
             </p>
@@ -295,28 +327,6 @@ const Navbar = () => {
               </span>
               Buy Google Play Card
             </Link>
-
-            <div className="border-t border-gray-200 my-2"></div>
-            <p className="px-3 pb-1.5 pt-1 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
-              Popular Brands
-            </p>
-            <div className="grid grid-cols-2 gap-1.5 px-1">
-              <Link to="/gift-card/amazon" className="flex items-center px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150 cursor-pointer">
-                Amazon
-              </Link>
-              <Link to="/gift-card/flipkart" className="flex items-center px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150 cursor-pointer">
-                Flipkart
-              </Link>
-              <Link to="/gift-card/steam" className="flex items-center px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150 cursor-pointer">
-                Steam
-              </Link>
-              <Link to="/gift-card/myntra" className="flex items-center px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150 cursor-pointer">
-                Myntra
-              </Link>
-              <Link to="/gift-card/bigbasket" className="flex items-center px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150 cursor-pointer">
-                BigBasket
-              </Link>
-            </div>
 
             <div className="border-t border-gray-200 my-2"></div>
             <Link to="/" className="flex items-center px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150 cursor-pointer">
@@ -383,7 +393,8 @@ const Navbar = () => {
                 Login
               </Link>
             )}
-          </nav>
+            </nav>
+          </div>
         </div>
       )}
     </nav>
