@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check } from 'lucide-react'
+import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check, Banknote, X, Loader } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -9,6 +9,11 @@ const UserSelling = () => {
   const [userListings, setUserListings] = useState([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
+  const [markPaidFor, setMarkPaidFor] = useState(null)
+  const [markPaidDate, setMarkPaidDate] = useState('')
+  const [markPaidLoading, setMarkPaidLoading] = useState(false)
+
+  const todayISO = () => new Date().toISOString().split('T')[0]
 
   const fetchData = useCallback(async () => {
     try {
@@ -56,6 +61,21 @@ const UserSelling = () => {
       fetchData()
     } catch (err) {
       toast.error('Failed to update status')
+    }
+  }
+
+  const handleMarkPaid = async () => {
+    if (!markPaidFor) return
+    setMarkPaidLoading(true)
+    try {
+      await axios.patch(`${BACKEND_URL}/api/admin/gift-cards/${markPaidFor}/status`, { status: 'paid', paidOn: markPaidDate }, { withCredentials: true })
+      toast.success('Listing marked as paid')
+      setMarkPaidFor(null)
+      fetchData()
+    } catch (err) {
+      toast.error('Failed to mark as paid')
+    } finally {
+      setMarkPaidLoading(false)
     }
   }
 
@@ -125,10 +145,14 @@ const UserSelling = () => {
                       <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-bold uppercase ${
                         card.status === 'pending' ? 'bg-amber-100 text-amber-700' :
                         card.status === 'active' ? 'bg-emerald-100 text-emerald-700' :
-                        card.status === 'sold' ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'
+                        card.status === 'sold' ? 'bg-blue-100 text-blue-700' :
+                        card.status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
                       }`}>{card.status}</span>
                       {card.status === 'sold' && card.soldTo && (
                         <span className="block text-[10px] text-gray-500 mt-1">Buyer: {card.soldTo.fullName} ({card.soldTo.email})</span>
+                      )}
+                      {card.status === 'paid' && card.paidOn && (
+                        <span className="block text-[10px] text-gray-500 mt-1">Paid on: {new Date(card.paidOn).toLocaleDateString('en-IN')}</span>
                       )}
                     </td>
                     <td className="px-6 py-4 text-xs text-gray-500">{new Date(card.createdAt).toLocaleDateString('en-IN')}</td>
@@ -144,6 +168,16 @@ const UserSelling = () => {
                             <RefreshCcw className="w-4 h-4" />
                           </button>
                         )}
+                        {['pending', 'active', 'sold'].includes(card.status) && (
+                          <button
+                            onClick={() => {
+                              setMarkPaidFor(card._id)
+                              setMarkPaidDate(todayISO())
+                            }}
+                            className="text-green-500 hover:bg-green-50 p-1.5 rounded" title="Mark Paid">
+                            <Banknote className="w-4 h-4" />
+                          </button>
+                        )}
                         <button onClick={() => handleDeleteUserListing(card._id)} className="text-red-500 hover:bg-red-50 p-1.5 rounded">
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -156,6 +190,47 @@ const UserSelling = () => {
           </div>
         )}
       </div>
+
+      {/* Mark Paid modal */}
+      {markPaidFor && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-sm p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <Banknote className="w-5 h-5 text-green-600" />
+                Mark as Paid
+              </h3>
+              <button onClick={() => setMarkPaidFor(null)} className="text-gray-400 hover:text-gray-600">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Paid On Date</label>
+            <input
+              type="date"
+              value={markPaidDate}
+              onChange={(e) => setMarkPaidDate(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            />
+            <div className="flex justify-end gap-2 mt-6">
+              <button
+                onClick={() => setMarkPaidFor(null)}
+                disabled={markPaidLoading}
+                className="px-4 py-2 text-sm font-medium border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleMarkPaid}
+                disabled={markPaidLoading}
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold bg-green-600 hover:bg-green-700 text-white rounded-lg disabled:opacity-50"
+              >
+                {markPaidLoading ? <Loader className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
+                Confirm Paid
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

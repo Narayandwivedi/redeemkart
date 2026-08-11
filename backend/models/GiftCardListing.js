@@ -32,12 +32,16 @@ const giftCardListingSchema = new mongoose.Schema({
   },
   expiry: {
     type: Date,
-    required: [true, 'Expiry date is required']
+    default: null
   },
   status: {
     type: String,
-    enum: ['pending', 'active', 'sold', 'expired'],
+    enum: ['pending', 'active', 'sold', 'paid', 'expired'],
     default: 'active'
+  },
+  paidOn: {
+    type: Date,
+    default: null
   },
   listedBy: {
     type: String,

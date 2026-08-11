@@ -64,7 +64,7 @@ const SellVoucher = () => {
       navigate('/login')
       return
     }
-    if (!form.brand || !form.balance || !form.code || !form.expiry) {
+    if (!form.brand || !form.balance || !form.code) {
       toast.error('Please fill all fields')
       return
     }
@@ -213,7 +213,9 @@ const SellVoucher = () => {
               )}
 
               <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">Expiry Date</label>
+                <label className="block text-sm font-medium text-gray-800 mb-1.5">
+                  Expiry Date <span className="text-gray-400 font-normal">(optional)</span>
+                </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Calendar className="h-4 w-4 text-violet-700" />
@@ -282,7 +284,7 @@ const SellVoucher = () => {
                   <div>
                     <p className="font-medium text-gray-900">{card.brand}</p>
                     <p className="text-sm text-gray-500">
-                      Code: {card.code.replace(/.(?=.{4})/g, '*')} | {card.pin ? `PIN: ${card.pin.replace(/.(?=.{4})/g, '*')} |` : ''} ₹{card.balance} | Exp: {new Date(card.expiry).toLocaleDateString('en-IN')}
+                      Code: {card.code.replace(/.(?=.{4})/g, '*')} | {card.pin ? `PIN: ${card.pin.replace(/.(?=.{4})/g, '*')} |` : ''} ₹{card.balance}{card.expiry ? ` | Exp: ${new Date(card.expiry).toLocaleDateString('en-IN')}` : ''}
                     </p>
                   </div>
                 </div>

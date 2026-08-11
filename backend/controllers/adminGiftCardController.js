@@ -25,7 +25,7 @@ const addListing = async (req, res) => {
   try {
     const { brand, balance, code, expiry, pin, productId } = req.body;
 
-    if (!brand || !balance || !code || !expiry) {
+    if (!brand || !balance || !code) {
       return res.status(400).json({
         success: false,
         message: 'All fields are required'
@@ -37,7 +37,7 @@ const addListing = async (req, res) => {
       brand, 
       balance, 
       code, 
-      expiry, 
+      expiry: expiry || null, 
       pin, 
       listedBy: 'admin',
       productId: productId || null
@@ -112,9 +112,9 @@ const getOrCreateProductForListing = async (listing) => {
 const updateListingStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body;
+    const { status, paidOn } = req.body;
 
-    if (!['pending', 'active', 'sold', 'expired'].includes(status)) {
+    if (!['pending', 'active', 'sold', 'paid', 'expired'].includes(status)) {
       return res.status(400).json({ success: false, message: 'Invalid status' });
     }
 
@@ -133,6 +133,11 @@ const updateListingStatus = async (req, res) => {
     listing.status = status;
     if (status === 'active') {
       listing.soldTo = null;
+    }
+    if (status === 'paid') {
+      listing.paidOn = paidOn ? new Date(paidOn) : new Date();
+    } else if (listing.paidOn) {
+      listing.paidOn = null;
     }
     await listing.save();
 

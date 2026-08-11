@@ -4,14 +4,14 @@ const addListing = async (req, res) => {
   try {
     const { brand, balance, code, expiry, pin } = req.body;
 
-    if (!brand || !balance || !code || !expiry) {
+    if (!brand || !balance || !code) {
       return res.status(400).json({
         success: false,
         message: 'All fields are required'
       });
     }
 
-    const listing = new GiftCardListing({ user: req.user._id, brand, balance, code, expiry, pin, listedBy: 'user', status: 'pending' });
+    const listing = new GiftCardListing({ user: req.user._id, brand, balance, code, expiry: expiry || null, pin, listedBy: 'user', status: 'pending' });
     const saved = await listing.save();
 
     res.status(201).json({

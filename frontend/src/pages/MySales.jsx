@@ -8,6 +8,7 @@ const statusConfig = {
   pending: { icon: Clock, bg: 'bg-amber-50 text-amber-700 border-amber-200', label: 'Pending' },
   active: { icon: Clock, bg: 'bg-violet-50 text-violet-800 border-violet-200', label: 'Active' },
   sold: { icon: CheckCircle, bg: 'bg-emerald-50 text-emerald-700 border-emerald-200', label: 'Sold' },
+  paid: { icon: Banknote, bg: 'bg-green-50 text-green-700 border-green-200', label: 'Paid' },
   expired: { icon: TrendingUp, bg: 'bg-red-50 text-red-700 border-red-200', label: 'Expired' },
 }
 
@@ -29,7 +30,7 @@ const MySales = () => {
     fetchListings()
   }, [BACKEND_URL])
 
-  const totalEarnings = listings.filter(s => s.status === 'sold').reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
+  const totalEarnings = listings.filter(s => s.status === 'sold' || s.status === 'paid').reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
   const pendingPayout = listings.filter(s => s.status === 'active' || s.status === 'pending').reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
 
   return (
@@ -125,7 +126,7 @@ const MySales = () => {
                         <td className="px-5 py-4 text-gray-500">-₹{commission}</td>
                         <td className="px-5 py-4 font-medium text-emerald-600">₹{payout}</td>
                         <td className="px-5 py-4 text-gray-600">{new Date(card.createdAt).toLocaleDateString('en-IN')}</td>
-                        <td className="px-5 py-4 text-gray-600">{card.status === 'sold' ? new Date(card.updatedAt).toLocaleDateString('en-IN') : '-'}</td>
+                        <td className="px-5 py-4 text-gray-600">{card.status === 'paid' && card.paidOn ? new Date(card.paidOn).toLocaleDateString('en-IN') : card.status === 'sold' ? new Date(card.updatedAt).toLocaleDateString('en-IN') : '-'}</td>
                         <td className="px-5 py-4">
                           <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${statusStyle}`}>
                             <StatusIcon className="h-3.5 w-3.5" />
