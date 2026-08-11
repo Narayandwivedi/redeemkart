@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
-import { ShoppingBag, MapPin, User, Headphones, Banknote, ShieldCheck, CheckCircle, Clock, XCircle } from 'lucide-react'
+import { ShoppingBag, MapPin, User, Headphones, Banknote, ShieldCheck, CheckCircle, Clock, XCircle, Gift } from 'lucide-react'
 
 const Account = () => {
   const { user } = useContext(AppContext) || {}
@@ -12,6 +12,12 @@ const Account = () => {
       description: 'View your order history and track current orders',
       path: '/my-orders',
       icon: <ShoppingBag className="w-6 h-6" />
+    },
+    {
+      title: 'My Sales',
+      description: 'Track your gift card sales and earnings',
+      path: '/my-sales',
+      icon: <Gift className="w-6 h-6" />
     },
     {
       title: 'Manage Addresses',
