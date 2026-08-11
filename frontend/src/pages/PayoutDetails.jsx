@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
 import { Building2, Banknote, Save, X, Loader, Edit2, CheckCircle, AlertCircle } from 'lucide-react'
@@ -56,6 +57,28 @@ const PayoutDetails = () => {
 
   const hasBank = formData.bankAccountHolder && formData.bankAccountNumber && formData.bankName && formData.ifscCode
 
+  const kycStatus = user?.kycStatus || 'not_submitted'
+  const kycBanner = {
+    not_submitted: {
+      text: 'KYC verification is mandatory to receive payouts. Please complete your KYC.',
+      bg: 'bg-amber-50 border-amber-200 text-amber-800',
+      icon: AlertCircle,
+      action: { to: '/kyc', label: 'Complete KYC now' },
+    },
+    pending: {
+      text: 'Your KYC is under review. You\u2019ll be able to receive payouts once it is verified.',
+      bg: 'bg-blue-50 border-blue-200 text-blue-800',
+      icon: AlertCircle,
+      action: null,
+    },
+    rejected: {
+      text: 'Your KYC was rejected. Payouts are blocked until you get verified.',
+      bg: 'bg-red-50 border-red-200 text-red-800',
+      icon: AlertCircle,
+      action: { to: '/kyc', label: 'Resubmit KYC' },
+    },
+  }[kycStatus]
+
   return (
     <div className="min-h-screen bg-gray-50 py-6 sm:py-10">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,6 +101,21 @@ const PayoutDetails = () => {
           </div>
 
           <div className="p-5 sm:p-6">
+            {kycBanner && (
+              <div className={`flex items-start gap-2.5 rounded-xl border px-4 py-3 mb-6 ${kycBanner.bg}`}>
+                <kycBanner.icon className="w-5 h-5 shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="text-sm font-medium">{kycBanner.text}</p>
+                  {kycBanner.action && (
+                    <Link to={kycBanner.action.to}>
+                      <span className="text-sm font-semibold underline underline-offset-2 inline-block mt-1 cursor-pointer">
+                        {kycBanner.action.label}
+                      </span>
+                    </Link>
+                  )}
+                </div>
+              </div>
+            )}
             <form onSubmit={handleSubmit}>
               <div className="space-y-6">
 

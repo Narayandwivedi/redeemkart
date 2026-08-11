@@ -13,14 +13,15 @@ import {
   Clock,
   XCircle,
   Image as ImageIcon,
-  AlertCircle
+  AlertCircle,
+  ChevronDown
 } from 'lucide-react'
 
 const DOCUMENT_OPTIONS = [
-  { id: 'aadhaar', label: 'Aadhaar Card', description: 'Verify with your 12-digit Aadhaar number', icon: Fingerprint, placeholder: 'Enter 12-digit Aadhaar number' },
-  { id: 'pan', label: 'PAN Card', description: 'Verify with your 10-character PAN number', icon: CreditCard, placeholder: 'Enter PAN number (e.g. ABCDE1234F)' },
-  { id: 'driving_license', label: 'Driving Licence', description: 'Verify with your driving licence number', icon: IdCard, placeholder: 'Enter driving licence number' },
-  { id: 'passport', label: 'Passport', description: 'Verify with your passport number', icon: FileText, placeholder: 'Enter passport number (e.g. A1234567)' }
+  { id: 'aadhaar', label: 'Aadhaar Card', description: 'Verify with your 12-digit Aadhaar number', icon: Fingerprint, placeholder: 'Enter 12-digit Aadhaar number', maxLength: 12, inputMode: 'numeric', digitsOnly: true },
+  { id: 'pan', label: 'PAN Card', description: 'Verify with your 10-character PAN number', icon: CreditCard, placeholder: 'Enter PAN number (e.g. ABCDE1234F)', maxLength: 10 },
+  { id: 'driving_license', label: 'Driving Licence', description: 'Verify with your driving licence number', icon: IdCard, placeholder: 'Enter driving licence number', maxLength: 20 },
+  { id: 'passport', label: 'Passport', description: 'Verify with your passport number', icon: FileText, placeholder: 'Enter passport number (e.g. A1234567)', maxLength: 8 }
 ]
 
 const KYC_STATUS = {
@@ -209,36 +210,24 @@ const KYC = () => {
             ) : (
               <form onSubmit={handleSubmit}>
                 {/* Document type selection */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                  {DOCUMENT_OPTIONS.map((doc) => {
-                    const Icon = doc.icon
-                    const isSelected = documentType === doc.id
-                    return (
-                      <button
-                        type="button"
-                        key={doc.id}
-                        onClick={() => {
-                          setDocumentType(doc.id)
-                          setDocumentNumber('')
-                        }}
-                        className={`p-4 rounded-xl border-2 text-left transition-all duration-200 cursor-pointer ${
-                          isSelected
-                            ? 'border-violet-500 bg-violet-50/60 shadow-sm'
-                            : 'border-gray-200 bg-white hover:border-violet-300'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${isSelected ? 'bg-violet-500 text-white' : 'bg-gray-100 text-gray-500'}`}>
-                            <Icon className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <p className="font-semibold text-sm text-gray-900">{doc.label}</p>
-                            <p className="text-xs text-gray-500 mt-0.5">{doc.description}</p>
-                          </div>
-                        </div>
-                      </button>
-                    )
-                  })}
+                <div className="mb-6">
+                  <label className="block text-[11px] font-medium text-gray-500 mb-1">Document Type</label>
+                  <div className="relative">
+                    <select
+                      value={documentType}
+                      onChange={(e) => {
+                        setDocumentType(e.target.value)
+                        setDocumentNumber('')
+                      }}
+                      className="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg text-sm bg-white transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 appearance-none pr-10 cursor-pointer"
+                    >
+                      <option value="">Select a document type</option>
+                      {DOCUMENT_OPTIONS.map((doc) => (
+                        <option key={doc.id} value={doc.id}>{doc.label}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
                 </div>
 
                 {documentType && (
@@ -251,8 +240,14 @@ const KYC = () => {
                       <input
                         type="text"
                         value={documentNumber}
-                        onChange={(e) => setDocumentNumber(e.target.value)}
+                        onChange={(e) => {
+                          let value = e.target.value
+                          if (selectedDoc?.digitsOnly) value = value.replace(/\D/g, '')
+                          setDocumentNumber(value)
+                        }}
                         placeholder={selectedDoc?.placeholder}
+                        maxLength={selectedDoc?.maxLength}
+                        inputMode={selectedDoc?.inputMode || 'text'}
                         autoComplete="off"
                         className="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-white"
                       />

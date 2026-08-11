@@ -311,7 +311,7 @@ const SellVoucher = () => {
                 </div>
                 <div className="border-t border-gray-100 pt-4">
                   <h4 className="font-medium text-gray-800 text-sm mb-1">Are there any selling fees?</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">We charge a flat 5% commission on successful sales. There are no listing fees.</p>
+                  <p className="text-gray-500 text-xs leading-relaxed">Commission varies by brand. We charge 30% on Google Play cards and 10% on all other brands, deducted from your payout. There are no listing fees.</p>
                 </div>
                 <div className="border-t border-gray-100 pt-4">
                   <h4 className="font-medium text-gray-800 text-sm mb-1">What if my code doesn't work?</h4>
