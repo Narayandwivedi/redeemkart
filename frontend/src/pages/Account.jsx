@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
-import { ShoppingBag, MapPin, User, Headphones, Banknote } from 'lucide-react'
+import { ShoppingBag, MapPin, User, Headphones, Banknote, ShieldCheck, CheckCircle, Clock, XCircle } from 'lucide-react'
 
 const Account = () => {
   const { user } = useContext(AppContext) || {}
@@ -30,6 +30,16 @@ const Account = () => {
       description: 'Manage your bank account for payouts',
       path: '/payout-details',
       icon: <Banknote className="w-6 h-6" />
+    },
+    {
+      title: 'KYC Verification',
+      description: user?.kycStatus === 'verified'
+        ? 'Your identity is verified'
+        : user?.kycStatus === 'pending'
+          ? 'Your KYC is under review'
+          : 'Verify your identity with Aadhaar, PAN, Licence or Passport',
+      path: '/kyc',
+      icon: <ShieldCheck className="w-6 h-6" />
     },
     {
       title: 'Customer Support',

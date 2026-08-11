@@ -59,6 +59,27 @@ const userSchema = new mongoose.Schema({
   ifscCode: { type: String, trim: true },
   upiId: { type: String, trim: true },
 
+  // KYC Information
+  kycStatus: {
+    type: String,
+    enum: ['not_submitted', 'pending', 'verified', 'rejected'],
+    default: 'not_submitted'
+  },
+  kycDocumentType: {
+    type: String,
+    enum: ['aadhaar', 'pan', 'driving_license', 'passport', ''],
+    trim: true
+  },
+  kycDocumentNumber: { type: String, trim: true },
+  kycDocumentImage: { type: String },
+  kycSubmittedAt: { type: Date },
+  kycReviewedAt: { type: Date },
+  kycReviewedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  kycRejectionReason: { type: String, trim: true },
+
   // OAuth Information
   googleId: {
     type: String

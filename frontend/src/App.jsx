@@ -43,6 +43,7 @@ import GiftCardsPage from './pages/gift-cards/GiftCardsPage'
 import RefundPolicy from './pages/RefundPolicy'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import PayoutDetails from './pages/PayoutDetails'
+import KYC from './pages/KYC'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -139,6 +140,7 @@ const AppContent = () => {
         <Route path="/profile-info" element={<ProtectedRoute><ProfileInfo /></ProtectedRoute>} />
         <Route path="/customer-support" element={<ProtectedRoute><CustomerSupport /></ProtectedRoute>} />
         <Route path="/payout-details" element={<ProtectedRoute><PayoutDetails /></ProtectedRoute>} />
+        <Route path="/kyc" element={<ProtectedRoute><KYC /></ProtectedRoute>} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />

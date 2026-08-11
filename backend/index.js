@@ -18,6 +18,8 @@ const shopCategoryRoutes = require('./routes/shopCategoryRoutes');
 const giftCardRoutes = require('./routes/giftCardRoutes');
 const adminGiftCardRoutes = require('./routes/adminGiftCardRoutes');
 const chatbotRoutes = require('./routes/chatbotRoutes');
+const kycRoutes = require('./routes/kycRoutes');
+const adminKycRoutes = require('./routes/adminKycRoutes');
 
 const app = express();
 const PORT = process.env.PORT;
@@ -76,6 +78,8 @@ app.use('/api/shop-categories', shopCategoryRoutes);
 app.use('/api/gift-cards', giftCardRoutes);
 app.use('/api/admin/gift-cards', adminGiftCardRoutes);
 app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/kyc', kycRoutes);
+app.use('/api/admin/kyc', adminKycRoutes);
 
 
 
