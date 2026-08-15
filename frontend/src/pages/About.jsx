@@ -9,33 +9,50 @@ const About = () => {
     keywords: 'about RedeemKart, gift card trading platform india, sell gift cards online, buy discounted gift cards, voucher marketplace india, gift card cashout india',
     ogImage: 'https://redeemkart.in/redeemkart-logo.png',
     canonicalUrl: 'https://redeemkart.in/about',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "RedeemKart",
-      "url": "https://redeemkart.in",
-      "logo": "https://redeemkart.in/redeemkart-logo.png",
-      "description": "RedeemKart is India's premier gift card trading platform where you can sell unused gift cards for instant cash or buy discounted vouchers from 100+ top brands.",
-      "email": "support@redeemkart.in",
-      "telephone": "+916264682508",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "New Delhi",
-        "addressCountry": "IN"
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About RedeemKart",
+        "url": "https://redeemkart.in/about",
+        "description": "Learn about RedeemKart, India's trusted gift card trading marketplace to buy discounted vouchers and sell unused gift cards for instant cash.",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "RedeemKart",
+          "url": "https://redeemkart.in",
+          "logo": "https://redeemkart.in/redeemkart-logo.png",
+          "description": "RedeemKart is India's premier gift card trading platform.",
+          "email": "support@redeemkart.in",
+          "telephone": "+916264682508",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "New Delhi",
+            "addressCountry": "IN"
+          },
+          "sameAs": [
+            "https://redeemkart.in"
+          ]
+        }
       },
-      "sameAs": [
-        "https://redeemkart.in"
-      ],
-      "foundingDate": "2024",
-      "numberOfEmployees": {
-        "@type": "QuantitativeValue",
-        "value": "10"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "India"
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://redeemkart.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About Us",
+            "item": "https://redeemkart.in/about"
+          }
+        ]
       }
-    }
+    ]
   })
 
   const stats = [

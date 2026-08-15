@@ -62,8 +62,11 @@ export const useSEO = ({
       setMetaTag('twitter:image', ogImage, true)
     }
 
-    // 5. Canonical Link — always use clean URL (no query string) unless explicitly provided
-    const finalCanonicalUrl = canonicalUrl || (window.location.origin + window.location.pathname)
+    // 5. Canonical Link — clean URL without trailing slash (except root)
+    const rawPath = window.location.pathname
+    const cleanPath = rawPath === '/' ? '/' : rawPath.replace(/\/+$/, '')
+    const defaultCanonical = window.location.origin + cleanPath
+    const finalCanonicalUrl = canonicalUrl || defaultCanonical
     let canonicalLink = document.querySelector('link[rel="canonical"]')
     if (!canonicalLink) {
       canonicalLink = document.createElement('link')
@@ -90,9 +93,13 @@ export const useSEO = ({
       })
     }
 
-    // Cleanup
+    // Cleanup on unmount or route change
     return () => {
-      injectedScripts.forEach(script => script.remove())
+      injectedScripts.forEach(script => {
+        if (script && script.parentNode) {
+          script.parentNode.removeChild(script)
+        }
+      })
     }
   }, [
     title,

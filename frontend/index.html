@@ -37,9 +37,23 @@
   <meta name="twitter:title" content="RedeemKart | Buy & Sell Gift Cards, Vouchers & Games" />
   <meta name="twitter:description"
     content="RedeemKart — India's trusted gift card trading platform. Buy and sell gift cards, digital vouchers, and game codes instantly at the best rates." />
-  <meta name="twitter:image" content="https://redeemkart.in/redeemkart-logo.png" />
-
-  <link rel="canonical" href="https://redeemkart.in/" />
+  <!-- Dynamic Canonical Initialization for SPA routes -->
+  <script>
+    (function() {
+      try {
+        var path = window.location.pathname;
+        var cleanPath = path === '/' ? '/' : path.replace(/\/+$/, '');
+        var canonical = 'https://redeemkart.in' + cleanPath;
+        var link = document.querySelector('link[rel="canonical"]');
+        if (!link) {
+          link = document.createElement('link');
+          link.setAttribute('rel', 'canonical');
+          document.head.appendChild(link);
+        }
+        link.setAttribute('href', canonical);
+      } catch (e) {}
+    })();
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
