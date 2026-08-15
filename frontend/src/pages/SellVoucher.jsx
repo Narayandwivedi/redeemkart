@@ -22,15 +22,100 @@ const SellVoucher = () => {
   const [loading, setLoading] = useState(false)
 
   useSEO({
-    title: 'Sell Gift Cards Online | Instant Cash Out | RedeemKart',
-    description: 'Sell your unused gift cards and digital vouchers instantly on RedeemKart. List cards from Google Play, Amazon, Steam, and more to receive fast payouts directly to your bank account.',
-    keywords: 'sell gift cards, sell vouchers online, gift card cash out, instant cash for gift cards, flipkart voucher cashout, RedeemKart',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Sell Gift Cards | RedeemKart",
-      "description": "Sell your unused gift cards and digital vouchers instantly on RedeemKart. Get paid directly to your bank account."
-    }
+    title: 'Sell Gift Cards Online for Instant Cash in India | RedeemKart',
+    description: 'Sell your unused gift cards and digital vouchers instantly for real cash on RedeemKart. Trade Google Play, Amazon, Flipkart, Steam, Myntra & BigBasket vouchers with fast bank payouts.',
+    keywords: 'sell gift cards india, sell gift cards online, gift card cash out, sell google play gift card, sell amazon voucher, flipkart gift card cashout, redeemkart sell voucher',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/sell-gift-card',
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Sell Gift Cards Online - RedeemKart",
+        "serviceType": "Gift Card Trading & Cashout",
+        "provider": {
+          "@type": "Organization",
+          "name": "RedeemKart",
+          "url": "https://redeemkart.in"
+        },
+        "areaServed": "IN",
+        "description": "List your unused gift cards from Google Play, Amazon, Flipkart, Steam, and Myntra to get instant cash payouts directly into your bank account."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Sell Gift Cards on RedeemKart",
+        "description": "Follow these 3 simple steps to turn your unused gift cards into real cash.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Add Your Card",
+            "text": "Select brand, enter gift card balance amount, code, and PIN."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Card Sells",
+            "text": "Your card is verified and listed for thousands of buyers. Most cards sell within 24 hours."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Get Paid Direct to Bank",
+            "text": "Once sold, money is credited to your wallet and transferred to your bank account."
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How fast will my gift card sell?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most popular gift cards like Google Play, Amazon, and Flipkart sell within 24 hours."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When do I get paid after selling my gift card?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Money is automatically credited to your RedeemKart wallet and can be withdrawn directly to your bank account."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are there any listing or selling fees?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Listing is completely free. We charge a commission (30% on Google Play, 10% on other brands) deducted upon successful sale."
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://redeemkart.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Sell Gift Cards",
+            "item": "https://redeemkart.in/sell-gift-card"
+          }
+        ]
+      }
+    ]
   })
   const [form, setForm] = useState({
     brand: '',
