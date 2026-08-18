@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2, ChevronLeft, ChevronRight, Landmark, X, Copy } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -29,6 +29,7 @@ const Users = () => {
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [totalUsers, setTotalUsers] = useState(0)
+  const [selectedUser, setSelectedUser] = useState(null)
   const limit = 40
 
   const fetchUsers = async (pageNum = page) => {
@@ -154,7 +155,14 @@ const Users = () => {
                 users.map((user, idx) => (
                   <tr key={user._id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-4 py-3 text-gray-500">{(page - 1) * limit + idx + 1}</td>
-                    <td className="px-4 py-3 font-medium text-gray-900">{user.fullName || user.firstName + ' ' + (user.lastName || '')}</td>
+                                        <td className="px-4 py-3 font-medium text-gray-900">
+                      {user.fullName || user.firstName + ' ' + (user.lastName || '')}
+                      {(user.bankAccountHolder || user.bankAccountNumber || user.bankName || user.ifscCode || user.upiId) && (
+                        <span className="ml-2 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          <Landmark className="h-3 w-3" /> Bank
+                        </span>
+                      )}
+                    </td>
                     <td className="px-4 py-3 text-gray-700">{user.phone || '-'}</td>
                     <td className="px-4 py-3 text-gray-700">{user.email || '-'}</td>
                     <td className="px-4 py-3">
@@ -182,6 +190,13 @@ const Users = () => {
                     <td className="px-4 py-3 text-gray-500 text-xs">{new Date(user.createdAt).toLocaleDateString('en-IN')}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => setSelectedUser(user)}
+                          className="p-1.5 rounded-lg text-emerald-500 hover:bg-emerald-50 transition-colors"
+                          title="View bank details"
+                        >
+                          <Landmark className="h-4 w-4" />
+                        </button>
                         <button
                           onClick={() => handleAccess(user)}
                           className="p-1.5 rounded-lg text-blue-500 hover:bg-blue-50 transition-colors"
@@ -257,6 +272,67 @@ const Users = () => {
           </div>
         )}
       </div>
+
+      {/* Bank Details Modal */}
+      {selectedUser && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40" onClick={() => setSelectedUser(null)}>
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-5">
+              <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <Landmark className="w-5 h-5 text-emerald-600" />
+                Bank / Payout Details
+              </h3>
+              <button onClick={() => setSelectedUser(null)} className="text-gray-400 hover:text-gray-600">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="mb-4 pb-4 border-b border-gray-100">
+              <p className="font-semibold text-gray-900">{selectedUser.fullName || selectedUser.email}</p>
+              <p className="text-xs text-gray-400">{selectedUser.email} {selectedUser.phone ? `• ${selectedUser.phone}` : ''}</p>
+            </div>
+
+            {selectedUser.bankAccountHolder || selectedUser.bankAccountNumber || selectedUser.bankName || selectedUser.ifscCode || selectedUser.upiId ? (
+              <div className="space-y-3">
+                {[
+                  { label: 'Account Holder', value: selectedUser.bankAccountHolder },
+                  { label: 'Bank Account Number', value: selectedUser.bankAccountNumber },
+                  { label: 'Bank Name', value: selectedUser.bankName },
+                  { label: 'IFSC Code', value: selectedUser.ifscCode },
+                  { label: 'UPI ID', value: selectedUser.upiId }
+                ].map(item => (
+                  item.value && (
+                    <div key={item.label} className="flex items-center justify-between">
+                      <span className="text-sm text-gray-500">{item.label}</span>
+                      <span className="text-sm font-semibold text-gray-900 font-mono flex items-center gap-2">
+                        {item.value}
+                        <button
+                          onClick={() => { navigator.clipboard.writeText(item.value); toast.success(`${item.label} copied!`) }}
+                          className="text-gray-400 hover:text-gray-600"
+                          title={`Copy ${item.label}`}
+                        >
+                          <Copy className="w-3.5 h-3.5" />
+                        </button>
+                      </span>
+                    </div>
+                  )
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-gray-400 text-center py-6">No payout details added yet.</p>
+            )}
+
+            <div className="flex justify-end mt-6">
+              <button
+                onClick={() => setSelectedUser(null)}
+                className="px-4 py-2 text-sm font-medium border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
