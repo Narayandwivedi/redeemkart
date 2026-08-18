@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check, Banknote, X, Loader } from 'lucide-react'
+import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check, Banknote, X, Loader, CheckCheck } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -9,6 +9,7 @@ const UserSelling = () => {
   const [userListings, setUserListings] = useState([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
   const [markPaidFor, setMarkPaidFor] = useState(null)
   const [markPaidDate, setMarkPaidDate] = useState('')
   const [markPaidLoading, setMarkPaidLoading] = useState(false)
@@ -53,6 +54,28 @@ const UserSelling = () => {
     }
   }
 
+  const handleReject = async (id) => {
+    if (!window.confirm('Reject this listing? (invalid card)')) return
+    try {
+      await axios.patch(`${BACKEND_URL}/api/admin/gift-cards/${id}/status`, { status: 'rejected' }, { withCredentials: true })
+      toast.success('Listing rejected')
+      fetchData()
+    } catch (err) {
+      toast.error('Failed to reject')
+    }
+  }
+
+  const handleMarkUsed = async (id) => {
+    if (!window.confirm('Mark this card as already used?')) return
+    try {
+      await axios.patch(`${BACKEND_URL}/api/admin/gift-cards/${id}/status`, { status: 'used' }, { withCredentials: true })
+      toast.success('Card marked as used')
+      fetchData()
+    } catch (err) {
+      toast.error('Failed to mark as used')
+    }
+  }
+
   const handleMarkActive = async (id) => {
     if (!window.confirm('Change status to active?')) return
     try {
@@ -80,9 +103,10 @@ const UserSelling = () => {
   }
 
   const filteredUserListings = userListings.filter(c =>
-    (c.brand || '').toLowerCase().includes(search.toLowerCase()) ||
+    (statusFilter === 'all' || (statusFilter === 'approved' ? c.status === 'active' : c.status === statusFilter)) &&
+    ((c.brand || '').toLowerCase().includes(search.toLowerCase()) ||
     (c.code || '').toLowerCase().includes(search.toLowerCase()) ||
-    (c.user?.fullName || '').toLowerCase().includes(search.toLowerCase())
+    (c.user?.fullName || '').toLowerCase().includes(search.toLowerCase()))
   )
 
   return (
@@ -92,14 +116,37 @@ const UserSelling = () => {
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="p-4 bg-gray-50 border-b flex justify-between items-center gap-4">
-          <h2 className="text-lg font-bold text-gray-800">
-            User-Submitted Selling List
-            {!loading && <span className="ml-2 text-sm font-normal text-gray-500">({userListings.length} total)</span>}
-          </h2>
-          <div className="relative w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search codes, brands..." className="w-full pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        <div className="p-4 bg-gray-50 border-b">
+          <div className="flex justify-between items-center gap-4">
+            <h2 className="text-lg font-bold text-gray-800">
+              User-Submitted Selling List
+              {!loading && <span className="ml-2 text-sm font-normal text-gray-500">({userListings.length} total)</span>}
+            </h2>
+            <div className="relative w-64">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search codes, brands..." className="w-full pl-9 pr-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+            </div>
+          </div>
+          <div className="flex items-center gap-2 mt-3">
+            {[
+              { key: 'all', label: 'All' },
+              { key: 'pending', label: 'Pending' },
+              { key: 'approved', label: 'Approved' },
+              { key: 'rejected', label: 'Rejected' },
+              { key: 'used', label: 'Already Used' }
+            ].map(f => (
+              <button
+                key={f.key}
+                onClick={() => setStatusFilter(f.key)}
+                className={`px-3 py-1.5 text-sm font-medium rounded-lg border transition-colors ${
+                  statusFilter === f.key
+                    ? 'bg-blue-500 text-white border-blue-500'
+                    : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -146,7 +193,9 @@ const UserSelling = () => {
                         card.status === 'pending' ? 'bg-amber-100 text-amber-700' :
                         card.status === 'active' ? 'bg-emerald-100 text-emerald-700' :
                         card.status === 'sold' ? 'bg-blue-100 text-blue-700' :
-                        card.status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                        card.status === 'paid' ? 'bg-green-100 text-green-700' :
+                        card.status === 'rejected' ? 'bg-red-100 text-red-700' :
+                        card.status === 'used' ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-600'
                       }`}>{card.status}</span>
                       {card.status === 'sold' && card.soldTo && (
                         <span className="block text-[10px] text-gray-500 mt-1">Buyer: {card.soldTo.fullName} ({card.soldTo.email})</span>
@@ -166,6 +215,16 @@ const UserSelling = () => {
                         {card.status === 'sold' && (
                           <button onClick={() => handleMarkActive(card._id)} className="text-blue-500 hover:bg-blue-50 p-1.5 rounded" title="Mark Active">
                             <RefreshCcw className="w-4 h-4" />
+                          </button>
+                        )}
+                        {['pending', 'active'].includes(card.status) && (
+                          <button onClick={() => handleMarkUsed(card._id)} className="text-purple-500 hover:bg-purple-50 p-1.5 rounded" title="Already Used">
+                            <CheckCheck className="w-4 h-4" />
+                          </button>
+                        )}
+                        {['pending', 'active'].includes(card.status) && (
+                          <button onClick={() => handleReject(card._id)} className="text-red-500 hover:bg-red-50 p-1.5 rounded" title="Reject">
+                            <X className="w-4 h-4" />
                           </button>
                         )}
                         {['pending', 'active', 'sold'].includes(card.status) && (

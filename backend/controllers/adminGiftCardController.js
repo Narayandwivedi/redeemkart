@@ -3,7 +3,10 @@ const Product = require('../models/Product');
 
 const getAllListings = async (req, res) => {
   try {
-    const listings = await GiftCardListing.find()
+    const { status } = req.query;
+    const filter = status ? { status } : {};
+
+    const listings = await GiftCardListing.find(filter)
       .populate('user', 'fullName email')
       .populate('soldTo', 'fullName email')
       .sort({ createdAt: -1 });
@@ -114,7 +117,7 @@ const updateListingStatus = async (req, res) => {
     const { id } = req.params;
     const { status, paidOn } = req.body;
 
-    if (!['pending', 'active', 'sold', 'paid', 'expired'].includes(status)) {
+    if (!['pending', 'active', 'sold', 'paid', 'expired', 'rejected', 'used'].includes(status)) {
       return res.status(400).json({ success: false, message: 'Invalid status' });
     }
 
@@ -128,6 +131,12 @@ const updateListingStatus = async (req, res) => {
       listing.productId = product._id;
       product.stockQuantity = (product.stockQuantity || 0) + 1;
       await product.save();
+    } else if (['rejected', 'used'].includes(status) && listing.status === 'active' && listing.productId) {
+      const product = await Product.findById(listing.productId);
+      if (product) {
+        product.stockQuantity = Math.max((product.stockQuantity || 0) - 1, 0);
+        await product.save();
+      }
     }
 
     listing.status = status;

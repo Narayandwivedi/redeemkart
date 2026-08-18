@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { ArrowLeft, Gift, CheckCircle, Clock, TrendingUp, Banknote, Wallet } from 'lucide-react'
+import { ArrowLeft, Gift, CheckCircle, Clock, TrendingUp, Banknote, Wallet, X, CheckCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { AppContext } from '../context/AppContext'
@@ -10,6 +10,8 @@ const statusConfig = {
   sold: { icon: CheckCircle, bg: 'bg-emerald-50 text-emerald-700 border-emerald-200', label: 'Sold' },
   paid: { icon: Banknote, bg: 'bg-green-50 text-green-700 border-green-200', label: 'Paid' },
   expired: { icon: TrendingUp, bg: 'bg-red-50 text-red-700 border-red-200', label: 'Expired' },
+  rejected: { icon: X, bg: 'bg-red-50 text-red-700 border-red-200', label: 'Rejected' },
+  used: { icon: CheckCheck, bg: 'bg-purple-50 text-purple-700 border-purple-200', label: 'Already Used' },
 }
 
 const MySales = () => {
