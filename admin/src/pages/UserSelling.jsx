@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check, Banknote, X, Loader, CheckCheck, Tag, Percent, Edit3 } from 'lucide-react'
+import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check, Banknote, X, Loader, CheckCheck, Tag, Percent, Edit3, TrendingUp, ShieldCheck } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -152,6 +152,13 @@ const UserSelling = () => {
     (c.code || '').toLowerCase().includes(search.toLowerCase()) ||
     (c.user?.fullName || '').toLowerCase().includes(search.toLowerCase()))
   )
+
+  // Calculations for Approval/Edit Modal
+  const currentSellingPrice = approveModalCard ? (Number(approveSellingPrice) || 0) : 0
+  const sellerPayoutRate = approveModalCard ? (approveModalCard.brand === 'Google Play' ? 0.7 : 0.9) : 0.9
+  const sellerPayout = approveModalCard ? Math.round(approveModalCard.balance * sellerPayoutRate) : 0
+  const gatewayFee = Math.round(currentSellingPrice * 0.02)
+  const platformProfit = currentSellingPrice - sellerPayout - gatewayFee
 
   return (
     <div className="space-y-6">
@@ -353,7 +360,7 @@ const UserSelling = () => {
                 <div className="text-right">
                   <span className="text-gray-500 block">Est. Seller Payout</span>
                   <span className="font-bold text-emerald-600 text-sm">
-                    ₹{Math.round(approveModalCard.balance * (approveModalCard.brand === 'Google Play' ? 0.7 : 0.9))}
+                    ₹{sellerPayout}
                   </span>
                 </div>
               </div>
@@ -427,23 +434,51 @@ const UserSelling = () => {
                 </div>
               )}
 
-              {/* Live Calculation Summary */}
-              <div className="bg-indigo-50/70 border border-indigo-100 rounded-xl p-4 space-y-2">
-                <div className="flex justify-between items-center text-xs text-indigo-900">
-                  <span>Face Value (Balance):</span>
-                  <span className="font-semibold">₹{approveModalCard.balance}</span>
+              {/* Financial Calculation & Net Profit Breakdown */}
+              <div className="bg-indigo-50/60 border border-indigo-100 rounded-xl p-4 space-y-2 text-xs">
+                <div className="flex justify-between items-center text-gray-600">
+                  <span>Card Face Value (Balance):</span>
+                  <span className="font-semibold text-gray-800">₹{approveModalCard.balance}</span>
                 </div>
-                <div className="flex justify-between items-center text-xs text-indigo-900">
-                  <span>Discount Offered:</span>
-                  <span className="font-semibold text-emerald-600">{approveDiscountPercent}% OFF</span>
+                <div className="flex justify-between items-center text-gray-600">
+                  <span>Customer Discount ({approveDiscountPercent}% OFF):</span>
+                  <span className="font-semibold text-emerald-600">-₹{Math.max(0, approveModalCard.balance - currentSellingPrice)}</span>
                 </div>
-                <div className="flex justify-between items-center text-xs text-indigo-900">
-                  <span>Customer Saves:</span>
-                  <span className="font-semibold text-emerald-600">₹{Math.max(0, approveModalCard.balance - approveSellingPrice)}</span>
+                <div className="flex justify-between items-center text-gray-600">
+                  <span>Store Selling Price:</span>
+                  <span className="font-bold text-gray-900 text-sm">₹{currentSellingPrice}</span>
                 </div>
-                <div className="border-t border-indigo-200/60 pt-2 flex justify-between items-center">
-                  <span className="text-sm font-bold text-indigo-950">Store Selling Price:</span>
-                  <span className="text-lg font-extrabold text-indigo-700">₹{approveSellingPrice}</span>
+
+                <div className="border-t border-indigo-200/60 my-2 pt-2 space-y-1.5">
+                  <div className="flex justify-between items-center text-gray-600">
+                    <span>Seller Payout ({approveModalCard.brand === 'Google Play' ? '70%' : '90%'}):</span>
+                    <span className="font-medium text-amber-700">-₹{sellerPayout}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-gray-600">
+                    <span>Gateway Charges (2%):</span>
+                    <span className="font-medium text-purple-700">-₹{gatewayFee}</span>
+                  </div>
+                </div>
+
+                {/* Net Platform Profit Badge */}
+                <div className={`border pt-2.5 flex justify-between items-center p-3 rounded-xl transition-all ${
+                  platformProfit > 0 ? 'bg-emerald-50 border-emerald-300 text-emerald-950' :
+                  platformProfit === 0 ? 'bg-gray-100 border-gray-300 text-gray-800' :
+                  'bg-red-50 border-red-300 text-red-950'
+                }`}>
+                  <div>
+                    <span className="text-xs font-bold block uppercase tracking-wider flex items-center gap-1">
+                      <TrendingUp className="w-3.5 h-3.5" />
+                      Platform Net Profit
+                    </span>
+                    <span className="text-[10px] text-gray-500">(Selling Price - Payout - 2% Gateway)</span>
+                  </div>
+                  <span className={`text-xl font-extrabold ${
+                    platformProfit > 0 ? 'text-emerald-700' :
+                    platformProfit === 0 ? 'text-gray-700' : 'text-red-600'
+                  }`}>
+                    {platformProfit >= 0 ? `+₹${platformProfit}` : `-₹${Math.abs(platformProfit)}`}
+                  </span>
                 </div>
               </div>
             </div>
