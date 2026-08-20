@@ -11,12 +11,12 @@ const brandData = {
     img: '/products/google%20play.avif',
     description: 'Get Google Play codes at the best prices. Instant delivery via email.',
     vouchers: [
-      { _id: 'google-play-10', denom: 10, price: 8, originalPrice: 10 },
-      { _id: 'google-play-50', denom: 50, price: 45, originalPrice: 50 },
-      { _id: 'google-play-100', denom: 100, price: 90, originalPrice: 100 },
-      { _id: 'google-play-200', denom: 200, price: 150, originalPrice: 200 },
-      { _id: 'google-play-400', denom: 400, price: 349, originalPrice: 400 },
-      { _id: 'google-play-520', denom: 520, price: 400, originalPrice: 520 },
+      { _id: 'google-play-10', denom: 10, price: 8, originalPrice: 10, stockQuantity: 0 },
+      { _id: 'google-play-50', denom: 50, price: 45, originalPrice: 50, stockQuantity: 0 },
+      { _id: 'google-play-100', denom: 100, price: 90, originalPrice: 100, stockQuantity: 0 },
+      { _id: 'google-play-200', denom: 200, price: 150, originalPrice: 200, stockQuantity: 0 },
+      { _id: 'google-play-400', denom: 400, price: 349, originalPrice: 400, stockQuantity: 0 },
+      { _id: 'google-play-520', denom: 520, price: 400, originalPrice: 520, stockQuantity: 0 },
       { _id: 'google-play-650', denom: 650, price: 500, originalPrice: 650, stockQuantity: 0 },
       { _id: 'google-play-799', denom: 799, price: 650, originalPrice: 799, stockQuantity: 0 },
       { _id: 'google-play-1000', denom: 1000, price: 799, originalPrice: 1000, stockQuantity: 0 },
@@ -28,10 +28,10 @@ const brandData = {
     img: '/products/amazon.avif',
     description: 'Get Amazon codes at the best prices. Instant delivery via email.',
     vouchers: [
-      { _id: 'amazon-100', denom: 100, price: 88, originalPrice: 100 },
-      { _id: 'amazon-500', denom: 500, price: 435, originalPrice: 500 },
-      { _id: 'amazon-1000', denom: 1000, price: 870, originalPrice: 1000 },
-      { _id: 'amazon-2000', denom: 2000, price: 1740, originalPrice: 2000 },
+      { _id: 'amazon-100', denom: 100, price: 88, originalPrice: 100, stockQuantity: 0 },
+      { _id: 'amazon-500', denom: 500, price: 435, originalPrice: 500, stockQuantity: 0 },
+      { _id: 'amazon-1000', denom: 1000, price: 870, originalPrice: 1000, stockQuantity: 0 },
+      { _id: 'amazon-2000', denom: 2000, price: 1740, originalPrice: 2000, stockQuantity: 0 },
     ]
   },
   'flipkart': {
@@ -51,10 +51,10 @@ const brandData = {
     img: '/products/steam.avif',
     description: 'Get Steam Wallet codes at the best prices. Instant delivery via email.',
     vouchers: [
-      { _id: 'steam-50', denom: 50, price: 44, originalPrice: 50 },
-      { _id: 'steam-100', denom: 100, price: 85, originalPrice: 100 },
-      { _id: 'steam-500', denom: 500, price: 430, originalPrice: 500 },
-      { _id: 'steam-1000', denom: 1000, price: 860, originalPrice: 1000 },
+      { _id: 'steam-50', denom: 50, price: 44, originalPrice: 50, stockQuantity: 0 },
+      { _id: 'steam-100', denom: 100, price: 85, originalPrice: 100, stockQuantity: 0 },
+      { _id: 'steam-500', denom: 500, price: 430, originalPrice: 500, stockQuantity: 0 },
+      { _id: 'steam-1000', denom: 1000, price: 860, originalPrice: 1000, stockQuantity: 0 },
     ]
   },
   'myntra': {
@@ -62,9 +62,9 @@ const brandData = {
     img: '/products/myntra.avif',
     description: 'Get Myntra codes at the best prices. Instant delivery via email.',
     vouchers: [
-      { _id: 'myntra-500', denom: 500, price: 440, originalPrice: 500 },
-      { _id: 'myntra-1000', denom: 1000, price: 875, originalPrice: 1000 },
-      { _id: 'myntra-2000', denom: 2000, price: 1750, originalPrice: 2000 },
+      { _id: 'myntra-500', denom: 500, price: 440, originalPrice: 500, stockQuantity: 0 },
+      { _id: 'myntra-1000', denom: 1000, price: 875, originalPrice: 1000, stockQuantity: 0 },
+      { _id: 'myntra-2000', denom: 2000, price: 1750, originalPrice: 2000, stockQuantity: 0 },
     ]
   },
   'bigbasket': {
@@ -72,9 +72,9 @@ const brandData = {
     img: '/products/bigbasket.avif',
     description: 'Get BigBasket codes at the best prices. Instant delivery via email.',
     vouchers: [
-      { _id: 'bigbasket-100', denom: 100, price: 88, originalPrice: 100 },
-      { _id: 'bigbasket-500', denom: 500, price: 435, originalPrice: 500 },
-      { _id: 'bigbasket-1000', denom: 1000, price: 870, originalPrice: 1000 },
+      { _id: 'bigbasket-100', denom: 100, price: 88, originalPrice: 100, stockQuantity: 0 },
+      { _id: 'bigbasket-500', denom: 500, price: 435, originalPrice: 500, stockQuantity: 0 },
+      { _id: 'bigbasket-1000', denom: 1000, price: 870, originalPrice: 1000, stockQuantity: 0 },
     ]
   }
 }
@@ -89,6 +89,8 @@ const calculateDiscount = (original, current) => {
   if (!original || original <= current) return 0
   return Math.round(((original - current) / original) * 100)
 }
+
+const isOutOfStock = (v) => !v || v.stockQuantity === 0 || v.stockQuantity === undefined || v.availability === 'out-of-stock';
 
 const GiftCardDetail = () => {
   const { brand } = useParams()
@@ -106,7 +108,7 @@ const GiftCardDetail = () => {
     const fetchVouchers = async () => {
       if (!brandInfo) return
       try {
-        const response = await fetch(`${BACKEND_URL}/api/products/category/gift-cards?brand=${brandInfo.name}&limit=50`)
+        const response = await fetch(`${BACKEND_URL}/api/products/category/gift-cards?brand=${encodeURIComponent(brandInfo.name)}&limit=50`)
         const data = await response.json()
         if (data.success && data.data.length > 0) {
           const mappedVouchers = data.data.map(v => ({
@@ -131,7 +133,7 @@ const GiftCardDetail = () => {
   const savings = selected ? selected.originalPrice - selected.price : 0
 
   const handleVariantClick = (v) => {
-    if (v.stockQuantity === 0) {
+    if (isOutOfStock(v)) {
       toast.error('Out of stock')
       return
     }
@@ -139,7 +141,7 @@ const GiftCardDetail = () => {
   }
 
   const handleAddToCart = () => {
-    if (!selected || selected.stockQuantity === 0) {
+    if (!selected || isOutOfStock(selected)) {
       toast.error('Out of stock')
       return
     }
@@ -165,7 +167,7 @@ const GiftCardDetail = () => {
   }
 
   const handleBuyNow = () => {
-    if (!selected || selected.stockQuantity === 0) return
+    if (!selected || isOutOfStock(selected)) return
     
     const cartItemData = fetchedVouchers.length > 0 ? selected : {
       ...selected,
@@ -238,7 +240,7 @@ const GiftCardDetail = () => {
                   <div className="flex flex-nowrap gap-2.5 overflow-x-auto pb-2 scrollbar-thin pe-6">
                     {vouchers.map((v) => {
                       const isSelected = (selected?._id === v._id)
-                      const isOos = v.stockQuantity === 0
+                      const isOos = isOutOfStock(v)
                       return (
                         <button
                           key={v._id}
@@ -262,7 +264,7 @@ const GiftCardDetail = () => {
                 </div>
               </div>
 
-              {selected && selected.stockQuantity !== 0 && (
+              {selected && !isOutOfStock(selected) && (
                 <>
                   <div className="bg-slate-50 rounded-2xl p-4 sm:p-5 mb-6 border border-slate-100">
                     <div className="flex items-baseline gap-3 mb-1">
@@ -291,7 +293,7 @@ const GiftCardDetail = () => {
                 </>
               )}
 
-              {selected?.stockQuantity === 0 && (
+              {selected && isOutOfStock(selected) && (
                 <div className="bg-red-50 border border-red-200 rounded-2xl p-4 text-center">
                   <p className="text-red-700 font-semibold">This denomination is currently out of stock</p>
                   <p className="text-red-500 text-sm mt-1">Please select another option</p>
