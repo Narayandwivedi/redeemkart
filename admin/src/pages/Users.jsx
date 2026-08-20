@@ -81,7 +81,11 @@ const Users = () => {
       const res = await axios.post(`${BACKEND_URL}/api/admin/users/${user._id}/impersonate`, {}, { withCredentials: true })
       if (res.data.success) {
         toast.success(res.data.message)
-        window.open(res.data.data.frontendUrl, '_blank')
+        let targetUrl = res.data.data?.frontendUrl || 'https://redeemkart.in'
+        if (targetUrl.includes('gchub.in')) {
+          targetUrl = targetUrl.replace('gchub.in', 'redeemkart.in')
+        }
+        window.open(targetUrl, '_blank')
       }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to access account')

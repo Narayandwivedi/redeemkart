@@ -439,7 +439,10 @@ const impersonateUser = async (req, res) => {
       maxAge: 2 * 60 * 60 * 1000,
     });
 
-    const frontendUrl = process.env.FRONTEND_URL || 'https://redeemkart.in';
+    let frontendUrl = process.env.FRONTEND_URL || 'https://redeemkart.in';
+    if (frontendUrl.includes('gchub.in')) {
+      frontendUrl = 'https://redeemkart.in';
+    }
 
     res.status(200).json({
       success: true,
