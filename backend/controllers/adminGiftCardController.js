@@ -84,7 +84,11 @@ const deleteListing = async (req, res) => {
   }
 };
 
-const getOrCreateProductForListing = async (listing) => {
+const getOrCreateProductForListing = async (listing, customPrice) => {
+  const sellingPrice = customPrice !== undefined && customPrice !== null
+    ? Number(customPrice)
+    : (listing.sellingPrice ? listing.sellingPrice : Math.round(listing.balance * 0.9));
+
   let product = await Product.findOne({
     brand: listing.brand,
     originalPrice: listing.balance,
@@ -100,12 +104,16 @@ const getOrCreateProductForListing = async (listing) => {
       subCategory: 'digital-vouchers',
       brand: listing.brand,
       originalPrice: listing.balance,
-      price: listing.balance,
+      price: sellingPrice,
       stockQuantity: 0,
       maxAddCartItem: 4,
       isActive: true,
       images: [`/products/${listing.brand.toLowerCase().replace(/\s+/g, '%20')}.avif`]
     });
+    await product.save();
+  } else {
+    // Keep product price updated with the selling rate set for this voucher
+    product.price = sellingPrice;
     await product.save();
   }
 
@@ -115,22 +123,52 @@ const getOrCreateProductForListing = async (listing) => {
 const updateListingStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status, paidOn } = req.body;
-
-    if (!['pending', 'active', 'sold', 'paid', 'expired', 'rejected', 'used'].includes(status)) {
-      return res.status(400).json({ success: false, message: 'Invalid status' });
-    }
+    let { status, paidOn, sellingPrice, discountPercent } = req.body;
 
     const listing = await GiftCardListing.findById(id);
     if (!listing) {
       return res.status(404).json({ success: false, message: 'Listing not found' });
     }
 
-    if (status === 'active' && !listing.productId) {
-      const product = await getOrCreateProductForListing(listing);
-      listing.productId = product._id;
-      product.stockQuantity = (product.stockQuantity || 0) + 1;
-      await product.save();
+    if (!status) {
+      status = listing.status;
+    }
+
+    if (!['pending', 'active', 'sold', 'paid', 'expired', 'rejected', 'used'].includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status' });
+    }
+
+    // Determine custom selling price & discount percentage (default 10% discount)
+    let finalSellingPrice = listing.sellingPrice;
+    let finalDiscountPercent = listing.discountPercent !== undefined ? listing.discountPercent : 10;
+
+    if (sellingPrice !== undefined && sellingPrice !== null && sellingPrice !== '') {
+      finalSellingPrice = Math.max(0, Number(sellingPrice));
+      finalDiscountPercent = listing.balance > 0
+        ? Math.round(((listing.balance - finalSellingPrice) / listing.balance) * 100 * 10) / 10
+        : 0;
+    } else if (discountPercent !== undefined && discountPercent !== null && discountPercent !== '') {
+      finalDiscountPercent = Number(discountPercent);
+      finalSellingPrice = Math.round(listing.balance * (1 - finalDiscountPercent / 100));
+    } else if (finalSellingPrice === undefined || finalSellingPrice === null) {
+      // Default: 10% discount
+      finalDiscountPercent = 10;
+      finalSellingPrice = Math.round(listing.balance * 0.90);
+    }
+
+    listing.sellingPrice = finalSellingPrice;
+    listing.discountPercent = finalDiscountPercent;
+
+    if (status === 'active') {
+      const product = await getOrCreateProductForListing(listing, finalSellingPrice);
+      if (!listing.productId) {
+        listing.productId = product._id;
+        product.stockQuantity = (product.stockQuantity || 0) + 1;
+        await product.save();
+      } else if (listing.status !== 'active') {
+        product.stockQuantity = (product.stockQuantity || 0) + 1;
+        await product.save();
+      }
     } else if (['rejected', 'used'].includes(status) && listing.status === 'active' && listing.productId) {
       const product = await Product.findById(listing.productId);
       if (product) {

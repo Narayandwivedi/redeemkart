@@ -21,6 +21,14 @@ const giftCardListingSchema = new mongoose.Schema({
     required: [true, 'Balance amount is required'],
     min: [1, 'Balance must be at least 1']
   },
+  sellingPrice: {
+    type: Number,
+    default: null
+  },
+  discountPercent: {
+    type: Number,
+    default: 10
+  },
   code: {
     type: String,
     required: [true, 'Gift card code is required'],
