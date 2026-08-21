@@ -157,12 +157,22 @@ const UserSelling = () => {
     }
   }
 
-  const filteredUserListings = userListings.filter(c =>
-    (statusFilter === 'all' || (statusFilter === 'approved' ? c.status === 'active' : c.status === statusFilter)) &&
-    ((c.brand || '').toLowerCase().includes(search.toLowerCase()) ||
-    (c.code || '').toLowerCase().includes(search.toLowerCase()) ||
-    (c.user?.fullName || '').toLowerCase().includes(search.toLowerCase()))
-  )
+  const filteredUserListings = userListings.filter(c => {
+    let matchesStatus = true
+    if (statusFilter === 'approved') {
+      matchesStatus = c.status === 'active'
+    } else if (statusFilter === 'sold') {
+      matchesStatus = ['sold', 'sold_out'].includes(c.status)
+    } else if (statusFilter === 'paid') {
+      matchesStatus = !!c.paidOn || c.status === 'paid'
+    } else if (statusFilter !== 'all') {
+      matchesStatus = c.status === statusFilter
+    }
+    return matchesStatus &&
+      ((c.brand || '').toLowerCase().includes(search.toLowerCase()) ||
+      (c.code || '').toLowerCase().includes(search.toLowerCase()) ||
+      (c.user?.fullName || '').toLowerCase().includes(search.toLowerCase()))
+  })
 
   // Calculations for Approval/Edit Modal
   const currentSellingPrice = approveModalCard ? (Number(approveSellingPrice) || 0) : 0
@@ -195,7 +205,7 @@ const UserSelling = () => {
               { key: 'pending', label: 'Pending' },
               { key: 'approved', label: 'Approved' },
               { key: 'sold', label: 'Sold' },
-              { key: 'sold_out', label: 'Sold Out' },
+              { key: 'paid', label: 'Paid' },
               { key: 'rejected', label: 'Rejected' },
               { key: 'used', label: 'Already Used' }
             ].map(f => (
