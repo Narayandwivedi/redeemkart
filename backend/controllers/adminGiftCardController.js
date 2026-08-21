@@ -134,8 +134,14 @@ const updateListingStatus = async (req, res) => {
       status = listing.status;
     }
 
-    if (!['pending', 'active', 'sold', 'paid', 'expired', 'rejected', 'used'].includes(status)) {
+    if (!['pending', 'active', 'sold', 'sold_out', 'paid', 'expired', 'rejected', 'used'].includes(status)) {
       return res.status(400).json({ success: false, message: 'Invalid status' });
+    }
+
+    // Mark as paid: if the card is not already sold/sold out, it counts as sold
+    let finalStatus = status;
+    if (status === 'paid') {
+      finalStatus = ['sold', 'sold_out'].includes(listing.status) ? listing.status : 'sold';
     }
 
     // Determine custom selling price & discount percentage (default 10% discount)
@@ -159,7 +165,7 @@ const updateListingStatus = async (req, res) => {
     listing.sellingPrice = finalSellingPrice;
     listing.discountPercent = finalDiscountPercent;
 
-    if (status === 'active') {
+    if (finalStatus === 'active') {
       const product = await getOrCreateProductForListing(listing, finalSellingPrice);
       if (!listing.productId) {
         listing.productId = product._id;
@@ -169,7 +175,9 @@ const updateListingStatus = async (req, res) => {
         product.stockQuantity = (product.stockQuantity || 0) + 1;
         await product.save();
       }
-    } else if (['rejected', 'used'].includes(status) && listing.status === 'active' && listing.productId) {
+    } else if (['rejected', 'used', 'sold', 'sold_out'].includes(finalStatus) && ['active', 'paid'].includes(listing.status) && listing.productId) {
+      // Card is no longer available for sale - remove it from the storefront stock
+      // ('paid' included for legacy cards that were paid out before stock was reduced)
       const product = await Product.findById(listing.productId);
       if (product) {
         product.stockQuantity = Math.max((product.stockQuantity || 0) - 1, 0);
@@ -177,8 +185,8 @@ const updateListingStatus = async (req, res) => {
       }
     }
 
-    listing.status = status;
-    if (status === 'active') {
+    listing.status = finalStatus;
+    if (finalStatus === 'active') {
       listing.soldTo = null;
     }
     if (status === 'paid') {
@@ -190,7 +198,7 @@ const updateListingStatus = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: `Listing status updated to ${status}`,
+      message: `Listing status updated to ${finalStatus}`,
       data: listing
     });
   } catch (error) {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check, Banknote, X, Loader, CheckCheck, Tag, Percent, Edit3, TrendingUp, ShieldCheck } from 'lucide-react'
+import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check, Banknote, X, Loader, CheckCheck, Tag, Percent, Edit3, TrendingUp, ShieldCheck, PackageX } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -131,6 +131,17 @@ const UserSelling = () => {
     }
   }
 
+  const handleMarkSoldOut = async (id) => {
+    if (!window.confirm('Mark this card as sold out? (it will be hidden from the storefront)')) return
+    try {
+      await axios.patch(`${BACKEND_URL}/api/admin/gift-cards/${id}/status`, { status: 'sold_out' }, { withCredentials: true })
+      toast.success('Card marked as sold out')
+      fetchData()
+    } catch (err) {
+      toast.error('Failed to mark as sold out')
+    }
+  }
+
   const handleMarkPaid = async () => {
     if (!markPaidFor) return
     setMarkPaidLoading(true)
@@ -183,6 +194,8 @@ const UserSelling = () => {
               { key: 'all', label: 'All' },
               { key: 'pending', label: 'Pending' },
               { key: 'approved', label: 'Approved' },
+              { key: 'sold', label: 'Sold' },
+              { key: 'sold_out', label: 'Sold Out' },
               { key: 'rejected', label: 'Rejected' },
               { key: 'used', label: 'Already Used' }
             ].map(f => (
@@ -267,14 +280,15 @@ const UserSelling = () => {
                         card.status === 'pending' ? 'bg-amber-100 text-amber-700' :
                         card.status === 'active' ? 'bg-emerald-100 text-emerald-700' :
                         card.status === 'sold' ? 'bg-blue-100 text-blue-700' :
+                        card.status === 'sold_out' ? 'bg-orange-100 text-orange-700' :
                         card.status === 'paid' ? 'bg-green-100 text-green-700' :
                         card.status === 'rejected' ? 'bg-red-100 text-red-700' :
                         card.status === 'used' ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-600'
-                      }`}>{card.status}</span>
+                      }`}>{card.status === 'sold_out' ? 'sold out' : card.status}</span>
                       {card.status === 'sold' && card.soldTo && (
                         <span className="block text-[10px] text-gray-500 mt-1">Buyer: {card.soldTo.fullName} ({card.soldTo.email})</span>
                       )}
-                      {card.status === 'paid' && card.paidOn && (
+                      {['sold', 'sold_out', 'paid'].includes(card.status) && card.paidOn && (
                         <span className="block text-[10px] text-gray-500 mt-1">Paid on: {new Date(card.paidOn).toLocaleDateString('en-IN')}</span>
                       )}
                     </td>
@@ -292,9 +306,14 @@ const UserSelling = () => {
                             Edit Price
                           </button>
                         )}
-                        {card.status === 'sold' && (
+                        {['sold', 'sold_out'].includes(card.status) && (
                           <button onClick={() => handleMarkActive(card._id)} className="text-blue-500 hover:bg-blue-50 p-1.5 rounded" title="Mark Active">
                             <RefreshCcw className="w-4 h-4" />
+                          </button>
+                        )}
+                        {['pending', 'active', 'paid'].includes(card.status) && (
+                          <button onClick={() => handleMarkSoldOut(card._id)} className="text-orange-500 hover:bg-orange-50 p-1.5 rounded" title="Sold Out">
+                            <PackageX className="w-4 h-4" />
                           </button>
                         )}
                         {['pending', 'active'].includes(card.status) && (
@@ -307,7 +326,7 @@ const UserSelling = () => {
                             <X className="w-4 h-4" />
                           </button>
                         )}
-                        {['pending', 'active', 'sold'].includes(card.status) && (
+                        {['pending', 'active', 'sold', 'sold_out'].includes(card.status) && (
                           <button
                             onClick={() => {
                               setMarkPaidFor(card._id)
@@ -524,6 +543,9 @@ const UserSelling = () => {
               onChange={(e) => setMarkPaidDate(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500"
             />
+            <p className="text-xs text-gray-500 mt-2">
+              If this card is not already Sold / Sold Out, it will be marked as <span className="font-semibold">Sold</span> and removed from the Google Play gift card selling page.
+            </p>
             <div className="flex justify-end gap-2 mt-6">
               <button
                 onClick={() => setMarkPaidFor(null)}

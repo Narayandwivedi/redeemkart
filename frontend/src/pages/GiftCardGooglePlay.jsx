@@ -32,8 +32,10 @@ const GiftCardGooglePlay = () => {
         const response = await fetch(`${BACKEND_URL}/api/products/category/gift-cards?brand=Google Play&limit=50`)
         const data = await response.json()
         if (data.success) {
+          // Hide vouchers that are sold out / paid out to sellers (no stock left)
+          const available = data.data.filter(v => v.stockQuantity > 0)
           // Sort vouchers by price ascending
-          const sorted = data.data.sort((a, b) => a.price - b.price)
+          const sorted = available.sort((a, b) => a.price - b.price)
           setVouchers(sorted)
         }
       } catch (error) {
