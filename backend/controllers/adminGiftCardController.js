@@ -138,10 +138,11 @@ const updateListingStatus = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid status' });
     }
 
-    // Mark as paid: if the card is not already sold/sold out, it counts as sold
+    // Mark as paid: payment is recorded via paidOn while the card keeps its
+    // sold/sold out status. If it was never sold, selling it counts as sold out.
     let finalStatus = status;
     if (status === 'paid') {
-      finalStatus = ['sold', 'sold_out'].includes(listing.status) ? listing.status : 'sold';
+      finalStatus = ['sold', 'sold_out'].includes(listing.status) ? listing.status : 'sold_out';
     }
 
     // Determine custom selling price & discount percentage (default 10% discount)
