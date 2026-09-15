@@ -1,4 +1,5 @@
 const GiftCardListing = require('../models/GiftCardListing');
+const { notifyGiftCardListed } = require('../services/telegramService');
 
 // Brands where first-time listers get a promotional 10% commission.
 // All other brands (including Google Play) always use 30%.
@@ -55,6 +56,11 @@ const addListing = async (req, res) => {
       discountPercent: commissionPercent,
     });
     const saved = await listing.save();
+
+    // Trigger Telegram Alert asynchronously
+    notifyGiftCardListed({ listing: saved, user: req.user }).catch((err) => {
+      console.error('[TelegramAlert] Failed to send alert for listing:', err);
+    });
 
     res.status(201).json({
       success: true,
