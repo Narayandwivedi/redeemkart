@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check, Banknote, X, Loader, CheckCheck, Tag, Percent, Edit3, TrendingUp, ShieldCheck, PackageX } from 'lucide-react'
+import { Gift, Trash2, Search, User, Copy, RefreshCcw, Check, Banknote, X, Loader, CheckCheck, Tag, Percent, Edit3, TrendingUp, ShieldCheck, PackageX, ExternalLink } from 'lucide-react'
+import { handleRedeemCode } from '../utils/redeemHelper'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -349,11 +350,21 @@ const UserSelling = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 font-mono text-xs">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-gray-100 px-2 py-1 rounded">{card.code}</span>
-                        <button onClick={() => { navigator.clipboard.writeText(card.code); toast.success('Copied!') }}><Copy className="w-3 h-3 text-gray-400" /></button>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="bg-gray-100 px-2 py-0.5 rounded font-semibold text-gray-800">{card.code}</span>
+                        <button onClick={() => { navigator.clipboard.writeText(card.code); toast.success('Copied!') }} title="Copy Code">
+                          <Copy className="w-3.5 h-3.5 text-gray-400 hover:text-gray-700" />
+                        </button>
                       </div>
-                      {card.pin && <div className="mt-1 text-gray-400">PIN: {card.pin}</div>}
+                      {card.pin && <div className="text-gray-500 text-[11px] mb-1.5 font-sans">PIN: <span className="font-mono font-semibold text-gray-800 bg-gray-50 px-1 rounded border border-gray-200">{card.pin}</span></div>}
+                      <button
+                        onClick={() => handleRedeemCode(card.brand, card.code, card.pin)}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 shadow-sm transition-all active:scale-95"
+                        title={`Redeem ${card.brand} code`}
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        <span>Redeem</span>
+                      </button>
                     </td>
                     <td className="px-6 py-4">
                       <span className="block font-medium text-gray-800">{card.user?.fullName || 'Unknown'}</span>

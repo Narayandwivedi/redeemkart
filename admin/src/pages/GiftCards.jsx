@@ -4,8 +4,9 @@ import { toast } from 'react-toastify'
 import { 
   Trash2, Plus, Copy,
   Settings, Save, X, ToggleLeft, ToggleRight, ChevronDown, ChevronRight,
-  Key, Calendar
+  Key, Calendar, ExternalLink
 } from 'lucide-react'
+import { handleRedeemCode } from '../utils/redeemHelper'
 
 const brandsList = ['Google Play', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Reliance JioMart Gift Card', 'Flipkart', 'Steam', 'Myntra', 'BigBasket']
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
@@ -441,9 +442,17 @@ const GiftCards = () => {
                                   {codes.map(c => (
                                     <tr key={c._id} className="hover:bg-white transition-colors">
                                       <td className="py-2 pr-4 font-mono text-xs">
-                                        <div className="flex items-center gap-2">
-                                          <span className="bg-gray-100 px-2 py-0.5 rounded">{c.code}</span>
-                                          <button onClick={() => { navigator.clipboard.writeText(c.code); toast.success('Copied!') }} className="text-gray-400 hover:text-gray-700"><Copy className="w-3 h-3" /></button>
+                                        <div className="flex items-center gap-1.5">
+                                          <span className="bg-gray-100 px-2 py-0.5 rounded font-semibold text-gray-800">{c.code}</span>
+                                          <button onClick={() => { navigator.clipboard.writeText(c.code); toast.success('Copied!') }} className="text-gray-400 hover:text-gray-700" title="Copy Code"><Copy className="w-3 h-3" /></button>
+                                          <button
+                                            onClick={() => handleRedeemCode(selectedBrand, c.code, c.pin)}
+                                            className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-bold rounded bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 transition-colors ml-1"
+                                            title={`Redeem ${selectedBrand} code`}
+                                          >
+                                            <ExternalLink className="w-2.5 h-2.5" />
+                                            Redeem
+                                          </button>
                                         </div>
                                       </td>
                                       <td className="py-2 pr-4 font-mono text-xs text-gray-500">{c.pin || '—'}</td>
