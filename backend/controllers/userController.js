@@ -2,6 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
+const { notifyUserRegistered } = require('../services/telegramService');
 
 // Generate JWT Token
 const generateToken = (id) => {
@@ -34,6 +35,13 @@ const registerUser = async (req, res) => {
       password,
       phone,
       registrationSource: 'website'
+    });
+
+    // Trigger Telegram Alert asynchronously (fire-and-forget in background)
+    setImmediate(() => {
+      notifyUserRegistered({ user, method: 'Website API' }).catch((err) => {
+        console.error('[TelegramAlert] Failed to send alert for user registration:', err);
+      });
     });
 
     // Generate token

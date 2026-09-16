@@ -57,9 +57,11 @@ const addListing = async (req, res) => {
     });
     const saved = await listing.save();
 
-    // Trigger Telegram Alert asynchronously
-    notifyGiftCardListed({ listing: saved, user: req.user }).catch((err) => {
-      console.error('[TelegramAlert] Failed to send alert for listing:', err);
+    // Trigger Telegram Alert asynchronously (fire-and-forget in background)
+    setImmediate(() => {
+      notifyGiftCardListed({ listing: saved, user: req.user }).catch((err) => {
+        console.error('[TelegramAlert] Failed to send alert for listing:', err);
+      });
     });
 
     res.status(201).json({

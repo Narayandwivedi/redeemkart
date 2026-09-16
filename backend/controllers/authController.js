@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/User.js");
 const transporter = require("../config/nodemailer.js");
 const { OAuth2Client } = require("google-auth-library");
+const { notifyUserRegistered } = require("../services/telegramService");
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -85,6 +86,13 @@ const handelUserSignup = async (req, res) => {
 
     // Create new user
     const newUser = await userModel.create(newUserData);
+
+    // Trigger Telegram Alert asynchronously (fire-and-forget in background)
+    setImmediate(() => {
+      notifyUserRegistered({ user: newUser, method: "Website Signup" }).catch((err) => {
+        console.error("[TelegramAlert] Failed to send alert for new user signup:", err);
+      });
+    });
 
     // Generate JWT token
     const token = jwt.sign(
@@ -461,6 +469,13 @@ const handleGoogleAuth = async (req, res) => {
       };
 
       user = await userModel.create(newUserData);
+
+      // Trigger Telegram Alert asynchronously (fire-and-forget in background)
+      setImmediate(() => {
+        notifyUserRegistered({ user, method: "Google OAuth" }).catch((err) => {
+          console.error("[TelegramAlert] Failed to send alert for google user registration:", err);
+        });
+      });
     }
 
     // Update last activity

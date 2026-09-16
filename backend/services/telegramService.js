@@ -27,6 +27,7 @@ const sendTelegramAlert = async (text, options = {}) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
+      signal: AbortSignal.timeout ? AbortSignal.timeout(6000) : undefined,
     });
 
     const result = await response.json();
@@ -56,7 +57,7 @@ const notifyGiftCardListed = async ({ listing, user }) => {
     const commission = listing.discountPercent || 0;
     const sellerPayout = listing.balance ? (listing.balance - (listing.balance * commission / 100)).toLocaleString('en-IN') : '0';
 
-    const userName = (user && user.name) || 'User';
+    const userName = (user && (user.fullName || user.name || `${user.firstName || ''} ${user.lastName || ''}`.trim())) || 'User';
     const userEmail = (user && user.email) || 'N/A';
     const userPhone = (user && user.phone) || 'N/A';
 
@@ -95,7 +96,48 @@ const notifyGiftCardListed = async ({ listing, user }) => {
   }
 };
 
+/**
+ * Format and send an alert for a newly registered user
+ */
+const notifyUserRegistered = async ({ user, method = 'Website' }) => {
+  try {
+    const fullName = (user && (user.fullName || `${user.firstName || ''} ${user.lastName || ''}`.trim())) || 'User';
+    const email = (user && user.email) || 'N/A';
+    const phone = (user && user.phone) || 'N/A';
+
+    // Format location if available
+    const locationParts = [user?.city, user?.district, user?.state].filter(Boolean);
+    const location = locationParts.length > 0 ? locationParts.join(', ') : null;
+
+    const istTime = new Date().toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    });
+
+    let message = `👤 <b>New User Registered!</b>\n\n`;
+    message += `📛 <b>Name:</b> ${fullName}\n`;
+    message += `📧 <b>Email:</b> ${email}\n`;
+    if (phone !== 'N/A') {
+      message += `📱 <b>Phone:</b> ${phone}\n`;
+    }
+    if (location) {
+      message += `📍 <b>Location:</b> ${location}\n`;
+    }
+    message += `🔐 <b>Method:</b> ${method}\n`;
+    message += `\n`;
+    message += `⏰ <b>Time:</b> ${istTime}\n`;
+    message += `⚡ <i>User registered and may list gift cards soon!</i>`;
+
+    return await sendTelegramAlert(message);
+  } catch (err) {
+    console.error('[TelegramAlert] Failed to format user registration alert:', err);
+    return { success: false, error: err.message };
+  }
+};
+
 module.exports = {
   sendTelegramAlert,
   notifyGiftCardListed,
+  notifyUserRegistered,
 };
