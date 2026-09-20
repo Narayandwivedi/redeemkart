@@ -213,14 +213,14 @@ const Navbar = () => {
                         Payout Details
                       </Link>
                       <Link
-                        to="/customer-support"
+                        to="/contact"
                         className="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-emerald-700 transition-all duration-200"
                         onClick={() => setProfileDropdownOpen(false)}
                       >
                         <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        Customer Support
+                        Contact Us
                       </Link>
                       <div className="border-t border-gray-100 my-1"></div>
                       <button
@@ -357,13 +357,7 @@ const Navbar = () => {
               <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Contact
-            </Link>
-            <Link to="/customer-support" className="flex items-center px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150 cursor-pointer">
-              <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9V7a6 6 0 10-12 0v2m12 0a3 3 0 013 3v3a3 3 0 01-3 3h-2v-8h2zm-12 0a3 3 0 00-3 3v3a3 3 0 003 3h2v-8H6z" />
-              </svg>
-              Customer Support
+              Contact Us
             </Link>
             <Link to="/refund-policy" className="flex items-center px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150 cursor-pointer">
               <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -608,7 +608,7 @@ const verifyPayment = async (req, res) => {
                   
                   <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center;">
                     <p style="margin: 0 0 10px 0; font-size: 14px; color: #64748b;">Need help redeeming your code?</p>
-                    <a href="${process.env.FRONTEND_URL}/customer-support" style="display: inline-block; background: #f1f5f9; color: #475569; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 14px;">Contact Support</a>
+                    <a href="${process.env.FRONTEND_URL}/contact" style="display: inline-block; background: #f1f5f9; color: #475569; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 14px;">Contact Support</a>
                   </div>
                 </div>
                 
@@ -747,7 +747,7 @@ const assignCodeToOrder = async (req, res) => {
               
               <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center;">
                 <p style="margin: 0 0 10px 0; font-size: 14px; color: #64748b;">Need help redeeming your code?</p>
-                <a href="${process.env.FRONTEND_URL}/customer-support" style="display: inline-block; background: #f1f5f9; color: #475569; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 14px;">Contact Support</a>
+                <a href="${process.env.FRONTEND_URL}/contact" style="display: inline-block; background: #f1f5f9; color: #475569; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 14px;">Contact Support</a>
               </div>
             </div>
           </div>

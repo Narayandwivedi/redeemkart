@@ -10,7 +10,6 @@ Disallow: /my-orders
 Disallow: /order/
 Disallow: /manage-addresses
 Disallow: /profile-info
-Disallow: /customer-support
 Disallow: /payout-details
 Disallow: /my-sales
 Disallow: /chat

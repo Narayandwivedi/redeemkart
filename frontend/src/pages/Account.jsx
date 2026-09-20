@@ -50,7 +50,7 @@ const Account = () => {
     {
       title: 'Customer Support',
       description: 'Get help with your orders and account',
-      path: '/customer-support',
+      path: '/contact',
       icon: <Headphones className="w-6 h-6" />
     }
   ]

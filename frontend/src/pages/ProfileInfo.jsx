@@ -160,7 +160,7 @@ const ProfileInfo = () => {
                 <ShoppingBag className="w-5 h-5" />
                 <span className="leading-tight text-center">Orders</span>
               </button>
-              <button onClick={() => navigate('/customer-support')}
+              <button onClick={() => navigate('/contact')}
                 className="flex flex-col items-center justify-center gap-1.5 bg-white border border-gray-200 text-gray-700 hover:border-violet-500 hover:text-violet-700 py-3 px-2 rounded-xl transition-all duration-200 text-[11px] font-medium cursor-pointer">
                 <Headphones className="w-5 h-5" />
                 <span className="leading-tight text-center">Support</span>
