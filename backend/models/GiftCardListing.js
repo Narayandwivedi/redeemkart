@@ -60,6 +60,10 @@ const giftCardListingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     default: null
+  },
+  isRemoved: {
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true

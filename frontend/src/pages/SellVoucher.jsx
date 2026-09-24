@@ -380,6 +380,12 @@ const SellVoucher = () => {
                   </div>
                 );
               })()}
+
+              <div className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
+                <h4 className="font-semibold text-blue-900 text-sm mb-2">📚 How to Sell Flipkart Gift Cards?</h4>
+                <p className="text-blue-800 text-xs mb-3">Learn the complete process, tips, and FAQs about selling Flipkart gift cards on RedeemKart.</p>
+                <Link to="/how-to-sell-flipkart-gift-card" className="inline-block text-xs font-semibold text-blue-950 hover:text-blue-800 bg-white px-3 py-1.5 rounded transition-colors">Read Guide &rarr;</Link>
+              </div>
             </div>
           </div>
 

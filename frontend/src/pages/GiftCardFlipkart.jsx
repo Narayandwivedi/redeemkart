@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
 import { useSEO } from '../hooks/useSEO'
+import { BookOpen } from 'lucide-react'
 
 const defaultVouchers = [
   { _id: 'flipkart-100', name: 'Flipkart Gift Card - ₹100', price: 89, originalPrice: 100, brand: 'Flipkart', category: 'gift-cards', images: ['/products/flipkart.avif'], description: '₹100 Flipkart Gift Card at just ₹89', stockQuantity: 0 },
@@ -66,6 +67,22 @@ const GiftCardFlipkart = () => {
             <span className="bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">Gift Cards</span>
           </h1>
           <p className="text-base sm:text-base text-slate-500 max-w-2xl mx-auto">Get Flipkart codes at the best prices. Instant delivery via email.</p>
+        </div>
+
+        {/* Info Banner */}
+        <div className="mb-10 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 max-w-3xl mx-auto">
+          <div className="flex gap-4 items-start">
+            <BookOpen className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-bold text-slate-900 mb-2">Want to Sell Your Flipkart Gift Card?</h3>
+              <p className="text-slate-600 text-sm mb-3">
+                Have an unused Flipkart gift card? Learn how to sell it for instant cash on RedeemKart at the best prices.
+              </p>
+              <Link to="/how-to-sell-flipkart-gift-card" className="inline-block text-sm font-semibold text-blue-600 hover:text-blue-700 bg-white px-4 py-2 rounded-lg transition-colors border border-blue-200 hover:border-blue-300">
+                Read Complete Guide →
+              </Link>
+            </div>
+          </div>
         </div>
 
         {loading ? (

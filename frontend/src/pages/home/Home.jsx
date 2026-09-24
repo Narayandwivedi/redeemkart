@@ -87,14 +87,14 @@ const Home = () => {
   ]
 
   const reviews = [
-    { name: 'Rahul Sharma', rating: 5, text: 'bc GTA 5 ka code mil gaya 2 minute mein, best website hai yeh!', initials: 'RS' },
-    { name: 'Priya Patel', rating: 5, text: 'Google Play voucher instantly aagaya, 20% off mil gaya, kamaal kar diya!', initials: 'PP' },
-    { name: 'Amit Verma', rating: 4, text: 'Amazon gift card becha, payment 5 min mein aa gayi. Thoda aur rate hota to maza aata!', initials: 'AV' },
-    { name: 'Manish Reddy', rating: 5, text: 'Got my Steam wallet code in 2 minutes. Game bundle sale mein bohot accha deal mila!', initials: 'MR' },
-    { name: 'Vikram Singh', rating: 5, text: 'Bought an Apple gift card at great price. Code delivered in under a minute. Legit platform bro!', initials: 'VS' },
-    { name: 'Arjun Mehta', rating: 5, text: 'Mere bhai ke liye GTA 5 aur RDR2 ka bundle liya. Itna sasta kahi nahi milega!', initials: 'AM' },
-    { name: 'Rohit Joshi', rating: 5, text: 'Bought a Google Play voucher and got 15% off. Delivery was instant. Highly recommended!', initials: 'RJ' },
-    { name: 'Karan Joshi', rating: 5, text: 'Sold my unused Flipkart voucher. Got better rate than any other platform. Will use again for sure!', initials: 'KJ' },
+    { name: 'Rahul Sharma', rating: 5, text: 'Google Play voucher instantly aagaya, 25% off mil gaya. Best platform for discounted gift cards!', initials: 'RS' },
+    { name: 'Priya Patel', rating: 5, text: 'Sold my Amazon gift card easily. Payment 3-4 hours mein bank account mein aa gayi. Reliable!', initials: 'PP' },
+    { name: 'Amit Verma', rating: 5, text: 'Flipkart gift card becha, best rate mil gaya. 4 hours mein payment received. Bahut aasan!', initials: 'AV' },
+    { name: 'Manish Reddy', rating: 5, text: 'Bought Myntra voucher at 18% discount. Code delivered instantly. Very reliable platform!', initials: 'MR' },
+    { name: 'Vikram Singh', rating: 5, text: 'Sold unused Apple gift card for best price. Payment within 3 hours, no hidden charges!', initials: 'VS' },
+    { name: 'Arjun Mehta', rating: 5, text: 'Got BigBasket gift card at great deal. Easy to use, instant delivery. Highly satisfied!', initials: 'AM' },
+    { name: 'Rohit Joshi', rating: 5, text: 'Bought Google Play voucher, got 20% off. Code delivered instantly. Very fast process!', initials: 'RJ' },
+    { name: 'Karan Joshi', rating: 5, text: 'Sold Flipkart voucher, payment received in 3-4 hours. Best rates than other platforms!', initials: 'KJ' },
   ]
 
   const [page, setPage] = useState(0)

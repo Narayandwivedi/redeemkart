@@ -140,6 +140,18 @@ const GiftCards = () => {
     }
   }
 
+  const handleRemoveCode = async (listingId, productId) => {
+    if (!window.confirm('Remove this card?')) return
+    try {
+      await axios.patch(`${BACKEND_URL}/api/admin/gift-cards/${listingId}/remove`, {}, { withCredentials: true })
+      toast.success('Card removed')
+      fetchCodesForVariant(productId)
+      fetchData()
+    } catch (err) {
+      toast.error('Failed to remove card')
+    }
+  }
+
   const handleToggleCodeStatus = async (codeId, currentStatus, productId) => {
     const newStatus = currentStatus === 'active' ? 'sold' : 'active'
     if (!window.confirm(`Change status to ${newStatus}?`)) return
@@ -469,9 +481,22 @@ const GiftCards = () => {
                                         {c.soldTo ? <span>{c.soldTo.fullName}<br/><span className="text-gray-400">{c.soldTo.email}</span></span> : '—'}
                                       </td>
                                       <td className="py-2 text-right">
-                                        <button onClick={() => handleDeleteCode(c._id, p._id)} className="text-red-400 hover:text-red-600 hover:bg-red-50 p-1 rounded">
-                                          <Trash2 className="w-3.5 h-3.5" />
-                                        </button>
+                                        <div className="flex items-center gap-1 justify-end">
+                                          <button
+                                            onClick={() => handleRemoveCode(c._id, p._id)}
+                                            className="text-amber-400 hover:text-amber-600 hover:bg-amber-50 p-1 rounded transition-colors"
+                                            title="Remove from Admin View (Not Deleted)"
+                                          >
+                                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-4.803m5.596-3.856a3.375 3.375 0 11-4.753 4.753m4.753-4.753L3.596 3.596" /></svg>
+                                          </button>
+                                          <button
+                                            onClick={() => handleDeleteCode(c._id, p._id)}
+                                            className="text-red-400 hover:text-red-600 hover:bg-red-50 p-1 rounded transition-colors"
+                                            title="Delete Permanently"
+                                          >
+                                            <Trash2 className="w-3.5 h-3.5" />
+                                          </button>
+                                        </div>
                                       </td>
                                     </tr>
                                   ))}

@@ -4,7 +4,10 @@ const Product = require('../models/Product');
 const getAllListings = async (req, res) => {
   try {
     const { status } = req.query;
-    const filter = status ? { status } : {};
+    const filter = { isRemoved: false };
+    if (status) {
+      filter.status = status;
+    }
 
     const listings = await GiftCardListing.find(filter)
       .populate('user', 'fullName email')
@@ -230,7 +233,7 @@ const updateListingStatus = async (req, res) => {
 const getListingsByProduct = async (req, res) => {
   try {
     const { productId } = req.params;
-    const listings = await GiftCardListing.find({ productId })
+    const listings = await GiftCardListing.find({ productId, isRemoved: false })
       .populate('user', 'fullName email')
       .populate('soldTo', 'fullName email')
       .sort({ createdAt: -1 });
@@ -248,4 +251,32 @@ const getListingsByProduct = async (req, res) => {
   }
 };
 
-module.exports = { getAllListings, addListing, deleteListing, updateListingStatus, getListingsByProduct };
+const removeListing = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const listing = await GiftCardListing.findById(id);
+
+    if (!listing) {
+      return res.status(404).json({
+        success: false,
+        message: 'Listing not found'
+      });
+    }
+
+    listing.isRemoved = true;
+    await listing.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Gift card removed successfully',
+      data: listing
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
+module.exports = { getAllListings, addListing, deleteListing, updateListingStatus, getListingsByProduct, removeListing };
