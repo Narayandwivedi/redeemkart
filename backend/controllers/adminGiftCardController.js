@@ -266,6 +266,13 @@ const removeListing = async (req, res) => {
       });
     }
 
+    if (listing.listedBy === 'admin') {
+      return res.status(400).json({
+        success: false,
+        message: 'Only user-submitted listings can be removed'
+      });
+    }
+
     listing.isRemoved = true;
     await listing.save();
 
