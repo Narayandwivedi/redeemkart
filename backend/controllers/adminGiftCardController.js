@@ -4,7 +4,7 @@ const Product = require('../models/Product');
 const getAllListings = async (req, res) => {
   try {
     const { status } = req.query;
-    const filter = { isRemoved: false };
+    const filter = { $or: [{ isRemoved: false }, { isRemoved: { $exists: false } }] };
     if (status) {
       filter.status = status;
     }
@@ -233,7 +233,10 @@ const updateListingStatus = async (req, res) => {
 const getListingsByProduct = async (req, res) => {
   try {
     const { productId } = req.params;
-    const listings = await GiftCardListing.find({ productId, isRemoved: false })
+    const listings = await GiftCardListing.find({
+      productId,
+      $or: [{ isRemoved: false }, { isRemoved: { $exists: false } }]
+    })
       .populate('user', 'fullName email')
       .populate('soldTo', 'fullName email')
       .sort({ createdAt: -1 });
