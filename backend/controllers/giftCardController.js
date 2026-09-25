@@ -1,18 +1,11 @@
 const GiftCardListing = require('../models/GiftCardListing');
 const { notifyGiftCardListed } = require('../services/telegramService');
 
-// Brands where first-time listers get a promotional 10% commission.
-// All other brands (including Google Play) always use 30%.
-const FIRST_TIMER_BRANDS = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart'];
+// Amazon and Flipkart always use a flat 10% commission.
+// All other brands (including Google Play) use 30%.
+const TEN_PERCENT_BRANDS = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart'];
 
-const getCommissionRate = async (userId, brand) => {
-  if (!FIRST_TIMER_BRANDS.includes(brand)) {
-    return 30; // Google Play and all other brands: always 30%
-  }
-  // Check if this user has ever listed this brand before (any status counts)
-  const prior = await GiftCardListing.countDocuments({ user: userId, brand });
-  return prior === 0 ? 10 : 30;
-};
+const getCommissionRate = (brand) => (TEN_PERCENT_BRANDS.includes(brand) ? 10 : 30);
 
 const addListing = async (req, res) => {
   try {
@@ -42,7 +35,7 @@ const addListing = async (req, res) => {
       }
     }
 
-    const commissionPercent = await getCommissionRate(req.user._id, brand);
+    const commissionPercent = getCommissionRate(brand);
 
     const listing = new GiftCardListing({
       user: req.user._id,

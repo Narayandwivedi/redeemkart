@@ -364,11 +364,8 @@ const SellVoucher = () => {
               </div>
 
               {form.balance > 0 && (() => {
-                const firstTimerBrands = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart'];
-                const isFirstTimer =
-                  firstTimerBrands.includes(form.brand) &&
-                  cards.filter(c => c.brand === form.brand).length === 0;
-                const commission = isFirstTimer ? 10 : 30;
+                const tenPercentBrands = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart'];
+                const commission = tenPercentBrands.includes(form.brand) ? 10 : 30;
                 const payout = Math.round(form.balance * (1 - commission / 100));
                 return (
                   <div className="text-center -mt-2">

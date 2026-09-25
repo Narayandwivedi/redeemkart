@@ -44,6 +44,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import PayoutDetails from './pages/PayoutDetails'
 import KYC from './pages/KYC'
 import HowToSellFlipkartGiftCard from './pages/HowToSellFlipkartGiftCard'
+import HowToSellAmazonGiftCard from './pages/HowToSellAmazonGiftCard'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -168,6 +169,7 @@ const AppContent = () => {
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/how-to-sell-flipkart-gift-card" element={<HowToSellFlipkartGiftCard />} />
+        <Route path="/how-to-sell-amazon-gift-card" element={<HowToSellAmazonGiftCard />} />
       </Routes>
       {showMobileNav && <Footer />}
       {showMobileNav && <MobileBottomNav />}

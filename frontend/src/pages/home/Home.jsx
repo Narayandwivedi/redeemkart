@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Gift, Gamepad2, DollarSign, ArrowRight, Star, Sparkles } from 'lucide-react'
 import HeroSection from './component/HeroSection'
+import SellGiftCardSection from './component/SellGiftCardSection'
 import PopularGiftCards from './component/PopularGiftCards'
 import HomeGamesSection from './component/HomeGamesSection'
 import { useCart } from '../../context/CartContext'
@@ -122,6 +123,8 @@ const Home = () => {
         <HeroSection />
       </div>
 
+      <SellGiftCardSection />
+
       <PopularGiftCards />
 
       <HomeGamesSection />
@@ -151,11 +154,12 @@ const Home = () => {
       {/* User Reviews */}
       <div className="py-8 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">What Our Customers Say</h2>
+          <h2 className="text-2xl md:text-[28px] font-semibold text-gray-800 text-center">What Our Customers Say</h2>
+          <p className="text-sm text-gray-500 text-center mt-1 mb-8">Real experiences from people buying and selling gift cards</p>
           <div className="relative">
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {currentReviews.map((review, i) => (
-                <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200 min-h-[160px] flex flex-col">
+                <div key={i} className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 min-h-[160px] flex flex-col">
                   <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                     <div className={`w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br ${gradients[i % gradients.length]} flex items-center justify-center text-white font-semibold text-[10px] sm:text-sm`}>
                       {review.initials}

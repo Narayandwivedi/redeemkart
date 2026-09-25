@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
 
         {/* Main Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
 
           {/* Brand Column */}
           <div>
@@ -55,61 +55,55 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Categories + Quick Links in same row */}
-          <div className="grid grid-cols-2 gap-6">
-            {/* Shop by Category */}
-            <div>
-              <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#8b5cf6' }} />
-                Categories
-              </h3>
-              <ul className="space-y-2.5">
-                {[
-                  { to: '/search?category=e-commerce', label: '🛒 E-Commerce' },
-                  { to: '/search?category=gaming', label: '🎮 Gaming' },
-                  { to: '/search?category=food-dining', label: '🍔 Food & Dining' },
-                  { to: '/search?category=fashion-lifestyle', label: '👔 Fashion & Lifestyle' },
-                  { to: '/search?category=travel-entertainment', label: '✈️ Travel & Entertainment' },
-                ].map(({ to, label }) => (
-                  <li key={to}>
-                    <Link
-                      to={to}
-                      className="text-gray-400 text-sm hover:text-violet-500 transition-colors duration-200 flex items-center gap-1.5 group"
-                    >
-                      <span className="w-0 group-hover:w-2 h-px rounded transition-all duration-200 inline-block" style={{ background: '#8b5cf6' }} />
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+              <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#8b5cf6' }} />
+              Quick Links
+            </h3>
+            <ul className="space-y-2.5">
+              {[
+                { to: '/', label: 'Home' },
+                { to: '/about', label: 'About Us' },
+                { to: '/contact', label: 'Contact Us' },
+                { to: '/sell-gift-card', label: 'Sell Gift Card' },
+                { to: '/my-orders', label: 'My Orders' },
+              ].map(({ to, label }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="text-gray-400 text-sm hover:text-violet-500 transition-colors duration-200 flex items-center gap-1.5 group"
+                  >
+                    <span className="w-0 group-hover:w-2 h-px rounded transition-all duration-200 inline-block" style={{ background: '#8b5cf6' }} />
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            {/* Quick Links */}
-            <div>
-              <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#8b5cf6' }} />
-                Quick Links
-              </h3>
-              <ul className="space-y-2.5">
-                {[
-                  { to: '/', label: 'Home' },
-                  { to: '/about', label: 'About Us' },
-                  { to: '/contact', label: 'Contact Us' },
-                  { to: '/sell-gift-card', label: 'Sell Gift Card' },
-                  { to: '/my-orders', label: 'My Orders' },
-                ].map(({ to, label }) => (
-                  <li key={to}>
-                    <Link
-                      to={to}
-                      className="text-gray-400 text-sm hover:text-violet-500 transition-colors duration-200 flex items-center gap-1.5 group"
-                    >
-                      <span className="w-0 group-hover:w-2 h-px rounded transition-all duration-200 inline-block" style={{ background: '#8b5cf6' }} />
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Sell Guides */}
+          <div>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+              <span className="w-4 h-0.5 inline-block rounded" style={{ background: '#8b5cf6' }} />
+              Sell Guides
+            </h3>
+            <ul className="space-y-2.5">
+              {[
+                { to: '/how-to-sell-flipkart-gift-card', label: 'How to Sell Flipkart Gift Card' },
+                { to: '/how-to-sell-amazon-gift-card', label: 'How to Sell Amazon Gift Card' },
+              ].map(({ to, label }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="text-gray-400 text-sm hover:text-violet-500 transition-colors duration-200 flex items-center gap-1.5 group"
+                  >
+                    <span className="w-0 group-hover:w-2 h-px rounded transition-all duration-200 inline-block" style={{ background: '#8b5cf6' }} />
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Contact & Trust */}
