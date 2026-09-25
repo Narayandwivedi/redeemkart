@@ -2,56 +2,46 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronDown, Clock, ShieldCheck, Banknote } from 'lucide-react'
 import { useSEO } from '../hooks/useSEO'
+import { buildStructuredData, structuredDataId } from '../data/howToSell'
 
-const HowToSellGuide = ({ brand, path, seo, intro, steps, needs, receive, faqs }) => {
-  const url = `https://redeemkart.in${path}`
+const inr = (n) => `₹${n.toLocaleString('en-IN')}`
+
+const HowToSellGuide = ({ guide }) => {
+  const { brand, path, seo, intro, steps, needs, receive, example, tips, faqs, related, updated } = guide
+  const commissionAmount = Math.round((example.value * example.commission) / 100)
+  const payout = example.value - commissionAmount
 
   useSEO({
     title: seo.title,
     description: seo.description,
     keywords: seo.keywords,
     ogImage: 'https://redeemkart.in/redeemkart-logo.png',
-    canonicalUrl: url,
-    structuredDataId: `how-to-sell-${brand.toLowerCase()}-structured-data`,
-    structuredData: [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'HowTo',
-        name: `How to Sell a ${brand} Gift Card on RedeemKart`,
-        description: `Sell your unused ${brand} gift card on RedeemKart and get paid to your bank account.`,
-        totalTime: 'PT5M',
-        step: steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text })),
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqs.map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://redeemkart.in/' },
-          { '@type': 'ListItem', position: 2, name: 'Sell Gift Card', item: 'https://redeemkart.in/sell-gift-card' },
-          { '@type': 'ListItem', position: 3, name: `How to Sell ${brand} Gift Card`, item: url },
-        ],
-      },
-    ],
+    ogType: 'article',
+    canonicalUrl: `https://redeemkart.in${path}`,
+    structuredDataId: structuredDataId(guide),
+    structuredData: buildStructuredData(guide),
   })
 
   return (
     <div className="bg-slate-50 min-h-screen font-['Inter',sans-serif] text-slate-600">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <nav aria-label="Breadcrumb" className="text-xs text-slate-500 mb-4">
+          <Link to="/" className="hover:text-slate-800">Home</Link>
+          <span className="mx-1.5">/</span>
+          <Link to="/sell-gift-card" className="hover:text-slate-800">Sell Gift Card</Link>
+          <span className="mx-1.5">/</span>
+          <span className="text-slate-700">How to sell {brand} gift card</span>
+        </nav>
+
         <header>
           <p className="text-xs font-medium text-emerald-600 uppercase tracking-wider mb-2">Sell Guide</p>
           <h1 className="font-['Poppins',sans-serif] text-2xl sm:text-4xl font-semibold text-slate-900 tracking-tight leading-tight">
-            How to sell a {brand} gift card
+            How to sell a {brand} gift card online
           </h1>
           <p className="mt-3 text-[15px] sm:text-base leading-relaxed">{intro}</p>
+          <p className="mt-2 text-xs text-slate-400">
+            Last updated <time dateTime={updated.iso}>{updated.label}</time>
+          </p>
 
           <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-3">
             {[
@@ -68,7 +58,7 @@ const HowToSellGuide = ({ brand, path, seo, intro, steps, needs, receive, faqs }
         </header>
 
         <section className="mt-10 sm:mt-12">
-          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">Steps to sell your card</h2>
+          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">Steps to sell your {brand} gift card</h2>
           <ol className="bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100">
             {steps.map((s, i) => (
               <li key={s.title} className="flex gap-3 sm:gap-4 p-4 sm:p-5">
@@ -100,6 +90,23 @@ const HowToSellGuide = ({ brand, path, seo, intro, steps, needs, receive, faqs }
         </section>
 
         <section className="mt-10 sm:mt-12">
+          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-1">How much will you get?</h2>
+          <p className="text-sm mb-4">Here is an example of what a {brand} gift card pays out.</p>
+          <div className="bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100 text-sm">
+            <div className="flex justify-between p-4"><span>{brand} gift card value</span><span className="font-medium text-slate-900">{inr(example.value)}</span></div>
+            <div className="flex justify-between p-4"><span>Commission ({example.commission}%)</span><span className="font-medium text-slate-900">-{inr(commissionAmount)}</span></div>
+            <div className="flex justify-between p-4 bg-emerald-50/60 rounded-b-2xl"><span className="font-medium text-slate-900">You receive</span><span className="font-semibold text-emerald-700">{inr(payout)}</span></div>
+          </div>
+        </section>
+
+        <section className="mt-10 sm:mt-12">
+          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">Tips for a smooth sale</h2>
+          <ul className="bg-white border border-slate-200 rounded-2xl p-5 text-sm space-y-2 list-disc pl-9 marker:text-emerald-500">
+            {tips.map((t) => <li key={t}>{t}</li>)}
+          </ul>
+        </section>
+
+        <section className="mt-10 sm:mt-12">
           <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">Frequently asked questions</h2>
           <div className="bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100">
             {faqs.map((f) => (
@@ -126,6 +133,17 @@ const HowToSellGuide = ({ brand, path, seo, intro, steps, needs, receive, faqs }
             Sell Gift Card
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
+        </section>
+
+        <section className="mt-10 sm:mt-12">
+          <h2 className="font-['Poppins',sans-serif] text-base sm:text-lg font-semibold text-slate-900 mb-3">Related pages</h2>
+          <ul className="space-y-1.5 text-sm">
+            {related.map((r) => (
+              <li key={r.to}>
+                <Link to={r.to} className="text-emerald-700 hover:text-emerald-800 font-medium">{r.label} &rarr;</Link>
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     </div>
