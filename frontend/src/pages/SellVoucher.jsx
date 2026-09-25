@@ -27,7 +27,9 @@ const brandLogos = {
   BigBasket: '/products/bigbasket.avif',
 }
 
-const tenPercentBrands = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart']
+const noPinBrands = ['Google Play', 'Amazon Pay Gift Card']
+
+const tenPercentBrands =['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart']
 
 const statusStyles = {
   pending: 'bg-amber-50 text-amber-700',
@@ -343,7 +345,7 @@ const SellVoucher = () => {
               <div className="space-y-4 sm:space-y-5">
                 <div>
                   <Label>Gift card</Label>
-                  <BrandSelect value={form.brand} onSelect={(b) => setForm((f) => ({ ...f, brand: b }))} />
+                  <BrandSelect value={form.brand} onSelect={(b) => setForm((f) => ({ ...f, brand: b, pin: noPinBrands.includes(b) ? '' : f.pin }))} />
                 </div>
 
                 <div>
@@ -372,7 +374,7 @@ const SellVoucher = () => {
                   />
                 </div>
 
-                {form.brand !== 'Google Play' && (
+                {!noPinBrands.includes(form.brand) && (
                   <div>
                     <Label
                       hint={form.brand === 'Flipkart' ? 'Required, 6 digits' : 'Optional'}
