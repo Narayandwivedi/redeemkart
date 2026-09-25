@@ -297,9 +297,9 @@ const SellVoucher = () => {
   const payout = Math.round((Number(form.balance) || 0) * (1 - commission / 100))
 
   const steps = [
-    { icon: Upload, title: 'List your card', desc: 'Enter card details' },
-    { icon: ShieldCheck, title: 'We verify & sell', desc: 'Most sell within 24 hrs' },
-    { icon: Banknote, title: 'Get paid', desc: 'Usually in 3-4 hours' },
+    { icon: Upload, title: 'List your card', desc: 'Add card details' },
+    { icon: ShieldCheck, title: 'We verify', desc: 'Sells in about 24 hrs' },
+    { icon: Banknote, title: 'Get paid', desc: 'In 3-4 hours' },
   ]
 
   const faqs = [
@@ -325,15 +325,14 @@ const SellVoucher = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
           <div className="lg:col-span-2 space-y-6">
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              {steps.map(({ icon: Icon, title, desc }, i) => (
-                <div key={title} className="bg-white border border-slate-200 rounded-xl p-3 sm:p-4">
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold flex items-center justify-center">{i + 1}</span>
-                    <Icon className="w-4 h-4 text-emerald-600 hidden sm:block" />
-                  </div>
-                  <p className="text-[12px] sm:text-sm font-semibold text-slate-900 leading-tight">{title}</p>
-                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-snug">{desc}</p>
+            <div className="grid grid-cols-3 divide-x divide-emerald-100 rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-4 sm:py-5">
+              {steps.map(({ icon: Icon, title, desc }) => (
+                <div key={title} className="flex flex-col items-center text-center px-2 sm:px-4">
+                  <span className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-emerald-100 shadow-sm text-emerald-600 flex items-center justify-center mb-2.5">
+                    <Icon className="w-[18px] h-[18px] sm:w-5 sm:h-5" />
+                  </span>
+                  <p className="text-[13px] sm:text-sm font-semibold text-slate-900 leading-tight">{title}</p>
+                  <p className="text-[11px] sm:text-[13px] text-slate-500 mt-1 leading-snug">{desc}</p>
                 </div>
               ))}
             </div>
