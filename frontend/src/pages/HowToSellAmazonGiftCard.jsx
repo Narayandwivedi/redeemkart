@@ -24,7 +24,6 @@ const config = {
     { q: 'How long does the payment take?', a: 'Once your card is sold, the payout is usually released in 3-4 hours.' },
     { q: 'Which Amazon cards can I sell?', a: 'You can list Amazon Pay Gift Cards and Amazon Shopping Vouchers.' },
     { q: 'Is it free to list a card?', a: 'Yes. Listing is free. The commission is only deducted when your card sells.' },
-    { q: 'Can I sell a card with a partial balance?', a: 'Yes. Enter the current balance on the card when you list it.' },
     { q: 'What if my card is invalid or already used?', a: 'It will be rejected during verification and no payment is made. Check the code carefully before you publish.' },
   ],
 }

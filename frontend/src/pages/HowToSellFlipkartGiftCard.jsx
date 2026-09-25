@@ -24,7 +24,6 @@ const config = {
     { q: 'How long does the payment take?', a: 'Once your card is sold, the payout is usually released in 3-4 hours.' },
     { q: 'Is it free to list a card?', a: 'Yes. Listing is free. The commission is only deducted when your card sells.' },
     { q: 'What do I need to sell a Flipkart gift card?', a: 'The 16-digit card number and the 6-digit PIN. The card must be valid, unused and not expired.' },
-    { q: 'Can I sell a card with a partial balance?', a: 'Yes. Enter the current balance on the card when you list it.' },
     { q: 'What if my card is invalid or already used?', a: 'It will be rejected during verification and no payment is made. Check the code and PIN carefully before you publish.' },
   ],
 }
