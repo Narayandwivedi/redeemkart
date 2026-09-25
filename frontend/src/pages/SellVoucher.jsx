@@ -297,8 +297,8 @@ const SellVoucher = () => {
   const payout = Math.round((Number(form.balance) || 0) * (1 - commission / 100))
 
   const steps = [
-    { icon: Upload, title: 'List your card', desc: 'Add card details' },
-    { icon: ShieldCheck, title: 'We verify', desc: 'Sells in about 24 hrs' },
+    { icon: Upload, title: 'List card', desc: 'Add details' },
+    { icon: ShieldCheck, title: 'We verify', desc: 'Sells in 24 hrs' },
     { icon: Banknote, title: 'Get paid', desc: 'In 3-4 hours' },
   ]
 
@@ -317,9 +317,9 @@ const SellVoucher = () => {
           <Link to="/" className="p-1.5 -ml-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white transition-colors" aria-label="Back to home">
             <ArrowLeft className="h-5 w-5" />
           </Link>
-          <div>
-            <h1 className="font-['Poppins',sans-serif] text-xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Sell gift cards</h1>
-            <p className="text-[13px] sm:text-sm text-slate-500 mt-0.5">List your unused card and get paid to your bank account.</p>
+          <div className="min-w-0">
+            <h1 className="font-['Poppins',sans-serif] text-xl sm:text-3xl font-semibold text-slate-900 tracking-tight leading-tight">Sell gift cards</h1>
+            <p className="text-[13px] sm:text-sm text-slate-500 mt-0.5 truncate">List your card and get paid in 3-4 hours.</p>
           </div>
         </div>
 
