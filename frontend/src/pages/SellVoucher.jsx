@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { ArrowLeft, Plus, Gift, DollarSign, Hash, Calendar, X, Upload, Clock, Banknote, Lock } from 'lucide-react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
+import { ArrowLeft, Gift, ChevronDown, Check, Upload, ShieldCheck, Banknote, Loader2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
@@ -16,6 +16,111 @@ const brands = [
   'Myntra',
   'BigBasket',
 ]
+
+const brandLogos = {
+  'Google Play': '/products/google%20play.avif',
+  'Amazon Pay Gift Card': '/products/amazon.avif',
+  'Amazon Shopping Voucher': '/products/amazon.avif',
+  Flipkart: '/products/flipkart.avif',
+  Steam: '/products/steam.avif',
+  Myntra: '/products/myntra.avif',
+  BigBasket: '/products/bigbasket.avif',
+}
+
+const tenPercentBrands = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart']
+
+const statusStyles = {
+  pending: 'bg-amber-50 text-amber-700',
+  active: 'bg-emerald-50 text-emerald-700',
+  sold: 'bg-blue-50 text-blue-700',
+  sold_out: 'bg-blue-50 text-blue-700',
+  paid: 'bg-green-50 text-green-700',
+  rejected: 'bg-red-50 text-red-700',
+  used: 'bg-purple-50 text-purple-700',
+  expired: 'bg-slate-100 text-slate-600',
+}
+
+const inputCls =
+  'w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition'
+
+const BrandLogo = ({ brand, size = 'w-8 h-8' }) =>
+  brandLogos[brand] ? (
+    <img src={brandLogos[brand]} alt="" className={`${size} rounded-md object-cover shrink-0`} />
+  ) : (
+    <span className={`${size} rounded-md bg-slate-100 text-slate-500 flex items-center justify-center shrink-0`}>
+      <Gift className="w-4 h-4" />
+    </span>
+  )
+
+const BrandSelect = ({ value, onSelect }) => {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (!open) return undefined
+    const onDown = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false) }
+    document.addEventListener('mousedown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className={`${inputCls} flex items-center justify-between gap-3 text-left cursor-pointer ${open ? 'ring-2 ring-emerald-500/30 border-emerald-500' : ''}`}
+      >
+        {value ? (
+          <span className="flex items-center gap-2.5 min-w-0">
+            <BrandLogo brand={value} size="w-6 h-6" />
+            <span className="truncate font-medium">{value}</span>
+          </span>
+        ) : (
+          <span className="text-slate-400">Select gift card</span>
+        )}
+        <ChevronDown className={`w-4 h-4 text-slate-400 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <ul
+          role="listbox"
+          className="absolute z-30 mt-2 w-full max-h-72 overflow-auto rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl"
+        >
+          {brands.map((b) => {
+            const selected = b === value
+            return (
+              <li key={b} role="option" aria-selected={selected}>
+                <button
+                  type="button"
+                  onClick={() => { onSelect(b); setOpen(false) }}
+                  className={`w-full flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm text-left transition-colors cursor-pointer ${selected ? 'bg-emerald-50 text-emerald-800' : 'text-slate-700 hover:bg-slate-50'}`}
+                >
+                  <BrandLogo brand={b} />
+                  <span className="flex-1 font-medium">{b}</span>
+                  {selected && <Check className="w-4 h-4 text-emerald-600" />}
+                </button>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </div>
+  )
+}
+
+const Label = ({ children, hint, hintClass = 'text-slate-400' }) => (
+  <label className="flex items-center justify-between text-[13px] font-medium text-slate-700 mb-1.5">
+    <span>{children}</span>
+    {hint && <span className={`text-xs font-normal ${hintClass}`}>{hint}</span>}
+  </label>
+)
 
 const SellVoucher = () => {
   const { BACKEND_URL, isAuthenticated } = useContext(AppContext)
@@ -188,105 +293,74 @@ const SellVoucher = () => {
     }
   }
 
+  const commission = tenPercentBrands.includes(form.brand) ? 10 : 30
+  const payout = Math.round((Number(form.balance) || 0) * (1 - commission / 100))
+
+  const steps = [
+    { icon: Upload, title: 'List your card', desc: 'Enter card details' },
+    { icon: ShieldCheck, title: 'We verify & sell', desc: 'Most sell within 24 hrs' },
+    { icon: Banknote, title: 'Get paid', desc: 'Usually in 3-4 hours' },
+  ]
+
+  const faqs = [
+    { q: 'How fast will my card sell?', a: 'Most popular brand gift cards sell within 24 hours. Less common brands may take 2-3 days.' },
+    { q: 'When do I get paid?', a: 'Once your card is sold, the payout is usually released to your bank account in 3-4 hours.' },
+    { q: 'Are there any selling fees?', a: 'Listing is free. A commission is deducted from your payout when the card sells.' },
+    { q: "What if my code doesn't work?", a: 'Check the code and PIN before listing. Invalid cards are rejected, and fraudulent listings may lead to account suspension.' },
+    { q: 'How do I add my bank account?', a: 'Open your Account and go to Payout Details to add and verify your bank account.' },
+  ]
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-
-          {/* Main Section */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center justify-between mb-4 sm:mb-6">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <Link to="/" className="text-gray-600 hover:text-gray-900">
-                <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
-              </Link>
-              <h1 className="text-lg sm:text-2xl font-semibold text-gray-900">Sell Gift Cards</h1>
-            </div>
+    <div className="min-h-screen bg-slate-50 font-['Inter',sans-serif] text-slate-600">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+        <div className="flex items-center gap-3 mb-5 sm:mb-7">
+          <Link to="/" className="p-1.5 -ml-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-white transition-colors" aria-label="Back to home">
+            <ArrowLeft className="h-5 w-5" />
+          </Link>
+          <div>
+            <h1 className="font-['Poppins',sans-serif] text-xl sm:text-3xl font-semibold text-slate-900 tracking-tight">Sell gift cards</h1>
+            <p className="text-[13px] sm:text-sm text-slate-500 mt-0.5">List your unused card and get paid to your bank account.</p>
           </div>
+        </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 mb-6 sm:mb-8">
-            <h2 className="text-center text-[13px] sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">How It Works</h2>
-            <div className="flex flex-row items-start sm:items-center gap-0">
-              <div className="flex-1 flex flex-col items-center text-center relative">
-                <div className="bg-gray-900 text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-1.5 sm:mb-2 shadow-md relative z-10">
-                  <Upload className="h-3 w-3 sm:h-5 sm:w-5" />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+          <div className="lg:col-span-2 space-y-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              {steps.map(({ icon: Icon, title, desc }, i) => (
+                <div key={title} className="bg-white border border-slate-200 rounded-xl p-3 sm:p-4">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold flex items-center justify-center">{i + 1}</span>
+                    <Icon className="w-4 h-4 text-emerald-600 hidden sm:block" />
+                  </div>
+                  <p className="text-[12px] sm:text-sm font-semibold text-slate-900 leading-tight">{title}</p>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-snug">{desc}</p>
                 </div>
-                <p className="font-medium text-gray-900 text-[10px] sm:text-sm leading-tight">List Voucher</p>
-                <p className="text-[9px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">Fill card info & code</p>
-                <div className="absolute top-4 sm:top-5 left-[55%] w-[80%] h-0.5 border-t-[1.5px] sm:border-t-2 border-dashed border-gray-300 z-0" />
-              </div>
-              <div className="flex-1 flex flex-col items-center text-center relative">
-                <div className="bg-gray-900 text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-1.5 sm:mb-2 shadow-md relative z-10">
-                  <Clock className="h-3 w-3 sm:h-5 sm:w-5" />
-                </div>
-                <p className="font-medium text-gray-900 text-[10px] sm:text-sm leading-tight">Sells in 24 Hrs</p>
-                <p className="text-[9px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">Fast & easy selling process</p>
-                <div className="absolute top-4 sm:top-5 left-[55%] w-[80%] h-0.5 border-t-[1.5px] sm:border-t-2 border-dashed border-gray-300 z-0" />
-              </div>
-              <div className="flex-1 flex flex-col items-center text-center relative">
-                <div className="bg-gray-900 text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-1.5 sm:mb-2 shadow-md relative z-10">
-                  <Banknote className="h-3 w-3 sm:h-5 sm:w-5" />
-                </div>
-                <p className="font-medium text-gray-900 text-[10px] sm:text-sm leading-tight">Get Paid</p>
-                <p className="text-[9px] sm:text-xs text-gray-500 mt-0.5 hidden sm:block">Money credited to your bank</p>
-              </div>
+              ))}
             </div>
-          </div>
 
-          <div className="bg-gradient-to-br from-violet-50 via-white to-orange-50 rounded-xl shadow-md border border-violet-200 p-5 sm:p-6 mb-6 sm:mb-8 relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-violet-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
+              <h2 className="font-['Poppins',sans-serif] text-lg sm:text-xl font-semibold text-slate-900 mb-5">List your gift card</h2>
 
-            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <Gift className="h-6 w-6 text-violet-700" />
-              List Your Gift Card
-            </h2>
-
-            <div className="grid grid-cols-1 gap-5 relative z-10">
-              <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">Brand</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Gift className="h-4 w-4 text-violet-700" />
-                  </div>
-                  <select
-                    name="brand"
-                    value={form.brand}
-                    onChange={handleChange}
-                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow appearance-none"
-                  >
-                    <option value="">Select brand</option>
-                    {brands.map((b) => (
-                      <option key={b} value={b}>{b}</option>
-                    ))}
-                  </select>
+              <div className="space-y-4 sm:space-y-5">
+                <div>
+                  <Label>Gift card</Label>
+                  <BrandSelect value={form.brand} onSelect={(b) => setForm((f) => ({ ...f, brand: b }))} />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">Balance Amount (₹)</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <DollarSign className="h-4 w-4 text-violet-700" />
-                  </div>
+                <div>
+                  <Label>Balance amount (₹)</Label>
                   <input
                     type="number"
                     name="balance"
                     value={form.balance}
                     onChange={handleChange}
-                    placeholder="Enter amount"
-                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow"
+                    placeholder="e.g. 1000"
+                    className={inputCls}
                   />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">
-                  Gift Card Code {form.brand === 'Flipkart' && <span className="text-violet-600 font-semibold">(16-digit numbers only)</span>}
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Hash className="h-4 w-4 text-violet-700" />
-                  </div>
+                <div>
+                  <Label hint={form.brand === 'Flipkart' ? '16 digits' : ''} hintClass="text-emerald-600 font-medium">Gift card code</Label>
                   <input
                     type="text"
                     name="code"
@@ -294,21 +368,19 @@ const SellVoucher = () => {
                     onChange={handleChange}
                     maxLength={form.brand === 'Flipkart' ? 16 : 50}
                     inputMode={form.brand === 'Flipkart' ? 'numeric' : 'text'}
-                    placeholder={form.brand === 'Flipkart' ? 'e.g. 6000170522107804 (16 digits)' : 'Enter gift card code'}
-                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow font-mono"
+                    placeholder={form.brand === 'Flipkart' ? 'e.g. 6000170522107804' : 'Enter gift card code'}
+                    className={`${inputCls} font-mono tracking-wide`}
                   />
                 </div>
-              </div>
 
-              {form.brand !== 'Google Play' && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-800 mb-1.5">
-                    PIN {form.brand === 'Flipkart' ? <span className="text-red-500 font-bold">* (Mandatory 6-digit PIN)</span> : <span className="text-gray-400 font-normal">(optional)</span>}
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock className="h-4 w-4 text-violet-700" />
-                    </div>
+                {form.brand !== 'Google Play' && (
+                  <div>
+                    <Label
+                      hint={form.brand === 'Flipkart' ? 'Required, 6 digits' : 'Optional'}
+                      hintClass={form.brand === 'Flipkart' ? 'text-emerald-600 font-medium' : 'text-slate-400'}
+                    >
+                      PIN
+                    </Label>
                     <input
                       type="text"
                       name="pin"
@@ -316,146 +388,112 @@ const SellVoucher = () => {
                       onChange={handleChange}
                       maxLength={form.brand === 'Flipkart' ? 6 : 20}
                       inputMode={form.brand === 'Flipkart' ? 'numeric' : 'text'}
-                      placeholder={form.brand === 'Flipkart' ? 'Enter 6-digit PIN (e.g. 123456)' : 'Enter PIN if required'}
-                      className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow font-mono"
+                      placeholder={form.brand === 'Flipkart' ? 'e.g. 123456' : 'Enter PIN if your card has one'}
+                      className={`${inputCls} font-mono tracking-wide`}
                     />
                   </div>
-                </div>
-              )}
+                )}
 
-              <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">
-                  Expiry Date <span className="text-gray-400 font-normal">(optional)</span>
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Calendar className="h-4 w-4 text-violet-700" />
-                  </div>
+                <div>
+                  <Label hint="Optional">Expiry date</Label>
                   <input
                     type="date"
                     name="expiry"
                     value={form.expiry}
                     onChange={handleChange}
-                    className="w-full pl-10 border border-violet-300 bg-white/80 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 shadow-sm transition-shadow"
+                    className={inputCls}
                   />
                 </div>
-              </div>
 
-              <div className="pt-3">
+                {form.balance > 0 && (
+                  <div className="flex items-center justify-between rounded-xl bg-emerald-50 border border-emerald-100 px-4 py-3">
+                    <div>
+                      <p className="text-xs text-emerald-800/70">You will receive</p>
+                      <p className="text-lg font-semibold text-emerald-700">₹{payout}</p>
+                    </div>
+                    <p className="text-xs text-emerald-800/70">After {commission}% commission</p>
+                  </div>
+                )}
+
                 <button
                   onClick={handleAdd}
                   disabled={loading}
-                  className="w-full py-3 text-white font-semibold text-base rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
-                  style={{
-                    background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 55%, #6d28d9 100%)',
-                    boxShadow: '0 4px 14px rgba(139,92,246,0.4)',
-                  }}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm sm:text-base font-semibold py-3 rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
                 >
-                  {loading ? (
-                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                    </svg>
-                  ) : (
-                    <Plus className="h-5 w-5" />
-                  )}
-                  {loading ? 'Listing...' : 'Publish Listing'}
+                  {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                  {loading ? 'Listing...' : 'Publish listing'}
                 </button>
               </div>
+            </div>
 
-              {form.balance > 0 && (() => {
-                const tenPercentBrands = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart'];
-                const commission = tenPercentBrands.includes(form.brand) ? 10 : 30;
-                const payout = Math.round(form.balance * (1 - commission / 100));
-                return (
-                  <div className="text-center -mt-2">
-                    <p className="text-sm font-medium text-gray-700">
-                      You'll receive:{' '}
-                      <span className="text-emerald-600 font-semibold">₹{payout}</span>
-                      <span className="text-gray-400 font-normal"> (after {commission}% commission)</span>
-                    </p>
-                  </div>
-                );
-              })()}
-
-              <div className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
-                <h4 className="font-semibold text-blue-900 text-sm mb-2">📚 How to Sell Flipkart Gift Cards?</h4>
-                <p className="text-blue-800 text-xs mb-3">Learn the complete process, tips, and FAQs about selling Flipkart gift cards on RedeemKart.</p>
-                <Link to="/how-to-sell-flipkart-gift-card" className="inline-block text-xs font-semibold text-blue-950 hover:text-blue-800 bg-white px-3 py-1.5 rounded transition-colors">Read Guide &rarr;</Link>
-              </div>
+            <div>
+              <h2 className="font-['Poppins',sans-serif] text-base sm:text-lg font-semibold text-slate-900 mb-3">Your listings</h2>
+              {cards.length === 0 ? (
+                <div className="bg-white border border-dashed border-slate-300 rounded-2xl text-center py-10 px-4">
+                  <Gift className="h-10 w-10 text-slate-300 mx-auto mb-2" />
+                  <p className="text-sm font-medium text-slate-700">No gift cards listed yet</p>
+                  <p className="text-xs text-slate-500 mt-1">Fill in the form above to list your first card.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {cards.map((card) => (
+                    <div key={card._id} className="bg-white border border-slate-200 rounded-xl p-3.5 sm:p-4 flex items-center gap-3 sm:gap-4">
+                      <BrandLogo brand={card.brand} size="w-10 h-10" />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className="text-sm font-semibold text-slate-900">{card.brand}</p>
+                          {card.status && (
+                            <span className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full ${statusStyles[card.status] || 'bg-slate-100 text-slate-600'}`}>
+                              {['sold', 'sold_out'].includes(card.status) ? 'sold' : card.status}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-slate-500 mt-0.5 truncate font-mono">
+                          {card.code.replace(/.(?=.{4})/g, '*')}
+                          {card.pin ? `  PIN ${card.pin.replace(/.(?=.{4})/g, '*')}` : ''}
+                        </p>
+                        {card.expiry && (
+                          <p className="text-[11px] text-slate-400 mt-0.5">Exp {new Date(card.expiry).toLocaleDateString('en-IN')}</p>
+                        )}
+                      </div>
+                      <p className="text-base font-semibold text-slate-900">₹{card.balance}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Your Active Listings</h2>
-        {cards.length === 0 ? (
-          <div className="text-center py-20">
-            <Gift className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">No gift cards added yet</p>
-            <p className="text-gray-400 text-sm mt-1">Click "Add New Card" to get started</p>
-          </div>
-        ) : (
-          <div className="grid gap-4">
-            {cards.map((card) => (
-              <div
-                key={card._id}
-                className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="bg-gray-100 rounded-lg p-3">
-                    <Gift className="h-6 w-6 text-gray-700" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">{card.brand}</p>
-                    <p className="text-sm text-gray-500">
-                      Code: {card.code.replace(/.(?=.{4})/g, '*')} | {card.pin ? `PIN: ${card.pin.replace(/.(?=.{4})/g, '*')} |` : ''} ₹{card.balance}{card.expiry ? ` | Exp: ${new Date(card.expiry).toLocaleDateString('en-IN')}` : ''}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-          </div>
-
-          {/* Sidebar Section - FAQs */}
-          <div className="lg:col-span-1 space-y-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-6 sticky top-24">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="w-1 h-5 rounded-full bg-violet-500 block"></span>
-                Frequently Asked Questions
-              </h3>
-
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-medium text-gray-800 text-sm mb-1">How fast will my card sell?</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">Most popular brand gift cards sell within 24 hours. Less common brands may take 2-3 days.</p>
-                </div>
-                <div className="border-t border-gray-100 pt-4">
-                  <h4 className="font-medium text-gray-800 text-sm mb-1">When do I get paid?</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">Money is automatically transferred to your linked bank account or wallet within 48 hours after the buyer verifies the card.</p>
-                </div>
-                <div className="border-t border-gray-100 pt-4">
-                  <h4 className="font-medium text-gray-800 text-sm mb-1">Are there any selling fees?</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">A commission is deducted from your payout upon successful sale. Listing is completely free.</p>
-                </div>
-                <div className="border-t border-gray-100 pt-4">
-                  <h4 className="font-medium text-gray-800 text-sm mb-1">What if my code doesn't work?</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">Ensure the code and PIN are correct before listing. If a buyer reports an invalid code, we will investigate and may suspend your account if found fraudulent.</p>
-                </div>
-                <div className="border-t border-gray-100 pt-4">
-                  <h4 className="font-medium text-gray-800 text-sm mb-1">How do I add my bank account to get paid?</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">Go to your Account settings and select "Payment Methods". There, you can securely add and verify your bank account or wallet details.</p>
-                </div>
-              </div>
-
-              <div className="mt-6 bg-violet-50 rounded-lg p-4 border border-violet-200">
-                <h4 className="font-medium text-violet-900 text-sm mb-1">Need help?</h4>
-                <p className="text-violet-800 text-xs mb-3">Our support team is available 24/7 to assist you.</p>
-                <Link to="/contact" className="inline-block text-xs font-semibold text-violet-950 hover:text-violet-800">Contact Support &rarr;</Link>
+          <aside className="lg:col-span-1 space-y-4 lg:sticky lg:top-24">
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6">
+              <h3 className="font-['Poppins',sans-serif] text-base font-semibold text-slate-900 mb-3">Frequently asked questions</h3>
+              <div className="divide-y divide-slate-100">
+                {faqs.map((f) => (
+                  <details key={f.q} className="group py-3 first:pt-0 last:pb-0">
+                    <summary className="flex items-center justify-between gap-3 cursor-pointer list-none text-sm font-medium text-slate-800">
+                      {f.q}
+                      <ChevronDown className="w-4 h-4 shrink-0 text-slate-400 transition-transform group-open:rotate-180" />
+                    </summary>
+                    <p className="text-[13px] text-slate-500 mt-2 leading-relaxed">{f.a}</p>
+                  </details>
+                ))}
               </div>
             </div>
-          </div>
 
+            <div className="bg-white border border-slate-200 rounded-2xl p-5">
+              <h3 className="text-sm font-semibold text-slate-900 mb-2">Step-by-step guides</h3>
+              <div className="space-y-1.5 text-sm">
+                <Link to="/how-to-sell-flipkart-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Flipkart gift card &rarr;</Link>
+                <Link to="/how-to-sell-amazon-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Amazon gift card &rarr;</Link>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-slate-100 p-5">
+              <h3 className="text-sm font-semibold text-slate-900">Need help?</h3>
+              <p className="text-[13px] text-slate-500 mt-1 mb-2">Our support team is here to assist you.</p>
+              <Link to="/contact" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800">Contact support &rarr;</Link>
+            </div>
+          </aside>
         </div>
       </div>
     </div>
