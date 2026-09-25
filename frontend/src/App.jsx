@@ -22,7 +22,6 @@ import MyOrders from './pages/MyOrders'
 import OrderDetail from './pages/OrderDetail'
 import ManageAddresses from './pages/ManageAddresses'
 import ProfileInfo from './pages/ProfileInfo'
-import ChatBot from './components/ChatBot'
 import Account from './pages/Account'
 import ProtectedRoute from './components/ProtectedRoute'
 import BlogsPage from './pages/blog/BlogsPage'
@@ -185,7 +184,6 @@ const AppContent = () => {
         pauseOnHover
         theme="colored"
       />
-      {showMobileNav && <ChatBot />}
     </div>
   )
 }
