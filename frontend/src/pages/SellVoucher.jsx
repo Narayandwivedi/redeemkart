@@ -8,10 +8,10 @@ import { useSEO } from '../hooks/useSEO'
 
 const brands = [
   'Google Play',
+  'Flipkart',
   'Amazon Pay Gift Card',
   'Amazon Shopping Voucher',
   'Reliance JioMart Gift Card',
-  'Flipkart',
   'Steam',
   'Myntra',
   'BigBasket',
