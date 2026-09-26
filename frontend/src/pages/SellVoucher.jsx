@@ -14,6 +14,9 @@ const brands = [
   'Reliance JioMart Gift Card',
   'Steam',
   'Myntra',
+  'MakeMyTrip',
+  'PhonePe',
+  'Zomato',
   'BigBasket',
 ]
 
@@ -29,7 +32,9 @@ const brandLogos = {
 
 const noPinBrands = ['Google Play', 'Amazon Pay Gift Card']
 
-const tenPercentBrands =['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart']
+const pinRequiredBrands = ['Flipkart', 'MakeMyTrip', 'PhonePe', 'Zomato']
+
+const tenPercentBrands =['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart', 'PhonePe']
 
 const statusStyles = {
   pending: 'bg-amber-50 text-amber-700',
@@ -267,6 +272,11 @@ const SellVoucher = () => {
       return
     }
 
+    if (['MakeMyTrip', 'PhonePe', 'Zomato'].includes(form.brand) && !(form.pin || '').trim()) {
+      toast.error(`${form.brand} gift card PIN is mandatory`)
+      return
+    }
+
     if (form.brand === 'Flipkart') {
       const cleanCode = (form.code || '').trim().replace(/\s+/g, '')
       if (!/^\d{16}$/.test(cleanCode)) {
@@ -295,7 +305,7 @@ const SellVoucher = () => {
     }
   }
 
-  const commission = tenPercentBrands.includes(form.brand) ? 10 : 30
+  const commission = tenPercentBrands.includes(form.brand) ? 10 : ['Myntra', 'MakeMyTrip'].includes(form.brand) ? 20 : ['Google Play', 'Zomato'].includes(form.brand) ? 25 : 30
   const payout = Math.round((Number(form.balance) || 0) * (1 - commission / 100))
 
   const steps = [
@@ -377,8 +387,8 @@ const SellVoucher = () => {
                 {!noPinBrands.includes(form.brand) && (
                   <div>
                     <Label
-                      hint={form.brand === 'Flipkart' ? 'Required, 6 digits' : 'Optional'}
-                      hintClass={form.brand === 'Flipkart' ? 'text-emerald-600 font-medium' : 'text-slate-400'}
+                      hint={form.brand === 'Flipkart' ? 'Required, 6 digits' : pinRequiredBrands.includes(form.brand) ? 'Required' : 'Optional'}
+                      hintClass={pinRequiredBrands.includes(form.brand) ? 'text-emerald-600 font-medium' : 'text-slate-400'}
                     >
                       PIN
                     </Label>
@@ -389,7 +399,7 @@ const SellVoucher = () => {
                       onChange={handleChange}
                       maxLength={form.brand === 'Flipkart' ? 6 : 20}
                       inputMode={form.brand === 'Flipkart' ? 'numeric' : 'text'}
-                      placeholder={form.brand === 'Flipkart' ? 'e.g. 123456' : 'Enter PIN if your card has one'}
+                      placeholder={form.brand === 'Flipkart' ? 'e.g. 123456' : pinRequiredBrands.includes(form.brand) ? 'Enter gift card PIN' : 'Enter PIN if your card has one'}
                       className={`${inputCls} font-mono tracking-wide`}
                     />
                   </div>
@@ -484,8 +494,14 @@ const SellVoucher = () => {
             <div className="bg-white border border-slate-200 rounded-2xl p-5">
               <h3 className="text-sm font-semibold text-slate-900 mb-2">Step-by-step guides</h3>
               <div className="space-y-1.5 text-sm">
+                <Link to="/how-to-sell-gift-cards-in-india" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell gift cards in India &rarr;</Link>
                 <Link to="/how-to-sell-flipkart-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Flipkart gift card &rarr;</Link>
                 <Link to="/how-to-sell-amazon-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Amazon gift card &rarr;</Link>
+                <Link to="/how-to-sell-amazon-shopping-voucher" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Amazon Shopping Voucher &rarr;</Link>
+                <Link to="/how-to-convert-redeem-code-into-money" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to convert Google Play redeem code into money &rarr;</Link>
+                <Link to="/how-to-sell-zomato-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Zomato gift card &rarr;</Link>
+                <Link to="/how-to-sell-phonepe-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell PhonePe gift card &rarr;</Link>
+                <Link to="/how-to-sell-makemytrip-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell MakeMyTrip gift card or voucher &rarr;</Link>
               </div>
             </div>
 

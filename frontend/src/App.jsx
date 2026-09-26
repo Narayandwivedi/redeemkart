@@ -44,6 +44,12 @@ import PayoutDetails from './pages/PayoutDetails'
 import KYC from './pages/KYC'
 import HowToSellFlipkartGiftCard from './pages/HowToSellFlipkartGiftCard'
 import HowToSellAmazonGiftCard from './pages/HowToSellAmazonGiftCard'
+import HowToConvertRedeemCodeIntoMoney from './pages/HowToConvertRedeemCodeIntoMoney'
+import HowToSellAmazonShoppingVoucher from './pages/HowToSellAmazonShoppingVoucher'
+import HowToSellGiftCardsInIndia from './pages/HowToSellGiftCardsInIndia'
+import HowToSellZomatoGiftCard from './pages/HowToSellZomatoGiftCard'
+import HowToSellPhonePeGiftCard from './pages/HowToSellPhonePeGiftCard'
+import HowToSellMakeMyTripGiftCard from './pages/HowToSellMakeMyTripGiftCard'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -169,6 +175,12 @@ const AppContent = () => {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/how-to-sell-flipkart-gift-card" element={<HowToSellFlipkartGiftCard />} />
         <Route path="/how-to-sell-amazon-gift-card" element={<HowToSellAmazonGiftCard />} />
+        <Route path="/how-to-convert-redeem-code-into-money" element={<HowToConvertRedeemCodeIntoMoney />} />
+        <Route path="/how-to-sell-amazon-shopping-voucher" element={<HowToSellAmazonShoppingVoucher />} />
+        <Route path="/how-to-sell-gift-cards-in-india" element={<HowToSellGiftCardsInIndia />} />
+        <Route path="/how-to-sell-zomato-gift-card" element={<HowToSellZomatoGiftCard />} />
+        <Route path="/how-to-sell-phonepe-gift-card" element={<HowToSellPhonePeGiftCard />} />
+        <Route path="/how-to-sell-makemytrip-gift-card" element={<HowToSellMakeMyTripGiftCard />} />
       </Routes>
       {showMobileNav && <Footer />}
       {showMobileNav && <MobileBottomNav />}

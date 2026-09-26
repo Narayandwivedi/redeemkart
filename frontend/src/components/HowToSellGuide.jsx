@@ -2,12 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronDown, Clock, ShieldCheck, Banknote } from 'lucide-react'
 import { useSEO } from '../hooks/useSEO'
-import { buildStructuredData, structuredDataId } from '../data/howToSell'
+import { buildStructuredData, structuredDataId, guideLinks, commonRelated } from '../data/howToSell'
 
 const inr = (n) => `₹${n.toLocaleString('en-IN')}`
 
 const HowToSellGuide = ({ guide }) => {
-  const { brand, path, seo, intro, steps, needs, receive, example, tips, faqs, related, updated } = guide
+  const { brand, path, seo, intro, steps, needs, receive, example, safety, tips, faqs, updated, image } = guide
+  const item = guide.item || `${brand} gift card`
+  const related = [...(guide.related || []), ...guideLinks.filter((l) => l.to !== path), ...commonRelated]
+  const heading = guide.heading || `How to sell a ${brand} gift card online`
   const commissionAmount = Math.round((example.value * example.commission) / 100)
   const payout = example.value - commissionAmount
 
@@ -30,13 +33,16 @@ const HowToSellGuide = ({ guide }) => {
           <span className="mx-1.5">/</span>
           <Link to="/sell-gift-card" className="hover:text-slate-800">Sell Gift Card</Link>
           <span className="mx-1.5">/</span>
-          <span className="text-slate-700">How to sell {brand} gift card</span>
+          <span className="text-slate-700">{guide.heading || `How to sell ${brand} gift card`}</span>
         </nav>
 
         <header>
-          <p className="text-xs font-medium text-emerald-600 uppercase tracking-wider mb-2">Sell Guide</p>
+          <div className="flex items-center gap-2.5 mb-3">
+            {image && <img src={image} alt={`${item} logo`} width="36" height="36" className="w-9 h-9 rounded-lg object-cover border border-slate-200 bg-white" />}
+            <p className="text-xs font-medium text-emerald-600 uppercase tracking-wider">Sell Guide</p>
+          </div>
           <h1 className="font-['Poppins',sans-serif] text-2xl sm:text-4xl font-semibold text-slate-900 tracking-tight leading-tight">
-            How to sell a {brand} gift card online
+            {heading}
           </h1>
           <p className="mt-3 text-[15px] sm:text-base leading-relaxed">{intro}</p>
           <p className="mt-2 text-xs text-slate-400">
@@ -58,7 +64,7 @@ const HowToSellGuide = ({ guide }) => {
         </header>
 
         <section className="mt-10 sm:mt-12">
-          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">Steps to sell your {brand} gift card</h2>
+          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">{guide.stepsHeading || `Steps to sell your ${brand} gift card`}</h2>
           <ol className="bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100">
             {steps.map((s, i) => (
               <li key={s.title} className="flex gap-3 sm:gap-4 p-4 sm:p-5">
@@ -76,7 +82,7 @@ const HowToSellGuide = ({ guide }) => {
 
         <section className="mt-10 sm:mt-12 grid sm:grid-cols-2 gap-4">
           <div className="bg-white border border-slate-200 rounded-2xl p-5">
-            <h2 className="font-['Poppins',sans-serif] text-base sm:text-lg font-semibold text-slate-900 mb-2">Before you start</h2>
+            <h2 className="font-['Poppins',sans-serif] text-base sm:text-lg font-semibold text-slate-900 mb-2">What you need to sell</h2>
             <ul className="text-sm space-y-1.5 list-disc pl-5 marker:text-emerald-500">
               {needs.map((n) => <li key={n}>{n}</li>)}
             </ul>
@@ -90,17 +96,32 @@ const HowToSellGuide = ({ guide }) => {
         </section>
 
         <section className="mt-10 sm:mt-12">
-          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-1">How much will you get?</h2>
-          <p className="text-sm mb-4">Here is an example of what a {brand} gift card pays out.</p>
+          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-1">How much money will you get for your {item}?</h2>
+          <p className="text-sm mb-4">Here is an example of what you get when you sell your {item}.</p>
           <div className="bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100 text-sm">
-            <div className="flex justify-between p-4"><span>{brand} gift card value</span><span className="font-medium text-slate-900">{inr(example.value)}</span></div>
+            <div className="flex justify-between p-4"><span>{item} value</span><span className="font-medium text-slate-900">{inr(example.value)}</span></div>
             <div className="flex justify-between p-4"><span>Commission ({example.commission}%)</span><span className="font-medium text-slate-900">-{inr(commissionAmount)}</span></div>
             <div className="flex justify-between p-4 bg-emerald-50/60 rounded-b-2xl"><span className="font-medium text-slate-900">You receive</span><span className="font-semibold text-emerald-700">{inr(payout)}</span></div>
           </div>
         </section>
 
+        {safety && (
+          <section className="mt-10 sm:mt-12">
+            <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-1">{safety.heading}</h2>
+            <p className="text-sm mb-4 leading-relaxed">{safety.text}</p>
+            <ul className="bg-amber-50/60 border border-amber-200 rounded-2xl p-5 text-sm space-y-2">
+              {safety.points.map((p) => (
+                <li key={p} className="flex gap-2.5">
+                  <ShieldCheck className="w-4 h-4 shrink-0 mt-0.5 text-amber-600" />
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <section className="mt-10 sm:mt-12">
-          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">Tips for a smooth sale</h2>
+          <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">Tips to sell your {item} faster</h2>
           <ul className="bg-white border border-slate-200 rounded-2xl p-5 text-sm space-y-2 list-disc pl-9 marker:text-emerald-500">
             {tips.map((t) => <li key={t}>{t}</li>)}
           </ul>
@@ -123,7 +144,7 @@ const HowToSellGuide = ({ guide }) => {
 
         <section className="mt-10 sm:mt-12 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 p-6 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h2 className="font-['Poppins',sans-serif] text-lg sm:text-xl font-semibold">Ready to sell your {brand} gift card?</h2>
+            <h2 className="font-['Poppins',sans-serif] text-lg sm:text-xl font-semibold">Ready to sell your {item}?</h2>
             <p className="text-sm text-emerald-50/85 mt-1">It takes a few minutes to list.</p>
           </div>
           <Link

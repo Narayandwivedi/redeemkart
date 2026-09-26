@@ -1,11 +1,16 @@
 const GiftCardListing = require('../models/GiftCardListing');
 const { notifyGiftCardListed } = require('../services/telegramService');
 
-// Amazon and Flipkart always use a flat 10% commission.
-// All other brands (including Google Play) use 30%.
-const TEN_PERCENT_BRANDS = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart'];
+// Amazon, Flipkart and PhonePe always use a flat 10% commission, Myntra and MakeMyTrip use 20%, Google Play and Zomato 25%.
+// All other brands use 30%.
+const TEN_PERCENT_BRANDS = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart', 'PhonePe'];
 
-const getCommissionRate = (brand) => (TEN_PERCENT_BRANDS.includes(brand) ? 10 : 30);
+const getCommissionRate = (brand) => {
+  if (TEN_PERCENT_BRANDS.includes(brand)) return 10;
+  if (brand === 'Myntra' || brand === 'MakeMyTrip') return 20;
+  if (brand === 'Google Play' || brand === 'Zomato') return 25;
+  return 30;
+};
 
 const addListing = async (req, res) => {
   try {
@@ -33,6 +38,13 @@ const addListing = async (req, res) => {
           message: 'Flipkart PIN is mandatory and must be exactly 6 numeric digits'
         });
       }
+    }
+
+    if (['MakeMyTrip', 'PhonePe', 'Zomato'].includes(brand) && !(pin || '').trim()) {
+      return res.status(400).json({
+        success: false,
+        message: `${brand} gift card PIN is mandatory`
+      });
     }
 
     const commissionPercent = getCommissionRate(brand);

@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { AppContext } from '../context/AppContext'
 
+// Seller commission: Amazon, Flipkart and PhonePe 10%, Myntra and MakeMyTrip 20%, Google Play and Zomato 25%, all other brands 30%.
+const tenPercentBrands = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart', 'PhonePe']
+const commissionRate = (brand) => (tenPercentBrands.includes(brand) ? 0.1 : brand === 'Myntra' || brand === 'MakeMyTrip' ? 0.2 : brand === 'Google Play' || brand === 'Zomato' ? 0.25 : 0.3)
+
 const statusConfig = {
   pending: { icon: Clock, bg: 'bg-amber-50 text-amber-700 border-amber-200', label: 'Pending' },
   active: { icon: Clock, bg: 'bg-violet-50 text-violet-800 border-violet-200', label: 'Active' },
@@ -33,8 +37,8 @@ const MySales = () => {
     fetchListings()
   }, [BACKEND_URL])
 
-  const totalEarnings = listings.filter(s => ['sold', 'sold_out', 'paid'].includes(s.status)).reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
-  const pendingPayout = listings.filter(s => s.status === 'active' || s.status === 'pending').reduce((sum, s) => sum + Math.round(s.balance * (s.brand === 'Google Play' ? 0.7 : 0.9)), 0)
+  const totalEarnings = listings.filter(s => ['sold', 'sold_out', 'paid'].includes(s.status)).reduce((sum, s) => sum + Math.round(s.balance * (1 - commissionRate(s.brand))), 0)
+  const pendingPayout = listings.filter(s => s.status === 'active' || s.status === 'pending').reduce((sum, s) => sum + Math.round(s.balance * (1 - commissionRate(s.brand))), 0)
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -111,8 +115,7 @@ const MySales = () => {
                   </tr>
                 ) : (
                   listings.map((card) => {
-                    const commissionRate = card.brand === 'Google Play' ? 0.3 : 0.1
-                    const commission = Math.round(card.balance * commissionRate)
+                    const commission = Math.round(card.balance * commissionRate(card.brand))
                     const payout = card.balance - commission
                     const StatusIcon = statusConfig[card.status]?.icon || Clock
                     const statusStyle = statusConfig[card.status]?.bg || 'bg-gray-50 text-gray-700 border-gray-200'

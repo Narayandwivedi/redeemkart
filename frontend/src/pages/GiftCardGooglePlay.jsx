@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
@@ -127,6 +127,9 @@ const GiftCardGooglePlay = () => {
           <p className="text-base sm:text-base text-slate-500 max-w-2xl mx-auto">
             Get Google Play codes at the best prices. Instant delivery via email.
           </p>
+          <Link to="/how-to-convert-redeem-code-into-money" className="inline-block mt-3 text-sm font-semibold text-emerald-700 hover:text-emerald-800">
+            Have an unused code? Learn how to convert it into money &rarr;
+          </Link>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">

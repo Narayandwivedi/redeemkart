@@ -6,6 +6,10 @@ import { handleRedeemCode } from '../utils/redeemHelper'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
+// Seller commission: Amazon, Flipkart and PhonePe 10%, Myntra and MakeMyTrip 20%, Google Play and Zomato 25%, all other brands 30%.
+const tenPercentBrands = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart', 'PhonePe']
+const commissionRate = (brand) => (tenPercentBrands.includes(brand) ? 0.1 : brand === 'Myntra' || brand === 'MakeMyTrip' ? 0.2 : brand === 'Google Play' || brand === 'Zomato' ? 0.25 : 0.3)
+
 const UserSelling = () => {
   const [userListings, setUserListings] = useState([])
   const [loading, setLoading] = useState(true)
@@ -201,7 +205,7 @@ const UserSelling = () => {
 
   // Calculations for Approval/Edit Modal
   const currentSellingPrice = approveModalCard ? (Number(approveSellingPrice) || 0) : 0
-  const sellerPayoutRate = approveModalCard ? (approveModalCard.brand === 'Google Play' ? 0.7 : 0.9) : 0.9
+  const sellerPayoutRate = approveModalCard ? 1 - commissionRate(approveModalCard.brand) : 0.9
   const sellerPayout = approveModalCard ? Math.round(approveModalCard.balance * sellerPayoutRate) : 0
   const gatewayFee = Math.round(currentSellingPrice * 0.02)
   const platformProfit = currentSellingPrice - sellerPayout - gatewayFee
@@ -579,7 +583,7 @@ const UserSelling = () => {
 
                 <div className="border-t border-indigo-200/60 my-2 pt-2 space-y-1.5">
                   <div className="flex justify-between items-center text-gray-600">
-                    <span>Seller Payout ({approveModalCard.brand === 'Google Play' ? '70%' : '90%'}):</span>
+                    <span>Seller Payout ({Math.round(sellerPayoutRate * 100)}%):</span>
                     <span className="font-medium text-amber-700">-₹{sellerPayout}</span>
                   </div>
                   <div className="flex justify-between items-center text-gray-600">
