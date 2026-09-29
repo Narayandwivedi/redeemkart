@@ -50,6 +50,8 @@ import HowToSellGiftCardsInIndia from './pages/HowToSellGiftCardsInIndia'
 import HowToSellZomatoGiftCard from './pages/HowToSellZomatoGiftCard'
 import HowToSellPhonePeGiftCard from './pages/HowToSellPhonePeGiftCard'
 import HowToSellMakeMyTripGiftCard from './pages/HowToSellMakeMyTripGiftCard'
+import FlipkartGiftCardToBankAccount from './pages/FlipkartGiftCardToBankAccount'
+import HowToSellAmazonPayGiftCard from './pages/HowToSellAmazonPayGiftCard'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -181,6 +183,8 @@ const AppContent = () => {
         <Route path="/how-to-sell-zomato-gift-card" element={<HowToSellZomatoGiftCard />} />
         <Route path="/how-to-sell-phonepe-gift-card" element={<HowToSellPhonePeGiftCard />} />
         <Route path="/how-to-sell-makemytrip-gift-card" element={<HowToSellMakeMyTripGiftCard />} />
+        <Route path="/flipkart-gift-card-to-bank-account" element={<FlipkartGiftCardToBankAccount />} />
+        <Route path="/how-to-sell-amazon-pay-gift-card" element={<HowToSellAmazonPayGiftCard />} />
       </Routes>
       {showMobileNav && <Footer />}
       {showMobileNav && <MobileBottomNav />}

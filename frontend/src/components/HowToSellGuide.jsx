@@ -7,7 +7,7 @@ import { buildStructuredData, structuredDataId, guideLinks, commonRelated } from
 const inr = (n) => `₹${n.toLocaleString('en-IN')}`
 
 const HowToSellGuide = ({ guide }) => {
-  const { brand, path, seo, intro, steps, needs, receive, example, safety, tips, faqs, updated, image } = guide
+  const { brand, path, seo, intro, steps, needs, receive, example, answer, safety, tips, faqs, updated, image } = guide
   const item = guide.item || `${brand} gift card`
   const related = [...(guide.related || []), ...guideLinks.filter((l) => l.to !== path), ...commonRelated]
   const heading = guide.heading || `How to sell a ${brand} gift card online`
@@ -62,6 +62,16 @@ const HowToSellGuide = ({ guide }) => {
             ))}
           </div>
         </header>
+
+        {answer && (
+          <section className="mt-8 sm:mt-10 bg-white border border-slate-200 border-l-4 border-l-emerald-500 rounded-2xl p-5 sm:p-6">
+            <h2 className="font-['Poppins',sans-serif] text-lg sm:text-xl font-semibold text-slate-900 mb-2">{answer.heading}</h2>
+            <p className="text-sm sm:text-[15px] leading-relaxed">{answer.text}</p>
+            {answer.link && (
+              <Link to={answer.link.to} className="inline-block mt-3 text-sm text-emerald-700 hover:text-emerald-800 font-medium">{answer.link.label} &rarr;</Link>
+            )}
+          </section>
+        )}
 
         <section className="mt-10 sm:mt-12">
           <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">{guide.stepsHeading || `Steps to sell your ${brand} gift card`}</h2>

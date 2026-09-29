@@ -11,7 +11,9 @@ const commonReceive = [
 export const guideLinks = [
   { to: '/how-to-sell-gift-cards-in-india', label: 'How to sell gift cards in India' },
   { to: '/how-to-sell-flipkart-gift-card', label: 'How to sell a Flipkart gift card' },
-  { to: '/how-to-sell-amazon-gift-card', label: 'How to sell an Amazon Pay gift card' },
+  { to: '/flipkart-gift-card-to-bank-account', label: 'How to transfer a Flipkart gift card to a bank account' },
+  { to: '/how-to-sell-amazon-gift-card', label: 'How to sell an Amazon gift card' },
+  { to: '/how-to-sell-amazon-pay-gift-card', label: 'How to sell an Amazon Pay gift card for cash' },
   { to: '/how-to-sell-amazon-shopping-voucher', label: 'How to sell an Amazon Shopping Voucher' },
   { to: '/how-to-convert-redeem-code-into-money', label: 'How to convert a Google Play redeem code into money' },
   { to: '/how-to-sell-zomato-gift-card', label: 'How to sell a Zomato gift card' },
@@ -66,6 +68,65 @@ export const guides = {
     related: [{ to: '/gift-cards/flipkart', label: 'Buy Flipkart gift cards' }],
   },
 
+  flipkartToBank: {
+    brand: 'Flipkart',
+    path: '/flipkart-gift-card-to-bank-account',
+    published: '2026-09-29',
+    image: '/products/flipkart.avif',
+    updated: { iso: '2026-09-29', label: '29 September 2026' },
+    heading: 'How to transfer a Flipkart gift card to a bank account',
+    stepsHeading: 'Steps to sell your Flipkart gift card for cash',
+    seo: {
+      title: 'Flipkart Gift Card to Bank Account: How to Get Cash | RedeemKart',
+      description: 'You cannot transfer a Flipkart gift card to a bank account directly. Sell it on a trusted platform like RedeemKart and get 90% of the value in your bank.',
+      keywords: 'flipkart gift card to bank account, transfer flipkart gift card to bank account, flipkart gift card balance to bank account, convert flipkart gift card to cash, flipkart gift card to money, flipkart gift card to upi, sell flipkart gift card, RedeemKart',
+    },
+    intro: 'Want to move your Flipkart gift card money into your bank account? Flipkart does not allow it, but you can still get cash by selling the unused card on a trusted platform. Here is how it works.',
+    answer: {
+      heading: 'Can you transfer a Flipkart gift card to a bank account?',
+      text: 'No. You cannot directly transfer a Flipkart gift card or Flipkart gift card balance to a bank account or UPI. Flipkart gift cards can only be used to shop on Flipkart. However, there are a few trusted platforms where you can sell your Flipkart gift card for cash, and RedeemKart is one of the best platforms in India to do it. You list the card, it is sold to a verified buyer and the money is sent to your bank account.',
+      link: { to: '/how-to-sell-gift-cards-in-india', label: 'Compare platforms to sell gift cards in India' },
+    },
+    steps: [
+      { title: 'Keep the card unused', text: 'Do not add the gift card to your Flipkart account. Once added, the balance is locked to that account and cannot be sold.' },
+      { title: 'Log in to RedeemKart', text: 'Sign in with your account. New here? Create one in under a minute.' },
+      { title: 'Open the Sell Gift Card page', text: 'Choose Flipkart as the gift card and enter the balance shown on your card.' },
+      { title: 'Enter the card number and PIN', text: 'Add the 16-digit card number and the 6-digit PIN exactly as printed, then publish your listing.' },
+      { title: 'We verify and list your card', text: 'Our team checks the card and puts it up for sale. Most Flipkart cards sell within 24 hours.' },
+      { title: 'Get the money in your bank account', text: 'After the sale, your payout is sent to the bank account in your Payout Details, usually within 3-4 hours.' },
+    ],
+    needs: ['16-digit Flipkart card number', '6-digit PIN', 'Card must be valid, unused and not added to any account', 'Bank account for the payout'],
+    receive: commonReceive,
+    example: { value: 1000, commission: 10 },
+    safety: {
+      heading: 'Stay safe when converting your gift card to cash',
+      text: 'Many people lose their Flipkart gift cards to fake buyers on social media. Keep these points in mind:',
+      points: [
+        'Never share your card number and PIN with strangers on WhatsApp, Telegram or Instagram who promise to pay later.',
+        'Ignore anyone offering more than the card value. It is almost always a scam.',
+        'Flipkart does not offer any official way to withdraw gift card balance. Anyone claiming to do it for you is not genuine.',
+        'On RedeemKart your card is only shared with a verified buyer and your payout goes straight to your own bank account.',
+      ],
+    },
+    tips: [
+      'Check the card number and PIN twice before you publish. A wrong digit means the card is rejected.',
+      'Check the expiry date and list the card well before it expires so it has time to sell.',
+      'Enter the balance exactly as shown on the card.',
+      'Add your bank details in Payout Details early so your payment is not delayed after the sale.',
+    ],
+    faqs: [
+      { q: 'Can I transfer a Flipkart gift card to my bank account?', a: 'No. Flipkart does not allow gift card balance to be transferred or withdrawn to a bank account. The way to get cash is to sell the unused gift card on a trusted platform like RedeemKart.' },
+      { q: 'Can I transfer Flipkart gift card balance to UPI or Paytm?', a: 'No. Flipkart gift card balance cannot be sent to UPI, Paytm or any wallet. It can only be used for shopping on Flipkart.' },
+      { q: 'How do I convert a Flipkart gift card into cash?', a: 'Log in to RedeemKart, open the Sell Gift Card page, choose Flipkart, enter the balance, the 16-digit card number and the 6-digit PIN, then publish your listing. Once it sells, the money is sent to your bank account.' },
+      { q: 'How much money will I get in my bank account?', a: 'A flat 10% commission is deducted from the card value, so you receive 90%. For example, a Rs. 1,000 card pays Rs. 900. The exact amount is shown on the sell page before you publish.' },
+      { q: 'How long does it take to get the money?', a: 'Once your card is sold, the payout is usually released to your bank account in 3-4 hours.' },
+      { q: 'Can I get cash for a gift card already added to my Flipkart account?', a: 'No. Once a gift card is added to a Flipkart account, the balance is tied to that account and cannot be sold or transferred.' },
+      { q: 'Is it safe to sell a Flipkart gift card on RedeemKart?', a: 'Yes. Every card is verified before it is listed, it is only shared with the buyer after purchase, and your payout goes directly to your own bank account.' },
+      { q: 'Is it free to list a Flipkart gift card?', a: 'Yes. Listing is free. The commission is only deducted when your card sells.' },
+    ],
+    related: [{ to: '/gift-cards/flipkart', label: 'Buy Flipkart gift cards' }],
+  },
+
   amazon: {
     brand: 'Amazon',
     path: '/how-to-sell-amazon-gift-card',
@@ -103,6 +164,65 @@ export const guides = {
       { q: 'Is it free to list an Amazon gift card?', a: 'Yes. Listing is free. The commission is only deducted when your card sells.' },
       { q: 'What if my Amazon gift card is invalid or already used?', a: 'It will be rejected during verification and no payment is made. Check the code carefully before you publish.' },
       { q: 'Which other gift cards can I sell on RedeemKart?', a: 'You can also sell Google Play, Flipkart, PhonePe, Myntra, MakeMyTrip, Zomato, Reliance JioMart, Steam and BigBasket gift cards.' },
+    ],
+    related: [{ to: '/gift-cards/amazon', label: 'Buy Amazon gift cards' }],
+  },
+
+  amazonPay: {
+    brand: 'Amazon Pay',
+    path: '/how-to-sell-amazon-pay-gift-card',
+    published: '2026-09-29',
+    image: '/products/amazon.avif',
+    updated: { iso: '2026-09-29', label: '29 September 2026' },
+    heading: 'How to sell an Amazon Pay gift card for cash',
+    stepsHeading: 'Steps to sell your Amazon Pay gift card for cash',
+    seo: {
+      title: 'How to Sell Amazon Pay Gift Card for Cash in India | RedeemKart',
+      description: 'Sell your unused Amazon Pay gift card for cash in India. List the claim code on RedeemKart, keep 90% of the value and get paid to your bank in 3-4 hours.',
+      keywords: 'how to sell amazon pay gift card for cash, sell amazon pay gift card, amazon pay gift card to cash, amazon pay gift card to bank account, convert amazon pay gift card to money, sell amazon pay gift card online, amazon pay balance to bank account, RedeemKart',
+    },
+    intro: 'Got an Amazon Pay gift card you will not use? You can turn it into cash by selling the unused card on RedeemKart. List the claim code, let us verify it and receive the money in your bank account, usually within a few hours of the sale.',
+    answer: {
+      heading: 'Can you convert an Amazon Pay gift card into cash on Amazon?',
+      text: 'No. Once you add an Amazon Pay gift card to your account, the balance can only be spent on Amazon.in, bill payments and recharges. It cannot be withdrawn or transferred to a bank account or UPI. The way to get cash is to sell the unused card before you add it. RedeemKart is one of the best platforms in India to sell Amazon Pay gift cards: you only need the claim code and you keep 90% of the value.',
+      link: { to: '/how-to-sell-gift-cards-in-india', label: 'Compare platforms to sell gift cards in India' },
+    },
+    steps: [
+      { title: 'Keep the card unused', text: 'Do not add the gift card to your Amazon Pay balance. Once added, the balance is locked to that account and cannot be sold.' },
+      { title: 'Log in to RedeemKart', text: 'Sign in with your account. New here? Create one in under a minute.' },
+      { title: 'Open the Sell Gift Card page', text: 'Choose Amazon Pay Gift Card and enter the value shown on your card or email.' },
+      { title: 'Enter the claim code', text: 'Add the claim code exactly as it appears on your card or email. Amazon Pay gift cards do not need a PIN. Then publish your listing.' },
+      { title: 'We verify and list your card', text: 'Our team checks the card and puts it up for sale. Amazon Pay gift cards are among the fastest cards to sell.' },
+      { title: 'Get paid in your bank account', text: 'After the sale, your payout is sent to the bank account in your Payout Details, usually within 3-4 hours.' },
+    ],
+    needs: ['Amazon Pay gift card claim code', 'No PIN needed', 'Card must be valid, unused and not added to any account', 'Bank account for the payout'],
+    receive: commonReceive,
+    example: { value: 1000, commission: 10 },
+    safety: {
+      heading: 'Sell your Amazon Pay gift card safely',
+      text: 'Anyone who has your claim code can add the balance to their own account in seconds. Protect yourself:',
+      points: [
+        'Never share your claim code with strangers on WhatsApp, Telegram or Instagram who promise to pay later.',
+        'Do not send a photo or screenshot of the code before you are paid.',
+        'Ignore offers of more than the card value. They are almost always a scam.',
+        'On RedeemKart your code is only shared with a verified buyer and your payout goes straight to your own bank account.',
+      ],
+    },
+    tips: [
+      'Copy the claim code exactly as it appears. Extra spaces or a wrong character will get the card rejected.',
+      'Scratch the back of a physical card gently so no characters are damaged.',
+      'Enter the value exactly as shown on the card or email.',
+      'Add your bank details in Payout Details early so your payment is not delayed after the sale.',
+    ],
+    faqs: [
+      { q: 'How do I sell an Amazon Pay gift card for cash?', a: 'Log in to RedeemKart, open the Sell Gift Card page, choose Amazon Pay Gift Card, enter the value and the claim code, then publish your listing. Once it sells, the money is sent to your bank account.' },
+      { q: 'How much cash will I get for my Amazon Pay gift card?', a: 'A flat 10% commission is deducted from the card value, so you receive 90%. For example, a Rs. 1,000 card pays Rs. 900. The exact amount is shown on the sell page before you publish.' },
+      { q: 'Can I transfer Amazon Pay gift card balance to my bank account?', a: 'No. Amazon does not allow gift card balance to be withdrawn or sent to a bank account or UPI. Selling the unused card is the way to get cash for it.' },
+      { q: 'Do I need a PIN to sell an Amazon Pay gift card?', a: 'No. You only need the claim code of the Amazon Pay gift card.' },
+      { q: 'Can I sell a gift card that I have already added to my Amazon Pay balance?', a: 'No. Once a gift card is added to an Amazon account, the balance is tied to that account and cannot be sold.' },
+      { q: 'How long does the payment take?', a: 'Once your card is sold, the payout is usually released to your bank account in 3-4 hours.' },
+      { q: 'Is it free to list an Amazon Pay gift card?', a: 'Yes. Listing is free. The commission is only deducted when your card sells.' },
+      { q: 'What if my Amazon Pay gift card is invalid or already used?', a: 'It will be rejected during verification and no payment is made. Check the claim code carefully before you publish.' },
     ],
     related: [{ to: '/gift-cards/amazon', label: 'Buy Amazon gift cards' }],
   },
@@ -397,4 +517,4 @@ export const buildStructuredData = (g) => {
   ]
 }
 
-export const structuredDataId = (g) => `how-to-sell-${g.brand.toLowerCase().replace(/\s+/g, '-')}-structured-data`
+export const structuredDataId = (g) => `${g.path.slice(1)}-structured-data`
