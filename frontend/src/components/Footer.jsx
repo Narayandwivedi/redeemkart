@@ -93,7 +93,7 @@ const Footer = () => {
                 { to: '/how-to-sell-gift-cards-in-india', label: 'How to Sell Gift Cards in India' },
                 { to: '/how-to-sell-flipkart-gift-card', label: 'How to Sell Flipkart Gift Card' },
                 { to: '/flipkart-gift-card-to-bank-account', label: 'Flipkart Gift Card to Bank Account' },
-                { to: '/how-to-sell-amazon-gift-card', label: 'How to Sell Amazon Gift Card' },
+                { to: '/how-to-sell-amazon-gift-card', label: 'How to Sell Amazon Gift Card in India' },
                 { to: '/how-to-sell-amazon-pay-gift-card', label: 'How to Sell Amazon Pay Gift Card' },
                 { to: '/how-to-sell-amazon-shopping-voucher', label: 'How to Sell Amazon Shopping Voucher' },
                 { to: '/how-to-convert-redeem-code-into-money', label: 'Convert Redeem Code into Money' },
