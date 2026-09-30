@@ -58,6 +58,7 @@ const userSchema = new mongoose.Schema({
   bankName: { type: String, trim: true },
   ifscCode: { type: String, trim: true },
   upiId: { type: String, trim: true },
+  payoutMethod: { type: String, enum: ['bank', 'upi'], default: 'bank' },
 
   // KYC Information
   kycStatus: {

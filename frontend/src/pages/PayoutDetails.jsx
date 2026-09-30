@@ -2,13 +2,15 @@ import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
-import { Building2, Banknote, Save, X, Loader, Edit2, CheckCircle, AlertCircle } from 'lucide-react'
+import { Building2, Banknote, Smartphone, Save, X, Loader, Edit2, CheckCircle, AlertCircle } from 'lucide-react'
 
 const PayoutDetails = () => {
   const { user, BACKEND_URL, setUser } = useContext(AppContext)
-  const hasExistingPayout = user?.bankAccountHolder || user?.bankAccountNumber || user?.bankName || user?.ifscCode
+  const hasExistingPayout = user?.upiId || user?.bankAccountHolder || user?.bankAccountNumber || user?.bankName || user?.ifscCode
   const [isEditing, setIsEditing] = useState(!hasExistingPayout)
   const [formData, setFormData] = useState({
+    payoutMethod: user?.payoutMethod || 'bank',
+    upiId: user?.upiId || '',
     bankAccountHolder: user?.bankAccountHolder || '',
     bankAccountNumber: user?.bankAccountNumber || '',
     bankName: user?.bankName || '',
@@ -18,13 +20,22 @@ const PayoutDetails = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const upiId = formData.upiId.trim().toLowerCase()
+    if (formData.payoutMethod === 'upi' && !/^[a-z0-9._-]{2,256}@[a-z]{2,64}$/.test(upiId)) {
+      toast.error('Please enter a valid UPI ID (e.g. name@okaxis)')
+      return
+    }
+    if (formData.payoutMethod === 'bank' && !hasBank) {
+      toast.error('Please fill all bank account details')
+      return
+    }
     setLoading(true)
     try {
       const response = await fetch(`${BACKEND_URL}/api/auth/update-profile`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, upiId }),
       })
       const result = await response.json()
       if (result.success) {
@@ -43,6 +54,8 @@ const PayoutDetails = () => {
 
   const handleCancel = () => {
     setFormData({
+      payoutMethod: user?.payoutMethod || 'bank',
+      upiId: user?.upiId || '',
       bankAccountHolder: user?.bankAccountHolder || '',
       bankAccountNumber: user?.bankAccountNumber || '',
       bankName: user?.bankName || '',
@@ -55,7 +68,15 @@ const PayoutDetails = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  // Switching transfer mode opens the form so the new mode's details can be entered and saved
+  const handleModeChange = (e) => {
+    setFormData({ ...formData, payoutMethod: e.target.value })
+    setIsEditing(true)
+  }
+
   const hasBank = formData.bankAccountHolder && formData.bankAccountNumber && formData.bankName && formData.ifscCode
+  const hasUpi = !!formData.upiId.trim()
+  const isUpi = formData.payoutMethod === 'upi'
 
   const kycStatus = user?.kycStatus || 'not_submitted'
   const kycBanner = {
@@ -95,7 +116,7 @@ const PayoutDetails = () => {
               </div>
               <div>
                 <h2 className="text-lg sm:text-xl font-semibold text-white">Payout Settings</h2>
-                <p className="text-violet-200 text-sm mt-0.5">Add your bank account for payouts</p>
+                <p className="text-violet-200 text-sm mt-0.5">Add your UPI ID or bank account for payouts</p>
               </div>
             </div>
           </div>
@@ -119,57 +140,93 @@ const PayoutDetails = () => {
             <form onSubmit={handleSubmit}>
               <div className="space-y-6">
 
-                {/* Bank Account */}
+                {/* Transfer Mode */}
                 <div>
-                  <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
-                    <Building2 className="w-4 h-4 text-violet-500" />
-                    Bank Account
-                  </div>
-
-                  {!isEditing && hasBank && (
-                    <div className="flex items-center gap-2 text-xs text-green-600 mb-3 bg-green-50 px-3 py-2 rounded-lg">
-                      <CheckCircle className="w-4 h-4 shrink-0" />
-                      Bank account added
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="sm:col-span-2">
-                      <label className="block text-[11px] font-medium text-gray-500 mb-1">Account Holder Name</label>
-                      <input type="text" name="bankAccountHolder" value={formData.bankAccountHolder} onChange={handleChange} disabled={!isEditing} placeholder="Name on bank account"
-                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
-                          !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
-                        }`} />
-                    </div>
-                    <div className="sm:col-span-2">
-                      <label className="block text-[11px] font-medium text-gray-500 mb-1">Account Number</label>
-                      <input type="text" name="bankAccountNumber" value={formData.bankAccountNumber} onChange={handleChange} disabled={!isEditing} placeholder="Enter account number"
-                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
-                          !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
-                        }`} />
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-medium text-gray-500 mb-1">Bank Name</label>
-                      <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} disabled={!isEditing} placeholder="e.g. SBI, HDFC"
-                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
-                          !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
-                        }`} />
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-medium text-gray-500 mb-1">IFSC Code</label>
-                      <input type="text" name="ifscCode" value={formData.ifscCode} onChange={handleChange} disabled={!isEditing} placeholder="e.g. SBIN0001234"
-                        className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
-                          !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
-                        }`} />
-                    </div>
-                  </div>
+                  <label htmlFor="payoutMethod" className="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Transfer Mode</label>
+                  <select id="payoutMethod" name="payoutMethod" value={formData.payoutMethod} onChange={handleModeChange}
+                    className="w-full px-3.5 py-2.5 border border-gray-300 bg-white rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 cursor-pointer">
+                    <option value="bank">Bank Account</option>
+                    <option value="upi">UPI ID</option>
+                  </select>
                 </div>
 
+                {/* UPI ID */}
+                {isUpi && (
+                  <div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
+                      <Smartphone className="w-4 h-4 text-violet-500" />
+                      UPI ID
+                    </div>
+
+                    {!isEditing && hasUpi && (
+                      <div className="flex items-center gap-2 text-xs text-green-600 mb-3 bg-green-50 px-3 py-2 rounded-lg">
+                        <CheckCircle className="w-4 h-4 shrink-0" />
+                        UPI ID added
+                      </div>
+                    )}
+
+                    <label className="block text-[11px] font-medium text-gray-500 mb-1">UPI ID</label>
+                    <input type="text" name="upiId" value={formData.upiId} onChange={handleChange} disabled={!isEditing} placeholder="e.g. name@okaxis" autoCapitalize="none" autoCorrect="off" spellCheck={false}
+                      className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
+                        !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
+                      }`} />
+                    <p className="text-[11px] text-gray-400 mt-1">The quickest option. Just enter your UPI ID and we'll send payouts there.</p>
+                  </div>
+                )}
+
+                {/* Bank Account */}
+                {!isUpi && (
+                  <div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
+                      <Building2 className="w-4 h-4 text-violet-500" />
+                      Bank Account
+                    </div>
+
+                    {!isEditing && hasBank && (
+                      <div className="flex items-center gap-2 text-xs text-green-600 mb-3 bg-green-50 px-3 py-2 rounded-lg">
+                        <CheckCircle className="w-4 h-4 shrink-0" />
+                        Bank account added
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="sm:col-span-2">
+                        <label className="block text-[11px] font-medium text-gray-500 mb-1">Account Holder Name</label>
+                        <input type="text" name="bankAccountHolder" value={formData.bankAccountHolder} onChange={handleChange} disabled={!isEditing} placeholder="Name on bank account"
+                          className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
+                            !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
+                          }`} />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <label className="block text-[11px] font-medium text-gray-500 mb-1">Account Number</label>
+                        <input type="text" name="bankAccountNumber" value={formData.bankAccountNumber} onChange={handleChange} disabled={!isEditing} placeholder="Enter account number"
+                          className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
+                            !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
+                          }`} />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-medium text-gray-500 mb-1">Bank Name</label>
+                        <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} disabled={!isEditing} placeholder="e.g. SBI, HDFC"
+                          className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
+                            !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
+                          }`} />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-medium text-gray-500 mb-1">IFSC Code</label>
+                        <input type="text" name="ifscCode" value={formData.ifscCode} onChange={handleChange} disabled={!isEditing} placeholder="e.g. SBIN0001234"
+                          className={`w-full px-3.5 py-2.5 border rounded-lg text-sm transition-all duration-200 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 ${
+                            !isEditing ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed' : 'border-gray-300 bg-white'
+                          }`} />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Status info */}
-                {!isEditing && !hasBank && (
+                {!isEditing && (isUpi ? !hasUpi : !hasBank) && (
                   <div className="flex items-center gap-2 text-xs text-violet-700 bg-violet-50 px-3 py-2.5 rounded-lg">
                     <AlertCircle className="w-4 h-4 shrink-0" />
-                    No payout details added yet. Click Edit to add your bank account.
+                    No payout details added yet. Click Edit to add your UPI ID or bank account.
                   </div>
                 )}
 

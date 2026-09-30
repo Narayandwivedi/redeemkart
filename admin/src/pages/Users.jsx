@@ -191,7 +191,10 @@ const Users = () => {
                         </span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-gray-500 text-xs">{new Date(user.createdAt).toLocaleDateString('en-IN')}</td>
+                    <td className="px-4 py-3 text-xs whitespace-nowrap">
+                      <div className="text-gray-600 font-medium">{new Date(user.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+                      <div className="text-gray-400">{new Date(user.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true })}</div>
+                    </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1">
                         <button
@@ -299,6 +302,7 @@ const Users = () => {
             {selectedUser.bankAccountHolder || selectedUser.bankAccountNumber || selectedUser.bankName || selectedUser.ifscCode || selectedUser.upiId ? (
               <div className="space-y-3">
                 {[
+                  { label: 'Transfer Mode', value: selectedUser.payoutMethod === 'upi' ? 'UPI ID' : 'Bank Account' },
                   { label: 'Account Holder', value: selectedUser.bankAccountHolder },
                   { label: 'Bank Account Number', value: selectedUser.bankAccountNumber },
                   { label: 'Bank Name', value: selectedUser.bankName },

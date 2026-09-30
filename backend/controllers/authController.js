@@ -574,7 +574,7 @@ const updateProfile = async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const allowedFields = [
       'fullName', 'phone', 'bankAccountHolder', 'bankAccountNumber',
-      'bankName', 'ifscCode'
+      'bankName', 'ifscCode', 'upiId', 'payoutMethod'
     ];
     const updates = {};
     Object.keys(req.body).forEach((key) => {
@@ -582,6 +582,17 @@ const updateProfile = async (req, res) => {
         updates[key] = req.body[key];
       }
     });
+
+    if (updates.payoutMethod !== undefined && !['bank', 'upi'].includes(updates.payoutMethod)) {
+      return res.status(400).json({ success: false, message: 'Transfer mode must be bank or UPI' });
+    }
+
+    if (typeof updates.upiId === 'string') {
+      updates.upiId = updates.upiId.trim().toLowerCase();
+      if (updates.upiId && !/^[a-z0-9._-]{2,256}@[a-z]{2,64}$/.test(updates.upiId)) {
+        return res.status(400).json({ success: false, message: 'Please enter a valid UPI ID (e.g. name@okaxis)' });
+      }
+    }
 
     if (Object.keys(updates).length === 0) {
       return res.status(400).json({ success: false, message: 'No valid fields to update' });
