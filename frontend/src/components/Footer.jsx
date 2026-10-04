@@ -95,7 +95,7 @@ const Footer = () => {
                 { to: '/flipkart-gift-card-to-bank-account', label: 'Flipkart Gift Card to Bank Account' },
                 { to: '/how-to-sell-amazon-gift-card', label: 'How to Sell Amazon Gift Card in India' },
                 { to: '/how-to-sell-amazon-pay-gift-card', label: 'How to Sell Amazon Pay Gift Card' },
-                { to: '/how-to-sell-amazon-shopping-voucher', label: 'How to Sell Amazon Shopping Voucher' },
+                { to: '/how-to-sell-amazon-shopping-voucher', label: 'Sell Amazon Voucher Online' },
                 { to: '/how-to-convert-redeem-code-into-money', label: 'Convert Redeem Code into Money' },
                 { to: '/how-to-sell-zomato-gift-card', label: 'How to Sell Zomato Gift Card' },
                 { to: '/how-to-sell-phonepe-gift-card', label: 'How to Sell PhonePe Gift Card' },

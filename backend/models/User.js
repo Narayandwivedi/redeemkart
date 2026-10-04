@@ -166,6 +166,15 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  // Forgot-password OTP
+  resetOtp: {
+    type: Number,
+    select: false
+  },
+  otpExpiresAt: {
+    type: Date,
+    select: false
+  },
   isActive: {
     type: Boolean,
     default: true
@@ -208,6 +217,8 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function(next) {
   // Only hash password if it's modified and exists
   if (!this.isModified('password') || !this.password) return next();
+  // The auth controllers already hash with bcrypt; hashing again would make login fail
+  if (/^\$2[aby]\$\d{2}\$.{53}$/.test(this.password)) return next();
 
   try {
     // Hash password with cost of 12

@@ -76,27 +76,50 @@ export const AppContextProvider = (props) => {
     }
   }, [])
 
-  // Signup function
+  // Signup function: sends an OTP to the email. The account is created by verifySignupOtp.
   const signup = useCallback(async (signupData) => {
     try {
       const response = await axios.post(`${BACKEND_URL}/api/auth/signup`, signupData, {
         withCredentials: true
       })
-      
+
+      if (response.data.success) {
+        return { success: true, email: response.data.email }
+      } else {
+        return {
+          success: false,
+          error: response.data.message || 'Signup failed'
+        }
+      }
+    } catch (error) {
+      return {
+        success: false,
+        error: error.response?.data?.message || 'Signup failed'
+      }
+    }
+  }, [])
+
+  // Verify the signup email OTP; on success the account exists and the user is logged in
+  const verifySignupOtp = useCallback(async (email, otp) => {
+    try {
+      const response = await axios.post(`${BACKEND_URL}/api/auth/signup/verify`, { email, otp }, {
+        withCredentials: true
+      })
+
       if (response.data.success) {
         setIsAuthenticated(true)
         setUser(response.data.userData)
         return { success: true }
       } else {
-        return { 
-          success: false, 
-          error: response.data.message || 'Signup failed' 
+        return {
+          success: false,
+          error: response.data.message || 'Verification failed'
         }
       }
     } catch (error) {
-      return { 
-        success: false, 
-        error: error.response?.data?.message || 'Signup failed' 
+      return {
+        success: false,
+        error: error.response?.data?.message || 'Verification failed'
       }
     }
   }, [])
@@ -152,6 +175,7 @@ export const AppContextProvider = (props) => {
     loading,
     login,
     signup,
+    verifySignupOtp,
     logout,
     googleLogin,
     checkAuthStatus
@@ -162,6 +186,7 @@ export const AppContextProvider = (props) => {
     loading,
     login,
     signup,
+    verifySignupOtp,
     logout,
     googleLogin,
     checkAuthStatus

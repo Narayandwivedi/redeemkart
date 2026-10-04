@@ -1,11 +1,52 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 const userModel = require("../models/User.js");
+const pendingSignupModel = require("../models/PendingSignup.js");
 const transporter = require("../config/nodemailer.js");
 const { OAuth2Client } = require("google-auth-library");
 const { notifyUserRegistered } = require("../services/telegramService");
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+const OTP_TTL_MS = 10 * 60 * 1000; // an OTP is valid for 10 minutes
+const RESEND_WAIT_MS = 30 * 1000; // gap between two OTP emails
+const MAX_OTP_SENDS = 5; // OTP emails per signup (resets when the pending signup expires)
+const MAX_OTP_ATTEMPTS = 5; // wrong entries allowed per OTP
+
+const escapeHtml = (value) =>
+  String(value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+const hashOtp = (otp) => crypto.createHash("sha256").update(String(otp)).digest("hex");
+
+// Generate a new OTP for a pending signup and email it
+const sendSignupOtp = async (pending) => {
+  const otp = String(crypto.randomInt(100000, 1000000));
+
+  pending.otpHash = hashOtp(otp);
+  pending.otpExpiresAt = new Date(Date.now() + OTP_TTL_MS);
+  pending.attempts = 0;
+  pending.sendCount += 1;
+  pending.lastSentAt = new Date();
+  await pending.save();
+
+  await transporter.sendMail({
+    from: `"RedeemKart" <${process.env.EMAIL_USER}>`,
+    to: pending.email,
+    subject: `${otp} is your RedeemKart verification code`,
+    text: `Your RedeemKart email verification OTP is ${otp}. It will expire in 10 minutes. If you did not sign up on RedeemKart, please ignore this email.`,
+    html: `
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px; color: #334155;">
+        <h2 style="margin: 0 0 12px; color: #0f172a;">Verify your email</h2>
+        <p style="margin: 0 0 20px; font-size: 15px; line-height: 1.5;">Hello ${escapeHtml(pending.fullName)}, use this OTP to finish creating your RedeemKart account.</p>
+        <div style="background: #f5f3ff; border: 1px dashed #7c3aed; border-radius: 12px; padding: 18px; text-align: center;">
+          <span style="font-size: 30px; font-family: monospace; font-weight: bold; letter-spacing: 8px; color: #0f172a;">${otp}</span>
+        </div>
+        <p style="margin: 20px 0 0; font-size: 13px; color: #64748b; line-height: 1.5;">This OTP expires in 10 minutes. Never share it with anyone. If you did not sign up on RedeemKart, please ignore this email.</p>
+      </div>
+    `,
+  });
+};
 
 const handelUserSignup = async (req, res) => {
   try {
@@ -70,22 +111,122 @@ const handelUserSignup = async (req, res) => {
       }
     }
 
+    if (password.length < 6) {
+      return res.status(400).json({ success: false, message: "Password must be at least 6 characters" });
+    }
+
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserData = {
+    // The account is only created after the email OTP is verified. Until then the details wait here.
+    let pending = await pendingSignupModel.findOne({ email });
+    if (pending && pending.sendCount >= MAX_OTP_SENDS) {
+      return res.status(429).json({
+        success: false,
+        message: "Too many OTP requests. Please try again after some time.",
+      });
+    }
+    if (!pending) pending = new pendingSignupModel({ email });
+
+    pending.set({
       fullName,
-      email,
-      password: hashedPassword,
       phone: resolvedPhone,
+      password: hashedPassword,
       city: city?.trim() || undefined,
       district: district?.trim() || undefined,
       state: state?.trim() || undefined,
-      isEmailVerified: false,
-    };
+    });
 
-    // Create new user
-    const newUser = await userModel.create(newUserData);
+    // Submitted again within the resend wait: keep the OTP that was just emailed
+    const otpJustSent =
+      pending.otpHash &&
+      pending.lastSentAt &&
+      Date.now() - pending.lastSentAt.getTime() < RESEND_WAIT_MS;
+
+    if (otpJustSent) {
+      await pending.save();
+    } else {
+      try {
+        await sendSignupOtp(pending);
+      } catch (mailErr) {
+        console.error("Signup OTP email error:", mailErr);
+        return res.status(500).json({
+          success: false,
+          message: "Could not send the verification email. Please check your email address and try again.",
+        });
+      }
+    }
+
+    return res.status(200).json({
+      success: true,
+      requiresVerification: true,
+      email,
+      message: "OTP sent to your email",
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+// Verify the signup OTP, create the account and log the user in
+const verifySignupOtp = async (req, res) => {
+  try {
+    const email = String(req.body?.email || "").trim().toLowerCase();
+    const otp = String(req.body?.otp || "").trim();
+
+    if (!email || !otp) {
+      return res.status(400).json({ success: false, message: "Email and OTP are required" });
+    }
+
+    const pending = await pendingSignupModel.findOne({ email });
+    if (!pending) {
+      return res.status(400).json({
+        success: false,
+        message: "Verification expired. Please sign up again.",
+      });
+    }
+
+    if (!pending.otpHash || !pending.otpExpiresAt || pending.otpExpiresAt.getTime() < Date.now()) {
+      return res.status(400).json({ success: false, message: "OTP expired. Please request a new one." });
+    }
+
+    if (pending.attempts >= MAX_OTP_ATTEMPTS) {
+      return res.status(400).json({
+        success: false,
+        message: "Too many wrong attempts. Please request a new OTP.",
+      });
+    }
+
+    if (hashOtp(otp) !== pending.otpHash) {
+      pending.attempts += 1;
+      await pending.save();
+      return res.status(400).json({ success: false, message: "Invalid OTP" });
+    }
+
+    // Someone else may have registered this email or phone while the OTP was pending
+    const existingUser = await userModel.findOne({
+      $or: [{ phone: pending.phone }, { email }],
+    });
+    if (existingUser) {
+      await pending.deleteOne();
+      return res.status(400).json({
+        success: false,
+        message: existingUser.email === email ? "Email already exists" : "Phone number already exists",
+      });
+    }
+
+    const newUser = await userModel.create({
+      fullName: pending.fullName,
+      email,
+      password: pending.password,
+      phone: pending.phone,
+      city: pending.city,
+      district: pending.district,
+      state: pending.state,
+      isEmailVerified: true,
+    });
+    await pending.deleteOne();
 
     // Trigger Telegram Alert asynchronously (fire-and-forget in background)
     setImmediate(() => {
@@ -122,6 +263,43 @@ const handelUserSignup = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+// Email a fresh signup OTP
+const resendSignupOtp = async (req, res) => {
+  try {
+    const email = String(req.body?.email || "").trim().toLowerCase();
+    if (!email) {
+      return res.status(400).json({ success: false, message: "Email is required" });
+    }
+
+    const pending = await pendingSignupModel.findOne({ email });
+    if (!pending) {
+      return res.status(400).json({
+        success: false,
+        message: "Verification expired. Please sign up again.",
+      });
+    }
+
+    if (pending.sendCount >= MAX_OTP_SENDS) {
+      return res.status(429).json({
+        success: false,
+        message: "Too many OTP requests. Please try again after some time.",
+      });
+    }
+    if (pending.lastSentAt && Date.now() - pending.lastSentAt.getTime() < RESEND_WAIT_MS) {
+      return res.status(429).json({
+        success: false,
+        message: "Please wait 30 seconds before requesting another OTP.",
+      });
+    }
+
+    await sendSignupOtp(pending);
+    return res.status(200).json({ success: true, message: "OTP sent to your email" });
+  } catch (err) {
+    console.error("Resend signup OTP error:", err);
+    return res.status(500).json({ success: false, message: "Could not send the verification email" });
   }
 };
 
@@ -253,9 +431,9 @@ const generateResetPassOTP = async (req, res) => {
     await getUser.save();
 
     const mailOptions = {
-      from: process.env.EMAIL_USER || "noreply@computerstore.com",
+      from: `"RedeemKart" <${process.env.EMAIL_USER}>`,
       to: normalizedEmail,
-      subject: "Password Reset OTP - Computer Store",
+      subject: "Password Reset OTP - RedeemKart",
       text: `Your OTP for password reset is: ${otp}. It will expire in 10 minutes.`,
     };
 
@@ -278,7 +456,9 @@ const submitResetPassOTP = async (req, res) => {
       return res.status(400).json({ success: false, message: "Missing data" });
     }
 
-    const getUser = await userModel.findOne({ email: normalizedEmail });
+    const getUser = await userModel
+      .findOne({ email: normalizedEmail })
+      .select("+resetOtp +otpExpiresAt");
     if (!getUser) {
       return res
         .status(400)
@@ -621,6 +801,8 @@ const updateProfile = async (req, res) => {
 
 module.exports = {
   handelUserSignup,
+  verifySignupOtp,
+  resendSignupOtp,
   handelUserLogin,
   handleUserLogout,
   generateResetPassOTP,
