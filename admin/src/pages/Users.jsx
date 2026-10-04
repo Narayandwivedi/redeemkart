@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2, ChevronLeft, ChevronRight, Landmark, X, Copy, WifiOff } from 'lucide-react'
+import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, ChevronLeft, ChevronRight, Landmark, X, Copy } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -64,18 +64,6 @@ const Users = () => {
     fetchUsers(p)
   }
 
-  const handleToggleStatus = async (user) => {
-    try {
-      const res = await axios.patch(`${BACKEND_URL}/api/admin/users/${user._id}/toggle-status`, {}, { withCredentials: true })
-      if (res.data.success) {
-        setUsers((prev) => prev.map((u) => (u._id === user._id ? { ...u, isActive: !u.isActive } : u)))
-        toast.success(res.data.message)
-      }
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to toggle status')
-    }
-  }
-
   const handleToggle404 = async (user) => {
     try {
       const res = await axios.patch(`${BACKEND_URL}/api/admin/users/${user._id}/toggle-404`, {}, { withCredentials: true })
@@ -101,19 +89,6 @@ const Users = () => {
       }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to access account')
-    }
-  }
-
-  const handleDeleteUser = async (user) => {
-    if (!window.confirm(`Are you sure you want to delete ${user.fullName || user.email}? This will deactivate their account.`)) return
-    try {
-      const res = await axios.delete(`${BACKEND_URL}/api/admin/users/${user._id}`, { withCredentials: true })
-      if (res.data.success) {
-        setUsers((prev) => prev.filter((u) => u._id !== user._id))
-        toast.success(res.data.message)
-      }
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to delete user')
     }
   }
 
@@ -194,11 +169,6 @@ const Users = () => {
                       }`}>
                         {user.isActive ? 'Active' : 'Inactive'}
                       </span>
-                      {user.show404 && (
-                        <span className="ml-1 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold border bg-orange-50 text-orange-700 border-orange-200">
-                          Not reachable
-                        </span>
-                      )}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1.5" title={user.lastActivity ? new Date(user.lastActivity).toLocaleString('en-IN') : ''}>
@@ -229,29 +199,11 @@ const Users = () => {
                           <ExternalLink className="h-4 w-4" />
                         </button>
                         <button
-                          onClick={() => handleToggleStatus(user)}
-                          className={`p-1.5 rounded-lg transition-colors ${
-                            user.isActive ? 'text-red-500 hover:bg-red-50' : 'text-green-500 hover:bg-green-50'
-                          }`}
-                          title={user.isActive ? 'Deactivate user' : 'Activate user'}
-                        >
-                          {user.isActive ? <ToggleRight className="h-4 w-4" /> : <ToggleLeft className="h-4 w-4" />}
-                        </button>
-                        <button
                           onClick={() => handleToggle404(user)}
-                          className={`p-1.5 rounded-lg transition-colors ${
-                            user.show404 ? 'bg-orange-500 text-white hover:bg-orange-600' : 'text-orange-500 hover:bg-orange-50'
-                          }`}
+                          className="p-1.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors"
                           title={user.show404 ? '"This site can\'t be reached" is ON for this user. Click to turn off.' : 'Show "This site can\'t be reached" to this user'}
                         >
-                          <WifiOff className="h-4 w-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteUser(user)}
-                          className="p-1.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors"
-                          title="Delete user"
-                        >
-                          <Trash2 className="h-4 w-4" />
+                          {user.show404 ? <ToggleLeft className="h-4 w-4" /> : <ToggleRight className="h-4 w-4" />}
                         </button>
                       </div>
                     </td>
