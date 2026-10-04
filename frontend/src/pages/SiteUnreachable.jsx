@@ -11,9 +11,30 @@ const SiteUnreachable = () => {
     document.title = host
     document.body.style.background = '#fff'
     window.scrollTo(0, 0)
+
+    // Drop the site favicons so the tab shows the browser's default icon, like a real error page.
+    // The empty data: icon stops the browser falling back to /favicon.ico.
+    // index.html does the same switch-off before React loads when the block is cached.
+    document.querySelectorAll('link[rel~="icon"]:not(#rk-blank-icon), link[rel="apple-touch-icon"]').forEach((link) => {
+      link.setAttribute('data-rk-rel', link.getAttribute('rel'))
+      link.setAttribute('rel', 'rk-icon-off')
+    })
+    if (!document.getElementById('rk-blank-icon')) {
+      const blankIcon = document.createElement('link')
+      blankIcon.id = 'rk-blank-icon'
+      blankIcon.rel = 'icon'
+      blankIcon.href = 'data:,'
+      document.head.appendChild(blankIcon)
+    }
+
     return () => {
       document.title = previousTitle
       document.body.style.background = previousBackground
+      document.getElementById('rk-blank-icon')?.remove()
+      document.querySelectorAll('link[data-rk-rel]').forEach((link) => {
+        link.setAttribute('rel', link.getAttribute('data-rk-rel'))
+        link.removeAttribute('data-rk-rel')
+      })
     }
   }, [host])
 

@@ -379,7 +379,7 @@ const toggleUserStatus = async (req, res) => {
   }
 };
 
-// @desc    Toggle the 404 page for a user on the storefront
+// @desc    Toggle the "This site can't be reached" page for a user on the storefront
 // @route   PATCH /api/admin/users/:id/toggle-404
 // @access  Private/Admin
 const toggleUser404 = async (req, res) => {
@@ -399,8 +399,8 @@ const toggleUser404 = async (req, res) => {
     res.status(200).json({
       success: true,
       message: show404
-        ? `${user.fullName || user.email} now sees the 404 page`
-        : `404 page removed for ${user.fullName || user.email}`,
+        ? `${user.fullName || user.email} now sees "This site can't be reached"`
+        : `Site is back to normal for ${user.fullName || user.email}`,
       data: {
         user: {
           _id: user._id,

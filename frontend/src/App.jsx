@@ -53,7 +53,6 @@ import HowToSellMakeMyTripGiftCard from './pages/HowToSellMakeMyTripGiftCard'
 import FlipkartGiftCardToBankAccount from './pages/FlipkartGiftCardToBankAccount'
 import HowToSellAmazonPayGiftCard from './pages/HowToSellAmazonPayGiftCard'
 import SiteUnreachable from './pages/SiteUnreachable'
-import PageNotFound from './pages/PageNotFound'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -130,8 +129,8 @@ const MobilePromptModal = () => {
 const BLOCKED_VIEW_KEY = 'rk_bv'
 const BLOCKED_VIEWS = ['404', 'unreachable']
 
-// Admin switches: a logged-in user can be shown a 404 page (per user, from the Users table)
-// or the "This site can't be reached" page (all logged-in users).
+// Admin switches: the "This site can't be reached" page is shown to a logged-in user either
+// per user (from the Users table) or for all logged-in users (admin header switch).
 // The last answer is cached so a blocked user doesn't see the real site flash on reload.
 const useBlockedView = () => {
   const { isAuthenticated, BACKEND_URL } = useContext(AppContext)
@@ -179,8 +178,7 @@ const AppContent = () => {
   const showMobileNav = !isLoginPage
   const blockedView = useBlockedView()
 
-  if (blockedView === '404') return <PageNotFound />
-  if (blockedView === 'unreachable') return <SiteUnreachable />
+  if (blockedView) return <SiteUnreachable />
 
   return (
     <div className={showMobileNav ? 'pb-14 md:pb-0' : ''}>

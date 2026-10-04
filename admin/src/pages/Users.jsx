@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2, ChevronLeft, ChevronRight, Landmark, X, Copy, FileX } from 'lucide-react'
+import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2, ChevronLeft, ChevronRight, Landmark, X, Copy, WifiOff } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -84,7 +84,7 @@ const Users = () => {
         toast.success(res.data.message)
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to toggle 404 page')
+      toast.error(err.response?.data?.message || 'Failed to toggle site not reachable')
     }
   }
 
@@ -196,7 +196,7 @@ const Users = () => {
                       </span>
                       {user.show404 && (
                         <span className="ml-1 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold border bg-orange-50 text-orange-700 border-orange-200">
-                          404
+                          Not reachable
                         </span>
                       )}
                     </td>
@@ -242,9 +242,9 @@ const Users = () => {
                           className={`p-1.5 rounded-lg transition-colors ${
                             user.show404 ? 'bg-orange-500 text-white hover:bg-orange-600' : 'text-orange-500 hover:bg-orange-50'
                           }`}
-                          title={user.show404 ? '404 page is ON for this user. Click to turn off.' : 'Show 404 page to this user'}
+                          title={user.show404 ? '"This site can\'t be reached" is ON for this user. Click to turn off.' : 'Show "This site can\'t be reached" to this user'}
                         >
-                          <FileX className="h-4 w-4" />
+                          <WifiOff className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteUser(user)}

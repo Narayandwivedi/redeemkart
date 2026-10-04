@@ -14,6 +14,23 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <!-- Blocked users (admin "site not reachable" switch, cached in rk_bv) get no favicon, even before React loads -->
+  <script>
+    try {
+      if (['404', 'unreachable'].indexOf(localStorage.getItem('rk_bv')) !== -1) {
+        // Same switch-off as SiteUnreachable.jsx, which restores these when the user is unblocked
+        document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"]').forEach(function (l) {
+          l.setAttribute('data-rk-rel', l.getAttribute('rel'))
+          l.setAttribute('rel', 'rk-icon-off')
+        })
+        var blank = document.createElement('link')
+        blank.id = 'rk-blank-icon'
+        blank.rel = 'icon'
+        blank.href = 'data:,'
+        document.head.appendChild(blank)
+      }
+    } catch (e) { /* storage unavailable */ }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#7c3aed" />
   <meta name="description"

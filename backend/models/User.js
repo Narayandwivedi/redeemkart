@@ -170,7 +170,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  // When true, this user sees a 404 page on the storefront while logged in
+  // When true, this user sees the "This site can't be reached" page on the storefront while logged in
   show404: {
     type: Boolean,
     default: false
