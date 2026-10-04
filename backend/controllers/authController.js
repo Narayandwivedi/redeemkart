@@ -6,6 +6,7 @@ const pendingSignupModel = require("../models/PendingSignup.js");
 const transporter = require("../config/nodemailer.js");
 const { OAuth2Client } = require("google-auth-library");
 const { notifyUserRegistered } = require("../services/telegramService");
+const { buildOtpEmail } = require("../services/emailTemplates");
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -13,9 +14,6 @@ const OTP_TTL_MS = 10 * 60 * 1000; // an OTP is valid for 10 minutes
 const RESEND_WAIT_MS = 30 * 1000; // gap between two OTP emails
 const MAX_OTP_SENDS = 5; // OTP emails per signup (resets when the pending signup expires)
 const MAX_OTP_ATTEMPTS = 5; // wrong entries allowed per OTP
-
-const escapeHtml = (value) =>
-  String(value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 const hashOtp = (otp) => crypto.createHash("sha256").update(String(otp)).digest("hex");
 
@@ -31,20 +29,17 @@ const sendSignupOtp = async (pending) => {
   await pending.save();
 
   await transporter.sendMail({
-    from: `"RedeemKart" <${process.env.EMAIL_USER}>`,
+    from: `"RedeemKart" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
     to: pending.email,
     subject: `${otp} is your RedeemKart verification code`,
     text: `Your RedeemKart email verification OTP is ${otp}. It will expire in 10 minutes. If you did not sign up on RedeemKart, please ignore this email.`,
-    html: `
-      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px; color: #334155;">
-        <h2 style="margin: 0 0 12px; color: #0f172a;">Verify your email</h2>
-        <p style="margin: 0 0 20px; font-size: 15px; line-height: 1.5;">Hello ${escapeHtml(pending.fullName)}, use this OTP to finish creating your RedeemKart account.</p>
-        <div style="background: #f5f3ff; border: 1px dashed #7c3aed; border-radius: 12px; padding: 18px; text-align: center;">
-          <span style="font-size: 30px; font-family: monospace; font-weight: bold; letter-spacing: 8px; color: #0f172a;">${otp}</span>
-        </div>
-        <p style="margin: 20px 0 0; font-size: 13px; color: #64748b; line-height: 1.5;">This OTP expires in 10 minutes. Never share it with anyone. If you did not sign up on RedeemKart, please ignore this email.</p>
-      </div>
-    `,
+    html: buildOtpEmail({
+      title: "Verify your email",
+      name: pending.fullName,
+      message: "Use the OTP below to verify your email address and finish creating your RedeemKart account.",
+      otp,
+      ignore: "If you did not sign up on RedeemKart, you can safely ignore this email. No account will be created.",
+    }),
   });
 };
 
@@ -431,10 +426,17 @@ const generateResetPassOTP = async (req, res) => {
     await getUser.save();
 
     const mailOptions = {
-      from: `"RedeemKart" <${process.env.EMAIL_USER}>`,
+      from: `"RedeemKart" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
       to: normalizedEmail,
-      subject: "Password Reset OTP - RedeemKart",
-      text: `Your OTP for password reset is: ${otp}. It will expire in 10 minutes.`,
+      subject: `${otp} is your RedeemKart password reset code`,
+      text: `Your OTP for password reset is: ${otp}. It will expire in 10 minutes. If you did not request a password reset, please ignore this email.`,
+      html: buildOtpEmail({
+        title: "Reset your password",
+        name: getUser.fullName,
+        message: "We received a request to reset your RedeemKart password. Use the OTP below to set a new password.",
+        otp,
+        ignore: "If you did not request a password reset, you can safely ignore this email. Your password will not change.",
+      }),
     };
 
     await transporter.sendMail(mailOptions);

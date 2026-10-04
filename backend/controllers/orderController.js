@@ -621,7 +621,7 @@ const verifyPayment = async (req, res) => {
           `;
 
           await transporter.sendMail({
-            from: `"RedeemKart" <${process.env.EMAIL_USER}>`,
+            from: `"RedeemKart" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
             to: recipientEmail,
             subject: '🎉 Your Digital Voucher Codes from RedeemKart',
             html: emailHtml
@@ -756,7 +756,7 @@ const assignCodeToOrder = async (req, res) => {
       `;
 
       await transporter.sendMail({
-        from: `"RedeemKart" <${process.env.EMAIL_USER}>`,
+        from: `"RedeemKart" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
         to: recipientEmail,
         subject: '🎉 Your Digital Voucher Code from RedeemKart',
         html: emailHtml
