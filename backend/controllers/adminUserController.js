@@ -379,6 +379,52 @@ const toggleUserStatus = async (req, res) => {
   }
 };
 
+// @desc    Toggle the 404 page for a user on the storefront
+// @route   PATCH /api/admin/users/:id/toggle-404
+// @access  Private/Admin
+const toggleUser404 = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select('fullName email show404');
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    const show404 = !user.show404;
+    await User.updateOne({ _id: user._id }, { show404 });
+
+    res.status(200).json({
+      success: true,
+      message: show404
+        ? `${user.fullName || user.email} now sees the 404 page`
+        : `404 page removed for ${user.fullName || user.email}`,
+      data: {
+        user: {
+          _id: user._id,
+          show404
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Toggle user 404 error:', error);
+
+    if (error.kind === 'ObjectId') {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: 'Server error toggling 404 page'
+    });
+  }
+};
+
 // @desc    Impersonate user (admin login as user)
 // @route   POST /api/admin/users/:id/impersonate
 // @access  Private/Admin
@@ -466,5 +512,6 @@ module.exports = {
   getUserStats,
   resetUserPassword,
   toggleUserStatus,
+  toggleUser404,
   impersonateUser
 };

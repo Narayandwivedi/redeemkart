@@ -8,6 +8,7 @@ const {
   getUserStats,
   resetUserPassword,
   toggleUserStatus,
+  toggleUser404,
   impersonateUser
 } = require('../controllers/adminUserController');
 
@@ -30,6 +31,7 @@ router.route('/:id')
 
 router.post('/:id/reset-password', resetUserPassword);
 router.patch('/:id/toggle-status', toggleUserStatus);
+router.patch('/:id/toggle-404', toggleUser404);
 router.post('/:id/impersonate', impersonateUser);
 
 module.exports = router;

@@ -20,6 +20,7 @@ const adminGiftCardRoutes = require('./routes/adminGiftCardRoutes');
 const chatbotRoutes = require('./routes/chatbotRoutes');
 const kycRoutes = require('./routes/kycRoutes');
 const adminKycRoutes = require('./routes/adminKycRoutes');
+const siteSettingRoutes = require('./routes/siteSettingRoutes');
 
 const app = express();
 const PORT = process.env.PORT;
@@ -80,6 +81,7 @@ app.use('/api/admin/gift-cards', adminGiftCardRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/kyc', kycRoutes);
 app.use('/api/admin/kyc', adminKycRoutes);
+app.use('/api/site-settings', siteSettingRoutes);
 
 
 

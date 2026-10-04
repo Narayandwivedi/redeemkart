@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2, ChevronLeft, ChevronRight, Landmark, X, Copy } from 'lucide-react'
+import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2, ChevronLeft, ChevronRight, Landmark, X, Copy, FileX } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -73,6 +73,18 @@ const Users = () => {
       }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to toggle status')
+    }
+  }
+
+  const handleToggle404 = async (user) => {
+    try {
+      const res = await axios.patch(`${BACKEND_URL}/api/admin/users/${user._id}/toggle-404`, {}, { withCredentials: true })
+      if (res.data.success) {
+        setUsers((prev) => prev.map((u) => (u._id === user._id ? { ...u, show404: res.data.data.user.show404 } : u)))
+        toast.success(res.data.message)
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to toggle 404 page')
     }
   }
 
@@ -182,6 +194,11 @@ const Users = () => {
                       }`}>
                         {user.isActive ? 'Active' : 'Inactive'}
                       </span>
+                      {user.show404 && (
+                        <span className="ml-1 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold border bg-orange-50 text-orange-700 border-orange-200">
+                          404
+                        </span>
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1.5" title={user.lastActivity ? new Date(user.lastActivity).toLocaleString('en-IN') : ''}>
@@ -219,6 +236,15 @@ const Users = () => {
                           title={user.isActive ? 'Deactivate user' : 'Activate user'}
                         >
                           {user.isActive ? <ToggleRight className="h-4 w-4" /> : <ToggleLeft className="h-4 w-4" />}
+                        </button>
+                        <button
+                          onClick={() => handleToggle404(user)}
+                          className={`p-1.5 rounded-lg transition-colors ${
+                            user.show404 ? 'bg-orange-500 text-white hover:bg-orange-600' : 'text-orange-500 hover:bg-orange-50'
+                          }`}
+                          title={user.show404 ? '404 page is ON for this user. Click to turn off.' : 'Show 404 page to this user'}
+                        >
+                          <FileX className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteUser(user)}

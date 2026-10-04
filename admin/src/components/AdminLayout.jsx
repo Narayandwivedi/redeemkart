@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Gift, Users, Package, ShieldCheck, Menu, X, LogOut, User } from 'lucide-react'
+import { LayoutDashboard, Gift, Users, Package, ShieldCheck, Menu, X, LogOut, User, Wifi, WifiOff } from 'lucide-react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -18,6 +18,31 @@ const navItems = [
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const navigate = useNavigate()
+  const [siteUnreachable, setSiteUnreachable] = useState(null) // null = loading
+  const [togglingSite, setTogglingSite] = useState(false)
+
+  useEffect(() => {
+    axios.get(`${BACKEND_URL}/api/site-settings/admin`, { withCredentials: true })
+      .then((res) => setSiteUnreachable(Boolean(res.data?.data?.siteUnreachable)))
+      .catch(() => toast.error('Failed to load user site status'))
+  }, [])
+
+  const handleToggleSiteUnreachable = async () => {
+    const enabled = !siteUnreachable
+    if (enabled && !window.confirm('Show "This site can\'t be reached" to ALL logged-in users on the main site?')) return
+    setTogglingSite(true)
+    try {
+      const res = await axios.patch(`${BACKEND_URL}/api/site-settings/admin/unreachable`, { enabled }, { withCredentials: true })
+      if (res.data.success) {
+        setSiteUnreachable(res.data.data.siteUnreachable)
+        toast.success(res.data.message)
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to update user site status')
+    } finally {
+      setTogglingSite(false)
+    }
+  }
 
   const handleLogout = async () => {
     try {
@@ -79,14 +104,30 @@ const AdminLayout = () => {
             </button>
             <h2 className="text-lg font-semibold text-gray-900">Admin Panel</h2>
           </div>
-          {/* Logout button in header for desktop */}
-          <button
-            onClick={handleLogout}
-            className="hidden lg:flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-          >
-            <LogOut className="h-4 w-4" />
-            Logout
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Shows logged-in users a "This site can't be reached" page on the main site */}
+            <button
+              onClick={handleToggleSiteUnreachable}
+              disabled={siteUnreachable === null || togglingSite}
+              title={siteUnreachable ? 'Logged-in users currently see "This site can\'t be reached". Click to restore the site.' : 'Show logged-in users "This site can\'t be reached"'}
+              className={`flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-lg border transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                siteUnreachable
+                  ? 'bg-red-600 text-white border-red-600 hover:bg-red-700'
+                  : 'text-gray-600 border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              {siteUnreachable ? <WifiOff className="h-4 w-4" /> : <Wifi className="h-4 w-4" />}
+              <span className="hidden sm:inline">{siteUnreachable ? 'User site: Not reachable' : 'User site: Live'}</span>
+            </button>
+            {/* Logout button in header for desktop */}
+            <button
+              onClick={handleLogout}
+              className="hidden lg:flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            >
+              <LogOut className="h-4 w-4" />
+              Logout
+            </button>
+          </div>
         </header>
         <main className="flex-1 overflow-auto p-4 lg:p-6">
           <Outlet />

@@ -52,6 +52,8 @@ import HowToSellPhonePeGiftCard from './pages/HowToSellPhonePeGiftCard'
 import HowToSellMakeMyTripGiftCard from './pages/HowToSellMakeMyTripGiftCard'
 import FlipkartGiftCardToBankAccount from './pages/FlipkartGiftCardToBankAccount'
 import HowToSellAmazonPayGiftCard from './pages/HowToSellAmazonPayGiftCard'
+import SiteUnreachable from './pages/SiteUnreachable'
+import PageNotFound from './pages/PageNotFound'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -125,10 +127,60 @@ const MobilePromptModal = () => {
   )
 }
 
+const BLOCKED_VIEW_KEY = 'rk_bv'
+const BLOCKED_VIEWS = ['404', 'unreachable']
+
+// Admin switches: a logged-in user can be shown a 404 page (per user, from the Users table)
+// or the "This site can't be reached" page (all logged-in users).
+// The last answer is cached so a blocked user doesn't see the real site flash on reload.
+const useBlockedView = () => {
+  const { isAuthenticated, BACKEND_URL } = useContext(AppContext)
+  const { pathname } = useLocation()
+  const [blockedView, setBlockedView] = useState(() => {
+    try {
+      const cached = localStorage.getItem(BLOCKED_VIEW_KEY)
+      return BLOCKED_VIEWS.includes(cached) ? cached : null
+    } catch { return null }
+  })
+
+  React.useEffect(() => {
+    if (isAuthenticated === null) return
+
+    const apply = (value) => {
+      setBlockedView(value)
+      try {
+        if (value) localStorage.setItem(BLOCKED_VIEW_KEY, value)
+        else localStorage.removeItem(BLOCKED_VIEW_KEY)
+      } catch { /* storage unavailable */ }
+    }
+
+    if (!isAuthenticated) {
+      apply(null)
+      return
+    }
+
+    let cancelled = false
+    axios.get(`${BACKEND_URL}/api/site-settings/status`, { withCredentials: true })
+      .then((res) => {
+        if (cancelled) return
+        apply(res.data?.pageNotFound ? '404' : res.data?.siteUnreachable ? 'unreachable' : null)
+      })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [isAuthenticated, pathname, BACKEND_URL])
+
+  // Strictly for logged-in users: guests always get the normal site
+  return isAuthenticated !== false ? blockedView : null
+}
+
 const AppContent = () => {
   const location = useLocation()
   const isLoginPage = location.pathname === '/login'
   const showMobileNav = !isLoginPage
+  const blockedView = useBlockedView()
+
+  if (blockedView === '404') return <PageNotFound />
+  if (blockedView === 'unreachable') return <SiteUnreachable />
 
   return (
     <div className={showMobileNav ? 'pb-14 md:pb-0' : ''}>
