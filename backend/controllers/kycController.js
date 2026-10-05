@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { notifyKycRequested } = require('../services/telegramService');
 
 const KYC_DOCUMENT_TYPES = ['aadhaar', 'pan', 'driving_license', 'passport'];
 
@@ -94,6 +95,8 @@ const submitKyc = async (req, res) => {
       });
     }
 
+    const resubmitted = user.kycStatus === 'rejected';
+
     user.kycDocumentType = documentType;
     user.kycDocumentNumber = String(documentNumber).trim();
     user.kycDocumentImage = documentImage;
@@ -104,6 +107,18 @@ const submitKyc = async (req, res) => {
     user.kycRejectionReason = undefined;
 
     await user.save();
+
+    // Trigger Telegram Alert asynchronously (fire-and-forget in background)
+    setImmediate(() => {
+      notifyKycRequested({
+        user,
+        documentLabel: KYC_DOCUMENT_LABELS[documentType],
+        documentNumberMasked: maskDocumentNumber(documentType, user.kycDocumentNumber),
+        resubmitted
+      }).catch((err) => {
+        console.error('[TelegramAlert] Failed to send alert for KYC request:', err);
+      });
+    });
 
     const userObj = user.toObject();
     delete userObj.password;

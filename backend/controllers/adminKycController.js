@@ -1,4 +1,8 @@
 const User = require('../models/User');
+const transporter = require('../config/nodemailer');
+const { buildActionEmail } = require('../services/emailTemplates');
+
+const SELL_PAGE_URL = 'https://redeemkart.in/sell-gift-card';
 const {
   maskDocumentNumber,
   KYC_DOCUMENT_LABELS
@@ -112,6 +116,29 @@ const reviewKyc = async (req, res) => {
     user.kycRejectionReason = action === 'reject' ? String(rejectionReason).trim() : undefined;
 
     await user.save();
+
+    // Tell the user their KYC is approved. Sent in the background so a mail problem never blocks the approval.
+    if (action === 'approve' && user.email) {
+      transporter.sendMail({
+        from: `"RedeemKart" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
+        to: user.email,
+        subject: 'Your KYC is approved - RedeemKart',
+        text: `Hello ${user.fullName}, your KYC is approved and you are ready to sell your gift cards on RedeemKart. List your first card here: ${SELL_PAGE_URL}`,
+        html: buildActionEmail({
+          title: 'Your KYC is approved 🎉',
+          name: user.fullName,
+          message: 'Good news! We have verified your documents and your KYC is approved. You are now ready to sell your gift cards on RedeemKart.',
+          buttonLabel: 'Sell a gift card',
+          link: SELL_PAGE_URL,
+          showLink: false,
+          note: 'List your card in a few minutes and get paid to your bank account after it sells.',
+          ignore: 'Thank you for choosing RedeemKart. If you have any questions, our support team is happy to help.',
+          preheader: 'Your KYC is approved. You are ready to sell your gift cards on RedeemKart.'
+        })
+      }).catch((mailErr) => {
+        console.error('KYC approval email error:', mailErr);
+      });
+    }
 
     return res.status(200).json({
       success: true,

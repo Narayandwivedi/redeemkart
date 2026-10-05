@@ -136,8 +136,48 @@ const notifyUserRegistered = async ({ user, method = 'Website' }) => {
   }
 };
 
+/**
+ * Format and send an alert when a user submits KYC for review
+ */
+const notifyKycRequested = async ({ user, documentLabel, documentNumberMasked, resubmitted = false }) => {
+  try {
+    const fullName = (user && user.fullName) || 'User';
+    const email = (user && user.email) || 'N/A';
+    const phone = (user && user.phone) || 'N/A';
+
+    const istTime = new Date().toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    });
+
+    let message = `🪪 <b>New KYC Request!</b>\n\n`;
+    message += `📛 <b>Name:</b> ${fullName}\n`;
+    message += `📧 <b>Email:</b> ${email}\n`;
+    if (phone !== 'N/A') {
+      message += `📱 <b>Phone:</b> ${phone}\n`;
+    }
+    message += `📄 <b>Document:</b> ${documentLabel || 'N/A'}\n`;
+    if (documentNumberMasked) {
+      message += `🔢 <b>Number:</b> <code>${documentNumberMasked}</code>\n`;
+    }
+    if (resubmitted) {
+      message += `🔁 <b>Note:</b> Re-submitted after rejection\n`;
+    }
+    message += `\n`;
+    message += `⏰ <b>Time:</b> ${istTime}\n`;
+    message += `⚡ <i>Review it in the admin panel under KYC.</i>`;
+
+    return await sendTelegramAlert(message);
+  } catch (err) {
+    console.error('[TelegramAlert] Failed to format KYC alert:', err);
+    return { success: false, error: err.message };
+  }
+};
+
 module.exports = {
   sendTelegramAlert,
   notifyGiftCardListed,
   notifyUserRegistered,
+  notifyKycRequested,
 };

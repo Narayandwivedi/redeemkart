@@ -99,16 +99,18 @@ const buildOtpEmail = ({ title, name, message, otp, minutes = 10, ignore }) => b
           </tr>`,
 });
 
-// Email with one big button (email verification link).
+// Email with one big button (email verification link, KYC approved).
 //   buttonLabel - text on the button
-//   link        - where the button goes; also printed below it for mail apps that block buttons
+//   link        - where the button goes
+//   showLink    - also print the link below the button, for mail apps that block buttons
 //   note        - short line under the button (e.g. how long the link is valid)
-//   ignore      - what to do if the recipient did not request it
-const buildActionEmail = ({ title, name, message, buttonLabel, link, note, ignore }) => buildEmail({
+//   ignore      - closing line (e.g. what to do if the recipient did not request it)
+//   preheader   - preview line shown in the inbox (optional)
+const buildActionEmail = ({ title, name, message, buttonLabel, link, note, ignore, showLink = true, preheader }) => buildEmail({
   title,
   name,
   message,
-  preheader: `${buttonLabel} to finish setting up your RedeemKart account.`,
+  preheader: preheader || `${buttonLabel} to finish setting up your RedeemKart account.`,
   rows: `
           <tr>
             <td align="center" style="padding: 26px 28px 8px;">
@@ -125,7 +127,7 @@ const buildActionEmail = ({ title, name, message, buttonLabel, link, note, ignor
             <td align="center" style="padding: 10px 28px 4px; font-family: ${FONT}; font-size: 13px; color: #64748b;">
               ${escapeHtml(note)}
             </td>
-          </tr>
+          </tr>${!showLink ? '' : `
           <tr>
             <td style="padding: 20px 28px 8px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -137,7 +139,7 @@ const buildActionEmail = ({ title, name, message, buttonLabel, link, note, ignor
                 </tr>
               </table>
             </td>
-          </tr>
+          </tr>`}
           <tr>
             <td style="padding: 14px 28px 28px; font-family: ${FONT}; font-size: 13px; line-height: 1.6; color: #64748b;">
               ${escapeHtml(ignore)}
