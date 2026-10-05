@@ -21,6 +21,7 @@ const chatbotRoutes = require('./routes/chatbotRoutes');
 const kycRoutes = require('./routes/kycRoutes');
 const adminKycRoutes = require('./routes/adminKycRoutes');
 const siteSettingRoutes = require('./routes/siteSettingRoutes');
+const { resumePendingKycApprovals } = require('./services/kycService');
 
 const app = express();
 const PORT = process.env.PORT;
@@ -89,6 +90,7 @@ app.use('/api/site-settings', siteSettingRoutes);
 const startServer = async () => {
   try {
     await connectToDb();
+    resumePendingKycApprovals();
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });

@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const { notifyKycRequested } = require('../services/telegramService');
+const { scheduleKycAutoApproval } = require('../services/kycService');
 
 const KYC_DOCUMENT_TYPES = ['aadhaar', 'pan', 'driving_license', 'passport'];
 
@@ -107,6 +108,9 @@ const submitKyc = async (req, res) => {
     user.kycRejectionReason = undefined;
 
     await user.save();
+
+    // Approve automatically 2 minutes from now and email the user (unless an admin decides first)
+    scheduleKycAutoApproval(user._id, user.kycSubmittedAt);
 
     // Trigger Telegram Alert asynchronously (fire-and-forget in background)
     setImmediate(() => {
