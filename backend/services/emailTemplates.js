@@ -5,15 +5,10 @@ const FONT = "'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif";
 const escapeHtml = (value) =>
   String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-// Branded OTP email (signup verification, password reset). Table layout + inline styles so it
-// renders the same in Gmail, Outlook and mobile mail apps.
-//   title    - heading inside the card
-//   name     - recipient name for the greeting (optional)
-//   message  - one line explaining what the OTP is for
-//   otp      - the code
-//   minutes  - validity shown under the code
-//   ignore   - what to do if the recipient did not request it
-const buildOtpEmail = ({ title, name, message, otp, minutes = 10, ignore }) => `<!DOCTYPE html>
+// Shared branded layout: logo header, heading, greeting, message, then `rows` (table rows
+// specific to the email) and the footer. Table layout + inline styles so it renders the same
+// in Gmail, Outlook and mobile mail apps.
+const buildEmail = ({ title, preheader, name, message, rows }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -21,7 +16,7 @@ const buildOtpEmail = ({ title, name, message, otp, minutes = 10, ignore }) => `
   <title>${escapeHtml(title)}</title>
 </head>
 <body style="margin: 0; padding: 0; background-color: #f1f5f9;">
-  <div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent;">Your RedeemKart OTP is ${escapeHtml(otp)}. It is valid for ${minutes} minutes.</div>
+  <div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent;">${escapeHtml(preheader)}</div>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f1f5f9;">
     <tr>
       <td align="center" style="padding: 32px 12px;">
@@ -42,7 +37,33 @@ const buildOtpEmail = ({ title, name, message, otp, minutes = 10, ignore }) => `
               <p style="margin: 0 0 6px; font-size: 15px; line-height: 1.6; color: #334155;">Hello${name ? ` <strong>${escapeHtml(name)}</strong>` : ''},</p>
               <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #475569;">${escapeHtml(message)}</p>
             </td>
+          </tr>${rows}
+          <tr>
+            <td align="center" style="padding: 20px 24px; background-color: #f8fafc; border-top: 1px solid #e2e8f0; font-family: ${FONT}; font-size: 12px; line-height: 1.7; color: #94a3b8;">
+              Need help? <a href="${SITE_URL}/contact" style="color: #16a34a; text-decoration: none; font-weight: 600;">Contact support</a><br>
+              &copy; ${new Date().getFullYear()} RedeemKart &middot; <a href="${SITE_URL}" style="color: #94a3b8; text-decoration: none;">redeemkart.in</a>
+            </td>
           </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+// OTP email (password reset).
+//   title    - heading inside the card
+//   name     - recipient name for the greeting (optional)
+//   message  - one line explaining what the OTP is for
+//   otp      - the code
+//   minutes  - validity shown under the code
+//   ignore   - what to do if the recipient did not request it
+const buildOtpEmail = ({ title, name, message, otp, minutes = 10, ignore }) => buildEmail({
+  title,
+  name,
+  message,
+  preheader: `Your RedeemKart OTP is ${otp}. It is valid for ${minutes} minutes.`,
+  rows: `
           <tr>
             <td style="padding: 20px 28px 8px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -75,18 +96,53 @@ const buildOtpEmail = ({ title, name, message, otp, minutes = 10, ignore }) => `
             <td style="padding: 14px 28px 28px; font-family: ${FONT}; font-size: 13px; line-height: 1.6; color: #64748b;">
               ${escapeHtml(ignore)}
             </td>
-          </tr>
+          </tr>`,
+});
+
+// Email with one big button (email verification link).
+//   buttonLabel - text on the button
+//   link        - where the button goes; also printed below it for mail apps that block buttons
+//   note        - short line under the button (e.g. how long the link is valid)
+//   ignore      - what to do if the recipient did not request it
+const buildActionEmail = ({ title, name, message, buttonLabel, link, note, ignore }) => buildEmail({
+  title,
+  name,
+  message,
+  preheader: `${buttonLabel} to finish setting up your RedeemKart account.`,
+  rows: `
           <tr>
-            <td align="center" style="padding: 20px 24px; background-color: #f8fafc; border-top: 1px solid #e2e8f0; font-family: ${FONT}; font-size: 12px; line-height: 1.7; color: #94a3b8;">
-              Need help? <a href="${SITE_URL}/contact" style="color: #16a34a; text-decoration: none; font-weight: 600;">Contact support</a><br>
-              &copy; ${new Date().getFullYear()} RedeemKart &middot; <a href="${SITE_URL}" style="color: #94a3b8; text-decoration: none;">redeemkart.in</a>
+            <td align="center" style="padding: 26px 28px 8px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" bgcolor="#16a34a" style="border-radius: 12px;">
+                    <a href="${escapeHtml(link)}" target="_blank" style="display: inline-block; padding: 14px 36px; font-family: ${FONT}; font-size: 16px; font-weight: 700; color: #ffffff; text-decoration: none; border-radius: 12px;">${escapeHtml(buttonLabel)}</a>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>`;
+          <tr>
+            <td align="center" style="padding: 10px 28px 4px; font-family: ${FONT}; font-size: 13px; color: #64748b;">
+              ${escapeHtml(note)}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 20px 28px 8px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding: 14px 16px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; font-family: ${FONT}; font-size: 12px; line-height: 1.6; color: #64748b;">
+                    Button not working? Copy and paste this link into your browser:<br>
+                    <a href="${escapeHtml(link)}" target="_blank" style="color: #16a34a; word-break: break-all;">${escapeHtml(link)}</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 14px 28px 28px; font-family: ${FONT}; font-size: 13px; line-height: 1.6; color: #64748b;">
+              ${escapeHtml(ignore)}
+            </td>
+          </tr>`,
+});
 
-module.exports = { buildOtpEmail };
+module.exports = { buildOtpEmail, buildActionEmail };

@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const {
   handelUserSignup,
-  verifySignupOtp,
-  resendSignupOtp,
+  verifyEmail,
+  resendVerificationEmail,
   handelUserLogin,
   handleUserLogout,
   generateResetPassOTP,
@@ -16,9 +16,9 @@ const {
 } = require('../controllers/authController');
 
 // Public authentication routes
-router.post('/signup', handelUserSignup);               // sends the email OTP
-router.post('/signup/verify', verifySignupOtp);         // creates the account once the OTP matches
-router.post('/signup/resend-otp', resendSignupOtp);
+router.post('/signup', handelUserSignup);                      // creates the account and emails a verification link
+router.post('/verify-email', verifyEmail);                     // called by the page the email link opens
+router.post('/resend-verification', resendVerificationEmail);  // logged-in user asks for a new link
 router.post('/login', handelUserLogin);
 router.post('/logout', handleUserLogout);
 

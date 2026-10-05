@@ -166,6 +166,19 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  // Email verification link (sha256 of the token in the link). Needed only for payouts.
+  emailVerifyToken: {
+    type: String,
+    select: false
+  },
+  emailVerifyExpires: {
+    type: Date,
+    select: false
+  },
+  emailVerifySentAt: {
+    type: Date,
+    select: false
+  },
   // Forgot-password OTP
   resetOtp: {
     type: Number,

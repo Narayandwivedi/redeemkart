@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import { AppContext } from '../context/AppContext'
 import { useSEO } from '../hooks/useSEO'
+import VerifyEmailBanner from '../components/VerifyEmailBanner'
 import { brands, brandLogos, noPinBrands, pinRequiredBrands, getCommissionRate } from '../data/sellBrands'
 
 const statusStyles = {
@@ -319,6 +320,8 @@ const SellVoucher = () => {
                 </div>
               ))}
             </div>
+
+            <VerifyEmailBanner />
 
             <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
               <h2 className="font-['Poppins',sans-serif] text-lg sm:text-xl font-semibold text-slate-900 mb-5">List your gift card</h2>

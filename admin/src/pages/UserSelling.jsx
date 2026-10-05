@@ -168,7 +168,7 @@ const UserSelling = () => {
       setMarkPaidFor(null)
       fetchData()
     } catch (err) {
-      toast.error('Failed to mark as paid')
+      toast.error(err.response?.data?.message || 'Failed to mark as paid')
     } finally {
       setMarkPaidLoading(false)
     }
@@ -385,6 +385,11 @@ const UserSelling = () => {
                     <td className="px-6 py-4">
                       <span className="block font-medium text-gray-800">{card.user?.fullName || 'Unknown'}</span>
                       <span className="block text-xs text-gray-400">{card.user?.email}</span>
+                      {card.user && !card.user.isEmailVerified && (
+                        <span className="inline-block mt-1 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200" title="Payout cannot be marked until the seller verifies their email">
+                          Email not verified
+                        </span>
+                      )}
                     </td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-bold uppercase ${

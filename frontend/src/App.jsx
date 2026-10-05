@@ -53,6 +53,7 @@ import HowToSellMakeMyTripGiftCard from './pages/HowToSellMakeMyTripGiftCard'
 import FlipkartGiftCardToBankAccount from './pages/FlipkartGiftCardToBankAccount'
 import HowToSellAmazonPayGiftCard from './pages/HowToSellAmazonPayGiftCard'
 import SiteUnreachable from './pages/SiteUnreachable'
+import VerifyEmail from './pages/VerifyEmail'
 import ChatBot from './components/ChatBot'
 
 const ScrollToTop = () => {
@@ -203,6 +204,7 @@ const AppContent = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/sell-gift-card" element={<SellVoucher />} />
         <Route path="/my-sales" element={<ProtectedRoute><MySales /></ProtectedRoute>} />
         <Route path="/blog" element={<BlogsPage />} />

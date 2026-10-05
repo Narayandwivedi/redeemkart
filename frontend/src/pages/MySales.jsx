@@ -3,6 +3,7 @@ import { ArrowLeft, Gift, CheckCircle, Clock, TrendingUp, Banknote, Wallet, X, C
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { AppContext } from '../context/AppContext'
+import VerifyEmailBanner from '../components/VerifyEmailBanner'
 
 // Seller commission: Amazon, Flipkart and PhonePe 10%, Myntra and MakeMyTrip 20%, Google Play and Zomato 25%, all other brands 30%.
 const tenPercentBrands = ['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart', 'PhonePe']
@@ -49,6 +50,8 @@ const MySales = () => {
           </Link>
           <h1 className="text-lg sm:text-2xl font-semibold text-gray-900">My Sales</h1>
         </div>
+
+        <VerifyEmailBanner className="mb-6" />
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">

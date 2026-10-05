@@ -2,43 +2,63 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const userModel = require("../models/User.js");
-const pendingSignupModel = require("../models/PendingSignup.js");
 const transporter = require("../config/nodemailer.js");
 const { OAuth2Client } = require("google-auth-library");
 const { notifyUserRegistered } = require("../services/telegramService");
-const { buildOtpEmail } = require("../services/emailTemplates");
+const { buildOtpEmail, buildActionEmail } = require("../services/emailTemplates");
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-const OTP_TTL_MS = 10 * 60 * 1000; // an OTP is valid for 10 minutes
-const RESEND_WAIT_MS = 30 * 1000; // gap between two OTP emails
-const MAX_OTP_SENDS = 5; // OTP emails per signup (resets when the pending signup expires)
-const MAX_OTP_ATTEMPTS = 5; // wrong entries allowed per OTP
+const VERIFY_LINK_TTL_MS = 24 * 60 * 60 * 1000; // a verification link is valid for 24 hours
+const VERIFY_RESEND_WAIT_MS = 60 * 1000; // gap between two verification emails
 
-const hashOtp = (otp) => crypto.createHash("sha256").update(String(otp)).digest("hex");
+const hashToken = (token) => crypto.createHash("sha256").update(String(token)).digest("hex");
 
-// Generate a new OTP for a pending signup and email it
-const sendSignupOtp = async (pending) => {
-  const otp = String(crypto.randomInt(100000, 1000000));
+// Storefront address used in email links: the site the request came from, else FRONTEND_URL
+const STOREFRONT_ORIGINS = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
+  "https://redeemkart.in",
+  "https://www.redeemkart.in",
+];
 
-  pending.otpHash = hashOtp(otp);
-  pending.otpExpiresAt = new Date(Date.now() + OTP_TTL_MS);
-  pending.attempts = 0;
-  pending.sendCount += 1;
-  pending.lastSentAt = new Date();
-  await pending.save();
+const getFrontendUrl = (req) => {
+  const origin = req.headers.origin;
+  if (origin && STOREFRONT_ORIGINS.includes(origin)) return origin;
+  const configured = String(process.env.FRONTEND_URL || "").replace(/\/+$/, "");
+  return configured && !configured.includes("gchub.in") ? configured : "https://redeemkart.in";
+};
+
+// Email a "Verify my email" button to a user who signed up with email and password.
+// The link carries a random token; only its hash is stored on the user.
+const sendVerificationEmail = async (user, req) => {
+  const token = crypto.randomBytes(32).toString("hex");
+
+  await userModel.updateOne(
+    { _id: user._id },
+    {
+      emailVerifyToken: hashToken(token),
+      emailVerifyExpires: new Date(Date.now() + VERIFY_LINK_TTL_MS),
+      emailVerifySentAt: new Date(),
+    }
+  );
+
+  const link = `${getFrontendUrl(req)}/verify-email?token=${token}`;
 
   await transporter.sendMail({
     from: `"RedeemKart" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
-    to: pending.email,
-    subject: `${otp} is your RedeemKart verification code`,
-    text: `Your RedeemKart email verification OTP is ${otp}. It will expire in 10 minutes. If you did not sign up on RedeemKart, please ignore this email.`,
-    html: buildOtpEmail({
+    to: user.email,
+    subject: "Verify your email - RedeemKart",
+    text: `Hello ${user.fullName}, verify your RedeemKart email address by opening this link: ${link} . The link is valid for 24 hours. If you did not sign up on RedeemKart, please ignore this email.`,
+    html: buildActionEmail({
       title: "Verify your email",
-      name: pending.fullName,
-      message: "Use the OTP below to verify your email address and finish creating your RedeemKart account.",
-      otp,
-      ignore: "If you did not sign up on RedeemKart, you can safely ignore this email. No account will be created.",
+      name: user.fullName,
+      message: "Welcome to RedeemKart! Please confirm that this is your email address. You can already use your account and list gift cards; a verified email is needed to receive payouts.",
+      buttonLabel: "Verify my email",
+      link,
+      note: "This link is valid for 24 hours.",
+      ignore: "If you did not sign up on RedeemKart, you can safely ignore this email.",
     }),
   });
 };
@@ -113,115 +133,22 @@ const handelUserSignup = async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // The account is only created after the email OTP is verified. Until then the details wait here.
-    let pending = await pendingSignupModel.findOne({ email });
-    if (pending && pending.sendCount >= MAX_OTP_SENDS) {
-      return res.status(429).json({
-        success: false,
-        message: "Too many OTP requests. Please try again after some time.",
-      });
-    }
-    if (!pending) pending = new pendingSignupModel({ email });
-
-    pending.set({
+    // The account works straight away. Email verification is by link and is only required for payouts.
+    const newUser = await userModel.create({
       fullName,
-      phone: resolvedPhone,
+      email,
       password: hashedPassword,
+      phone: resolvedPhone,
       city: city?.trim() || undefined,
       district: district?.trim() || undefined,
       state: state?.trim() || undefined,
+      isEmailVerified: false,
     });
 
-    // Submitted again within the resend wait: keep the OTP that was just emailed
-    const otpJustSent =
-      pending.otpHash &&
-      pending.lastSentAt &&
-      Date.now() - pending.lastSentAt.getTime() < RESEND_WAIT_MS;
-
-    if (otpJustSent) {
-      await pending.save();
-    } else {
-      try {
-        await sendSignupOtp(pending);
-      } catch (mailErr) {
-        console.error("Signup OTP email error:", mailErr);
-        return res.status(500).json({
-          success: false,
-          message: "Could not send the verification email. Please check your email address and try again.",
-        });
-      }
-    }
-
-    return res.status(200).json({
-      success: true,
-      requiresVerification: true,
-      email,
-      message: "OTP sent to your email",
+    // Send the verification link in the background; signup must not fail if the email does
+    sendVerificationEmail(newUser, req).catch((mailErr) => {
+      console.error("Verification email error:", mailErr);
     });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ success: false, message: "Server error" });
-  }
-};
-
-// Verify the signup OTP, create the account and log the user in
-const verifySignupOtp = async (req, res) => {
-  try {
-    const email = String(req.body?.email || "").trim().toLowerCase();
-    const otp = String(req.body?.otp || "").trim();
-
-    if (!email || !otp) {
-      return res.status(400).json({ success: false, message: "Email and OTP are required" });
-    }
-
-    const pending = await pendingSignupModel.findOne({ email });
-    if (!pending) {
-      return res.status(400).json({
-        success: false,
-        message: "Verification expired. Please sign up again.",
-      });
-    }
-
-    if (!pending.otpHash || !pending.otpExpiresAt || pending.otpExpiresAt.getTime() < Date.now()) {
-      return res.status(400).json({ success: false, message: "OTP expired. Please request a new one." });
-    }
-
-    if (pending.attempts >= MAX_OTP_ATTEMPTS) {
-      return res.status(400).json({
-        success: false,
-        message: "Too many wrong attempts. Please request a new OTP.",
-      });
-    }
-
-    if (hashOtp(otp) !== pending.otpHash) {
-      pending.attempts += 1;
-      await pending.save();
-      return res.status(400).json({ success: false, message: "Invalid OTP" });
-    }
-
-    // Someone else may have registered this email or phone while the OTP was pending
-    const existingUser = await userModel.findOne({
-      $or: [{ phone: pending.phone }, { email }],
-    });
-    if (existingUser) {
-      await pending.deleteOne();
-      return res.status(400).json({
-        success: false,
-        message: existingUser.email === email ? "Email already exists" : "Phone number already exists",
-      });
-    }
-
-    const newUser = await userModel.create({
-      fullName: pending.fullName,
-      email,
-      password: pending.password,
-      phone: pending.phone,
-      city: pending.city,
-      district: pending.district,
-      state: pending.state,
-      isEmailVerified: true,
-    });
-    await pending.deleteOne();
 
     // Trigger Telegram Alert asynchronously (fire-and-forget in background)
     setImmediate(() => {
@@ -252,7 +179,7 @@ const verifySignupOtp = async (req, res) => {
 
     return res.status(201).json({
       success: true,
-      message: "User created successfully",
+      message: "Account created. We sent a verification link to your email.",
       userData: userObj,
     });
   } catch (err) {
@@ -261,40 +188,84 @@ const verifySignupOtp = async (req, res) => {
   }
 };
 
-// Email a fresh signup OTP
-const resendSignupOtp = async (req, res) => {
+// Confirm an email address from the link in the verification email.
+// Public: the link may be opened in a different browser than the one that signed up.
+const verifyEmail = async (req, res) => {
   try {
-    const email = String(req.body?.email || "").trim().toLowerCase();
-    if (!email) {
-      return res.status(400).json({ success: false, message: "Email is required" });
+    const token = String(req.body?.token || "").trim();
+    if (!/^[a-f0-9]{64}$/.test(token)) {
+      return res.status(400).json({ success: false, message: "This verification link is not valid." });
     }
 
-    const pending = await pendingSignupModel.findOne({ email });
-    if (!pending) {
+    const user = await userModel
+      .findOne({ emailVerifyToken: hashToken(token) })
+      .select("+emailVerifyToken +emailVerifyExpires");
+
+    if (!user) {
       return res.status(400).json({
         success: false,
-        message: "Verification expired. Please sign up again.",
+        message: "This verification link is not valid or has already been used.",
       });
     }
 
-    if (pending.sendCount >= MAX_OTP_SENDS) {
-      return res.status(429).json({
+    if (!user.isEmailVerified && (!user.emailVerifyExpires || user.emailVerifyExpires.getTime() < Date.now())) {
+      return res.status(400).json({
         success: false,
-        message: "Too many OTP requests. Please try again after some time.",
-      });
-    }
-    if (pending.lastSentAt && Date.now() - pending.lastSentAt.getTime() < RESEND_WAIT_MS) {
-      return res.status(429).json({
-        success: false,
-        message: "Please wait 30 seconds before requesting another OTP.",
+        expired: true,
+        message: "This verification link has expired. Please request a new one.",
       });
     }
 
-    await sendSignupOtp(pending);
-    return res.status(200).json({ success: true, message: "OTP sent to your email" });
+    await userModel.updateOne(
+      { _id: user._id },
+      { $set: { isEmailVerified: true }, $unset: { emailVerifyToken: 1, emailVerifyExpires: 1 } }
+    );
+
+    return res.status(200).json({ success: true, message: "Your email is verified." });
   } catch (err) {
-    console.error("Resend signup OTP error:", err);
-    return res.status(500).json({ success: false, message: "Could not send the verification email" });
+    console.error("Verify email error:", err);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+// Send the verification link again to the logged-in user
+const resendVerificationEmail = async (req, res) => {
+  try {
+    const token = req.cookies?.token;
+    if (!token) {
+      return res.status(401).json({ success: false, message: "Please log in first" });
+    }
+
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch {
+      return res.status(401).json({ success: false, message: "Please log in again" });
+    }
+
+    const user = await userModel.findById(decoded.userId).select("+emailVerifySentAt");
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Please log in again" });
+    }
+    if (user.isEmailVerified) {
+      return res.status(200).json({ success: true, alreadyVerified: true, message: "Your email is already verified." });
+    }
+    if (!user.email) {
+      return res.status(400).json({ success: false, message: "No email address on this account" });
+    }
+
+    if (user.emailVerifySentAt && Date.now() - user.emailVerifySentAt.getTime() < VERIFY_RESEND_WAIT_MS) {
+      return res.status(429).json({
+        success: false,
+        message: "We just sent you an email. Please wait a minute before requesting another.",
+      });
+    }
+
+    await sendVerificationEmail(user, req);
+    return res.status(200).json({ success: true, message: `Verification link sent to ${user.email}` });
+  } catch (err) {
+    console.error("Resend verification email error:", err);
+    return res.status(500).json({ success: false, message: "Could not send the verification email. Please try again later." });
   }
 };
 
@@ -487,6 +458,8 @@ const submitResetPassOTP = async (req, res) => {
     if (Number(otp) === Number(getUser.resetOtp)) {
       const newHashedPass = await bcrypt.hash(newPass, 10);
       getUser.password = newHashedPass;
+      // The OTP was sent to this address, so the user has just proved they own it
+      getUser.isEmailVerified = true;
 
       // Clear OTP fields after successful password reset
       getUser.resetOtp = undefined;
@@ -803,8 +776,8 @@ const updateProfile = async (req, res) => {
 
 module.exports = {
   handelUserSignup,
-  verifySignupOtp,
-  resendSignupOtp,
+  verifyEmail,
+  resendVerificationEmail,
   handelUserLogin,
   handleUserLogout,
   generateResetPassOTP,

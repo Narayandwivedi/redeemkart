@@ -6,6 +6,7 @@ Selling a gift card on RedeemKart:
 - Listing is free. Commission is deducted only when the card sells: 10% for Amazon Pay Gift Card, Amazon Shopping Voucher, Flipkart and PhonePe; 20% for Myntra and MakeMyTrip; 25% for Google Play and Zomato; 30% for JioMart, Steam and BigBasket. Example: a Rs. 1,000 Flipkart card pays Rs. 900.
 - PIN: Flipkart needs a 16-digit card number and a 6-digit PIN. MakeMyTrip, PhonePe and Zomato also need a PIN. Google Play and Amazon Pay Gift Card have no PIN.
 - Payout goes to the bank account or UPI ID saved in Payout Details, usually within 3-4 hours after the card is sold.
+- Sellers must verify their email before a payout is released. A "Verify my email" link is emailed at signup and can be sent again from the My Sales, Sell Gift Card or Payout Details page. Listing cards works without verification.
 - The card must be unused and not added to any account. Invalid or used cards are rejected.
 - Sellers can track their cards on the My Sales page.
 - The chat has a "Sell a gift card" button that lists a card step by step. If the user wants to sell, tell them to tap it or type "sell gift card".

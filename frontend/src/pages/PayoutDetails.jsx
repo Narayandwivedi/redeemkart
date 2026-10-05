@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
+import VerifyEmailBanner from '../components/VerifyEmailBanner'
 import { toast } from 'react-toastify'
 import { Building2, Banknote, Smartphone, Save, X, Loader, Edit2, CheckCircle, AlertCircle } from 'lucide-react'
 
@@ -107,6 +108,8 @@ const PayoutDetails = () => {
           <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">Payout Details</h1>
           <p className="text-sm text-gray-500 mt-1">Manage how you receive payments from us</p>
         </div>
+
+        <VerifyEmailBanner className="mb-6" />
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black px-5 sm:px-6 py-6">

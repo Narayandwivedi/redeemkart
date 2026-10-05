@@ -1,5 +1,6 @@
 const GiftCardListing = require('../models/GiftCardListing');
 const Product = require('../models/Product');
+const User = require('../models/User');
 
 const getAllListings = async (req, res) => {
   try {
@@ -10,7 +11,7 @@ const getAllListings = async (req, res) => {
     }
 
     const listings = await GiftCardListing.find(filter)
-      .populate('user', 'fullName email')
+      .populate('user', 'fullName email isEmailVerified')
       .populate('soldTo', 'fullName email')
       .sort({ createdAt: -1 });
 
@@ -162,6 +163,18 @@ const updateListingStatus = async (req, res) => {
     // sold/sold out status. If it was never sold, selling it counts as sold out.
     let finalStatus = status;
     if (status === 'paid') {
+      // Sellers must verify their email before a payout can be recorded
+      const seller = listing.listedBy === 'user' && listing.user
+        ? await User.findById(listing.user).select('fullName email isEmailVerified')
+        : null;
+      if (seller && !seller.isEmailVerified) {
+        return res.status(400).json({
+          success: false,
+          code: 'EMAIL_NOT_VERIFIED',
+          message: `${seller.fullName || seller.email} has not verified their email yet. Payout is allowed only after email verification.`
+        });
+      }
+
       finalStatus = ['sold', 'sold_out'].includes(listing.status) ? listing.status : 'sold_out';
     }
 
@@ -237,7 +250,7 @@ const getListingsByProduct = async (req, res) => {
       productId,
       $or: [{ isRemoved: false }, { isRemoved: { $exists: false } }]
     })
-      .populate('user', 'fullName email')
+      .populate('user', 'fullName email isEmailVerified')
       .populate('soldTo', 'fullName email')
       .sort({ createdAt: -1 });
 

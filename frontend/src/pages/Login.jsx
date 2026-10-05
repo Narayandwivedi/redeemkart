@@ -1,11 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import GoogleLogin from '../components/GoogleLogin'
 
 const Login = () => {
-  const { login, signup, verifySignupOtp, BACKEND_URL } = useContext(AppContext)
+  const { login, signup, BACKEND_URL } = useContext(AppContext)
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -24,18 +25,6 @@ const Login = () => {
     password: '',
     confirmPassword: ''
   })
-
-  // Signup email verification: set to the email once the OTP has been sent
-  const [verifyEmail, setVerifyEmail] = useState('')
-  const [signupOtp, setSignupOtp] = useState('')
-  const [resendIn, setResendIn] = useState(0)
-  const [notice, setNotice] = useState('')
-
-  useEffect(() => {
-    if (resendIn <= 0) return
-    const timer = setTimeout(() => setResendIn((s) => s - 1), 1000)
-    return () => clearTimeout(timer)
-  }, [resendIn])
 
   // Forgot password
   const [forgotStep, setForgotStep] = useState(0)
@@ -111,10 +100,9 @@ const Login = () => {
       const { confirmPassword, ...submitData } = signupData
       const result = await signup(submitData)
       if (result.success) {
-        setVerifyEmail(result.email || signupData.email.trim().toLowerCase())
-        setSignupOtp('')
-        setNotice('')
-        setResendIn(30)
+        // The account works right away; the email link is only needed before payouts
+        toast.success('Account created! We sent a verification link to your email.', { autoClose: 6000 })
+        navigate('/')
       } else {
         setError(result.error)
       }
@@ -123,52 +111,6 @@ const Login = () => {
     } finally {
       setLoading(false)
     }
-  }
-
-  const handleVerifySignup = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
-    setNotice('')
-    try {
-      const result = await verifySignupOtp(verifyEmail, signupOtp)
-      if (result.success) {
-        navigate('/')
-      } else {
-        setError(result.error)
-      }
-    } catch {
-      setError('Verification failed')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleResendSignupOtp = async () => {
-    setLoading(true)
-    setError('')
-    setNotice('')
-    try {
-      const response = await axios.post(`${BACKEND_URL}/api/auth/signup/resend-otp`, { email: verifyEmail })
-      if (response.data.success) {
-        setSignupOtp('')
-        setNotice('A new OTP has been sent to your email')
-        setResendIn(30)
-      } else {
-        setError(response.data.message || 'Failed to resend OTP')
-      }
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to resend OTP')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const cancelVerifySignup = () => {
-    setVerifyEmail('')
-    setSignupOtp('')
-    setNotice('')
-    setError('')
   }
 
   const handleSendOTP = async (e) => {
@@ -237,12 +179,7 @@ const Login = () => {
             <Link to='/' className='inline-block mb-3'>
               <img src='/redeemkart-logo.png' alt='RedeemKart' className='h-14 w-auto mx-auto object-contain' />
             </Link>
-            {verifyEmail ? (
-              <div className='mb-2'>
-                <p className='text-slate-700 font-semibold text-sm'>Verify your email</p>
-                <p className='text-slate-400 text-xs mt-1'>Enter the 6-digit OTP sent to {verifyEmail}</p>
-              </div>
-            ) : forgotStep === 0 ? (
+            {forgotStep === 0 ? (
               <>
                 <div className='flex bg-slate-100 rounded-xl p-1 mb-4'>
                   <button
@@ -290,33 +227,7 @@ const Login = () => {
           )}
 
           {/* forgotStep 0 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Login / Signup */}
-          {/* Signup email verification */}
-          {verifyEmail && (
-            <form onSubmit={handleVerifySignup} className='space-y-3.5'>
-              <div>
-                <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-3 ml-1'>Enter OTP</label>
-                <input type='text' inputMode='numeric' autoComplete='one-time-code' autoFocus maxLength={6} value={signupOtp} onChange={(e) => setSignupOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder='000000' className='w-full text-center text-xl font-semibold bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-600/20 focus:border-violet-600 transition-all py-2.5 tracking-[0.5em]' disabled={loading} />
-              </div>
-
-              {notice && <p className='text-xs text-emerald-700 font-medium text-center'>{notice}</p>}
-              <p className='text-xs text-slate-400 text-center'>The OTP is valid for 10 minutes. Check your spam folder if you cannot find the email.</p>
-
-              <button type='submit' disabled={loading || signupOtp.length !== 6} className='w-full bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg hover:shadow-violet-600/30 transition-all duration-300 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-2 cursor-pointer'>
-                <span>{loading ? 'Please wait...' : 'Verify & Create Account'}</span>
-              </button>
-
-              <div className='flex items-center justify-between'>
-                <button type='button' onClick={cancelVerifySignup} disabled={loading} className='text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer'>
-                  &larr; Change details
-                </button>
-                <button type='button' onClick={handleResendSignupOtp} disabled={loading || resendIn > 0} className='text-xs font-medium text-violet-700 hover:text-violet-800 hover:underline transition-colors cursor-pointer disabled:text-slate-400 disabled:no-underline disabled:cursor-not-allowed'>
-                  {resendIn > 0 ? `Resend OTP in ${resendIn}s` : 'Resend OTP'}
-                </button>
-              </div>
-            </form>
-          )}
-
-          {forgotStep === 0 && !verifyEmail && (
+          {forgotStep === 0 && (
             <form onSubmit={isLogin ? handleLogin : handleSignup} className='space-y-3.5'>
               {/* Sign up: Google first, the email form below it */}
               {!isLogin && (
