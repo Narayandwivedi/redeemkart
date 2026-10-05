@@ -8,26 +8,34 @@ const SELL_PAGE_URL = 'https://redeemkart.in/sell-gift-card';
 const AUTO_APPROVE_DELAY_MS = 2 * 60 * 1000;
 
 // Email the user that their KYC is approved. Used by the admin approval and the auto-approval.
-const sendKycApprovedEmail = (user) => {
-  if (!user || !user.email) return Promise.resolve();
+// Every outcome is logged so the server log shows whether the email left the server.
+const sendKycApprovedEmail = async (user) => {
+  if (!user || !user.email) {
+    console.log('[KYC] Approval email skipped: the user has no email address');
+    return;
+  }
 
-  return transporter.sendMail({
+  // Wording is kept plain on purpose: "KYC approved", "documents" and "bank account" in one
+  // email read like a phishing mail and sent this message to the spam folder.
+  const info = await transporter.sendMail({
     from: `"RedeemKart" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
     to: user.email,
-    subject: 'Your KYC is approved - RedeemKart',
-    text: `Hello ${user.fullName}, your KYC is approved and you are ready to sell your gift cards on RedeemKart. List your first card here: ${SELL_PAGE_URL}`,
+    subject: 'You can now sell gift cards on RedeemKart',
+    text: `Hello ${user.fullName}, your RedeemKart account verification is complete. You can now sell your gift cards on RedeemKart: ${SELL_PAGE_URL}`,
     html: buildActionEmail({
-      title: 'Your KYC is approved 🎉',
+      title: 'Your verification is complete',
       name: user.fullName,
-      message: 'Good news! We have verified your documents and your KYC is approved. You are now ready to sell your gift cards on RedeemKart.',
+      message: 'Your RedeemKart account verification is complete. You are now ready to sell your gift cards on RedeemKart.',
       buttonLabel: 'Sell a gift card',
       link: SELL_PAGE_URL,
       showLink: false,
-      note: 'List your card in a few minutes and get paid to your bank account after it sells.',
-      ignore: 'Thank you for choosing RedeemKart. If you have any questions, our support team is happy to help.',
-      preheader: 'Your KYC is approved. You are ready to sell your gift cards on RedeemKart.'
+      note: 'Listing a card takes only a few minutes.',
+      ignore: 'Thank you for choosing RedeemKart.',
+      preheader: 'Your account verification is complete. You can now sell gift cards on RedeemKart.'
     })
   });
+
+  console.log(`[KYC] Approval email handed to the mail server for ${user.email}: ${info.response}`);
 };
 
 // Approve one KYC and email the user. Does nothing if an admin already approved or rejected it,
@@ -40,18 +48,22 @@ const autoApproveKyc = async (userId, submittedAt) => {
       { new: true }
     ).select('fullName email');
 
-    if (!user) return;
+    if (!user) {
+      console.log(`[KYC] Auto-approval skipped for user ${userId}: no longer pending (an admin already decided, or it was submitted again)`);
+      return;
+    }
 
     console.log(`[KYC] Auto-approved KYC for ${user.email || user._id}`);
     await sendKycApprovedEmail(user);
   } catch (error) {
-    console.error('[KYC] Auto-approval error:', error);
+    console.error('[KYC] Auto-approval or approval email FAILED:', error);
   }
 };
 
 // Called when a user submits KYC: approve it AUTO_APPROVE_DELAY_MS after the submission time
 const scheduleKycAutoApproval = (userId, submittedAt) => {
   const wait = Math.max(0, new Date(submittedAt).getTime() + AUTO_APPROVE_DELAY_MS - Date.now());
+  console.log(`[KYC] Auto-approval scheduled for user ${userId} in ${Math.round(wait / 1000)}s`);
   setTimeout(() => autoApproveKyc(userId, submittedAt), wait);
 };
 
