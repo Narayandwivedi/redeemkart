@@ -15,8 +15,8 @@ const {
 const { protect, authorize } = require('../middleware/auth');
 
 // All routes require admin authentication
-// router.use(protect);
-// router.use(authorize('admin'));
+router.use(protect);
+router.use(authorize('admin'));
 
 // User management routes
 router.route('/')

@@ -1,5 +1,23 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const GiftCardListing = require('../models/GiftCardListing');
+const ChatMessage = require('../models/ChatMessage');
+const fs = require('fs');
+const path = require('path');
+const { uploadsDir } = require('../config/multer');
+
+// Delete a file that was uploaded to /uploads (e.g. a KYC document photo). Returns true if a file was removed.
+const deleteUploadedFile = async (url) => {
+  const match = /^\/uploads\/([\w.-]+)$/.exec(String(url || ''));
+  if (!match) return false;
+  try {
+    await fs.promises.unlink(path.join(uploadsDir, match[1]));
+    return true;
+  } catch (error) {
+    if (error.code !== 'ENOENT') console.error('Could not delete uploaded file:', error.message);
+    return false;
+  }
+};
 
 // @desc    Get all users
 // @route   GET /api/admin/users
@@ -177,21 +195,45 @@ const deleteUser = async (req, res) => {
       });
     }
 
-    // Prevent admin from deleting themselves
-    if (user._id.toString() === req.user.id) {
+    // Prevent admin from deleting themselves or another admin
+    if (req.user && user._id.toString() === req.user._id.toString()) {
       return res.status(400).json({
         success: false,
         message: 'Cannot delete your own account'
       });
     }
+    if (user.role === 'admin') {
+      return res.status(400).json({
+        success: false,
+        message: 'Admin accounts cannot be deleted'
+      });
+    }
 
-    // Soft delete - just deactivate the user
-    user.isActive = false;
-    await user.save();
+    // The payout details live on the user, so a seller with cards still for sale or
+    // sold but not yet paid must be settled first.
+    const openListings = await GiftCardListing.countDocuments({
+      user: user._id,
+      isRemoved: { $ne: true },
+      $or: [
+        { status: { $in: ['pending', 'active'] } },
+        { status: { $in: ['sold', 'sold_out'] }, paidOn: null }
+      ]
+    });
+    if (openListings > 0) {
+      return res.status(400).json({
+        success: false,
+        message: `This user has ${openListings} gift card(s) listed or awaiting payout. Reject or pay them in User Selling first, then delete the user.`
+      });
+    }
+
+    // Permanent delete: KYC document photo, support chat messages, then the account itself
+    const kycFileDeleted = await deleteUploadedFile(user.kycDocumentImage);
+    await ChatMessage.deleteMany({ userId: user._id });
+    await User.deleteOne({ _id: user._id });
 
     res.status(200).json({
       success: true,
-      message: 'User deactivated successfully'
+      message: `${user.fullName || user.email} was permanently deleted${kycFileDeleted ? ' along with their KYC document' : ''}`
     });
   } catch (error) {
     console.error('Delete user error:', error);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, ChevronLeft, ChevronRight, Landmark, X, Copy } from 'lucide-react'
+import { Users as UsersIcon, Search, ToggleLeft, ToggleRight, Activity, ExternalLink, Trash2, ChevronLeft, ChevronRight, Landmark, X, Copy } from 'lucide-react'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -30,6 +30,7 @@ const Users = () => {
   const [totalPages, setTotalPages] = useState(1)
   const [totalUsers, setTotalUsers] = useState(0)
   const [selectedUser, setSelectedUser] = useState(null)
+  const [deletingId, setDeletingId] = useState(null)
   const limit = 40
 
   const fetchUsers = async (pageNum = page) => {
@@ -73,6 +74,25 @@ const Users = () => {
       }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to toggle site not reachable')
+    }
+  }
+
+  // Permanent delete: the account, bank details, support chat and KYC document are removed for good
+  const handleDeleteUser = async (user) => {
+    const name = user.fullName || user.email
+    if (!window.confirm(`Permanently delete ${name}?\n\nThis removes the account, bank / payout details and KYC documents. It cannot be undone.`)) return
+    setDeletingId(user._id)
+    try {
+      const res = await axios.delete(`${BACKEND_URL}/api/admin/users/${user._id}`, { withCredentials: true })
+      if (res.data.success) {
+        setUsers((prev) => prev.filter((u) => u._id !== user._id))
+        setTotalUsers((n) => Math.max(0, n - 1))
+        toast.success(res.data.message)
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to delete user', { autoClose: 6000 })
+    } finally {
+      setDeletingId(null)
     }
   }
 
@@ -205,6 +225,16 @@ const Users = () => {
                         >
                           {user.show404 ? <ToggleLeft className="h-4 w-4" /> : <ToggleRight className="h-4 w-4" />}
                         </button>
+                        {user.role !== 'admin' && (
+                          <button
+                            onClick={() => handleDeleteUser(user)}
+                            disabled={deletingId === user._id}
+                            className="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+                            title="Permanently delete user and KYC documents"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
