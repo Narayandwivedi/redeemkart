@@ -5,36 +5,7 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import { AppContext } from '../context/AppContext'
 import { useSEO } from '../hooks/useSEO'
-
-const brands = [
-  'Google Play',
-  'Flipkart',
-  'Amazon Pay Gift Card',
-  'Amazon Shopping Voucher',
-  'Reliance JioMart Gift Card',
-  'Steam',
-  'Myntra',
-  'MakeMyTrip',
-  'PhonePe',
-  'Zomato',
-  'BigBasket',
-]
-
-const brandLogos = {
-  'Google Play': '/products/google%20play.avif',
-  'Amazon Pay Gift Card': '/products/amazon.avif',
-  'Amazon Shopping Voucher': '/products/amazon.avif',
-  Flipkart: '/products/flipkart.avif',
-  Steam: '/products/steam.avif',
-  Myntra: '/products/myntra.avif',
-  BigBasket: '/products/bigbasket.avif',
-}
-
-const noPinBrands = ['Google Play', 'Amazon Pay Gift Card']
-
-const pinRequiredBrands = ['Flipkart', 'MakeMyTrip', 'PhonePe', 'Zomato']
-
-const tenPercentBrands =['Amazon', 'Amazon Pay Gift Card', 'Amazon Shopping Voucher', 'Flipkart', 'PhonePe']
+import { brands, brandLogos, noPinBrands, pinRequiredBrands, getCommissionRate } from '../data/sellBrands'
 
 const statusStyles = {
   pending: 'bg-amber-50 text-amber-700',
@@ -305,7 +276,7 @@ const SellVoucher = () => {
     }
   }
 
-  const commission = tenPercentBrands.includes(form.brand) ? 10 : ['Myntra', 'MakeMyTrip'].includes(form.brand) ? 20 : ['Google Play', 'Zomato'].includes(form.brand) ? 25 : 30
+  const commission = getCommissionRate(form.brand)
   const payout = Math.round((Number(form.balance) || 0) * (1 - commission / 100))
 
   const steps = [

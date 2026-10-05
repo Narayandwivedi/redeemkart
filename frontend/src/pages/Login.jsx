@@ -260,7 +260,7 @@ const Login = () => {
                     Sign Up
                   </button>
                 </div>
-                <p className='text-slate-500 text-xs'>{isLogin ? 'Sign in to your Voucher Cash account' : 'Create your Voucher Cash account'}</p>
+                <p className='text-slate-500 text-xs'>{isLogin ? 'Sign in to your RedeemKart account' : 'Create your RedeemKart account'}</p>
               </>
             ) : (
               <div className='mb-2'>
@@ -318,6 +318,24 @@ const Login = () => {
 
           {forgotStep === 0 && !verifyEmail && (
             <form onSubmit={isLogin ? handleLogin : handleSignup} className='space-y-3.5'>
+              {/* Sign up: Google first, the email form below it */}
+              {!isLogin && (
+                <>
+                  <div className='flex justify-center'>
+                    <GoogleLogin text='signup_with' />
+                  </div>
+
+                  <div className='relative my-4'>
+                    <div className='absolute inset-0 flex items-center'>
+                      <div className='w-full border-t border-slate-200'></div>
+                    </div>
+                    <div className='relative flex justify-center text-xs uppercase'>
+                      <span className='bg-white px-2 text-slate-400 font-semibold tracking-widest'>Or sign up with email</span>
+                    </div>
+                  </div>
+                </>
+              )}
+
               {/* Login fields */}
               {isLogin && (
                 <>
@@ -470,18 +488,22 @@ const Login = () => {
                 )}
               </button>
 
-              <div className='relative my-4'>
-                <div className='absolute inset-0 flex items-center'>
-                  <div className='w-full border-t border-slate-200'></div>
-                </div>
-                <div className='relative flex justify-center text-xs uppercase'>
-                  <span className='bg-white px-2 text-slate-400 font-semibold tracking-widest'>Or continue with</span>
-                </div>
-              </div>
+              {isLogin && (
+                <>
+                  <div className='relative my-4'>
+                    <div className='absolute inset-0 flex items-center'>
+                      <div className='w-full border-t border-slate-200'></div>
+                    </div>
+                    <div className='relative flex justify-center text-xs uppercase'>
+                      <span className='bg-white px-2 text-slate-400 font-semibold tracking-widest'>Or continue with</span>
+                    </div>
+                  </div>
 
-              <div className='flex justify-center'>
-                <GoogleLogin />
-              </div>
+                  <div className='flex justify-center'>
+                    <GoogleLogin />
+                  </div>
+                </>
+              )}
             </form>
           )}
 

@@ -53,6 +53,7 @@ import HowToSellMakeMyTripGiftCard from './pages/HowToSellMakeMyTripGiftCard'
 import FlipkartGiftCardToBankAccount from './pages/FlipkartGiftCardToBankAccount'
 import HowToSellAmazonPayGiftCard from './pages/HowToSellAmazonPayGiftCard'
 import SiteUnreachable from './pages/SiteUnreachable'
+import ChatBot from './components/ChatBot'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -238,6 +239,7 @@ const AppContent = () => {
       </Routes>
       {showMobileNav && <Footer />}
       {showMobileNav && <MobileBottomNav />}
+      {!isLoginPage && <ChatBot />}
       <ToastContainer
         position="top-right"
         autoClose={600}

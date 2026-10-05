@@ -1,38 +1,84 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MessageCircle, X, Send, Bot, User, Sparkles, RotateCcw } from 'lucide-react'
+import { MessageCircle, X, Send, Bot, Sparkles, RotateCcw, Gift, Lock } from 'lucide-react'
 import { AppContext } from '../context/AppContext'
 import { useCart } from '../context/CartContext'
 import { gamesList } from '../data/games'
+import { brands, brandLogos, noPinBrands, pinRequiredBrands, getCommissionRate, getPayout } from '../data/sellBrands'
 
-const QUICK_REPLIES = [
-  'How do I get my voucher code?',
-  'My code is not working',
-  'I want a refund',
-  'How to place an order?',
-  'What payment methods do you accept?',
+// Shortcuts shown above the input. `action` is handled by runAction.
+const QUICK_ACTIONS = [
+  { label: 'Sell a gift card', action: 'sell' },
+  { label: 'My sales status', action: 'sales' },
+  { label: 'How much will I get?', action: 'rates' },
+  { label: 'Buy gift cards', action: 'nav:/gift-cards' },
+  { label: 'My orders', action: 'nav:/my-orders' },
+  { label: 'Payout details', action: 'nav:/payout-details' },
+  { label: 'My code is not working', action: 'text:My code is not working' },
+  { label: 'I want a refund', action: 'text:I want a refund' },
 ]
+
+const SALE_STATUS = {
+  pending: { label: 'Under review', cls: 'bg-amber-50 text-amber-700' },
+  active: { label: 'Listed for sale', cls: 'bg-emerald-50 text-emerald-700' },
+  sold: { label: 'Sold, payout in progress', cls: 'bg-blue-50 text-blue-700' },
+  sold_out: { label: 'Sold, payout in progress', cls: 'bg-blue-50 text-blue-700' },
+  paid: { label: 'Paid', cls: 'bg-green-50 text-green-700' },
+  rejected: { label: 'Rejected', cls: 'bg-red-50 text-red-700' },
+  used: { label: 'Already used', cls: 'bg-purple-50 text-purple-700' },
+  expired: { label: 'Expired', cls: 'bg-slate-100 text-slate-600' },
+}
+
+const GAME_PRODUCT_IDS = ['gta-5', 'rdr2', 'cyberpunk', 'the-last-of-us-2', 'resident-evil-4', 'san-andreas', 'the-witcher-3', 'god-of-war', 'cod-modern-warfare-2', 'mafia-3', 'forza-horizon-5', 'bundle-all-11']
+
+const isGameItem = (item) =>
+  GAME_PRODUCT_IDS.includes(item.productId) ||
+  item.productBrand?.toLowerCase() === 'game' ||
+  item.productName?.toLowerCase().includes('game')
+
+const inr = (n) => `₹${Number(n).toLocaleString('en-IN')}`
+
+const uid = () => `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+
+const RATES_TEXT = `Listing is free. Commission is deducted only when your card sells:
+
+• Amazon Pay, Amazon Shopping Voucher, Flipkart, PhonePe: **10%** (you get 90%)
+• Myntra, MakeMyTrip: **20%** (you get 80%)
+• Google Play, Zomato: **25%** (you get 75%)
+• JioMart, Steam, BigBasket: **30%** (you get 70%)
+
+Example: a ₹1,000 Flipkart card pays you **₹900**, usually within 3-4 hours after it sells.`
+
+// Renders **bold** from bot replies; everything else stays plain text
+const renderText = (text) =>
+  String(text).split(/\*\*(.+?)\*\*/g).map((part, i) => (i % 2 ? <strong key={i}>{part}</strong> : part))
+
+const optionBtnCls =
+  'text-xs font-medium px-3 py-2 bg-slate-50 hover:bg-violet-50 hover:border-violet-300 border border-slate-200 rounded-xl transition-all cursor-pointer text-slate-700 hover:text-violet-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-slate-50 disabled:hover:border-slate-200 disabled:hover:text-slate-700'
 
 const ChatBot = () => {
   const navigate = useNavigate()
   const { addToCart } = useCart()
-  const { user, BACKEND_URL } = useContext(AppContext)
+  const { user, isAuthenticated, BACKEND_URL } = useContext(AppContext)
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState([
-    {
-      role: 'assistant',
-      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} 👋 I'm the RedeemKart support bot! How can I help you today?`,
-      id: 'welcome'
-    }
-  ])
+
+  const welcome = () => ({
+    role: 'assistant',
+    content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} 👋 I'm the RedeemKart assistant. I can help you sell a gift card, check your sales, or answer any question.`,
+    id: 'welcome'
+  })
+
+  const [messages, setMessages] = useState(() => [welcome()])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [hasNewMessage, setHasNewMessage] = useState(false)
-  
-  // Refund Flow State
-  const [refundStep, setRefundStep] = useState(null) // null, 'select_item', 'ask_reason'
+
+  // Refund flow: null, 'select_item', 'ask_reason'
+  const [refundStep, setRefundStep] = useState(null)
   const [refundItem, setRefundItem] = useState(null)
-  const [refundOrderId, setRefundOrderId] = useState(null)
+
+  // Sell flow: null or { step: 'brand' | 'balance' | 'code' | 'pin' | 'confirm', brand, balance, code, pin }
+  const [sell, setSell] = useState(null)
 
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
@@ -49,39 +95,306 @@ const ChatBot = () => {
     if (isOpen) {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [messages])
+  }, [messages, isOpen])
+
+  // `local` messages never go to the AI: they can contain gift card codes and PINs
+  const say = (...items) =>
+    setMessages((prev) => [...prev, ...items.map((m) => ({ role: 'assistant', id: uid(), local: true, ...(typeof m === 'string' ? { content: m } : m) }))])
+
+  const sayUser = (content, local = true) =>
+    setMessages((prev) => [...prev, { role: 'user', content, id: uid(), local }])
+
+  // Buttons only work on the newest message, so an old step cannot be clicked again
+  const isLatest = (msg) => messages[messages.length - 1]?.id === msg.id
+
+  const goTo = (path) => {
+    setIsOpen(false)
+    navigate(path)
+  }
+
+  /* ---------- Sell a gift card ---------- */
+
+  const startSell = () => {
+    if (!user) {
+      say('Please log in first so I can list the gift card on your account.', {
+        type: 'options',
+        options: [{ label: 'Log in / Sign up', action: 'nav:/login' }]
+      })
+      return
+    }
+    setRefundStep(null)
+    setRefundItem(null)
+    setSell({ step: 'brand' })
+    say('Sure! Which gift card do you want to sell?', { type: 'brand_selector' })
+  }
+
+  const cancelSell = () => {
+    setSell(null)
+    say('No problem, I have cancelled the listing. Nothing was submitted.')
+  }
+
+  const selectBrand = (brand) => {
+    const rate = getCommissionRate(brand)
+    sayUser(brand)
+    setSell({ step: 'balance', brand })
+    say(`**${brand}** it is. Commission is ${rate}%, so you keep ${100 - rate}% of the card value.\n\nWhat is the balance on your card (in ₹)?`)
+  }
+
+  const askPinOrConfirm = (data) => {
+    if (noPinBrands.includes(data.brand)) {
+      showSummary({ ...data, pin: '' })
+      return
+    }
+    setSell({ ...data, step: 'pin' })
+    if (data.brand === 'Flipkart') {
+      say('Now enter the **6-digit PIN** of your Flipkart card.')
+    } else if (pinRequiredBrands.includes(data.brand)) {
+      say(`Now enter the **PIN** of your ${data.brand} card. It is required.`)
+    } else {
+      say('Does your card have a PIN? Type it here, or tap **No PIN**.', {
+        type: 'options',
+        options: [{ label: 'No PIN', action: 'nopin' }]
+      })
+    }
+  }
+
+  const showSummary = (data) => {
+    setSell({ ...data, step: 'confirm' })
+    say('Please check the details before I list your card:', { type: 'sell_summary', data })
+  }
+
+  const handleSellInput = (text) => {
+    if (/^(cancel|stop|exit|quit)$/i.test(text)) {
+      cancelSell()
+      return
+    }
+
+    if (sell.step === 'brand') {
+      // A typed name only counts when it points to exactly one card ("amazon" matches two)
+      const typed = text.toLowerCase()
+      const partial = typed.length >= 4 ? brands.filter((b) => b.toLowerCase().includes(typed)) : []
+      const match = brands.find((b) => b.toLowerCase() === typed) || (partial.length === 1 ? partial[0] : null)
+      if (match) {
+        const rate = getCommissionRate(match)
+        setSell({ step: 'balance', brand: match })
+        say(`**${match}** it is. Commission is ${rate}%, so you keep ${100 - rate}% of the card value.\n\nWhat is the balance on your card (in ₹)?`)
+      } else {
+        say('Please tap one of the gift cards above, or type "cancel" to stop.', { type: 'brand_selector' })
+      }
+      return
+    }
+
+    if (sell.step === 'balance') {
+      const balance = Number(text.replace(/[₹,\s]|rs\.?|inr|rupees?/gi, ''))
+      if (!Number.isFinite(balance) || balance < 1 || balance > 1000000) {
+        say('Please type only the amount in numbers, for example **1000**.')
+        return
+      }
+      const rounded = Math.round(balance)
+      setSell({ ...sell, step: 'code', balance: rounded })
+      say(
+        `Got it. For a ${inr(rounded)} card you will receive **${inr(getPayout(sell.brand, rounded))}** after it sells.\n\n` +
+        (sell.brand === 'Flipkart'
+          ? 'Now send the **16-digit card number** of your Flipkart gift card.'
+          : 'Now send your **gift card code**, exactly as it appears on the card, email or SMS.')
+      )
+      return
+    }
+
+    if (sell.step === 'code') {
+      let code = text.trim()
+      if (sell.brand === 'Flipkart') {
+        code = code.replace(/[\s-]/g, '')
+        if (!/^\d{16}$/.test(code)) {
+          say('A Flipkart card number must be exactly **16 digits** (e.g. 6000170522107804). Please check and send it again.')
+          return
+        }
+      } else if (code.length < 4 || code.length > 50) {
+        say('That does not look like a valid gift card code. Please check and send it again.')
+        return
+      }
+      askPinOrConfirm({ ...sell, code })
+      return
+    }
+
+    if (sell.step === 'pin') {
+      let pin = text.trim()
+      const optional = !pinRequiredBrands.includes(sell.brand)
+      if (optional && /^(no|no pin|none|skip|nahi|na)$/i.test(pin)) {
+        showSummary({ ...sell, pin: '' })
+        return
+      }
+      if (sell.brand === 'Flipkart') {
+        pin = pin.replace(/\s/g, '')
+        if (!/^\d{6}$/.test(pin)) {
+          say('A Flipkart PIN must be exactly **6 digits**. Please check and send it again.')
+          return
+        }
+      } else if (!pin || pin.length > 20) {
+        say('That does not look like a valid PIN. Please check and send it again.')
+        return
+      }
+      showSummary({ ...sell, pin })
+      return
+    }
+
+    if (sell.step === 'confirm') {
+      if (/^(yes|y|ok|okay|confirm|list|haan|ha|han)$/i.test(text)) submitSell()
+      else if (/^(no|n|nahi)$/i.test(text)) cancelSell()
+      else say('Tap **List my card** above to submit, or type "cancel" to stop.')
+    }
+  }
+
+  const submitSell = async () => {
+    if (!sell || sell.step !== 'confirm' || loading) return
+    const { brand, balance, code, pin } = sell
+    setLoading(true)
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/gift-cards`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ brand, balance, code, pin: pin || '', expiry: '' })
+      })
+      const data = await res.json().catch(() => ({}))
+
+      if (res.ok && data.success) {
+        setSell(null)
+        say(
+          `✅ Your **${brand}** gift card of ${inr(balance)} has been submitted for review.\n\nOur team will verify it and list it for sale. Once it sells, **${inr(getPayout(brand, balance))}** is sent to your bank account, usually within 3-4 hours.`,
+          {
+            type: 'options',
+            options: [
+              { label: 'View My Sales', action: 'nav:/my-sales' },
+              { label: 'Add payout details', action: 'nav:/payout-details' },
+              { label: 'Sell another card', action: 'sell' },
+            ]
+          }
+        )
+      } else if (res.status === 401) {
+        setSell(null)
+        say('Your session has expired. Please log in again and then list your card.', {
+          type: 'options',
+          options: [{ label: 'Log in', action: 'nav:/login' }]
+        })
+      } else {
+        setSell(null)
+        say(`I could not list the card: ${data.message || 'something went wrong'}.`, {
+          type: 'options',
+          options: [{ label: 'Try again', action: 'sell' }, { label: 'Open the Sell page', action: 'nav:/sell-gift-card' }]
+        })
+      }
+    } catch {
+      say('I could not reach the server. Please check your connection and tap **List my card** again.', { type: 'sell_summary', data: sell })
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  /* ---------- My sales ---------- */
+
+  const showSales = async () => {
+    if (!user) {
+      say('Please log in to see the gift cards you have listed.', {
+        type: 'options',
+        options: [{ label: 'Log in / Sign up', action: 'nav:/login' }]
+      })
+      return
+    }
+    setLoading(true)
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/gift-cards`, { credentials: 'include' })
+      const data = await res.json()
+      if (!res.ok || !data.success) throw new Error('Failed to fetch listings')
+
+      if (data.data.length === 0) {
+        say('You have not listed any gift cards yet.', {
+          type: 'options',
+          options: [{ label: 'Sell a gift card', action: 'sell' }]
+        })
+      } else {
+        say(
+          `Here are your latest listings (${data.data.length} in total):`,
+          { type: 'sales_list', listings: data.data.slice(0, 5) },
+          { type: 'options', options: [{ label: 'View all in My Sales', action: 'nav:/my-sales' }, { label: 'Sell another card', action: 'sell' }] }
+        )
+      }
+    } catch {
+      say('I could not load your sales right now. Please try again or open the My Sales page.', {
+        type: 'options',
+        options: [{ label: 'Open My Sales', action: 'nav:/my-sales' }]
+      })
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  /* ---------- Refunds ---------- */
+
+  const startRefund = async () => {
+    if (!user) {
+      say('Please log in to your account first so I can look up your orders and help you request a refund.', {
+        type: 'options',
+        options: [{ label: 'Log in / Sign up', action: 'nav:/login' }]
+      })
+      return
+    }
+    setLoading(true)
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/orders/customer/${user.email}`, { credentials: 'include' })
+      if (!res.ok) throw new Error('Failed to fetch orders')
+      const data = await res.json()
+
+      if (data.success && data.data && data.data.length > 0) {
+        setRefundStep('select_item')
+        say('Here are your recent ordered items. Please click on the item you want to request a refund for:', {
+          type: 'order_selector',
+          orders: data.data
+        })
+      } else {
+        say("I couldn't find any orders placed under your email address. If you made a purchase, please make sure you are logged into the correct account.")
+      }
+    } catch {
+      say('I encountered an error checking your order history. Please try again or email us at support@redeemkart.in.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleSelectOrderItem = (item, orderId) => {
-    const userMsg = {
-      role: 'user',
-      content: `I select: ${item.productName} (from Order #${orderId.slice(-6).toUpperCase()})`,
-      id: Date.now()
-    }
-    setMessages(prev => [...prev, userMsg])
+    sayUser(`I select: ${item.productName} (from Order #${orderId.slice(-6).toUpperCase()})`)
     setRefundItem(item)
-    setRefundOrderId(orderId)
     setRefundStep('ask_reason')
-
-    setTimeout(() => {
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: `You selected **${item.productName}**. Please choose or type the reason for your refund request:`,
-        id: Date.now() + 1
-      }, {
-        role: 'assistant',
-        id: 'reasons_selector_msg',
-        type: 'reason_selector',
-        item: item
-      }])
-    }, 400)
+    say(`You selected **${item.productName}**. Please choose or type the reason for your refund request:`, {
+      type: 'reason_selector',
+      item
+    })
   }
 
-  const handleSelectReason = (reason) => {
-    sendMessage(reason)
+  const answerRefundReason = (reason) => {
+    const textLower = reason.toLowerCase()
+    let policyResponse = ''
+
+    if (isGameItem(refundItem)) {
+      if (['receive', 'get', 'not deliver', 'technical', 'error', 'download', 'install'].some((w) => textLower.includes(w))) {
+        policyResponse = '**Refund Policy for Games**:\n\nGames are generally **non-refundable**. However, since you did not receive the game or got a technical error while downloading, our support team will verify this and **provide a new download link** to resolve any problem. Our team will contact you at your email address to assist with this!'
+      } else {
+        policyResponse = '**Refund Policy for Games**:\n\nPlease note that games are **non-refundable**. They are only refundable/replaceable if you **did not receive the game** or encountered a **technical error while downloading**, in which case our team will provide a new download link. For any other issues, please contact support@redeemkart.in.'
+      }
+    } else if (['invalid', 'not work', 'work', 'fail', 'expired'].some((w) => textLower.includes(w))) {
+      policyResponse = '**Refund Policy for Vouchers/Gift Cards**:\n\nWe are sorry to hear that the code is invalid or not working. Since the code is invalid, we will process your refund back to your original payment method. The refund will be completed in **3-5 days**.'
+    } else {
+      policyResponse = '**Refund Policy for Vouchers/Gift Cards**:\n\nOur policy only permits refunds if the voucher code is **invalid or not working** (refund processed in **3-5 days**). For other issues, please contact support@redeemkart.in.'
+    }
+
+    say(policyResponse)
+    setRefundStep(null)
+    setRefundItem(null)
   }
+
+  /* ---------- Games ---------- */
 
   const handleBuyGameDirectly = (game) => {
-    // Add game to cart and navigate to cart page
     addToCart({
       _id: game._id,
       name: game.fullName,
@@ -89,132 +402,16 @@ const ChatBot = () => {
       originalPrice: game.originalPrice,
       images: game.img ? [game.img] : [],
     })
-    setIsOpen(false)
-    navigate('/cart')
+    goTo('/cart')
   }
 
-  const sendMessage = async (text) => {
-    const userText = text || input.trim()
-    if (!userText || loading) return
+  /* ---------- AI answer ---------- */
 
-    // Don't add user message again if it was already added by button clicks
-    if (!text) {
-      const userMsg = { role: 'user', content: userText, id: Date.now() }
-      setMessages(prev => [...prev, userMsg])
-      setInput('')
-    }
+  const askAI = async (userText) => {
     setLoading(true)
-
-    const textLower = userText.toLowerCase()
-
-    // 1. Intercept Buy Games Queries
-    if (textLower.includes('buy game') || textLower.includes('purchase game') || textLower.includes('get game') || textLower.includes('want game') || textLower.includes('games page') || (textLower.includes('buy') && textLower.includes('game'))) {
-      setTimeout(() => {
-        setMessages(prev => [...prev, {
-          role: 'assistant',
-          content: 'RedeemKart offers discounted game keys and downloads! Here are the games available on our platform. Select one to buy or view details:',
-          id: Date.now() + 1
-        }, {
-          role: 'assistant',
-          id: 'games_selector_msg',
-          type: 'game_selector'
-        }])
-        setLoading(false)
-      }, 600)
-      return
-    }
-
-    // 2. If currently in 'ask_reason' step, process the refund reason input
-    if (refundStep === 'ask_reason' && refundItem) {
-      setTimeout(() => {
-        const isGameItem = ['gta-5', 'rdr2', 'cyberpunk', 'the-last-of-us-2', 'resident-evil-4', 'san-andreas', 'the-witcher-3', 'god-of-war', 'cod-modern-warfare-2', 'mafia-3', 'forza-horizon-5', 'bundle-all-11'].includes(refundItem.productId) || 
-                           refundItem.productBrand?.toLowerCase() === 'game' || 
-                           refundItem.productName?.toLowerCase().includes('game')
-        
-        let policyResponse = ""
-        
-        if (isGameItem) {
-          if (textLower.includes('receive') || textLower.includes('get') || textLower.includes('not deliver') || textLower.includes('technical') || textLower.includes('error') || textLower.includes('download') || textLower.includes('install')) {
-            policyResponse = `**Refund Policy for Games**:\n\nGames are generally **non-refundable**. However, since you did not receive the game or got a technical error while downloading, our support team will verify this and **provide a new download link** to resolve any problem. Our team will contact you at your email address to assist with this!`
-          } else {
-            policyResponse = `**Refund Policy for Games**:\n\nPlease note that games are **non-refundable**. They are only refundable/replaceable if you **did not receive the game** or encountered a **technical error while downloading**, in which case our team will provide a new download link. For any other issues, please contact support@redeemkart.in.`
-          }
-        } else {
-          // It's a voucher or gift card
-          if (textLower.includes('invalid') || textLower.includes('not work') || textLower.includes('work') || textLower.includes('fail') || textLower.includes('expired')) {
-            policyResponse = `**Refund Policy for Vouchers/Gift Cards**:\n\nWe are sorry to hear that the code is invalid or not working. Since the code is invalid, we will process your refund back to your original payment method. The refund will be completed in **3-5 days**.`
-          } else {
-            policyResponse = `**Refund Policy for Vouchers/Gift Cards**:\n\nOur policy only permits refunds if the voucher code is **invalid or not working** (refund processed in **3-5 days**). For other issues, please contact support@redeemkart.in.`
-          }
-        }
-
-        setMessages(prev => [...prev, {
-          role: 'assistant',
-          content: policyResponse,
-          id: Date.now() + 1
-        }])
-        setRefundStep(null)
-        setRefundItem(null)
-        setRefundOrderId(null)
-        setLoading(false)
-      }, 800)
-      return
-    }
-
-    // 3. Start refund flow if keyword matches
-    if (textLower.includes('refund') || textLower.includes('return') || textLower.includes('not working')) {
-      if (!user) {
-        setMessages(prev => [...prev, {
-          role: 'assistant',
-          content: 'Please log in to your account first so I can look up your orders and help you request a refund.',
-          id: Date.now() + 1
-        }])
-        setLoading(false)
-        return
-      }
-
-      try {
-        const res = await fetch(`${BACKEND_URL}/api/orders/customer/${user.email}`, {
-          credentials: 'include'
-        })
-        if (!res.ok) throw new Error('Failed to fetch orders')
-        const data = await res.json()
-        
-        if (data.success && data.data && data.data.length > 0) {
-          setRefundStep('select_item')
-          setMessages(prev => [...prev, {
-            role: 'assistant',
-            content: 'Here are your recent ordered items. Please click on the item you want to request a refund for:',
-            id: 'select_item_instruction'
-          }, {
-            role: 'assistant',
-            id: 'orders_selector_msg',
-            type: 'order_selector',
-            orders: data.data
-          }])
-        } else {
-          setMessages(prev => [...prev, {
-            role: 'assistant',
-            content: 'I couldn\'t find any orders placed under your email address. If you made a purchase, please make sure you are logged into the correct account.',
-            id: Date.now() + 1
-          }])
-        }
-      } catch (err) {
-        setMessages(prev => [...prev, {
-          role: 'assistant',
-          content: 'I encountered an error checking your order history. Please try again or email us at support@redeemkart.in.',
-          id: Date.now() + 1
-        }])
-      } finally {
-        setLoading(false)
-      }
-      return
-    }
-
-    // Default: call normal AI chatbot
     try {
       const history = messages
-        .filter(m => !m.type) // exclude selectors
+        .filter((m) => !m.type && !m.local && m.content)
         .map(({ role, content }) => ({ role, content }))
       history.push({ role: 'user', content: userText })
 
@@ -225,25 +422,85 @@ const ChatBot = () => {
         body: JSON.stringify({ messages: history })
       })
 
-      if (!res.ok) throw new Error('Backend error')
-      const data = await res.json()
-      if (!data.success) throw new Error(data.message)
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || !data.success) throw new Error(data.message || 'Backend error')
 
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: data.reply,
-        id: Date.now() + 1
-      }])
-
+      say({ content: data.reply, local: false })
       if (!isOpen) setHasNewMessage(true)
     } catch (err) {
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: 'Something went wrong. Please try again or email us at support@redeemkart.in',
-        id: Date.now() + 1
-      }])
+      say(err.message?.startsWith('Too many') ? err.message : 'Something went wrong. Please try again or email us at support@redeemkart.in')
     } finally {
       setLoading(false)
+    }
+  }
+
+  /* ---------- Routing of what the user typed or tapped ---------- */
+
+  const handleText = (userText) => {
+    const textLower = userText.toLowerCase()
+
+    if (sell) {
+      handleSellInput(userText)
+      return
+    }
+
+    if (refundStep === 'ask_reason' && refundItem) {
+      answerRefundReason(userText)
+      return
+    }
+
+    if (/\b(sell|selling|bech|bechna|bechni|bechu|bechun)\b/.test(textLower)) {
+      startSell()
+      return
+    }
+
+    if (/\b(my sales?|sales status|listing status|payout status|my listings?)\b/.test(textLower)) {
+      showSales()
+      return
+    }
+
+    if ((textLower.includes('game') && /\b(buy|purchase|get|want)\b/.test(textLower)) || textLower.includes('games page')) {
+      say('RedeemKart offers discounted game keys and downloads! Here are the games available on our platform. Select one to buy or view details:', { type: 'game_selector' })
+      return
+    }
+
+    if (textLower.includes('refund') || textLower.includes('return') || textLower.includes('not working')) {
+      startRefund()
+      return
+    }
+
+    askAI(userText)
+  }
+
+  const sendMessage = () => {
+    const userText = input.trim()
+    if (!userText || loading) return
+    // Anything typed during the sell flow may be a code or PIN, so it stays out of the AI history
+    sayUser(userText, Boolean(sell))
+    setInput('')
+    handleText(userText)
+  }
+
+  const runAction = (action, label) => {
+    if (loading) return
+    if (action.startsWith('nav:')) {
+      goTo(action.slice(4))
+    } else if (action.startsWith('text:')) {
+      const text = action.slice(5)
+      sayUser(text, false)
+      handleText(text)
+    } else if (action === 'sell') {
+      sayUser(label || 'I want to sell a gift card')
+      startSell()
+    } else if (action === 'sales') {
+      sayUser(label || 'My sales status')
+      showSales()
+    } else if (action === 'rates') {
+      sayUser(label || 'How much will I get?')
+      say(RATES_TEXT, { type: 'options', options: [{ label: 'Sell a gift card', action: 'sell' }] })
+    } else if (action === 'nopin' && sell?.step === 'pin') {
+      sayUser('No PIN')
+      showSummary({ ...sell, pin: '' })
     }
   }
 
@@ -255,16 +512,38 @@ const ChatBot = () => {
   }
 
   const resetChat = () => {
-    setMessages([{
-      role: 'assistant',
-      content: `Hi ${user?.fullName?.split(' ')[0] || 'there'} 👋 I'm the RedeemKart support bot! How can I help you today?`,
-      id: 'welcome'
-    }])
+    setMessages([welcome()])
     setRefundStep(null)
     setRefundItem(null)
-    setRefundOrderId(null)
+    setSell(null)
     setInput('')
   }
+
+  // Start a fresh chat when the account changes (login, logout) so the greeting and history match the user
+  useEffect(() => {
+    resetChat()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?._id])
+
+  // The chatbot is for logged-in users only (the API rejects guests too)
+  const canChat = Boolean(isAuthenticated && user)
+
+  const inputLocked = refundStep === 'select_item'
+  const placeholder = inputLocked
+    ? 'Choose an item above...'
+    : refundStep === 'ask_reason'
+      ? 'Type reason...'
+      : sell?.step === 'brand'
+        ? 'Choose a gift card above...'
+        : sell?.step === 'balance'
+          ? 'Card balance, e.g. 1000'
+          : sell?.step === 'code'
+            ? 'Enter gift card code'
+            : sell?.step === 'pin'
+              ? 'Enter PIN'
+              : sell?.step === 'confirm'
+                ? 'Tap List my card above...'
+                : 'Type your message...'
 
   return (
     <>
@@ -309,13 +588,13 @@ const ChatBot = () => {
               </div>
             </div>
             <div className="flex items-center gap-1">
-              <button
+              {canChat && <button
                 onClick={resetChat}
                 title="Reset chat"
                 className="p-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer rounded-lg hover:bg-white/10"
               >
                 <RotateCcw className="w-4 h-4" />
-              </button>
+              </button>}
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer rounded-lg hover:bg-white/10"
@@ -325,20 +604,149 @@ const ChatBot = () => {
             </div>
           </div>
 
+          {/* Guests must log in or sign up before they can chat */}
+          {!canChat && (
+            <div className="flex-1 bg-slate-50 px-6 flex flex-col items-center justify-center text-center">
+              {isAuthenticated === false && (
+                <>
+                  <span className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
+                    <Lock className="w-6 h-6" />
+                  </span>
+                  <p className="text-base font-semibold text-slate-900">Sign up to chat with us</p>
+                  <p className="text-sm text-slate-500 mt-1.5 leading-relaxed">
+                    Create a free RedeemKart account or log in to sell gift cards, check your sales and get help from our assistant.
+                  </p>
+                  <button
+                    onClick={() => goTo('/login')}
+                    className="mt-5 w-full max-w-[240px] bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold py-2.5 rounded-xl cursor-pointer transition-colors"
+                  >
+                    Sign up / Log in
+                  </button>
+                </>
+              )}
+            </div>
+          )}
+
           {/* Messages */}
+          {canChat && (
           <div className="flex-1 overflow-y-auto bg-slate-50 px-4 py-3 space-y-3 flex flex-col">
             {messages.map((msg) => {
+              if (msg.type === 'options') {
+                return (
+                  <div key={msg.id} className="flex flex-wrap gap-1.5 max-w-[90%] self-start pl-9">
+                    {msg.options.map((opt) => (
+                      <button
+                        key={opt.label}
+                        onClick={() => runAction(opt.action, opt.label)}
+                        disabled={!isLatest(msg) || loading}
+                        className={optionBtnCls}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                )
+              }
+
+              if (msg.type === 'brand_selector') {
+                const active = isLatest(msg) && sell?.step === 'brand'
+                return (
+                  <div key={msg.id} className="bg-white border border-slate-100 rounded-2xl p-3 space-y-2 shadow-sm w-[90%] self-start">
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Choose a gift card</p>
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {brands.map((brand) => (
+                        <button
+                          key={brand}
+                          onClick={() => selectBrand(brand)}
+                          disabled={!active}
+                          className="flex items-center gap-2 text-left p-2 bg-slate-50 hover:bg-emerald-50 hover:border-emerald-300 border border-slate-200 rounded-xl transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-slate-50 disabled:hover:border-slate-200"
+                        >
+                          {brandLogos[brand] ? (
+                            <img src={brandLogos[brand]} alt="" className="w-7 h-7 rounded-md object-cover shrink-0" />
+                          ) : (
+                            <span className="w-7 h-7 rounded-md bg-slate-200 text-slate-500 flex items-center justify-center shrink-0">
+                              <Gift className="w-3.5 h-3.5" />
+                            </span>
+                          )}
+                          <span className="min-w-0">
+                            <span className="block text-[11px] font-semibold text-slate-800 leading-tight">{brand}</span>
+                            <span className="block text-[10px] text-emerald-700">You get {100 - getCommissionRate(brand)}%</span>
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )
+              }
+
+              if (msg.type === 'sell_summary') {
+                const d = msg.data
+                const active = isLatest(msg) && sell?.step === 'confirm'
+                const rate = getCommissionRate(d.brand)
+                return (
+                  <div key={msg.id} className="bg-white border border-slate-100 rounded-2xl p-3 shadow-sm w-[90%] self-start">
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Your listing</p>
+                    <dl className="text-xs divide-y divide-slate-100">
+                      <div className="flex justify-between gap-3 py-1.5"><dt className="text-slate-500">Gift card</dt><dd className="font-semibold text-slate-800 text-right">{d.brand}</dd></div>
+                      <div className="flex justify-between gap-3 py-1.5"><dt className="text-slate-500">Balance</dt><dd className="font-semibold text-slate-800">{inr(d.balance)}</dd></div>
+                      <div className="flex justify-between gap-3 py-1.5"><dt className="text-slate-500">Code</dt><dd className="font-mono font-semibold text-slate-800 break-all text-right">{d.code}</dd></div>
+                      {!noPinBrands.includes(d.brand) && (
+                        <div className="flex justify-between gap-3 py-1.5"><dt className="text-slate-500">PIN</dt><dd className="font-mono font-semibold text-slate-800 break-all text-right">{d.pin || 'No PIN'}</dd></div>
+                      )}
+                      <div className="flex justify-between gap-3 py-1.5"><dt className="text-slate-500">Commission ({rate}%)</dt><dd className="font-semibold text-slate-800">-{inr(d.balance - getPayout(d.brand, d.balance))}</dd></div>
+                      <div className="flex justify-between gap-3 py-1.5"><dt className="font-semibold text-slate-800">You receive</dt><dd className="font-semibold text-emerald-700">{inr(getPayout(d.brand, d.balance))}</dd></div>
+                    </dl>
+                    <div className="flex gap-2 mt-3">
+                      <button
+                        onClick={submitSell}
+                        disabled={!active || loading}
+                        className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold py-2 rounded-xl cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {loading && active ? 'Listing...' : 'List my card'}
+                      </button>
+                      <button
+                        onClick={cancelSell}
+                        disabled={!active || loading}
+                        className="px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold py-2 rounded-xl cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )
+              }
+
+              if (msg.type === 'sales_list') {
+                return (
+                  <div key={msg.id} className="bg-white border border-slate-100 rounded-2xl p-3 space-y-1.5 shadow-sm w-[90%] self-start">
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Your gift cards</p>
+                    {msg.listings.map((listing) => {
+                      const status = SALE_STATUS[listing.status] || { label: listing.status, cls: 'bg-slate-100 text-slate-600' }
+                      return (
+                        <div key={listing._id} className="flex items-center justify-between gap-2 p-2 bg-slate-50 border border-slate-200 rounded-xl">
+                          <div className="min-w-0">
+                            <p className="text-xs font-semibold text-slate-800 truncate">{listing.brand}</p>
+                            <p className="text-[10px] text-slate-500">{inr(listing.balance)} card • you get {inr(getPayout(listing.brand, listing.balance))}</p>
+                          </div>
+                          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${status.cls}`}>{status.label}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )
+              }
+
               if (msg.type === 'order_selector') {
                 return (
                   <div key={msg.id} className="bg-white border border-slate-100 rounded-2xl p-3 space-y-2 shadow-sm max-w-[90%] self-start">
                     <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Your Recent Items</p>
                     <div className="max-h-40 overflow-y-auto space-y-1.5 pr-1">
-                      {msg.orders.map(order => 
+                      {msg.orders.map(order =>
                         order.items.map((item, idx) => (
                           <button
                             key={`${order._id}-${idx}`}
                             onClick={() => handleSelectOrderItem(item, order._id)}
-                            disabled={refundStep !== 'select_item'}
+                            disabled={refundStep !== 'select_item' || !isLatest(msg)}
                             className="w-full text-left text-xs p-2.5 bg-slate-50 hover:bg-violet-50 hover:border-violet-300 border border-slate-200 rounded-xl transition-all cursor-pointer flex justify-between items-center group font-medium"
                           >
                             <div className="truncate pr-2">
@@ -355,11 +763,7 @@ const ChatBot = () => {
               }
 
               if (msg.type === 'reason_selector') {
-                const isGameItem = ['gta-5', 'rdr2', 'cyberpunk', 'the-last-of-us-2', 'resident-evil-4', 'san-andreas', 'the-witcher-3', 'god-of-war', 'cod-modern-warfare-2', 'mafia-3', 'forza-horizon-5', 'bundle-all-11'].includes(msg.item.productId) || 
-                                   msg.item.productBrand?.toLowerCase() === 'game' || 
-                                   msg.item.productName?.toLowerCase().includes('game')
-
-                const reasons = isGameItem 
+                const reasons = isGameItem(msg.item)
                   ? ['Did not receive the game', 'Technical error while downloading', 'Code is invalid / not working', 'Other / Changed mind']
                   : ['Code is invalid / not working', 'Other / Changed mind']
 
@@ -370,8 +774,8 @@ const ChatBot = () => {
                       {reasons.map((reason) => (
                         <button
                           key={reason}
-                          onClick={() => handleSelectReason(reason)}
-                          disabled={refundStep !== 'ask_reason'}
+                          onClick={() => { sayUser(reason); answerRefundReason(reason) }}
+                          disabled={refundStep !== 'ask_reason' || !isLatest(msg)}
                           className="w-full text-left text-xs px-3 py-2 bg-slate-50 hover:bg-violet-50 hover:border-violet-300 border border-slate-200 rounded-xl transition-all cursor-pointer font-medium text-slate-700 hover:text-violet-900"
                         >
                           {reason}
@@ -421,10 +825,7 @@ const ChatBot = () => {
                                 Buy Now
                               </button>
                               <button
-                                onClick={() => {
-                                  navigate(`/games/${game.slug}`)
-                                  setIsOpen(false)
-                                }}
+                                onClick={() => goTo(`/games/${game.slug}`)}
                                 className="w-full bg-slate-950 hover:bg-slate-800 text-white text-[10px] font-medium py-1 rounded cursor-pointer transition-colors text-center"
                               >
                                 Details
@@ -448,12 +849,12 @@ const ChatBot = () => {
                   )}
 
                   {/* Bubble */}
-                  <div className={`max-w-[78%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-sm whitespace-pre-line ${
+                  <div className={`max-w-[78%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-sm whitespace-pre-line break-words ${
                     msg.role === 'assistant'
                       ? 'bg-white text-slate-800 rounded-tl-sm border border-slate-100'
                       : 'bg-gradient-to-br from-violet-500 to-violet-600 text-white rounded-tr-sm font-medium'
                   }`}>
-                    {msg.content}
+                    {msg.role === 'assistant' ? renderText(msg.content) : msg.content}
                   </div>
                 </div>
               )
@@ -476,23 +877,37 @@ const ChatBot = () => {
             )}
             <div ref={messagesEndRef} />
           </div>
+          )}
 
-          {/* Quick replies only show when messages are few and not in refund flow */}
-          {messages.length <= 2 && !loading && !refundStep && (
-            <div className="bg-slate-50 px-3 pb-1 flex flex-wrap gap-1.5">
-              {QUICK_REPLIES.map((q) => (
+          {/* Shortcuts, hidden while a sell or refund conversation is in progress */}
+          {canChat && !loading && !refundStep && !sell && (
+            <div className="bg-slate-50 px-3 pt-1 pb-2 flex gap-1.5 overflow-x-auto shrink-0">
+              {QUICK_ACTIONS.map((q) => (
                 <button
-                  key={q}
-                  onClick={() => sendMessage(q)}
-                  className="text-[11px] font-medium px-3 py-1.5 bg-white border border-slate-200 rounded-full text-slate-600 hover:border-violet-500 hover:text-violet-800 hover:bg-violet-50 transition-all cursor-pointer whitespace-nowrap"
+                  key={q.label}
+                  onClick={() => runAction(q.action, q.label)}
+                  className={`text-[11px] font-medium px-3 py-1.5 border rounded-full transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                    q.action === 'sell'
+                      ? 'bg-emerald-500 border-emerald-500 text-white hover:bg-emerald-600'
+                      : 'bg-white border-slate-200 text-slate-600 hover:border-violet-500 hover:text-violet-800 hover:bg-violet-50'
+                  }`}
                 >
-                  {q}
+                  {q.label}
                 </button>
               ))}
             </div>
           )}
 
+          {canChat && sell && !loading && (
+            <div className="bg-slate-50 px-3 pb-1.5 shrink-0">
+              <button onClick={cancelSell} className="text-[11px] font-medium text-slate-500 hover:text-red-600 transition-colors cursor-pointer">
+                Cancel selling
+              </button>
+            </div>
+          )}
+
           {/* Input */}
+          {canChat && (
           <div className="bg-white border-t border-slate-100 px-3 py-2.5 flex items-center gap-2 shrink-0">
             <input
               ref={inputRef}
@@ -500,18 +915,19 @@ const ChatBot = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder={refundStep === 'select_item' ? 'Choose an item above...' : refundStep === 'ask_reason' ? 'Type reason...' : 'Type your message...'}
-              disabled={loading || refundStep === 'select_item'}
+              placeholder={placeholder}
+              disabled={loading || inputLocked}
               className="flex-1 text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400 transition-all placeholder:text-slate-400 disabled:opacity-60"
             />
             <button
-              onClick={() => sendMessage()}
-              disabled={loading || !input.trim() || refundStep === 'select_item'}
+              onClick={sendMessage}
+              disabled={loading || !input.trim() || inputLocked}
               className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center hover:shadow-md hover:shadow-emerald-300/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer shrink-0 active:scale-95"
             >
               <Send className="w-4 h-4 text-black" />
             </button>
           </div>
+          )}
         </div>
       )}
     </>
