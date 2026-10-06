@@ -99,12 +99,66 @@ const ChatBot = () => {
     }
   }, [messages, isOpen])
 
-  // `local` messages never go to the AI: they can contain gift card codes and PINs
-  const say = (...items) =>
-    setMessages((prev) => [...prev, ...items.map((m) => ({ role: 'assistant', id: uid(), local: true, ...(typeof m === 'string' ? { content: m } : m) }))])
+  /* ---------- Saving the conversation ---------- */
 
-  const sayUser = (content, local = true) =>
+  // The server saves what goes through the AI. Everything the widget answers itself
+  // (sell, refund, sales, games) is queued here and sent in order, so the saved
+  // conversation has no gaps.
+  const logQueue = useRef([])
+  const logTimer = useRef(null)
+
+  const flushLog = () => {
+    clearTimeout(logTimer.current)
+    logTimer.current = null
+    const entries = logQueue.current
+    logQueue.current = []
+    // One request per conversation: a reset can leave two ids in the queue
+    for (const id of new Set(entries.map((entry) => entry.conversationId))) {
+      fetch(`${BACKEND_URL}/api/chatbot/log`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          conversationId: id,
+          messages: entries.filter((entry) => entry.conversationId === id).map(({ role, content }) => ({ role, content }))
+        })
+      }).catch(() => {})
+    }
+  }
+
+  const queueLog = (role, content) => {
+    if (!user || !content) return null
+    const entry = { role, content, conversationId: conversationIdRef.current }
+    logQueue.current.push(entry)
+    if (!logTimer.current) logTimer.current = setTimeout(flushLog, 400)
+    return entry
+  }
+
+  // Takes back a queued message that turned out to go to the AI (the server saves that one)
+  const dropLog = (entry) => {
+    logQueue.current = logQueue.current.filter((queued) => queued !== entry)
+  }
+
+  // `local` messages never go to the AI: they can contain gift card codes and PINs
+  const say = (...items) => {
+    const added = items.map((m) => ({ role: 'assistant', id: uid(), local: true, ...(typeof m === 'string' ? { content: m } : m) }))
+    setMessages((prev) => [...prev, ...added])
+    // AI replies (local: false) are already saved by the server
+    added.filter((m) => m.local).forEach((m) => queueLog('assistant', m.content))
+  }
+
+  // log: false when the caller saves the message itself (typed text, see sendMessage)
+  const sayUser = (content, local = true, log = local) => {
     setMessages((prev) => [...prev, { role: 'user', content, id: uid(), local }])
+    if (log) queueLog('user', content)
+  }
+
+  // Typed text is saved as typed, except in the two sell steps where it is a gift card
+  // code or a PIN. Returns the queued entry so it can be taken back if the AI handles it.
+  const queueTyped = (text) => {
+    const secret = Boolean(sell) && ['code', 'pin'].includes(sell.step)
+    return queueLog('user', secret ? '[gift card code or PIN hidden]' : text)
+  }
 
   // Buttons only work on the newest message, so an old step cannot be clicked again
   const isLatest = (msg) => messages[messages.length - 1]?.id === msg.id
@@ -472,15 +526,17 @@ const ChatBot = () => {
     }
 
     askAI(userText)
+    return true
   }
 
   const sendMessage = () => {
     const userText = input.trim()
     if (!userText || loading) return
+    const queued = queueTyped(userText)
     // Anything typed during the sell flow may be a code or PIN, so it stays out of the AI history
-    sayUser(userText, Boolean(sell))
+    sayUser(userText, Boolean(sell), false)
     setInput('')
-    handleText(userText)
+    if (handleText(userText)) dropLog(queued)
   }
 
   const runAction = (action, label) => {
@@ -489,8 +545,9 @@ const ChatBot = () => {
       goTo(action.slice(4))
     } else if (action.startsWith('text:')) {
       const text = action.slice(5)
+      const queued = queueTyped(text)
       sayUser(text, false)
-      handleText(text)
+      if (handleText(text)) dropLog(queued)
     } else if (action === 'sell') {
       sayUser(label || 'I want to sell a gift card')
       startSell()
@@ -515,6 +572,8 @@ const ChatBot = () => {
 
   const resetChat = () => {
     setMessages([welcome()])
+    // Send what is still queued under the old id before a new conversation starts
+    flushLog()
     conversationIdRef.current = uid()
     setRefundStep(null)
     setRefundItem(null)

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-// One chat between a user and the AI assistant. Only the AI part of the chat is
-// stored: the scripted sell / refund steps never reach the server, so gift card
-// codes and PINs typed there are not saved here.
+// One chat between a user and the assistant: the AI questions and answers, plus the
+// widget's own steps (sell, refund, sales, games). Gift card codes and PINs typed in
+// the sell steps are replaced with a placeholder by the widget and never stored here.
 const chatbotConversationSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -36,6 +36,11 @@ const chatbotConversationSchema = new mongoose.Schema({
     content: {
       type: String,
       required: true
+    },
+    // true for the widget's own steps (sell, refund, sales, games); false for AI chat
+    scripted: {
+      type: Boolean,
+      default: false
     },
     createdAt: {
       type: Date,

@@ -55,35 +55,68 @@ const isRateLimited = (key) => {
 // Long digit runs are card numbers or account numbers: keep them out of the saved chats
 const maskNumbers = (text) => text.replace(/\d(?:[ -]?\d){11,18}/g, '[number removed]');
 
+// Adds messages to the end of the user's conversation, creating it if needed
+const appendMessages = async ({ user, conversationId, startsNewChat, entries }) => {
+  let id = /^[\w-]{8,64}$/.test(String(conversationId || '')) ? String(conversationId) : null;
+
+  // Chat widget without a conversation id (old cached page): a first message
+  // starts a new conversation, anything else continues the latest one.
+  if (!id && !startsNewChat) {
+    const latest = await ChatbotConversation.findOne({ user: user._id }).sort({ lastMessageAt: -1 }).select('conversationId');
+    id = latest ? latest.conversationId : null;
+  }
+  if (!id) id = crypto.randomUUID();
+
+  const now = new Date();
+  const messages = entries.map((entry) => ({ ...entry, content: maskNumbers(entry.content), createdAt: now }));
+
+  await ChatbotConversation.updateOne(
+    { user: user._id, conversationId: id },
+    {
+      $set: { userName: user.fullName || '', userEmail: user.email || '', aiModel: GROQ_MODEL, lastMessageAt: now },
+      $push: { messages: { $each: messages } },
+      $inc: { messageCount: messages.length }
+    },
+    { upsert: true }
+  );
+};
+
 // Saves the newest user message (and the AI reply, when there is one) to the user's
 // conversation. Never throws: a failed save must not break the chat itself.
 const saveTurn = async ({ user, conversationId, isFirstMessage, userMessage, reply }) => {
   try {
-    let id = /^[\w-]{8,64}$/.test(String(conversationId || '')) ? String(conversationId) : null;
-
-    // Chat widget without a conversation id (old cached page): a single message
-    // starts a new conversation, anything longer continues the latest one.
-    if (!id && !isFirstMessage) {
-      const latest = await ChatbotConversation.findOne({ user: user._id }).sort({ lastMessageAt: -1 }).select('conversationId');
-      id = latest ? latest.conversationId : null;
-    }
-    if (!id) id = crypto.randomUUID();
-
-    const now = new Date();
-    const turn = [{ role: 'user', content: maskNumbers(userMessage), createdAt: now }];
-    if (reply) turn.push({ role: 'assistant', content: maskNumbers(reply), createdAt: now });
-
-    await ChatbotConversation.updateOne(
-      { user: user._id, conversationId: id },
-      {
-        $set: { userName: user.fullName || '', userEmail: user.email || '', aiModel: GROQ_MODEL, lastMessageAt: now },
-        $push: { messages: { $each: turn } },
-        $inc: { messageCount: turn.length }
-      },
-      { upsert: true }
-    );
+    const entries = [{ role: 'user', content: userMessage }];
+    if (reply) entries.push({ role: 'assistant', content: reply });
+    await appendMessages({ user, conversationId, startsNewChat: isFirstMessage, entries });
   } catch (error) {
     console.error('Chatbot save error:', error.message);
+  }
+};
+
+// The chat widget answers some messages itself, without the AI: the sell, refund, sales
+// and games steps. It sends those here so the saved conversation has no gaps. The widget
+// replaces gift card codes and PINs with a placeholder before sending.
+const logMessages = async (req, res) => {
+  try {
+    const { messages, conversationId } = req.body;
+
+    const entries = (Array.isArray(messages) ? messages : [])
+      .filter((m) => m && ['user', 'assistant'].includes(m.role) && typeof m.content === 'string' && m.content.trim())
+      .slice(0, 20)
+      .map(({ role, content }) => ({ role, content: content.slice(0, MAX_MESSAGE_LENGTH * 2), scripted: true }));
+
+    if (entries.length === 0) {
+      return res.status(400).json({ success: false, message: 'Messages are required' });
+    }
+    if (isRateLimited(`log:${req.user._id}`)) {
+      return res.status(429).json({ success: false, message: 'Too many messages.' });
+    }
+
+    await appendMessages({ user: req.user, conversationId, startsNewChat: false, entries });
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Chatbot log error:', error.message);
+    return res.status(500).json({ success: false, message: 'Could not save the messages' });
   }
 };
 
@@ -227,7 +260,8 @@ const exportConversations = async (req, res) => {
         userName: c.userName,
         userEmail: c.userEmail,
         startedAt: c.createdAt,
-        messages: c.messages.map(({ role, content }) => ({ role, content }))
+        // "scripted" marks replies and choices from the widget's own steps, not from the AI
+        messages: c.messages.map(({ role, content, scripted }) => (scripted ? { role, content, scripted: true } : { role, content }))
       }) + '\n');
     }
     res.end();
@@ -238,4 +272,4 @@ const exportConversations = async (req, res) => {
   }
 };
 
-module.exports = { chatWithBot, getConversations, getConversation, exportConversations };
+module.exports = { chatWithBot, logMessages, getConversations, getConversation, exportConversations };
