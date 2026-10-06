@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Gift, Users, Package, ShieldCheck, MessageSquare, Menu, X, LogOut, User, Wifi, WifiOff } from 'lucide-react'
+import { LayoutDashboard, Gift, Users, Package, ShieldCheck, Menu, X, LogOut, User, Wifi, WifiOff } from 'lucide-react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -13,7 +13,6 @@ const navItems = [
   { label: 'Users', icon: Users, path: '/users' },
   { label: 'KYC Verifications', icon: ShieldCheck, path: '/kyc-verifications' },
   { label: 'Orders', icon: Package, path: '/orders' },
-  { label: 'AI Chats', icon: MessageSquare, path: '/ai-chats' },
 ]
 
 const AdminLayout = () => {
