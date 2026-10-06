@@ -5,6 +5,7 @@ const {
   verifyEmail,
   resendVerificationEmail,
   handelUserLogin,
+  handleAgentLogin,
   handleUserLogout,
   generateResetPassOTP,
   submitResetPassOTP,
@@ -14,12 +15,14 @@ const {
   updateMobileNumber,
   updateProfile,
 } = require('../controllers/authController');
+const { loginLimiter } = require('../middleware/auth');
 
 // Public authentication routes
 router.post('/signup', handelUserSignup);                      // creates the account and emails a verification link
 router.post('/verify-email', verifyEmail);                     // called by the page the email link opens
 router.post('/resend-verification', resendVerificationEmail);  // logged-in user asks for a new link
 router.post('/login', handelUserLogin);
+router.post('/agent-login', loginLimiter, handleAgentLogin);    // local gift card agent: admin only, 90-day token in the body
 router.post('/logout', handleUserLogout);
 
 // Password reset routes

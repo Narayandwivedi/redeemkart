@@ -1,3 +1,6 @@
+const crypto = require('crypto');
+const ChatbotConversation = require('../models/ChatbotConversation');
+
 const SYSTEM_PROMPT = `You are the customer support assistant for RedeemKart (redeemkart.in), an Indian marketplace where people buy discounted digital gift cards and sell their unused gift cards for cash.
 
 Selling a gift card on RedeemKart:
@@ -49,9 +52,44 @@ const isRateLimited = (key) => {
   return false;
 };
 
+// Long digit runs are card numbers or account numbers: keep them out of the saved chats
+const maskNumbers = (text) => text.replace(/\d(?:[ -]?\d){11,18}/g, '[number removed]');
+
+// Saves the newest user message (and the AI reply, when there is one) to the user's
+// conversation. Never throws: a failed save must not break the chat itself.
+const saveTurn = async ({ user, conversationId, isFirstMessage, userMessage, reply }) => {
+  try {
+    let id = /^[\w-]{8,64}$/.test(String(conversationId || '')) ? String(conversationId) : null;
+
+    // Chat widget without a conversation id (old cached page): a single message
+    // starts a new conversation, anything longer continues the latest one.
+    if (!id && !isFirstMessage) {
+      const latest = await ChatbotConversation.findOne({ user: user._id }).sort({ lastMessageAt: -1 }).select('conversationId');
+      id = latest ? latest.conversationId : null;
+    }
+    if (!id) id = crypto.randomUUID();
+
+    const now = new Date();
+    const turn = [{ role: 'user', content: maskNumbers(userMessage), createdAt: now }];
+    if (reply) turn.push({ role: 'assistant', content: maskNumbers(reply), createdAt: now });
+
+    await ChatbotConversation.updateOne(
+      { user: user._id, conversationId: id },
+      {
+        $set: { userName: user.fullName || '', userEmail: user.email || '', aiModel: GROQ_MODEL, lastMessageAt: now },
+        $push: { messages: { $each: turn } },
+        $inc: { messageCount: turn.length }
+      },
+      { upsert: true }
+    );
+  } catch (error) {
+    console.error('Chatbot save error:', error.message);
+  }
+};
+
 const chatWithBot = async (req, res) => {
   try {
-    const { messages } = req.body;
+    const { messages, conversationId } = req.body;
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return res.status(400).json({ success: false, message: 'Messages are required' });
@@ -76,6 +114,13 @@ const chatWithBot = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Messages are required' });
     }
 
+    // What gets saved for this request: only the newest user message, since the
+    // earlier ones were saved when they were sent
+    const lastMessage = history[history.length - 1];
+    const turn = lastMessage.role === 'user'
+      ? { user: req.user, conversationId, isFirstMessage: history.length === 1, userMessage: lastMessage.content }
+      : null;
+
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -98,6 +143,7 @@ const chatWithBot = async (req, res) => {
     if (!response.ok) {
       const err = await response.text();
       console.error('Groq API error:', err);
+      if (turn) saveTurn(turn);
       return res.status(502).json({ success: false, message: 'AI service error. Please try again.' });
     }
 
@@ -105,8 +151,11 @@ const chatWithBot = async (req, res) => {
     const reply = data.choices?.[0]?.message?.content?.trim();
 
     if (!reply) {
+      if (turn) saveTurn(turn);
       return res.status(502).json({ success: false, message: 'Empty response from AI' });
     }
+
+    if (turn) saveTurn({ ...turn, reply });
 
     return res.status(200).json({ success: true, reply });
   } catch (error) {
@@ -115,4 +164,78 @@ const chatWithBot = async (req, res) => {
   }
 };
 
-module.exports = { chatWithBot };
+const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// Admin: list saved conversations, newest first (without the message bodies)
+const getConversations = async (req, res) => {
+  try {
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 20, 1), 100);
+    const search = String(req.query.search || '').trim();
+
+    const filter = {};
+    if (search) {
+      const pattern = new RegExp(escapeRegex(search), 'i');
+      filter.$or = [{ userName: pattern }, { userEmail: pattern }];
+    }
+
+    const [conversations, total] = await Promise.all([
+      ChatbotConversation.find(filter)
+        .select('user userName userEmail conversationId messageCount lastMessageAt createdAt')
+        .sort({ lastMessageAt: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit),
+      ChatbotConversation.countDocuments(filter)
+    ]);
+
+    res.status(200).json({
+      success: true,
+      data: {
+        conversations,
+        pagination: { currentPage: page, totalPages: Math.max(Math.ceil(total / limit), 1), totalConversations: total }
+      }
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// Admin: one conversation with all its messages
+const getConversation = async (req, res) => {
+  try {
+    const conversation = await ChatbotConversation.findById(req.params.id);
+    if (!conversation) {
+      return res.status(404).json({ success: false, message: 'Conversation not found' });
+    }
+    res.status(200).json({ success: true, data: conversation });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// Admin: every conversation as a JSON Lines file (one conversation per line), for training
+const exportConversations = async (req, res) => {
+  try {
+    const fileName = `chatbot-conversations-${new Date().toISOString().slice(0, 10)}.jsonl`;
+    res.setHeader('Content-Type', 'application/x-ndjson; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+
+    const cursor = ChatbotConversation.find().sort({ createdAt: 1 }).lean().cursor();
+    for await (const c of cursor) {
+      res.write(JSON.stringify({
+        conversationId: c.conversationId,
+        userName: c.userName,
+        userEmail: c.userEmail,
+        startedAt: c.createdAt,
+        messages: c.messages.map(({ role, content }) => ({ role, content }))
+      }) + '\n');
+    }
+    res.end();
+  } catch (error) {
+    console.error('Chatbot export error:', error.message);
+    if (!res.headersSent) return res.status(500).json({ success: false, message: 'Export failed' });
+    res.end();
+  }
+};
+
+module.exports = { chatWithBot, getConversations, getConversation, exportConversations };

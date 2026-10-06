@@ -9,6 +9,7 @@ import UserSelling from './pages/UserSelling'
 import Users from './pages/Users'
 import KYCVerifications from './pages/KYCVerifications'
 import Orders from './pages/Orders'
+import AIChats from './pages/AIChats'
 import Login from './pages/Login'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/users" element={<Users />} />
             <Route path="/kyc-verifications" element={<KYCVerifications />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/ai-chats" element={<AIChats />} />
           </Route>
         </Route>
 

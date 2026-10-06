@@ -352,6 +352,61 @@ const handelUserLogin = async (req, res) => {
   }
 };
 
+// Login for the local gift card agent: admin only, returns a long-lived token
+// in the response body (sent back as "Authorization: Bearer <token>").
+const handleAgentLogin = async (req, res) => {
+  try {
+    const { emailOrMobile, password } = req.body;
+
+    if (!emailOrMobile || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email/Phone and password are required",
+      });
+    }
+
+    const loginIdentifier = String(emailOrMobile).trim();
+    const query = loginIdentifier.includes("@")
+      ? { email: loginIdentifier.toLowerCase() }
+      : { phone: loginIdentifier };
+
+    const user = await userModel.findOne(query).select("+password");
+    const isPassMatch = user && user.password
+      ? await bcrypt.compare(String(password), user.password)
+      : false;
+
+    if (!isPassMatch || !user.isActive) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
+    }
+
+    if (user.role !== 'admin') {
+      return res
+        .status(403)
+        .json({ success: false, message: "Admin access required" });
+    }
+
+    const token = jwt.sign(
+      { userId: user._id, role: 'admin' },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.AGENT_JWT_EXPIRE || "90d" }
+    );
+
+    return res.status(200).json({
+      success: true,
+      token,
+      expiresAt: new Date(jwt.decode(token).exp * 1000).toISOString(),
+      email: user.email,
+    });
+  } catch (err) {
+    console.error("Agent Login Error:", err.message);
+    return res
+      .status(500)
+      .json({ success: false, message: "Something went wrong" });
+  }
+};
+
 const handleUserLogout = async (req, res) => {
   try {
     res.clearCookie("token", {
@@ -779,6 +834,7 @@ module.exports = {
   verifyEmail,
   resendVerificationEmail,
   handelUserLogin,
+  handleAgentLogin,
   handleUserLogout,
   generateResetPassOTP,
   submitResetPassOTP,

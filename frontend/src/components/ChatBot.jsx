@@ -82,6 +82,8 @@ const ChatBot = () => {
 
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
+  // Groups the AI messages of one chat on the server; a reset starts a new one
+  const conversationIdRef = useRef(uid())
 
   useEffect(() => {
     if (isOpen) {
@@ -419,7 +421,7 @@ const ChatBot = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ messages: history })
+        body: JSON.stringify({ messages: history, conversationId: conversationIdRef.current })
       })
 
       const data = await res.json().catch(() => ({}))
@@ -513,6 +515,7 @@ const ChatBot = () => {
 
   const resetChat = () => {
     setMessages([welcome()])
+    conversationIdRef.current = uid()
     setRefundStep(null)
     setRefundItem(null)
     setSell(null)
