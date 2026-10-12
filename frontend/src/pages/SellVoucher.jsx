@@ -469,6 +469,7 @@ const SellVoucher = () => {
               <h3 className="text-sm font-semibold text-slate-900 mb-2">Step-by-step guides</h3>
               <div className="space-y-1.5 text-sm">
                 <Link to="/how-to-sell-gift-cards-in-india" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell gift cards in India &rarr;</Link>
+                <Link to="/sell-vouchers-online-for-cash" className="block text-emerald-700 hover:text-emerald-800 font-medium">Sell vouchers online for cash &rarr;</Link>
                 <Link to="/how-to-sell-flipkart-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Flipkart gift card &rarr;</Link>
                 <Link to="/flipkart-gift-card-to-bank-account" className="block text-emerald-700 hover:text-emerald-800 font-medium">Flipkart gift card to bank account &rarr;</Link>
                 <Link to="/how-to-sell-amazon-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Amazon gift card &rarr;</Link>
@@ -478,6 +479,8 @@ const SellVoucher = () => {
                 <Link to="/how-to-sell-zomato-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Zomato gift card &rarr;</Link>
                 <Link to="/how-to-sell-phonepe-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell PhonePe gift card &rarr;</Link>
                 <Link to="/how-to-sell-makemytrip-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell MakeMyTrip gift card or voucher &rarr;</Link>
+                <Link to="/how-to-sell-myntra-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Myntra gift card &rarr;</Link>
+                <Link to="/how-to-sell-decathlon-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Decathlon gift card online &rarr;</Link>
               </div>
             </div>
 

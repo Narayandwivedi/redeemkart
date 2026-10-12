@@ -91,15 +91,18 @@ const Footer = () => {
             <ul className="space-y-2.5">
               {[
                 { to: '/how-to-sell-gift-cards-in-india', label: 'How to Sell Gift Cards in India' },
+                { to: '/sell-vouchers-online-for-cash', label: 'Sell Vouchers Online for Cash' },
                 { to: '/how-to-sell-flipkart-gift-card', label: 'How to Sell Flipkart Gift Card' },
                 { to: '/flipkart-gift-card-to-bank-account', label: 'Flipkart Gift Card to Bank Account' },
                 { to: '/how-to-sell-amazon-gift-card', label: 'How to Sell Amazon Gift Card in India' },
                 { to: '/how-to-sell-amazon-pay-gift-card', label: 'How to Sell Amazon Pay Gift Card' },
-                { to: '/how-to-sell-amazon-shopping-voucher', label: 'Sell Amazon Voucher Online' },
+                { to: '/how-to-sell-amazon-shopping-voucher', label: 'How to Sell Amazon Shopping Voucher' },
                 { to: '/how-to-convert-redeem-code-into-money', label: 'Convert Redeem Code into Money' },
                 { to: '/how-to-sell-zomato-gift-card', label: 'How to Sell Zomato Gift Card' },
                 { to: '/how-to-sell-phonepe-gift-card', label: 'How to Sell PhonePe Gift Card' },
                 { to: '/how-to-sell-makemytrip-gift-card', label: 'How to Sell MakeMyTrip Gift Card' },
+                { to: '/how-to-sell-myntra-gift-card', label: 'How to Sell Myntra Gift Card' },
+                { to: '/how-to-sell-decathlon-gift-card', label: 'How to Sell Decathlon Gift Card' },
               ].map(({ to, label }) => (
                 <li key={to}>
                   <Link

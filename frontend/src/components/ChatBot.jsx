@@ -45,7 +45,7 @@ const RATES_TEXT = `Listing is free. Commission is deducted only when your card 
 • Amazon Pay, Amazon Shopping Voucher, Flipkart, PhonePe: **10%** (you get 90%)
 • Myntra, MakeMyTrip: **20%** (you get 80%)
 • Google Play, Zomato: **25%** (you get 75%)
-• JioMart, Steam, BigBasket: **30%** (you get 70%)
+• JioMart, Steam, BigBasket, Decathlon: **30%** (you get 70%)
 
 Example: a ₹1,000 Flipkart card pays you **₹900**, usually within 3-4 hours after it sells.`
 

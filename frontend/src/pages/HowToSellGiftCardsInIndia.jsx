@@ -22,7 +22,7 @@ const platforms = [
     payout: 'Bank account, usually 3-4 hours after the card sells',
     fees: '10% on Amazon, Flipkart and PhonePe, 20% on Myntra and MakeMyTrip, 25% on Google Play and Zomato, 30% on other brands. Free to list.',
     points: [
-      'Sell Google Play, Amazon Pay, Amazon Shopping Voucher, Flipkart, PhonePe, Myntra, MakeMyTrip, Zomato, Steam, BigBasket and Reliance JioMart cards.',
+      'Sell Google Play, Amazon Pay, Amazon Shopping Voucher, Flipkart, PhonePe, Myntra, MakeMyTrip, Zomato, Decathlon, Steam, BigBasket and Reliance JioMart cards.',
       'Every card is verified before it is listed, so buyers trust the listings and cards sell faster.',
       'Your code is only shared with the buyer after purchase, and the money goes straight to your own bank account.',
       'The exact amount you will receive is shown before you publish, with no hidden charges.',
@@ -75,7 +75,7 @@ const faqs = [
   { q: 'How can I sell gift cards in India?', a: 'Use a gift card selling platform such as RedeemKart. Log in, open the Sell Gift Card page, choose the brand, enter the balance, code and PIN, and publish your listing. Once the card sells, the money is sent to your bank account.' },
   { q: 'Which is the best platform to sell gift cards in India?', a: 'It depends on what you need. RedeemKart verifies every card, pays to your bank account usually within 3-4 hours of the sale and charges only 10% on Amazon, Flipkart and PhonePe cards. Crafin buys cards directly at an offer price, and Zingoy lets you set your own price but holds payment during a 10-day buyer protection period.' },
   { q: 'How much money will I get for my gift card?', a: 'On RedeemKart you receive 90% of the card value for Amazon, Flipkart and PhonePe cards, 80% for Myntra and MakeMyTrip, 75% for Google Play and Zomato, and 70% for other brands. For example, a Rs. 1,000 Flipkart card pays Rs. 900. The exact amount is shown before you publish.' },
-  { q: 'Which gift cards can I sell on RedeemKart?', a: 'Google Play, Amazon Pay Gift Card, Amazon Shopping Voucher, Flipkart, PhonePe, Myntra, MakeMyTrip, Zomato, Steam, BigBasket and Reliance JioMart gift cards.' },
+  { q: 'Which gift cards can I sell on RedeemKart?', a: 'Google Play, Amazon Pay Gift Card, Amazon Shopping Voucher, Flipkart, PhonePe, Myntra, MakeMyTrip, Zomato, Decathlon, Steam, BigBasket and Reliance JioMart gift cards.' },
   { q: 'Is it legal to sell gift cards in India?', a: 'Yes. You can sell an unused gift card that you own, as long as the brand\'s terms allow it to be transferred. Always sell through a platform that verifies cards.' },
   { q: 'Can I sell a gift card that I have already redeemed?', a: 'No. Once a card is added to an account, the balance is tied to that account and cannot be sold. Only unused cards can be sold.' },
   { q: 'Is it safe to sell gift cards online?', a: 'Yes, if you use a trusted platform. Avoid selling to strangers on social media, where most gift card scams happen.' },

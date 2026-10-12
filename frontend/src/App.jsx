@@ -50,6 +50,9 @@ import HowToSellGiftCardsInIndia from './pages/HowToSellGiftCardsInIndia'
 import HowToSellZomatoGiftCard from './pages/HowToSellZomatoGiftCard'
 import HowToSellPhonePeGiftCard from './pages/HowToSellPhonePeGiftCard'
 import HowToSellMakeMyTripGiftCard from './pages/HowToSellMakeMyTripGiftCard'
+import HowToSellMyntraGiftCard from './pages/HowToSellMyntraGiftCard'
+import HowToSellDecathlonGiftCard from './pages/HowToSellDecathlonGiftCard'
+import SellVouchersOnline from './pages/SellVouchersOnline'
 import FlipkartGiftCardToBankAccount from './pages/FlipkartGiftCardToBankAccount'
 import HowToSellAmazonPayGiftCard from './pages/HowToSellAmazonPayGiftCard'
 import SiteUnreachable from './pages/SiteUnreachable'
@@ -236,6 +239,9 @@ const AppContent = () => {
         <Route path="/how-to-sell-zomato-gift-card" element={<HowToSellZomatoGiftCard />} />
         <Route path="/how-to-sell-phonepe-gift-card" element={<HowToSellPhonePeGiftCard />} />
         <Route path="/how-to-sell-makemytrip-gift-card" element={<HowToSellMakeMyTripGiftCard />} />
+        <Route path="/how-to-sell-myntra-gift-card" element={<HowToSellMyntraGiftCard />} />
+        <Route path="/how-to-sell-decathlon-gift-card" element={<HowToSellDecathlonGiftCard />} />
+        <Route path="/sell-vouchers-online-for-cash" element={<SellVouchersOnline />} />
         <Route path="/flipkart-gift-card-to-bank-account" element={<FlipkartGiftCardToBankAccount />} />
         <Route path="/how-to-sell-amazon-pay-gift-card" element={<HowToSellAmazonPayGiftCard />} />
       </Routes>
