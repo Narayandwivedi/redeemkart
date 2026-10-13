@@ -472,8 +472,10 @@ const SellVoucher = () => {
                 <Link to="/sell-vouchers-online-for-cash" className="block text-emerald-700 hover:text-emerald-800 font-medium">Sell vouchers online for cash &rarr;</Link>
                 <Link to="/how-to-sell-flipkart-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Flipkart gift card &rarr;</Link>
                 <Link to="/flipkart-gift-card-to-bank-account" className="block text-emerald-700 hover:text-emerald-800 font-medium">Flipkart gift card to bank account &rarr;</Link>
+                <Link to="/how-to-convert-flipkart-gift-card-to-bank-account" className="block text-emerald-700 hover:text-emerald-800 font-medium">Convert Flipkart gift card to bank account &rarr;</Link>
                 <Link to="/how-to-sell-amazon-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Amazon gift card &rarr;</Link>
                 <Link to="/how-to-sell-amazon-pay-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Amazon Pay gift card for cash &rarr;</Link>
+                <Link to="/amazon-pay-gift-card-to-bank-account" className="block text-emerald-700 hover:text-emerald-800 font-medium">Amazon Pay gift card to bank account &rarr;</Link>
                 <Link to="/how-to-sell-amazon-shopping-voucher" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Amazon Shopping Voucher &rarr;</Link>
                 <Link to="/how-to-convert-redeem-code-into-money" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to convert Google Play redeem code into money &rarr;</Link>
                 <Link to="/how-to-sell-zomato-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Zomato gift card &rarr;</Link>

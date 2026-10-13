@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ChevronDown, Clock, ShieldCheck, Banknote } from 'lucide-react'
+import { ArrowRight, ChevronDown, Clock, ShieldCheck, Banknote, CircleCheck, CircleX } from 'lucide-react'
 import { useSEO } from '../hooks/useSEO'
 import { buildStructuredData, structuredDataId, guideLinks, commonRelated } from '../data/howToSell'
 
 const inr = (n) => `₹${n.toLocaleString('en-IN')}`
 
 const HowToSellGuide = ({ guide }) => {
-  const { brand, path, seo, intro, steps, needs, receive, example, answer, safety, tips, faqs, updated, image } = guide
+  const { brand, path, seo, intro, steps, needs, receive, example, answer, sections, safety, tips, faqs, updated, image } = guide
   const item = guide.item || `${brand} gift card`
   const related = [...(guide.related || []), ...guideLinks.filter((l) => l.to !== path), ...commonRelated]
   const heading = guide.heading || `How to sell a ${brand} gift card online`
@@ -72,6 +72,29 @@ const HowToSellGuide = ({ guide }) => {
             )}
           </section>
         )}
+
+        {sections?.map((s) => (
+          <section key={s.heading} className="mt-10 sm:mt-12">
+            <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-1">{s.heading}</h2>
+            {s.text && <p className="text-sm leading-relaxed">{s.text}</p>}
+            <ul className="mt-4 bg-white border border-slate-200 rounded-2xl divide-y divide-slate-100">
+              {s.items.map((it) => (
+                <li key={it.title} className="flex gap-3 p-4 sm:p-5">
+                  {it.ok
+                    ? <CircleCheck className="w-5 h-5 shrink-0 mt-0.5 text-emerald-600" />
+                    : <CircleX className="w-5 h-5 shrink-0 mt-0.5 text-rose-500" />}
+                  <div>
+                    <h3 className="text-[15px] sm:text-base font-semibold text-slate-900">
+                      {it.title}
+                      {it.tag && <span className={`ml-2 align-middle text-[11px] font-medium rounded-full px-2 py-0.5 ${it.ok ? 'text-emerald-700 bg-emerald-50' : 'text-rose-700 bg-rose-50'}`}>{it.tag}</span>}
+                    </h3>
+                    <p className="text-sm mt-0.5 leading-relaxed">{it.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
 
         <section className="mt-10 sm:mt-12">
           <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">{guide.stepsHeading || `Steps to sell your ${brand} gift card`}</h2>

@@ -53,6 +53,8 @@ import HowToSellMakeMyTripGiftCard from './pages/HowToSellMakeMyTripGiftCard'
 import HowToSellMyntraGiftCard from './pages/HowToSellMyntraGiftCard'
 import HowToSellDecathlonGiftCard from './pages/HowToSellDecathlonGiftCard'
 import SellVouchersOnline from './pages/SellVouchersOnline'
+import HowToConvertFlipkartGiftCardToBank from './pages/HowToConvertFlipkartGiftCardToBank'
+import AmazonPayGiftCardToBankAccount from './pages/AmazonPayGiftCardToBankAccount'
 import FlipkartGiftCardToBankAccount from './pages/FlipkartGiftCardToBankAccount'
 import HowToSellAmazonPayGiftCard from './pages/HowToSellAmazonPayGiftCard'
 import SiteUnreachable from './pages/SiteUnreachable'
@@ -242,6 +244,8 @@ const AppContent = () => {
         <Route path="/how-to-sell-myntra-gift-card" element={<HowToSellMyntraGiftCard />} />
         <Route path="/how-to-sell-decathlon-gift-card" element={<HowToSellDecathlonGiftCard />} />
         <Route path="/sell-vouchers-online-for-cash" element={<SellVouchersOnline />} />
+        <Route path="/how-to-convert-flipkart-gift-card-to-bank-account" element={<HowToConvertFlipkartGiftCardToBank />} />
+        <Route path="/amazon-pay-gift-card-to-bank-account" element={<AmazonPayGiftCardToBankAccount />} />
         <Route path="/flipkart-gift-card-to-bank-account" element={<FlipkartGiftCardToBankAccount />} />
         <Route path="/how-to-sell-amazon-pay-gift-card" element={<HowToSellAmazonPayGiftCard />} />
       </Routes>
