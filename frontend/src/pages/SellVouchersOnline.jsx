@@ -26,6 +26,7 @@ const brandGuides = {
   PhonePe: '/how-to-sell-phonepe-gift-card',
   Zomato: '/how-to-sell-zomato-gift-card',
   Decathlon: '/how-to-sell-decathlon-gift-card',
+  BigBasket: '/how-to-sell-bigbasket-gift-card',
 }
 
 const details = (brand) => {

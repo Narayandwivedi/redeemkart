@@ -24,6 +24,7 @@ export const guideLinks = [
   { to: '/how-to-sell-makemytrip-gift-card', label: 'How to sell a MakeMyTrip gift card or voucher' },
   { to: '/how-to-sell-myntra-gift-card', label: 'How to sell a Myntra gift card' },
   { to: '/how-to-sell-decathlon-gift-card', label: 'How to sell a Decathlon gift card online' },
+  { to: '/how-to-sell-bigbasket-gift-card', label: 'How to sell a BigBasket gift card' },
 ]
 
 export const commonRelated = [
@@ -742,6 +743,57 @@ export const guides = {
       { q: 'Do I need a PIN to sell an Amazon Pay gift card?', a: 'No. Amazon Pay gift cards only have a claim code, which is all you need to list the card.' },
     ],
     related: [{ to: '/gift-cards/amazon', label: 'Buy Amazon gift cards' }],
+  },
+  bigbasket: {
+    brand: 'BigBasket',
+    path: '/how-to-sell-bigbasket-gift-card',
+    published: '2026-10-13',
+    image: '/products/bigbasket.avif',
+    updated: { iso: '2026-10-13', label: '13 October 2026' },
+    seo: {
+      title: 'How to Sell BigBasket Gift Card Online for Cash | RedeemKart',
+      description: 'Learn how to sell your unused BigBasket gift card online in India. List the card number and PIN on RedeemKart and get 70% of the value in your bank account.',
+      keywords: 'how to sell bigbasket gift card, sell bigbasket gift card, sell bigbasket gift card online, bigbasket gift card to cash, bigbasket gift card to bank account, convert bigbasket gift card to money, sell bigbasket voucher, bigbasket gift card buyer india, RedeemKart',
+    },
+    intro: 'Got a BigBasket gift card from work, a festival gift or a reward, but you do not shop for groceries on BigBasket? BigBasket gift card balance can only be spent on BigBasket and cannot be exchanged for cash, but you can sell the unused card online on RedeemKart. List the card number and PIN, let us verify it and receive the money in your bank account.',
+    answer: {
+      heading: 'Can I transfer a BigBasket gift card to my bank account?',
+      text: 'No. BigBasket gift cards cannot be redeemed for cash or credited to a bank account. They can only be used to shop on BigBasket. The way to turn an unused BigBasket gift card into money is to sell it: on RedeemKart you receive 70% of the card value, paid to your bank account after the sale.',
+      link: { to: '/sell-vouchers-online-for-cash', label: 'See payouts for every voucher brand' },
+    },
+    steps: [
+      { title: 'Keep the card unused', text: 'Do not add the gift card to your BigBasket account or use it on an order. A used or partly used card cannot be listed for its full value.' },
+      { title: 'Log in to RedeemKart', text: 'Sign in with your account. New here? Create one in under a minute.' },
+      { title: 'Open the Sell Gift Card page', text: 'Choose BigBasket as the gift card and enter the balance on your card.' },
+      { title: 'Enter the card number and PIN', text: 'Add the gift card number and the PIN exactly as they appear on your card or email, then publish your listing.' },
+      { title: 'We verify and list your card', text: 'Our team checks the card and puts it up for sale.' },
+      { title: 'Get paid in your bank account', text: 'After the sale, your payout is released to your bank account, usually within 3-4 hours.' },
+    ],
+    needs: ['BigBasket gift card number', 'Gift card PIN (if your card has one)', 'Card must be valid, unused and not expired', 'Bank account for the payout'],
+    receive: [
+      '30% commission on BigBasket gift cards',
+      'You receive 70% of the card value',
+      'Free to list, commission only on sale',
+      'Exact payout shown before you publish',
+    ],
+    example: { value: 1000, commission: 30 },
+    tips: [
+      'Check the card number and PIN twice before you publish. A wrong character means the card is rejected.',
+      'BigBasket gift cards are usually valid for up to 12 months. Check the expiry date and list the card well before it expires.',
+      'Enter the exact balance left on the card.',
+      'Only real BigBasket gift cards can be sold. BigBasket coupons, bbstar benefits and cashback cannot be listed.',
+      'Add your bank details in Payout Details early so your payment is not delayed after the sale.',
+    ],
+    faqs: [
+      { q: 'How do I sell a BigBasket gift card online?', a: 'Log in to RedeemKart, open the Sell Gift Card page, choose BigBasket, enter the balance, the gift card number and the PIN, then publish your listing. Once it sells, the money is sent to your bank account.' },
+      { q: 'How much will I get for my BigBasket gift card?', a: 'A 30% commission is deducted from the card value, so you receive 70%. For example, a Rs. 1,000 card pays Rs. 700. The exact amount is shown on the sell page before you publish.' },
+      { q: 'Can I convert a BigBasket gift card to cash?', a: 'Not through BigBasket. BigBasket gift cards cannot be redeemed for cash or credited to a bank account. Selling the unused card on RedeemKart is the way to get cash for it.' },
+      { q: 'Can I sell a BigBasket e-gift card?', a: 'Yes. A BigBasket e-gift card received by email or SMS is listed the same way as a physical card, using the card number and PIN.' },
+      { q: 'Can I sell a BigBasket gift card that is already added to my account?', a: 'No. Once a gift card is added to a BigBasket account, the balance stays in that account and the card cannot be sold.' },
+      { q: 'How long does the payment take?', a: 'Once your card is sold, the payout is usually released to your bank account in 3-4 hours.' },
+      { q: 'Is it free to list a BigBasket gift card?', a: 'Yes. Listing is free. The commission is only deducted when your card sells.' },
+      { q: 'What if my BigBasket gift card is invalid or already used?', a: 'It will be rejected during verification and no payment is made. Check the card number and PIN carefully before you publish.' },
+    ],
   },
 }
 

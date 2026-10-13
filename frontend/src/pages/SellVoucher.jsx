@@ -483,6 +483,7 @@ const SellVoucher = () => {
                 <Link to="/how-to-sell-makemytrip-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell MakeMyTrip gift card or voucher &rarr;</Link>
                 <Link to="/how-to-sell-myntra-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Myntra gift card &rarr;</Link>
                 <Link to="/how-to-sell-decathlon-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Decathlon gift card online &rarr;</Link>
+                <Link to="/how-to-sell-bigbasket-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell BigBasket gift card &rarr;</Link>
               </div>
             </div>
 
