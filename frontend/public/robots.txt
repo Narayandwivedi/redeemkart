@@ -13,7 +13,6 @@ Disallow: /profile-info
 Disallow: /payout-details
 Disallow: /my-sales
 Disallow: /chat
-Disallow: /login        
 
 # Sitemaps
 Sitemap: https://redeemkart.in/sitemap.xml

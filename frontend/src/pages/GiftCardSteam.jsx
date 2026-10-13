@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
@@ -65,6 +65,9 @@ const GiftCardSteam = () => {
             <span className="bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">Gift Cards</span>
           </h1>
           <p className="text-base sm:text-base text-slate-500 max-w-2xl mx-auto">Get Steam codes at the best prices. Instant delivery via email.</p>
+          <Link to="/sell-gift-card" className="inline-block mt-3 text-sm font-semibold text-emerald-700 hover:text-emerald-800">
+            Have an unused Steam gift card? Sell it for cash &rarr;
+          </Link>
         </div>
 
         {loading ? (

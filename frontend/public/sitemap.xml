@@ -134,6 +134,14 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Login / Sign Up -->
+  <url>
+    <loc>https://redeemkart.in/login</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <!-- Flipkart Gift Card to Bank Account Guide -->
   <url>
     <loc>https://redeemkart.in/flipkart-gift-card-to-bank-account</loc>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronDown, Clock, ShieldCheck, Banknote, BadgeCheck } from 'lucide-react'
 import { useSEO } from '../hooks/useSEO'
+import { autoLink } from '../utils/autoLink'
 import { guideLinks, commonRelated } from '../data/howToSell'
 
 const SITE = 'https://redeemkart.in'
@@ -58,7 +59,7 @@ const platforms = [
 const steps = [
   { title: 'Check your gift card', text: 'Make sure the card is unused, not added to any account and not close to expiry. Keep the code and PIN ready.' },
   { title: 'Choose a trusted platform', text: 'Pick a platform that verifies cards and pays to your own bank account, not one that asks you to share the code in a chat.' },
-  { title: 'List the card', text: 'On RedeemKart, open Sell Gift Card, choose the brand, enter the balance, code and PIN, then publish your listing.' },
+  { title: 'List the card', text: 'On RedeemKart, open the Sell Gift Card page, choose the brand, enter the balance, code and PIN, then publish your listing.' },
   { title: 'Wait for verification and sale', text: 'The card is checked and put up for sale. Popular cards usually sell within 24 hours.' },
   { title: 'Get the money in your bank', text: 'Once the card sells, your payout is sent to your bank account, usually within 3-4 hours.' },
 ]
@@ -72,7 +73,7 @@ const safety = [
 ]
 
 const faqs = [
-  { q: 'How can I sell gift cards in India?', a: 'Use a gift card selling platform such as RedeemKart. Log in, open the Sell Gift Card page, choose the brand, enter the balance, code and PIN, and publish your listing. Once the card sells, the money is sent to your bank account.' },
+  { q: 'How can I sell gift cards in India?', a: 'Use a gift card selling platform such as RedeemKart. Sign in, open the Sell Gift Card page, choose the brand, enter the balance, code and PIN, and publish your listing. Once the card sells, the money is sent to your bank account.' },
   { q: 'Which is the best platform to sell gift cards in India?', a: 'It depends on what you need. RedeemKart verifies every card, pays to your bank account usually within 3-4 hours of the sale and charges only 10% on Amazon, Flipkart and PhonePe cards. Crafin buys cards directly at an offer price, and Zingoy lets you set your own price but holds payment during a 10-day buyer protection period.' },
   { q: 'How much money will I get for my gift card?', a: 'On RedeemKart you receive 90% of the card value for Amazon, Flipkart and PhonePe cards, 80% for Myntra and MakeMyTrip, 75% for Google Play and Zomato, and 70% for other brands. For example, a Rs. 1,000 Flipkart card pays Rs. 900. The exact amount is shown before you publish.' },
   { q: 'Which gift cards can I sell on RedeemKart?', a: 'Google Play, Amazon Pay Gift Card, Amazon Shopping Voucher, Flipkart, PhonePe, Myntra, MakeMyTrip, Zomato, Decathlon, Steam, BigBasket and Reliance JioMart gift cards.' },
@@ -143,6 +144,9 @@ const HowToSellGiftCardsInIndia = () => {
     structuredDataId: 'how-to-sell-gift-cards-india-structured-data',
     structuredData,
   })
+
+  const stepLinks = new Set()
+  const faqLinks = new Set()
 
   return (
     <div className="bg-slate-50 min-h-screen font-['Inter',sans-serif] text-slate-600">
@@ -251,7 +255,7 @@ const HowToSellGiftCardsInIndia = () => {
                 </span>
                 <div>
                   <h3 className="text-[15px] sm:text-base font-semibold text-slate-900">{s.title}</h3>
-                  <p className="text-sm mt-0.5 leading-relaxed">{s.text}</p>
+                  <p className="text-sm mt-0.5 leading-relaxed">{autoLink(s.text, stepLinks)}</p>
                 </div>
               </li>
             ))}
@@ -280,7 +284,7 @@ const HowToSellGiftCardsInIndia = () => {
                   {f.q}
                   <ChevronDown className="w-4 h-4 shrink-0 text-slate-400 transition-transform group-open:rotate-180" />
                 </summary>
-                <p className="text-sm mt-2 leading-relaxed">{f.a}</p>
+                <p className="text-sm mt-2 leading-relaxed">{autoLink(f.a, faqLinks)}</p>
               </details>
             ))}
           </div>

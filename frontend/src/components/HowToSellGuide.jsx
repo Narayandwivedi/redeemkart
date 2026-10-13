@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronDown, Clock, ShieldCheck, Banknote, CircleCheck, CircleX } from 'lucide-react'
 import { useSEO } from '../hooks/useSEO'
 import { buildStructuredData, structuredDataId, guideLinks, commonRelated } from '../data/howToSell'
+import { autoLink } from '../utils/autoLink'
 
 const inr = (n) => `₹${n.toLocaleString('en-IN')}`
 
@@ -13,6 +14,8 @@ const HowToSellGuide = ({ guide }) => {
   const heading = guide.heading || `How to sell a ${brand} gift card online`
   const commissionAmount = Math.round((example.value * example.commission) / 100)
   const payout = example.value - commissionAmount
+  // One link per target in each section
+  const linked = { steps: new Set(), tips: new Set(), faqs: new Set() }
 
   useSEO({
     title: seo.title,
@@ -66,7 +69,7 @@ const HowToSellGuide = ({ guide }) => {
         {answer && (
           <section className="mt-8 sm:mt-10 bg-white border border-slate-200 border-l-4 border-l-emerald-500 rounded-2xl p-5 sm:p-6">
             <h2 className="font-['Poppins',sans-serif] text-lg sm:text-xl font-semibold text-slate-900 mb-2">{answer.heading}</h2>
-            <p className="text-sm sm:text-[15px] leading-relaxed">{answer.text}</p>
+            <p className="text-sm sm:text-[15px] leading-relaxed">{autoLink(answer.text)}</p>
             {answer.link && (
               <Link to={answer.link.to} className="inline-block mt-3 text-sm text-emerald-700 hover:text-emerald-800 font-medium">{answer.link.label} &rarr;</Link>
             )}
@@ -106,7 +109,7 @@ const HowToSellGuide = ({ guide }) => {
                 </span>
                 <div>
                   <h3 className="text-[15px] sm:text-base font-semibold text-slate-900">{s.title}</h3>
-                  <p className="text-sm mt-0.5 leading-relaxed">{s.text}</p>
+                  <p className="text-sm mt-0.5 leading-relaxed">{autoLink(s.text, linked.steps)}</p>
                 </div>
               </li>
             ))}
@@ -156,7 +159,7 @@ const HowToSellGuide = ({ guide }) => {
         <section className="mt-10 sm:mt-12">
           <h2 className="font-['Poppins',sans-serif] text-lg sm:text-2xl font-semibold text-slate-900 mb-4">Tips to sell your {item} faster</h2>
           <ul className="bg-white border border-slate-200 rounded-2xl p-5 text-sm space-y-2 list-disc pl-9 marker:text-emerald-500">
-            {tips.map((t) => <li key={t}>{t}</li>)}
+            {tips.map((t) => <li key={t}>{autoLink(t, linked.tips)}</li>)}
           </ul>
         </section>
 
@@ -169,7 +172,7 @@ const HowToSellGuide = ({ guide }) => {
                   {f.q}
                   <ChevronDown className="w-4 h-4 shrink-0 text-slate-400 transition-transform group-open:rotate-180" />
                 </summary>
-                <p className="text-sm mt-2 leading-relaxed">{f.a}</p>
+                <p className="text-sm mt-2 leading-relaxed">{autoLink(f.a, linked.faqs)}</p>
               </details>
             ))}
           </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronDown, Clock, ShieldCheck, Banknote, XCircle } from 'lucide-react'
 import { useSEO } from '../hooks/useSEO'
+import { autoLink } from '../utils/autoLink'
 import { guideLinks, commonRelated } from '../data/howToSell'
 import { brands, brandLogos, noPinBrands, pinRequiredBrands, getCommissionRate, getPayout } from '../data/sellBrands'
 
@@ -141,6 +142,9 @@ const SellVouchersOnline = () => {
     structuredData,
   })
 
+  const stepLinks = new Set()
+  const faqLinks = new Set()
+
   return (
     <div className="bg-slate-50 min-h-screen font-['Inter',sans-serif] text-slate-600">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -234,7 +238,7 @@ const SellVouchersOnline = () => {
                 </span>
                 <div>
                   <h3 className="text-[15px] sm:text-base font-semibold text-slate-900">{s.title}</h3>
-                  <p className="text-sm mt-0.5 leading-relaxed">{s.text}</p>
+                  <p className="text-sm mt-0.5 leading-relaxed">{autoLink(s.text, stepLinks)}</p>
                 </div>
               </li>
             ))}
@@ -279,7 +283,7 @@ const SellVouchersOnline = () => {
                   {f.q}
                   <ChevronDown className="w-4 h-4 shrink-0 text-slate-400 transition-transform group-open:rotate-180" />
                 </summary>
-                <p className="text-sm mt-2 leading-relaxed">{f.a}</p>
+                <p className="text-sm mt-2 leading-relaxed">{autoLink(f.a, faqLinks)}</p>
               </details>
             ))}
           </div>

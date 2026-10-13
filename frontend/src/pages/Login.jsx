@@ -1,14 +1,24 @@
 import React, { useState, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import GoogleLogin from '../components/GoogleLogin'
+import { useSEO } from '../hooks/useSEO'
 
 const Login = () => {
   const { login, signup, BACKEND_URL } = useContext(AppContext)
   const navigate = useNavigate()
-  const [isLogin, setIsLogin] = useState(true)
+  const [searchParams] = useSearchParams()
+  const [isLogin, setIsLogin] = useState(searchParams.get('mode') !== 'signup')
+
+  useSEO({
+    title: 'Login or Sign Up | RedeemKart',
+    description: 'Log in or create your free RedeemKart account to buy discounted gift cards and sell your unused gift cards for cash in India.',
+    keywords: 'redeemkart login, redeemkart sign up, redeemkart account, sell gift card login',
+    ogImage: 'https://redeemkart.in/redeemkart-logo.png',
+    canonicalUrl: 'https://redeemkart.in/login',
+  })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -197,7 +207,7 @@ const Login = () => {
                     Sign Up
                   </button>
                 </div>
-                <p className='text-slate-500 text-xs'>{isLogin ? 'Sign in to your RedeemKart account' : 'Create your RedeemKart account'}</p>
+                <h1 className='text-slate-500 text-xs font-normal'>{isLogin ? 'Sign in to your RedeemKart account' : 'Create your RedeemKart account'}</h1>
               </>
             ) : (
               <div className='mb-2'>
