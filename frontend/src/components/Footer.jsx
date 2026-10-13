@@ -99,6 +99,7 @@ const Footer = () => {
                 { to: '/how-to-sell-amazon-pay-gift-card', label: 'How to Sell Amazon Pay Gift Card' },
                 { to: '/amazon-pay-gift-card-to-bank-account', label: 'Amazon Pay Gift Card to Bank Account' },
                 { to: '/how-to-sell-amazon-shopping-voucher', label: 'How to Sell Amazon Shopping Voucher' },
+                { to: '/sell-amazon-shopping-voucher-for-cash', label: 'Sell Amazon Shopping Voucher for Cash' },
                 { to: '/how-to-convert-redeem-code-into-money', label: 'Convert Redeem Code into Money' },
                 { to: '/how-to-sell-zomato-gift-card', label: 'How to Sell Zomato Gift Card' },
                 { to: '/how-to-sell-phonepe-gift-card', label: 'How to Sell PhonePe Gift Card' },

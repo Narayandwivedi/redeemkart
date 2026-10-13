@@ -18,6 +18,7 @@ export const guideLinks = [
   { to: '/how-to-sell-amazon-pay-gift-card', label: 'How to sell an Amazon Pay gift card for cash' },
   { to: '/amazon-pay-gift-card-to-bank-account', label: 'Amazon Pay gift card to bank account' },
   { to: '/how-to-sell-amazon-shopping-voucher', label: 'How to sell an Amazon Shopping Voucher online' },
+  { to: '/sell-amazon-shopping-voucher-for-cash', label: 'Sell an Amazon Shopping Voucher for cash' },
   { to: '/how-to-convert-redeem-code-into-money', label: 'How to convert a Google Play redeem code into money' },
   { to: '/how-to-sell-zomato-gift-card', label: 'How to sell a Zomato gift card' },
   { to: '/how-to-sell-phonepe-gift-card', label: 'How to sell a PhonePe gift card' },
@@ -322,7 +323,7 @@ export const guides = {
     heading: 'How to sell an Amazon Shopping Voucher online',
     stepsHeading: 'Steps to sell your Amazon Shopping Voucher online',
     seo: {
-      title: 'How to Sell Amazon Shopping Voucher Online for Cash | RedeemKart',
+      title: 'How to Sell Amazon Shopping Voucher Online in India | RedeemKart',
       description: 'Learn how to sell your unused Amazon Shopping Voucher online in India. List the voucher code on RedeemKart, keep 90% of the value and get paid to your bank.',
       keywords: 'how to sell amazon shopping voucher, sell amazon shopping voucher, sell amazon shopping voucher online, amazon shopping voucher to cash, amazon voucher sell online, sell amazon voucher online, how to sell amazon voucher, amazon voucher to cash, convert amazon voucher to money, amazon voucher buyer india, RedeemKart',
     },
@@ -330,7 +331,7 @@ export const guides = {
     answer: {
       heading: 'Can you sell an Amazon Shopping Voucher online?',
       text: 'Yes. Amazon does not buy vouchers back or let you move the balance to a bank account, but you can sell an unused Amazon voucher online to another shopper. On RedeemKart you list the Amazon Shopping Voucher code, we verify it and sell it to a verified buyer, and you receive 90% of the voucher value in your bank account. The voucher must be unused and must not be added to any Amazon account.',
-      link: { to: '/how-to-sell-amazon-pay-gift-card', label: 'Have an Amazon Pay gift card instead? Read that guide' },
+      link: { to: '/sell-amazon-shopping-voucher-for-cash', label: 'See how much cash you get for your Amazon voucher' },
     },
     safety: {
       heading: 'Sell your Amazon voucher online safely',
@@ -794,6 +795,75 @@ export const guides = {
       { q: 'Is it free to list a BigBasket gift card?', a: 'Yes. Listing is free. The commission is only deducted when your card sells.' },
       { q: 'What if my BigBasket gift card is invalid or already used?', a: 'It will be rejected during verification and no payment is made. Check the card number and PIN carefully before you publish.' },
     ],
+  },
+  amazonVoucherCash: {
+    brand: 'Amazon Shopping Voucher',
+    item: 'Amazon Shopping Voucher',
+    path: '/sell-amazon-shopping-voucher-for-cash',
+    published: '2026-10-13',
+    image: '/products/amazon.avif',
+    updated: { iso: '2026-10-13', label: '13 October 2026' },
+    heading: 'Sell your Amazon Shopping Voucher for cash',
+    stepsHeading: 'How to get cash for your Amazon Shopping Voucher',
+    seo: {
+      title: 'Sell Amazon Shopping Voucher for Cash: Get 90% in Your Bank | RedeemKart',
+      description: 'How to sell an Amazon Shopping Voucher for cash in India. See exactly how much cash you get for Rs. 500 to Rs. 5,000 vouchers, paid to your bank in 3-4 hours.',
+      keywords: 'how to sell amazon shopping voucher for cash, sell amazon shopping voucher for cash, amazon shopping voucher for cash, amazon shopping voucher to cash, convert amazon shopping voucher to cash, amazon voucher for cash, amazon shopping voucher cash value, RedeemKart',
+    },
+    intro: 'Got an Amazon Shopping Voucher from a credit card reward, an employer, a survey or a cashback offer, but would rather have the money? Amazon will not give you cash for it, but you can sell the unused voucher on RedeemKart and get 90% of its value in your bank account. Here is exactly how much you get and how to do it.',
+    answer: {
+      heading: 'Can I get cash for an Amazon Shopping Voucher?',
+      text: 'Yes, by selling it. Amazon does not pay out Amazon Shopping Voucher balance as cash and it cannot be moved to a bank account, UPI or your Amazon Pay wallet. If the voucher is still unused, sell it on RedeemKart: you keep 90% of the value, so a Rs. 1,000 voucher pays Rs. 900, usually within 3-4 hours of the sale.',
+      link: { to: '/how-to-sell-amazon-shopping-voucher', label: 'Read the complete guide to selling an Amazon Shopping Voucher online' },
+    },
+    sections: [
+      {
+        heading: 'How much cash you get for an Amazon Shopping Voucher',
+        text: 'A flat 10% commission is deducted only when the voucher sells. Here is what you receive for common voucher values:',
+        items: [
+          { ok: true, title: 'Rs. 500 voucher', text: 'You receive Rs. 450 in your bank account.' },
+          { ok: true, title: 'Rs. 1,000 voucher', text: 'You receive Rs. 900 in your bank account.' },
+          { ok: true, title: 'Rs. 2,000 voucher', text: 'You receive Rs. 1,800 in your bank account.' },
+          { ok: true, title: 'Rs. 5,000 voucher', text: 'You receive Rs. 4,500 in your bank account.' },
+        ],
+      },
+      {
+        heading: 'Ways to turn an Amazon Shopping Voucher into cash',
+        text: 'People try a few things. Only one puts cash in your bank safely.',
+        items: [
+          { ok: true, tag: 'Works', title: 'Sell the unused voucher on RedeemKart', text: 'List the voucher code. It is verified, sold to a buyer and 90% of the value is paid to your bank account.' },
+          { ok: false, tag: 'Not possible', title: 'Ask Amazon for a cash refund', text: 'Amazon Shopping Voucher balance cannot be withdrawn or refunded as cash.' },
+          { ok: false, tag: 'Not possible', title: 'Move it to Amazon Pay wallet, UPI or a bank', text: 'Shopping Voucher balance can only be spent on products sold on Amazon.in. It cannot be used for bills or transfers.' },
+          { ok: false, tag: 'Risky', title: 'Sell the code to someone on WhatsApp or Telegram', text: 'Buyers on chat apps often take the code and never pay, and there is no way to get it back.' },
+        ],
+      },
+    ],
+    steps: [
+      { title: 'Keep the voucher unused', text: 'Do not add the voucher to your Amazon account. Once added, it can only be spent on Amazon.in and cannot be sold.' },
+      { title: 'Sign in or sign up', text: 'Sign in to RedeemKart. New here? Create one in under a minute.' },
+      { title: 'Add your bank account', text: 'Add your bank details in Payout Details. This is where the cash is sent.' },
+      { title: 'List the voucher', text: 'Open the Sell Gift Card page, choose Amazon Shopping Voucher, enter the value and the voucher code, then publish.' },
+      { title: 'We verify and sell it', text: 'Our team checks the code and lists it. Amazon vouchers are in high demand and sell quickly.' },
+      { title: 'Cash arrives in your bank', text: 'After the sale, 90% of the voucher value is sent to your bank account, usually within 3-4 hours.' },
+    ],
+    needs: ['Amazon Shopping Voucher code', 'PIN, if your voucher has one', 'Voucher must be valid, unused and not expired', 'Bank account added in Payout Details'],
+    receive: commonReceive,
+    example: { value: 1000, commission: 10 },
+    tips: [
+      'Sell vouchers from rewards and incentives as soon as you get them, before they get close to expiry.',
+      'Copy the code exactly from the email or SMS. A wrong character gets the voucher rejected.',
+      'Add your bank details in Payout Details before you list, so the cash is sent straight after the sale.',
+    ],
+    faqs: [
+      { q: 'How do I sell an Amazon Shopping Voucher for cash?', a: 'Sign in to RedeemKart, open the Sell Gift Card page, choose Amazon Shopping Voucher, enter the value and the code, and publish. Once it sells, 90% of the value is sent to your bank account.' },
+      { q: 'How much cash will I get for my Amazon Shopping Voucher?', a: 'You get 90% of the voucher value: Rs. 450 for a Rs. 500 voucher, Rs. 900 for Rs. 1,000, Rs. 1,800 for Rs. 2,000 and Rs. 4,500 for Rs. 5,000.' },
+      { q: 'Will Amazon give me cash for a Shopping Voucher?', a: 'No. Amazon Shopping Voucher balance can only be used to buy products on Amazon.in. It cannot be refunded as cash or sent to a bank account.' },
+      { q: 'Can I sell an Amazon voucher I got from credit card reward points?', a: 'Yes, as long as the voucher is valid, unused and has not been added to an Amazon account.' },
+      { q: 'How fast will I get the cash?', a: 'Amazon vouchers usually sell quickly, and the payout reaches your bank account about 3-4 hours after the sale.' },
+      { q: 'Can I get cash for a voucher already added to my Amazon account?', a: 'No. Once added, the balance is tied to your Amazon account and can only be spent on Amazon.in.' },
+      { q: 'Is it free to sell?', a: 'Yes. Listing is free and the 10% commission is only deducted when your voucher sells.' },
+    ],
+    related: [{ to: '/gift-cards/amazon', label: 'Buy Amazon gift cards' }],
   },
 }
 

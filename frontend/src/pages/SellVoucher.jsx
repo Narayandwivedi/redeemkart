@@ -477,6 +477,7 @@ const SellVoucher = () => {
                 <Link to="/how-to-sell-amazon-pay-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Amazon Pay gift card for cash &rarr;</Link>
                 <Link to="/amazon-pay-gift-card-to-bank-account" className="block text-emerald-700 hover:text-emerald-800 font-medium">Amazon Pay gift card to bank account &rarr;</Link>
                 <Link to="/how-to-sell-amazon-shopping-voucher" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Amazon Shopping Voucher &rarr;</Link>
+                <Link to="/sell-amazon-shopping-voucher-for-cash" className="block text-emerald-700 hover:text-emerald-800 font-medium">Sell Amazon Shopping Voucher for cash &rarr;</Link>
                 <Link to="/how-to-convert-redeem-code-into-money" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to convert Google Play redeem code into money &rarr;</Link>
                 <Link to="/how-to-sell-zomato-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell Zomato gift card &rarr;</Link>
                 <Link to="/how-to-sell-phonepe-gift-card" className="block text-emerald-700 hover:text-emerald-800 font-medium">How to sell PhonePe gift card &rarr;</Link>
