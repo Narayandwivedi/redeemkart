@@ -26,6 +26,7 @@ export const guideLinks = [
   { to: '/how-to-sell-myntra-gift-card', label: 'How to sell a Myntra gift card' },
   { to: '/how-to-sell-decathlon-gift-card', label: 'How to sell a Decathlon gift card online' },
   { to: '/how-to-sell-bigbasket-gift-card', label: 'How to sell a BigBasket gift card' },
+  { to: '/how-to-sell-blinkit-gift-card', label: 'How to sell a Blinkit gift card' },
 ]
 
 export const commonRelated = [
@@ -864,6 +865,56 @@ export const guides = {
       { q: 'Is it free to sell?', a: 'Yes. Listing is free and the 10% commission is only deducted when your voucher sells.' },
     ],
     related: [{ to: '/gift-cards/amazon', label: 'Buy Amazon gift cards' }],
+  },
+  blinkit: {
+    brand: 'Blinkit',
+    path: '/how-to-sell-blinkit-gift-card',
+    published: '2026-10-14',
+    updated: { iso: '2026-10-14', label: '14 October 2026' },
+    seo: {
+      title: 'How to Sell Blinkit Gift Card Online for Cash | RedeemKart',
+      description: 'Learn how to sell your unused Blinkit gift card online in India. List the card number and PIN on RedeemKart and get 70% of the value in your bank account.',
+      keywords: 'how to sell blinkit gift card, sell blinkit gift card, sell blinkit gift card online, blinkit gift card to cash, blinkit gift card to bank account, convert blinkit gift card to money, sell blinkit voucher, blinkit gift card buyer india, RedeemKart',
+    },
+    intro: 'Got a Blinkit gift card from your office, a festival gift or a credit card reward, but you rarely order on Blinkit? Blinkit gift card balance can only be spent on Blinkit orders and cannot be exchanged for cash, but you can sell the unused card online on RedeemKart. List the card number and PIN, let us verify it and receive the money in your bank account.',
+    answer: {
+      heading: 'Can I transfer a Blinkit gift card to my bank account?',
+      text: 'No. Blinkit gift cards cannot be redeemed for cash or credited to a bank account. They can only be used to pay for orders on Blinkit. The way to turn an unused Blinkit gift card into money is to sell it: on RedeemKart you receive 70% of the card value, paid to your bank account after the sale.',
+      link: { to: '/sell-vouchers-online-for-cash', label: 'See payouts for every voucher brand' },
+    },
+    steps: [
+      { title: 'Keep the card unused', text: 'Do not add the gift card to your Blinkit account or use it on an order. Once added, the balance stays in that Blinkit account and the card cannot be sold.' },
+      { title: 'Log in to RedeemKart', text: 'Sign in with your account. New here? Create one in under a minute.' },
+      { title: 'Open the Sell Gift Card page', text: 'Choose Blinkit as the gift card and enter the balance on your card.' },
+      { title: 'Enter the card number and PIN', text: 'Add the gift card number and the PIN exactly as they appear in your email, SMS or card, then publish your listing.' },
+      { title: 'We verify and list your card', text: 'Our team checks the card and puts it up for sale.' },
+      { title: 'Get paid in your bank account', text: 'After the sale, your payout is released to your bank account, usually within 3-4 hours.' },
+    ],
+    needs: ['Blinkit gift card number', 'Gift card PIN (if your card has one)', 'Card must be valid, unused and not expired', 'Bank account for the payout'],
+    receive: [
+      '30% commission on Blinkit gift cards',
+      'You receive 70% of the card value',
+      'Free to list, commission only on sale',
+      'Exact payout shown before you publish',
+    ],
+    example: { value: 1000, commission: 30 },
+    tips: [
+      'Check the card number and PIN twice before you publish. A wrong character means the card is rejected.',
+      'Check the expiry date in your gift card email and list the card well before it expires so it has time to sell.',
+      'Enter the exact balance left on the card.',
+      'Only real Blinkit gift cards can be sold. Blinkit coupons, offer codes and cashback cannot be listed.',
+      'Add your bank details in Payout Details early so your payment is not delayed after the sale.',
+    ],
+    faqs: [
+      { q: 'How do I sell a Blinkit gift card online?', a: 'Log in to RedeemKart, open the Sell Gift Card page, choose Blinkit, enter the balance, the gift card number and the PIN, then publish your listing. Once it sells, the money is sent to your bank account.' },
+      { q: 'How much will I get for my Blinkit gift card?', a: 'A 30% commission is deducted from the card value, so you receive 70%. For example, a Rs. 1,000 card pays Rs. 700. The exact amount is shown on the sell page before you publish.' },
+      { q: 'Can I convert a Blinkit gift card to cash?', a: 'Not through Blinkit. Blinkit gift cards cannot be redeemed for cash or credited to a bank account. Selling the unused card on RedeemKart is the way to get cash for it.' },
+      { q: 'Can I sell a Blinkit e-gift card?', a: 'Yes. A Blinkit e-gift card received by email or SMS is listed using the card number and PIN from the message.' },
+      { q: 'Can I sell a Blinkit gift card that is already added to my account?', a: 'No. Once a gift card is added to a Blinkit account, the balance stays in that account and the card cannot be sold.' },
+      { q: 'How long does the payment take?', a: 'Once your card is sold, the payout is usually released to your bank account in 3-4 hours.' },
+      { q: 'Is it free to list a Blinkit gift card?', a: 'Yes. Listing is free. The commission is only deducted when your card sells.' },
+      { q: 'What if my Blinkit gift card is invalid or already used?', a: 'It will be rejected during verification and no payment is made. Check the card number and PIN carefully before you publish.' },
+    ],
   },
 }
 

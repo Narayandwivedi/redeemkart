@@ -13,6 +13,7 @@ export const brands = [
   'Zomato',
   'BigBasket',
   'Decathlon',
+  'Blinkit',
 ]
 
 export const brandLogos = {

@@ -107,6 +107,7 @@ const Footer = () => {
                 { to: '/how-to-sell-myntra-gift-card', label: 'How to Sell Myntra Gift Card' },
                 { to: '/how-to-sell-decathlon-gift-card', label: 'How to Sell Decathlon Gift Card' },
                 { to: '/how-to-sell-bigbasket-gift-card', label: 'How to Sell BigBasket Gift Card' },
+                { to: '/how-to-sell-blinkit-gift-card', label: 'How to Sell Blinkit Gift Card' },
               ].map(({ to, label }) => (
                 <li key={to}>
                   <Link

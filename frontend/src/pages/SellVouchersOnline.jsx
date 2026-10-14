@@ -28,6 +28,7 @@ const brandGuides = {
   Zomato: '/how-to-sell-zomato-gift-card',
   Decathlon: '/how-to-sell-decathlon-gift-card',
   BigBasket: '/how-to-sell-bigbasket-gift-card',
+  Blinkit: '/how-to-sell-blinkit-gift-card',
 }
 
 const details = (brand) => {
